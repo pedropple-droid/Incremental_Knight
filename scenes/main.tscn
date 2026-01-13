@@ -1,25 +1,25 @@
 [gd_scene load_steps=35 format=3 uid="uid://cbslel71cfdb3"]
 
 [ext_resource type="Script" uid="uid://nrfi2y2wrie" path="res://Scripts/main.gd" id="1_0ld40"]
-[ext_resource type="Texture2D" uid="uid://dpop7ene1vyks" path="res://Tiny Swords (Free Pack)/Units/Blue Units/ExtraSprites/warrioratt1.png" id="2_ya4ey"]
-[ext_resource type="Texture2D" uid="uid://dlp61hr2qphx1" path="res://Tiny Swords (Free Pack)/Units/Blue Units/ExtraSprites/warrioratt12.png" id="3_eb6dy"]
-[ext_resource type="Texture2D" uid="uid://cspyikifexb1k" path="res://Tiny Swords (Free Pack)/Units/Blue Units/ExtraSprites/warrioratt13.png" id="4_trceg"]
-[ext_resource type="Texture2D" uid="uid://dhm8m8x0hqcxu" path="res://Tiny Swords (Free Pack)/Units/Blue Units/ExtraSprites/warrioratt14.png" id="5_a8y0u"]
-[ext_resource type="Texture2D" uid="uid://das67lybenstd" path="res://Tiny Swords (Free Pack)/Units/Blue Units/ExtraSprites/warioratt8.5.png" id="6_jkv2x"]
-[ext_resource type="Texture2D" uid="uid://dvw22p3irib55" path="res://Tiny Swords (Free Pack)/Units/Blue Units/ExtraSprites/warrioratt2.png" id="7_jbj1t"]
-[ext_resource type="Texture2D" uid="uid://btxca80fqqoiy" path="res://Tiny Swords (Free Pack)/Units/Blue Units/ExtraSprites/warrioratt22.png" id="8_muem4"]
-[ext_resource type="Texture2D" uid="uid://116cwh5g5ats" path="res://Tiny Swords (Free Pack)/Units/Blue Units/ExtraSprites/warrioratt23.png" id="9_dp3eg"]
-[ext_resource type="Texture2D" uid="uid://inlnl1dvxyeb" path="res://Tiny Swords (Free Pack)/Units/Blue Units/ExtraSprites/warrioratt24.png" id="10_0ld40"]
-[ext_resource type="Texture2D" uid="uid://cu42rt1fcbfv" path="res://Tiny Swords (Free Pack)/Units/Blue Units/ExtraSprites/warioratt9.5.png" id="11_gqmmt"]
-[ext_resource type="Texture2D" uid="uid://cckwe6jas61cj" path="res://Tiny Swords (Free Pack)/Units/Blue Units/ExtraSprites/warrioridle1.png" id="12_0ld40"]
-[ext_resource type="Texture2D" uid="uid://c5a0l752btlhx" path="res://Tiny Swords (Free Pack)/Units/Blue Units/ExtraSprites/warrioridle12.png" id="13_gqmmt"]
-[ext_resource type="Texture2D" uid="uid://b6tvsdciu1mbc" path="res://Tiny Swords (Free Pack)/Units/Blue Units/ExtraSprites/warrioridle13.png" id="14_yc10j"]
-[ext_resource type="Texture2D" uid="uid://c6eg46hk1n0s2" path="res://Tiny Swords (Free Pack)/Units/Blue Units/ExtraSprites/warrioridle14.png" id="15_jscy8"]
-[ext_resource type="Texture2D" uid="uid://bllxut0orw6wp" path="res://Tiny Swords (Free Pack)/Units/Blue Units/ExtraSprites/warrioridle15.png" id="16_pm3ni"]
-[ext_resource type="Texture2D" uid="uid://bfjihx2ybmqy0" path="res://Tiny Swords (Free Pack)/Units/Blue Units/ExtraSprites/warrioridle16.png" id="17_y6deb"]
-[ext_resource type="Texture2D" uid="uid://crhpfpvaf6fxu" path="res://Tiny Swords (Free Pack)/Units/Blue Units/ExtraSprites/warrioridle17.png" id="18_og1vs"]
-[ext_resource type="Texture2D" uid="uid://b83bly7o0igrh" path="res://Tiny Swords (Free Pack)/Units/Blue Units/ExtraSprites/warrioridle18.png" id="19_2wyq8"]
-[ext_resource type="Texture2D" uid="uid://bvnxmi7u1wgmj" path="res://Tiny Swords (Free Pack)/Units/Blue Units/Warrior/Warrior_Run.png" id="21_yc10j"]
+[ext_resource type="Texture2D" uid="uid://dpop7ene1vyks" path="res://ExtraSprites/warrioratt1.png" id="2_ya4ey"]
+[ext_resource type="Texture2D" uid="uid://dlp61hr2qphx1" path="res://ExtraSprites/warrioratt12.png" id="3_eb6dy"]
+[ext_resource type="Texture2D" uid="uid://cspyikifexb1k" path="res://ExtraSprites/warrioratt13.png" id="4_trceg"]
+[ext_resource type="Texture2D" uid="uid://dhm8m8x0hqcxu" path="res://ExtraSprites/warrioratt14.png" id="5_a8y0u"]
+[ext_resource type="Texture2D" uid="uid://das67lybenstd" path="res://ExtraSprites/warioratt8.5.png" id="6_jkv2x"]
+[ext_resource type="Texture2D" uid="uid://dvw22p3irib55" path="res://ExtraSprites/warrioratt2.png" id="7_jbj1t"]
+[ext_resource type="Texture2D" uid="uid://btxca80fqqoiy" path="res://ExtraSprites/warrioratt22.png" id="8_muem4"]
+[ext_resource type="Texture2D" uid="uid://116cwh5g5ats" path="res://ExtraSprites/warrioratt23.png" id="9_dp3eg"]
+[ext_resource type="Texture2D" uid="uid://inlnl1dvxyeb" path="res://ExtraSprites/warrioratt24.png" id="10_0ld40"]
+[ext_resource type="Texture2D" uid="uid://cu42rt1fcbfv" path="res://ExtraSprites/warioratt9.5.png" id="11_gqmmt"]
+[ext_resource type="Texture2D" uid="uid://cckwe6jas61cj" path="res://ExtraSprites/warrioridle1.png" id="12_0ld40"]
+[ext_resource type="Texture2D" uid="uid://c5a0l752btlhx" path="res://ExtraSprites/warrioridle12.png" id="13_gqmmt"]
+[ext_resource type="Texture2D" uid="uid://b6tvsdciu1mbc" path="res://ExtraSprites/warrioridle13.png" id="14_yc10j"]
+[ext_resource type="Texture2D" uid="uid://c6eg46hk1n0s2" path="res://ExtraSprites/warrioridle14.png" id="15_jscy8"]
+[ext_resource type="Texture2D" uid="uid://bllxut0orw6wp" path="res://ExtraSprites/warrioridle15.png" id="16_pm3ni"]
+[ext_resource type="Texture2D" uid="uid://bfjihx2ybmqy0" path="res://ExtraSprites/warrioridle16.png" id="17_y6deb"]
+[ext_resource type="Texture2D" uid="uid://crhpfpvaf6fxu" path="res://ExtraSprites/warrioridle17.png" id="18_og1vs"]
+[ext_resource type="Texture2D" uid="uid://b83bly7o0igrh" path="res://ExtraSprites/warrioridle18.png" id="19_2wyq8"]
+[ext_resource type="Texture2D" uid="uid://b4pvei0ie5xxr" path="res://Blue Units/Warrior/Warrior_Run.png" id="21_yc10j"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sgp6g"]
 
@@ -184,6 +184,18 @@ tracks/12/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("../../../../../../../../../AnimationPlayer:speed_scale")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
 
 [sub_resource type="Animation" id="Animation_kmb1v"]
 resource_name = "attack"
@@ -274,30 +286,6 @@ tracks/3/path = NodePath("../../../../../../../../../Game_Over:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../Knight3:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("../Knight2:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -403,6 +391,18 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../../../../../../../../../AnimationPlayer:speed_scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c6pm6"]
@@ -590,7 +590,7 @@ text = "Extra Knight
 [node name="WinButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Win"
+text = "Prestige...?"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer/Knight")
@@ -609,19 +609,21 @@ texture_filter = 1
 position = Vector2(218, 255)
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_2f3dj")
+frame_progress = 0.34847745
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Game_Over"]
 texture_filter = 1
 position = Vector2(373, 257)
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_2f3dj")
+frame_progress = 0.42699966
 
 [node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="Game_Over"]
 texture_filter = 1
 position = Vector2(530, 256.99997)
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_2f3dj")
-frame_progress = 0.547541
+frame_progress = 0.6911728
 
 [node name="Label" type="Label" parent="."]
 visible = false
