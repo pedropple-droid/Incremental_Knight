@@ -201,6 +201,10 @@ tracks/2/keys = {
 "values": [ExtResource("2_ya4ey"), ExtResource("2_ya4ey"), ExtResource("3_eb6dy"), ExtResource("4_trceg"), ExtResource("5_a8y0u"), ExtResource("6_jkv2x"), ExtResource("6_jkv2x"), ExtResource("6_jkv2x"), ExtResource("7_jbj1t"), ExtResource("8_muem4"), ExtResource("9_dp3eg"), ExtResource("10_0ld40"), ExtResource("11_gqmmt"), ExtResource("11_gqmmt"), ExtResource("11_gqmmt"), ExtResource("11_gqmmt")]
 }
 
+[sub_resource type="Animation" id="Animation_0ld40"]
+resource_name = "choosing"
+step = 0.1
+
 [sub_resource type="Animation" id="Animation_pibwh"]
 resource_name = "idle"
 length = 0.8
@@ -319,10 +323,6 @@ tracks/5/keys = {
 "update": 0,
 "values": [1.0]
 }
-
-[sub_resource type="Animation" id="Animation_0ld40"]
-resource_name = "choosing"
-step = 0.1
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c6pm6"]
 _data = {
@@ -485,6 +485,9 @@ grow_vertical = 2
 z_index = 1
 layout_mode = 2
 mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0.9372549, 0.9372549, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "Spd"
 fit_content = true
@@ -508,6 +511,9 @@ grow_vertical = 2
 z_index = 1
 layout_mode = 2
 mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0.9388745, 0.9388743, 1.540184e-06, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "Spd"
 fit_content = true
@@ -531,6 +537,9 @@ grow_vertical = 2
 z_index = 1
 layout_mode = 2
 mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0.9372549, 0.9372549, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "Spd"
 fit_content = true

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://oymy00w8uiy2"
-path="res://.godot/imported/warriorunning3.png-96a7d00ef9059af8b0192c19af90f989.ctex"
+path="res://.godot/imported/warriorunning3.png-944d0a87366a5a29f7185cf292f86cd0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tiny Swords (Free Pack)/Units/Blue Units/ExtraSprites/warriorunning3.png"
-dest_files=["res://.godot/imported/warriorunning3.png-96a7d00ef9059af8b0192c19af90f989.ctex"]
+source_file="res://ExtraSprites/warriorunning3.png"
+dest_files=["res://.godot/imported/warriorunning3.png-944d0a87366a5a29f7185cf292f86cd0.ctex"]
 
 [params]
 
