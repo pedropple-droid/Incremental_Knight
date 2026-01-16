@@ -4,7 +4,7 @@ const MAIN_2 = preload("uid://ey2i670agjff")
 
 const original_output_correction = 0.08
 const win_cost: int = 60000
-const BASE_UPGRADE_DELAY := 0.7
+const BASE_UPGRADE_DELAY := 1
 const MIN_UPGRADE_DELAY := 0.01
 const STREAK_THRESHOLD := 1
 const MIN_OUTPUT_UPGRADE := 1.15
@@ -48,25 +48,23 @@ var upgrades := {
 		"cost": 60000,
 		"cost_mult": 1.0,
 		"apply": func():
-			get_tree().change_scene_to_packed(MAIN_2)
-			queue_free(),
+			pass,
 	},
 }
 
 
-@onready var main: Control = $"."
 @onready var animation: AnimationPlayer = $AnimationPlayer
-@onready var label: Label = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/Label
-@onready var spd_label: RichTextLabel = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/RichTextLabel
-@onready var out_label: RichTextLabel = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton/CenterContainer/RichTextLabel
-@onready var knight_label: RichTextLabel = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade/CenterContainer/RichTextLabel
-@onready var win_label: RichTextLabel = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton/CenterContainer/RichTextLabel
-@onready var h_box: HBoxContainer = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer
-@onready var knight: TextureRect = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer/Knight
-@onready var knight_2: TextureRect = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer/Knight2
-@onready var knight_3: TextureRect = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer/Knight3
+@onready var label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/Label
+@onready var spd_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/RichTextLabel
+@onready var out_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton/CenterContainer/RichTextLabel
+@onready var knight_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade/CenterContainer/RichTextLabel
+@onready var win_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton/CenterContainer/RichTextLabel
+@onready var h_box: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer
+@onready var knight: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer/Knight
+@onready var knight_2: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer/Knight2
+@onready var knight_3: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer/Knight3
 
-var slain: int = 1000000000
+var slain: int = 0
 var output: int = 1
 var output_multiplier: float = 2
 var knight_set_level: int = 0
@@ -141,10 +139,8 @@ func _on_button_button_up() -> void:
 	pressing = false
 
 func on_upgrade_mouse_entered(type: UpgradeType):
-	print("[HOVER] entered | choosing=%s upgrading=%s current=%s"
-	% [choosing, upgrading, current_upgrade])
 	if upgrading:
-		upgrading = false
+		return
 	current_upgrade = type
 	choosing = true
 	upgrading = true
@@ -155,7 +151,6 @@ func on_upgrade_mouse_exited():
 	upgrade_streak = 0
 	current_upgrade_delay = BASE_UPGRADE_DELAY
 	upgrade_anim_speed = BASE_UPGRADE_DELAY
-	await get_tree().create_timer(0.1).timeout
 
 func start_upgrade_loop():
 	while choosing:
@@ -180,8 +175,38 @@ func do_upgrade_feedback(type: UpgradeType):
 	var in_time := 0.4 / upgrade_anim_speed
 	var pop_time := 0.1 / upgrade_anim_speed
 	var out_time := 0.4 / upgrade_anim_speed
+	var win_time := 0.8
 
 	if type == UpgradeType.WIN:
+		var tween = get_tree().create_tween()
+		while choosing:
+			tween.tween_property(
+				label_type,
+				"theme_override_font_sizes/normal_font_size",
+				30,
+				win_time
+			).set_trans(Tween.TRANS_BACK)
+			await tween.finished
+			if choosing:
+				tween = get_tree().create_tween()
+				tween.chain().tween_property(
+					label_type,
+					"theme_override_font_sizes/normal_font_size",
+					102,
+					pop_time
+				)
+				await tween.finished
+				try_buy_upgrade(UpgradeType.WIN)
+			tween = get_tree().create_tween()
+			tween.tween_property(
+				label_type,
+				"theme_override_font_sizes/normal_font_size",
+				16,
+				in_time
+			)
+			await tween.finished
+			return
+
 		try_buy_upgrade(type)
 		return
 
@@ -308,3 +333,6 @@ func _on_win_button_mouse_entered() -> void:
 
 func _on_win_button_mouse_exited() -> void:
 	on_upgrade_mouse_exited()
+
+func _on_button_pressed() -> void:
+	print('damm')
