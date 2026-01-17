@@ -1,8 +1,8 @@
 extends Control
 
 const original_output_correction = 0.08
-const win_cost: int = 60000
-const BASE_UPGRADE_DELAY := 0.7
+const win_cost: int = 1000000
+const BASE_UPGRADE_DELAY := 1
 const MIN_UPGRADE_DELAY := 0.01
 const STREAK_THRESHOLD := 1
 const MIN_OUTPUT_UPGRADE := 1.15
@@ -16,11 +16,11 @@ enum UpgradeType {
 
 var upgrades := {
 	UpgradeType.OUTPUT_2: {
-		"cost": 20,
+		"cost": 30,
 		"cost_mult": 2.0,
 		"apply": func():
 			@warning_ignore("narrowing_conversion")
-			OUTPUT_2 *= output_multiplier
+			output *= output_multiplier
 			output_multiplier -= original_output_correction
 			output_multiplier = max(
 			output_multiplier,
@@ -28,13 +28,13 @@ var upgrades := {
 		),
 	},
 	UpgradeType.SPEED_2: {
-		"cost": 5,
+		"cost": 12,
 		"cost_mult": 1.5,
 		"apply": func():
-			animation.speed_scale *= 1.1,
+			animation_2.speed_scale *= 1.1,
 	},
-	UpgradeType.KNIGHT: {
-		"cost": 500,
+	UpgradeType.KNIGHT_2: {
+		"cost": 50000,
 		"cost_mult": 3.0,
 		"apply": func():
 			var amount = knights_per_purchase()
@@ -42,28 +42,27 @@ var upgrades := {
 			update_knight_visuals()
 			update_output_from_knights(),
 	},
-	UpgradeType.WIN: {
-		"cost": 60000,
+	UpgradeType.WIN_2: {
+		"cost": 1000000,
+		"cost_mult": 1.0,
 		"apply": func():
-			get_tree().change_scene_to_file("res://scenes/main_2.tscn"),
+			pass,
 	},
 }
 
 
-@onready var main: Control = $"."
-@onready var animation: AnimationPlayer = $AnimationPlayer
+@onready var animation_2: AnimationPlayer = $AnimationPlayer
 @onready var label: Label = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/Label
 @onready var spd_label: RichTextLabel = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/RichTextLabel
 @onready var out_label: RichTextLabel = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton/CenterContainer/RichTextLabel
 @onready var knight_label: RichTextLabel = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade/CenterContainer/RichTextLabel
 @onready var win_label: RichTextLabel = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton/CenterContainer/RichTextLabel
-@onready var h_box: HBoxContainer = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer
 @onready var row_1: HBoxContainer = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row1
 @onready var row_2: HBoxContainer = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row2
 @onready var row_3: HBoxContainer = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row3
 
-var slain: int = 1000000000
-var OUTPUT_2: int = 1
+var slain: int = 0
+var output: int = 3
 var output_multiplier: float = 2
 var knight_set_level: int = 0
 var max_knights_per_run: int = 3
@@ -75,22 +74,22 @@ var upgrade_anim_speed := 1.0
 
 var pressing = false
 var choosing = false
-var upgrading := false
+var upgrading = false
 var current_upgrade : UpgradeType
 
 func _ready() -> void:
-	animation.play('idle')
+	animation_2.play('idle_2')
 	update_text()
 	row_2.visible = false
 	row_3.visible = false
 
 func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
-	slain += OUTPUT_2
+	slain += output
 	if pressing:
-		animation.play('attack')
+		animation_2.play('attack_2')
 		update_text()
 		return
-	animation.play("idle")
+	animation_2.play("idle_2")
 	update_text()
 
 func update_knight_visuals(): #UPDATE THIS
@@ -99,43 +98,39 @@ func update_knight_visuals(): #UPDATE THIS
 	row_3.visible = total_knights >= 3
 
 func update_output_from_knights():
-	OUTPUT_2 *= total_knights
+	output *= total_knights
 
 func knights_per_purchase():
 	return int(pow(3, knight_set_level))
 
 func update_text():
 	var slain_left = win_cost - slain
-	var SPEED_2 = snapped(animation.speed_scale, 0.1)
+	var speed = snapped(animation_2.speed_scale, 0.1)
 
 	win_label.text = "Go to the next phase...?\nCost: %d\nEnemies left: %d" % [win_cost, max(slain_left, 0)]
 	label.text = "Enemies slain: %d" % slain
 
-	out_label.text = "OUTPUT_2\nCost: %d\nOutput: %d" % [
+	out_label.text = "Output\nCost: %d\nOutput: %d" % [
 		upgrades[UpgradeType.OUTPUT_2].cost,
-		OUTPUT_2
+		output
 	]
 
-	spd_label.text = "SPEED_2\nCost: %d\nSpeed Multiplier: %s" % [
+	spd_label.text = "Speed\nCost: %d\nSpeed Multiplier: %s" % [
 		upgrades[UpgradeType.SPEED_2].cost,
-		SPEED_2
+		speed
 	]
 
 	if total_knights >= max_knights_per_run:
 		knight_label.text = "Maxed out!!"
 	else:
 		knight_label.text = "Number of Knights\nCost: %d\nKnights: %d" % [
-			upgrades[UpgradeType.KNIGHT].cost,
+			upgrades[UpgradeType.KNIGHT_2].cost,
 			total_knights
 		]
 
-func _on_win_button_pressed() -> void:
-	if slain >= win_cost:
-		get_tree().change_scene_to_file("res://scenes/main_2.tscn")
-
 func _on_button_button_down() -> void:
 	pressing = true
-	animation.play("attack")
+	animation_2.play("attack_2")
 
 func _on_button_button_up() -> void:
 	pressing = false
@@ -170,7 +165,7 @@ func can_buy(type: UpgradeType) -> bool:
 	var up = upgrades[type]
 	if slain < up.cost:
 		return false
-	if type == UpgradeType.KNIGHT and total_knights >= max_knights_per_run:
+	if type == UpgradeType.KNIGHT_2 and total_knights >= max_knights_per_run:
 		return false
 	return true
 
@@ -180,6 +175,40 @@ func do_upgrade_feedback(type: UpgradeType):
 	var in_time := 0.4 / upgrade_anim_speed
 	var pop_time := 0.1 / upgrade_anim_speed
 	var out_time := 0.4 / upgrade_anim_speed
+	var win_time := 0.8
+
+	if type == UpgradeType.WIN_2:
+		var tween = get_tree().create_tween()
+		while choosing:
+			tween.tween_property(
+				label_type,
+				"theme_override_font_sizes/normal_font_size",
+				30,
+				win_time
+			).set_trans(Tween.TRANS_BACK)
+			await tween.finished
+			if choosing:
+				tween = get_tree().create_tween()
+				tween.chain().tween_property(
+					label_type,
+					"theme_override_font_sizes/normal_font_size",
+					102,
+					pop_time
+				)
+				await tween.finished
+				try_buy_upgrade(UpgradeType.WIN_2)
+			tween = get_tree().create_tween()
+			tween.tween_property(
+				label_type,
+				"theme_override_font_sizes/normal_font_size",
+				16,
+				in_time
+			)
+			await tween.finished
+			return
+
+		try_buy_upgrade(type)
+		return
 
 	var tween := get_tree().create_tween()
 	tween.tween_property(
@@ -230,27 +259,34 @@ func do_upgrade_feedback(type: UpgradeType):
 	)
 	await tween.finished
 
-
 func get_label_from_upgrade(type: UpgradeType) -> RichTextLabel:
 	match type:
 		UpgradeType.SPEED_2:
 			return spd_label
 		UpgradeType.OUTPUT_2:
 			return out_label
-		UpgradeType.KNIGHT:
+		UpgradeType.KNIGHT_2:
 			return knight_label
-		UpgradeType.WIN:
+		UpgradeType.WIN_2:
 			return win_label
 	return null
 
 func try_buy_upgrade(type: UpgradeType) -> void:
 	print("[UPGRADE] streak=%d delay=%.2f"
 	% [upgrade_streak, current_upgrade_delay])
+
+	if type == UpgradeType.WIN_2:
+		choosing = false
+		upgrading = false
+		await get_tree().process_frame
+		pass
+		return
+
 	var up = upgrades[type]
 
 	if slain < up.cost:
 		return
-	if type == UpgradeType.KNIGHT and total_knights >= max_knights_per_run:
+	if type == UpgradeType.KNIGHT_2 and total_knights >= max_knights_per_run:
 		knight_label.text = "Maxed out!!"
 		return
 
@@ -295,4 +331,5 @@ func _on_win_button_mouse_entered() -> void:
 	on_upgrade_mouse_entered(UpgradeType.WIN_2)
 
 func _on_win_button_mouse_exited() -> void:
+	
 	on_upgrade_mouse_exited()
