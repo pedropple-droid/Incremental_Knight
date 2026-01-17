@@ -64,7 +64,7 @@ var upgrades := {
 @onready var knight_2: TextureRect = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer/Knight2
 @onready var knight_3: TextureRect = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer/Knight3
 
-var slain: int = 0
+var slain: int = 11111111111111110
 var output: int = 1
 var output_multiplier: float = 2
 var knight_set_level: int = 0

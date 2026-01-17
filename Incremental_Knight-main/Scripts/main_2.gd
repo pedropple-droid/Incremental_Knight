@@ -64,7 +64,7 @@ var upgrades := {
 @onready var row_2: HBoxContainer = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row2
 @onready var row_3: HBoxContainer = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row3
 
-var slain: int = 0
+var slain: int = 11111111111111110
 var output: int = 3
 var output_multiplier: float = 2
 var knight_set_level: int = 0
