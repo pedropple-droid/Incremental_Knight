@@ -1,9 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://cbslel71cfdb3"]
+[gd_scene load_steps=42 format=3 uid="uid://cbslel71cfdb3"]
 
 [ext_resource type="Script" uid="uid://nrfi2y2wrie" path="res://Scripts/main.gd" id="1_0ld40"]
 [ext_resource type="Texture2D" uid="uid://dt8lebws3jmw6" path="res://UnitsTextureRect/WarAtt_2/warriorattack1.png" id="2_0ld40"]
 [ext_resource type="Texture2D" uid="uid://ct067lsb7bcc5" path="res://UnitsTextureRect/PawnIdle/Pawn_1.png" id="2_gqmmt"]
 [ext_resource type="Texture2D" uid="uid://bl48kbwnndmqh" path="res://UnitsTextureRect/WarAtt_2/warriorattack2.png" id="3_gqmmt"]
+[ext_resource type="Texture2D" uid="uid://bulnhqdarkokt" path="res://UnitsTextureRect/Buildings/House2.png" id="3_jscy8"]
+[ext_resource type="Texture2D" uid="uid://cnd71xoeqyohg" path="res://UnitsTextureRect/Buildings/House1.png" id="3_yc10j"]
 [ext_resource type="Texture2D" uid="uid://t82swpmnh5nw" path="res://UnitsTextureRect/WarAtt_2/warriorattack3.png" id="4_yc10j"]
 [ext_resource type="Texture2D" uid="uid://d2d6081upc11k" path="res://UnitsTextureRect/WarAtt_2/warriorattack4.png" id="5_jscy8"]
 [ext_resource type="Texture2D" uid="uid://br45vxyolitio" path="res://UnitsTextureRect/WarAtt_2/warriorattack4.2.png" id="6_pm3ni"]
@@ -24,6 +26,51 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sgp6g"]
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_yc10j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yc10j"]
+atlas = ExtResource("2_gqmmt")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jscy8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yc10j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pm3ni"]
+atlas = ExtResource("3_jscy8")
+region = Rect2(0, 0, 128, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y6deb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pm3ni")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_og1vs"]
+atlas = ExtResource("3_yc10j")
+region = Rect2(0, 0, 128, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2wyq8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_og1vs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="Resource" id="Resource_o5qli"]
 metadata/__load_path__ = "res://Tiny Swords (Free Pack)/UnitsTextureRect/WarAtt/warriorattack1.png"
@@ -132,6 +179,30 @@ tracks/7/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(596, 96)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_kmb1v"]
 resource_name = "attack"
@@ -216,11 +287,127 @@ tracks/2/keys = {
 "values": [ExtResource("12_yq6so"), ExtResource("13_fv21b"), ExtResource("14_tel4y"), ExtResource("15_qkpxi"), ExtResource("16_5q0nq"), ExtResource("17_dgi5k"), ExtResource("18_j8jky"), ExtResource("19_kmb1v"), ExtResource("19_kmb1v")]
 }
 
+[sub_resource type="Animation" id="Animation_gqmmt"]
+resource_name = "villager_to_wood"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(400, 380), Vector2(80, 190)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(4.1666665, 4.4333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vxglm"]
+resource_name = "from_wood_to_mount"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(80, 190), Vector2(400, 380)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.56666666, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2f3dj"]
+resource_name = "villager_to_gold"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(400, 380), Vector2(400, 150)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(4.733333, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yq6so"]
+resource_name = "from_gold_to_mount"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(400, 150), Vector2(400, 380)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.9802322e-08, 0.23333335),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c6pm6"]
 _data = {
 &"RESET": SubResource("Animation_fuf3a"),
 &"attack": SubResource("Animation_kmb1v"),
-&"idle": SubResource("Animation_pibwh")
+&"from_gold_to_mount": SubResource("Animation_yq6so"),
+&"from_wood_to_mount": SubResource("Animation_vxglm"),
+&"idle": SubResource("Animation_pibwh"),
+&"villager_to_gold": SubResource("Animation_2f3dj"),
+&"villager_to_wood": SubResource("Animation_gqmmt")
 }
 
 [node name="Main" type="Control"]
@@ -448,7 +635,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 custom_effects = [SubResource("RichTextEffect_yc10j")]
 
-[node name="MarginContainer2" type="MarginContainer" parent="TabContainer"]
+[node name="ResourcesTab" type="MarginContainer" parent="TabContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
@@ -456,68 +643,81 @@ theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 metadata/_tab_index = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="TabContainer/MarginContainer2"]
+[node name="PanelContainer" type="PanelContainer" parent="TabContainer/ResourcesTab"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer2/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/ResourcesTab/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 7
 
-[node name="HutSpace" type="PanelContainer" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="HutSpace" type="PanelContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_sgp6g")
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/HutSpace"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace"]
+layout_mode = 2
+theme_override_constants/margin_left = 600
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 20
+
+[node name="Pawn" type="AnimatedSprite2D" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer"]
+z_index = 1
+position = Vector2(596, 96)
+sprite_frames = SubResource("SpriteFrames_jscy8")
+
+[node name="Wood" type="AnimatedSprite2D" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer"]
+position = Vector2(80, 180)
+rotation = 3.1415927
+scale = Vector2(1, -1)
+sprite_frames = SubResource("SpriteFrames_y6deb")
+
+[node name="Gold" type="AnimatedSprite2D" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer"]
+position = Vector2(400, 100)
+rotation = 3.1415927
+scale = Vector2(1, -1)
+sprite_frames = SubResource("SpriteFrames_2wyq8")
+
+[node name="Meat" type="AnimatedSprite2D" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer"]
+position = Vector2(720, 180)
+sprite_frames = SubResource("SpriteFrames_y6deb")
+
+[node name="Upgrades" type="PanelContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_sgp6g")
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="TextureRect" type="TextureRect" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/VBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_gqmmt")
-
-[node name="Upgrades" type="PanelContainer" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_sgp6g")
-
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/Upgrades"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="Label" type="Label" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Upgrades"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpeedUpgradeButton" type="Button" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
+[node name="SpeedUpgradeButton" type="Button" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 16
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -525,7 +725,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer"]
 z_index = 1
 layout_mode = 2
 mouse_filter = 2
@@ -540,11 +740,11 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OutputUpgradeButton" type="Button" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
+[node name="OutputUpgradeButton" type="Button" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -552,7 +752,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton/CenterContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton/CenterContainer"]
 z_index = 1
 layout_mode = 2
 mouse_filter = 2
@@ -566,11 +766,11 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ExtraKnightUpgrade" type="Button" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
+[node name="ExtraKnightUpgrade" type="Button" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -578,7 +778,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade/CenterContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade/CenterContainer"]
 z_index = 1
 layout_mode = 2
 mouse_filter = 2
@@ -592,11 +792,11 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="WinButton" type="Button" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
+[node name="WinButton" type="Button" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -604,7 +804,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton/CenterContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton/CenterContainer"]
 z_index = 1
 layout_mode = 2
 mouse_filter = 2
@@ -619,7 +819,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 custom_effects = [SubResource("RichTextEffect_yc10j")]
 
-[node name="TabContainer" type="TabContainer" parent="TabContainer/MarginContainer2/PanelContainer"]
+[node name="TabContainer" type="TabContainer" parent="TabContainer/ResourcesTab/PanelContainer"]
 visible = false
 layout_mode = 2
 
