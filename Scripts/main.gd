@@ -52,7 +52,6 @@ var upgrades := {
 	},
 }
 
-
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/Label
 @onready var spd_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/RichTextLabel
@@ -63,6 +62,7 @@ var upgrades := {
 @onready var knight: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer/Knight
 @onready var knight_2: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer/Knight2
 @onready var knight_3: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer/Knight3
+@onready var pawn: AnimatedSprite2D = $TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn
 
 var slain: int = 0
 var output: int = 1
@@ -109,20 +109,16 @@ func knights_per_purchase():
 func update_text():
 	var slain_left = win_cost - slain
 	var speed = snapped(animation.speed_scale, 0.1)
-
 	win_label.text = "Go to the next phase...?\nCost: %d\nEnemies left: %d" % [win_cost, max(slain_left, 0)]
 	label.text = "Enemies slain: %d" % slain
-
 	out_label.text = "Output\nCost: %d\nOutput: %d" % [
 		upgrades[UpgradeType.OUTPUT].cost,
 		output
 	]
-
 	spd_label.text = "Speed\nCost: %d\nSpeed Multiplier: %s" % [
 		upgrades[UpgradeType.SPEED].cost,
 		speed
 	]
-
 	if total_knights >= max_knights_per_run:
 		knight_label.text = "Maxed out!!"
 	else:
@@ -130,13 +126,6 @@ func update_text():
 			upgrades[UpgradeType.KNIGHT].cost,
 			total_knights
 		]
-
-func _on_button_button_down() -> void:
-	pressing = true
-	animation.play("attack")
-
-func _on_button_button_up() -> void:
-	pressing = false
 
 func on_upgrade_mouse_entered(type: UpgradeType):
 	if upgrading:
@@ -334,5 +323,35 @@ func _on_win_button_mouse_entered() -> void:
 func _on_win_button_mouse_exited() -> void:
 	on_upgrade_mouse_exited()
 
-func _on_button_pressed() -> void:
-	print('damm')
+func _on_button_button_down() -> void:
+	pressing = true
+	animation.play("attack")
+
+func _on_button_button_up() -> void:
+	pressing = false
+
+func _on_button_2_button_down() -> void:
+	pressing = true
+	animation.play("blocking")
+
+func _on_button_2_button_up() -> void:
+	pressing = false
+
+func _on_button_3_button_down() -> void:
+	pressing = true
+	animation.play("looting")
+
+func _on_button_3_button_up() -> void:
+	pressing = false
+
+func _on_bigger_storage_pressed() -> void:
+	pawn.play("pawn_to")
+
+func _on_extra_pawn_pressed() -> void:
+	animation.play("looting")
+
+func _on_speed_upgrade_pressed() -> void:
+	animation.play("looting")
+
+func _on_carry_capacity_upgrade_pressed() -> void:
+	animation.play("looting")

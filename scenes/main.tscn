@@ -1,45 +1,142 @@
-[gd_scene load_steps=42 format=3 uid="uid://cbslel71cfdb3"]
+[gd_scene load_steps=59 format=3 uid="uid://cbslel71cfdb3"]
 
 [ext_resource type="Script" uid="uid://nrfi2y2wrie" path="res://Scripts/main.gd" id="1_0ld40"]
-[ext_resource type="Texture2D" uid="uid://dt8lebws3jmw6" path="res://UnitsTextureRect/WarAtt_2/warriorattack1.png" id="2_0ld40"]
-[ext_resource type="Texture2D" uid="uid://ct067lsb7bcc5" path="res://UnitsTextureRect/PawnIdle/Pawn_1.png" id="2_gqmmt"]
-[ext_resource type="Texture2D" uid="uid://bl48kbwnndmqh" path="res://UnitsTextureRect/WarAtt_2/warriorattack2.png" id="3_gqmmt"]
+[ext_resource type="Texture2D" uid="uid://dt8lebws3jmw6" path="res://UnitsTextureRect/WarAtt/warriorattack1.png" id="2_0ld40"]
+[ext_resource type="Texture2D" uid="uid://daw0bj5qch8kq" path="res://TinySword/Units/Blue Units/Pawn/Pawn_Idle.png" id="2_pm3ni"]
+[ext_resource type="Texture2D" uid="uid://bl48kbwnndmqh" path="res://UnitsTextureRect/WarAtt/warriorattack2.png" id="3_gqmmt"]
 [ext_resource type="Texture2D" uid="uid://bulnhqdarkokt" path="res://UnitsTextureRect/Buildings/House2.png" id="3_jscy8"]
+[ext_resource type="Texture2D" uid="uid://bbo03fure6pf5" path="res://TinySword/Units/Blue Units/Pawn/Pawn_Run.png" id="3_y6deb"]
 [ext_resource type="Texture2D" uid="uid://cnd71xoeqyohg" path="res://UnitsTextureRect/Buildings/House1.png" id="3_yc10j"]
-[ext_resource type="Texture2D" uid="uid://t82swpmnh5nw" path="res://UnitsTextureRect/WarAtt_2/warriorattack3.png" id="4_yc10j"]
-[ext_resource type="Texture2D" uid="uid://d2d6081upc11k" path="res://UnitsTextureRect/WarAtt_2/warriorattack4.png" id="5_jscy8"]
-[ext_resource type="Texture2D" uid="uid://br45vxyolitio" path="res://UnitsTextureRect/WarAtt_2/warriorattack4.2.png" id="6_pm3ni"]
-[ext_resource type="Texture2D" uid="uid://bh4ska0vps6fe" path="res://UnitsTextureRect/WarAtt_2/warriorattack5.png" id="7_y6deb"]
-[ext_resource type="Texture2D" uid="uid://dv1r1wk105bra" path="res://UnitsTextureRect/WarAtt_2/warriorattack6.png" id="8_og1vs"]
-[ext_resource type="Texture2D" uid="uid://b4rm8tamfp7y0" path="res://UnitsTextureRect/WarAtt_2/warriorattack7.png" id="9_2wyq8"]
+[ext_resource type="Texture2D" uid="uid://t82swpmnh5nw" path="res://UnitsTextureRect/WarAtt/warriorattack3.png" id="4_yc10j"]
+[ext_resource type="Texture2D" uid="uid://d2d6081upc11k" path="res://UnitsTextureRect/WarAtt/warriorattack4.png" id="5_jscy8"]
+[ext_resource type="Texture2D" uid="uid://br45vxyolitio" path="res://UnitsTextureRect/WarAtt/warriorattack4.2.png" id="6_pm3ni"]
+[ext_resource type="Texture2D" uid="uid://bh4ska0vps6fe" path="res://UnitsTextureRect/WarAtt/warriorattack5.png" id="7_y6deb"]
+[ext_resource type="Texture2D" uid="uid://dv1r1wk105bra" path="res://UnitsTextureRect/WarAtt/warriorattack6.png" id="8_og1vs"]
+[ext_resource type="Texture2D" uid="uid://b4rm8tamfp7y0" path="res://UnitsTextureRect/WarAtt/warriorattack7.png" id="9_2wyq8"]
 [ext_resource type="Texture2D" uid="uid://t14lok77j4ei" path="res://UnitsTextureRect/WarAtt_2/warriorattack8.png" id="10_vxglm"]
 [ext_resource type="Texture2D" uid="uid://5ttj7dfgjrit" path="res://UnitsTextureRect/WarAtt_2/warriorattack8.2.png" id="11_2f3dj"]
-[ext_resource type="Texture2D" uid="uid://cfyxpu5mgr1fa" path="res://UnitsTextureRect/WarIdle_2/warrioridle1.png" id="12_yq6so"]
-[ext_resource type="Texture2D" uid="uid://dtlei5hi4kdu2" path="res://UnitsTextureRect/WarIdle_2/warrioridle2.png" id="13_fv21b"]
-[ext_resource type="Texture2D" uid="uid://t13xykt8uvsv" path="res://UnitsTextureRect/WarIdle_2/warrioridle3.png" id="14_tel4y"]
-[ext_resource type="Texture2D" uid="uid://g6lpm3fo21n3" path="res://UnitsTextureRect/WarIdle_2/warrioridle4.png" id="15_qkpxi"]
-[ext_resource type="Texture2D" uid="uid://h6h65bd2sp0d" path="res://UnitsTextureRect/WarIdle_2/warrioridle5.png" id="16_5q0nq"]
-[ext_resource type="Texture2D" uid="uid://d2qirx17r6iv1" path="res://UnitsTextureRect/WarIdle_2/warrioridle6.png" id="17_dgi5k"]
-[ext_resource type="Texture2D" uid="uid://bm2dj1bdi8qgu" path="res://UnitsTextureRect/WarIdle_2/warrioridle7.png" id="18_j8jky"]
-[ext_resource type="Texture2D" uid="uid://dmxxdhe4dhseq" path="res://UnitsTextureRect/WarIdle_2/warrioridle8.png" id="19_kmb1v"]
+[ext_resource type="Texture2D" uid="uid://cfyxpu5mgr1fa" path="res://UnitsTextureRect/WarIdle/warrioridle1.png" id="12_yq6so"]
+[ext_resource type="Texture2D" uid="uid://dtlei5hi4kdu2" path="res://UnitsTextureRect/WarIdle/warrioridle2.png" id="13_fv21b"]
+[ext_resource type="Texture2D" uid="uid://t13xykt8uvsv" path="res://UnitsTextureRect/WarIdle/warrioridle3.png" id="14_tel4y"]
+[ext_resource type="Texture2D" uid="uid://g6lpm3fo21n3" path="res://UnitsTextureRect/WarIdle/warrioridle4.png" id="15_qkpxi"]
+[ext_resource type="Texture2D" uid="uid://h6h65bd2sp0d" path="res://UnitsTextureRect/WarIdle/warrioridle5.png" id="16_5q0nq"]
+[ext_resource type="Texture2D" uid="uid://d2qirx17r6iv1" path="res://UnitsTextureRect/WarIdle/warrioridle6.png" id="17_dgi5k"]
+[ext_resource type="Texture2D" uid="uid://bm2dj1bdi8qgu" path="res://UnitsTextureRect/WarIdle/warrioridle7.png" id="18_j8jky"]
+[ext_resource type="Texture2D" uid="uid://dmxxdhe4dhseq" path="res://UnitsTextureRect/WarIdle/warrioridle8.png" id="19_kmb1v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sgp6g"]
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_yc10j"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yc10j"]
-atlas = ExtResource("2_gqmmt")
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wyq8"]
+atlas = ExtResource("2_pm3ni")
 region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vxglm"]
+atlas = ExtResource("2_pm3ni")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2f3dj"]
+atlas = ExtResource("2_pm3ni")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yq6so"]
+atlas = ExtResource("2_pm3ni")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fv21b"]
+atlas = ExtResource("2_pm3ni")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tel4y"]
+atlas = ExtResource("2_pm3ni")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkpxi"]
+atlas = ExtResource("2_pm3ni")
+region = Rect2(1152, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5q0nq"]
+atlas = ExtResource("2_pm3ni")
+region = Rect2(1344, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dgi5k"]
+atlas = ExtResource("3_y6deb")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8jky"]
+atlas = ExtResource("3_y6deb")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmb1v"]
+atlas = ExtResource("3_y6deb")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fuf3a"]
+atlas = ExtResource("3_y6deb")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pibwh"]
+atlas = ExtResource("3_y6deb")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6pm6"]
+atlas = ExtResource("3_y6deb")
+region = Rect2(960, 0, 192, 192)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jscy8"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yc10j")
+"texture": SubResource("AtlasTexture_2wyq8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vxglm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2f3dj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yq6so")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fv21b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tel4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkpxi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5q0nq")
 }],
 "loop": true,
-"name": &"default",
-"speed": 5.0
+"name": &"idle",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dgi5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j8jky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmb1v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fuf3a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pibwh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6pm6")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 12.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pm3ni"]
@@ -203,6 +300,30 @@ tracks/9/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:animation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"walking"]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:flip_h")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_kmb1v"]
 resource_name = "attack"
@@ -287,62 +408,6 @@ tracks/2/keys = {
 "values": [ExtResource("12_yq6so"), ExtResource("13_fv21b"), ExtResource("14_tel4y"), ExtResource("15_qkpxi"), ExtResource("16_5q0nq"), ExtResource("17_dgi5k"), ExtResource("18_j8jky"), ExtResource("19_kmb1v"), ExtResource("19_kmb1v")]
 }
 
-[sub_resource type="Animation" id="Animation_gqmmt"]
-resource_name = "villager_to_wood"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(400, 380), Vector2(80, 190)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(4.1666665, 4.4333334),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_vxglm"]
-resource_name = "from_wood_to_mount"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 5.0333333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(80, 190), Vector2(400, 380)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.56666666, 0.8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_2f3dj"]
 resource_name = "villager_to_gold"
 length = 5.0
@@ -370,9 +435,125 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1, 1), Vector2(0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"walking"]
+}
+
+[sub_resource type="Animation" id="Animation_gqmmt"]
+resource_name = "villager_to_wood"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(400, 380), Vector2(80, 190)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(4.1666665, 4.4333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"walking"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:flip_h")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_5he1u"]
+resource_name = "villager_to_meat"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(400, 380), Vector2(700, 200)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(4.5, 4.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"walking"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:flip_h")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_yq6so"]
-resource_name = "from_gold_to_mount"
+resource_name = "gold_to_mount"
 length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -398,16 +579,176 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, 0), Vector2(1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"walking"]
+}
+
+[sub_resource type="Animation" id="Animation_vxglm"]
+resource_name = "wood_to_mount"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(80, 190), Vector2(400, 380)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.46666667, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"walking"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:flip_h")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_5poiv"]
+resource_name = "meat_to_mount"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(700, 200), Vector2(400, 380)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23333335),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"walking"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:flip_h")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_2cjbq"]
+resource_name = "pawn_idle"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(400, 380)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c6pm6"]
 _data = {
 &"RESET": SubResource("Animation_fuf3a"),
 &"attack": SubResource("Animation_kmb1v"),
-&"from_gold_to_mount": SubResource("Animation_yq6so"),
-&"from_wood_to_mount": SubResource("Animation_vxglm"),
+&"gold_to_mount": SubResource("Animation_yq6so"),
 &"idle": SubResource("Animation_pibwh"),
+&"meat_to_mount": SubResource("Animation_5poiv"),
+&"pawn_idle": SubResource("Animation_2cjbq"),
 &"villager_to_gold": SubResource("Animation_2f3dj"),
-&"villager_to_wood": SubResource("Animation_gqmmt")
+&"villager_to_meat": SubResource("Animation_5he1u"),
+&"villager_to_wood": SubResource("Animation_gqmmt"),
+&"wood_to_mount": SubResource("Animation_vxglm")
 }
 
 [node name="Main" type="Control"]
@@ -501,10 +842,30 @@ layout_mode = 2
 expand_mode = 3
 stretch_mode = 4
 
-[node name="Button" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="Button" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "attack"
+
+[node name="Button2" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "defend
+"
+
+[node name="Button3" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "loot
+"
 
 [node name="Upgrades" type="PanelContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -673,6 +1034,7 @@ theme_override_constants/margin_bottom = 20
 z_index = 1
 position = Vector2(596, 96)
 sprite_frames = SubResource("SpriteFrames_jscy8")
+animation = &"walking"
 
 [node name="Wood" type="AnimatedSprite2D" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer"]
 position = Vector2(80, 180)
@@ -712,12 +1074,12 @@ text = "Upgrades"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpeedUpgradeButton" type="Button" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
+[node name="CarryCapacityUpgrade" type="Button" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 16
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/CarryCapacityUpgrade"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -725,7 +1087,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/CarryCapacityUpgrade/CenterContainer"]
 z_index = 1
 layout_mode = 2
 mouse_filter = 2
@@ -734,17 +1096,17 @@ theme_override_colors/font_outline_color = Color(0.979693, 0.97969264, 1.540184e
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "Spd"
+text = "CarryWeight"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OutputUpgradeButton" type="Button" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
+[node name="SpeedUpgrade" type="Button" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgrade"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -752,7 +1114,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton/CenterContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgrade/CenterContainer"]
 z_index = 1
 layout_mode = 2
 mouse_filter = 2
@@ -760,17 +1122,17 @@ theme_override_colors/font_outline_color = Color(0.9372549, 0.9372549, 0, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "Spd"
+text = "SpeedUpgrade"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ExtraKnightUpgrade" type="Button" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
+[node name="ExtraPawn" type="Button" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraPawn"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -778,7 +1140,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade/CenterContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraPawn/CenterContainer"]
 z_index = 1
 layout_mode = 2
 mouse_filter = 2
@@ -786,17 +1148,17 @@ theme_override_colors/font_outline_color = Color(0.9388745, 0.9388743, 1.540184e
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "Spd"
+text = "ExtraPawn"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="WinButton" type="Button" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
+[node name="BiggerStorage" type="Button" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/BiggerStorage"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -804,7 +1166,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton/CenterContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/BiggerStorage/CenterContainer"]
 z_index = 1
 layout_mode = 2
 mouse_filter = 2
@@ -812,7 +1174,7 @@ theme_override_colors/font_outline_color = Color(0.9372549, 0.9372549, 0, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "[shake rate=5 level=10]SPD[/shake]"
+text = "Storage"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
@@ -848,8 +1210,12 @@ theme_override_font_sizes/font_size = 20
 text = "gOODdow win1!!!!1111im goin gto sleep goodbuye"
 
 [connection signal="gui_input" from="TabContainer" to="." method="_on_tab_container_gui_input"]
-[connection signal="button_down" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/Button" to="." method="_on_button_button_down"]
-[connection signal="button_up" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/Button" to="." method="_on_button_button_up"]
+[connection signal="button_down" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/Button" to="." method="_on_button_button_down"]
+[connection signal="button_up" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/Button" to="." method="_on_button_button_up"]
+[connection signal="button_down" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/Button2" to="." method="_on_button_2_button_down"]
+[connection signal="button_up" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/Button2" to="." method="_on_button_2_button_up"]
+[connection signal="button_down" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/Button3" to="." method="_on_button_3_button_down"]
+[connection signal="button_up" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/Button3" to="." method="_on_button_3_button_up"]
 [connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton" to="." method="_on_speed_upgrade_button_mouse_entered"]
 [connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton" to="." method="_on_speed_upgrade_button_mouse_exited"]
 [connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton" to="." method="_on_output_upgrade_button_mouse_entered"]
@@ -858,4 +1224,8 @@ text = "gOODdow win1!!!!1111im goin gto sleep goodbuye"
 [connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade" to="." method="_on_extra_knight_upgrade_mouse_exited"]
 [connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton" to="." method="_on_win_button_mouse_entered"]
 [connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton" to="." method="_on_win_button_mouse_exited"]
+[connection signal="pressed" from="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/CarryCapacityUpgrade" to="." method="_on_carry_capacity_upgrade_pressed"]
+[connection signal="pressed" from="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgrade" to="." method="_on_speed_upgrade_pressed"]
+[connection signal="pressed" from="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraPawn" to="." method="_on_extra_pawn_pressed"]
+[connection signal="pressed" from="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/BiggerStorage" to="." method="_on_bigger_storage_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
