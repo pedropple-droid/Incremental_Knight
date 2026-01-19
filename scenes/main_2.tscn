@@ -321,19 +321,19 @@ layout_mode = 2
 [node name="Knight" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row1"]
 texture_filter = 3
 layout_mode = 2
-texture = ExtResource("15_664ys")
+texture = ExtResource("5_c40c1")
 stretch_mode = 3
 
 [node name="Knight2" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row1"]
 texture_filter = 3
 layout_mode = 2
-texture = ExtResource("15_664ys")
+texture = ExtResource("5_c40c1")
 stretch_mode = 3
 
 [node name="Knight3" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row1"]
 texture_filter = 3
 layout_mode = 2
-texture = ExtResource("15_664ys")
+texture = ExtResource("5_c40c1")
 stretch_mode = 3
 
 [node name="row2" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer"]
@@ -342,19 +342,19 @@ layout_mode = 2
 [node name="Knight" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row2"]
 texture_filter = 3
 layout_mode = 2
-texture = ExtResource("15_664ys")
+texture = ExtResource("5_c40c1")
 stretch_mode = 3
 
 [node name="Knight2" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row2"]
 texture_filter = 3
 layout_mode = 2
-texture = ExtResource("15_664ys")
+texture = ExtResource("5_c40c1")
 stretch_mode = 3
 
 [node name="Knight3" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row2"]
 texture_filter = 3
 layout_mode = 2
-texture = ExtResource("15_664ys")
+texture = ExtResource("5_c40c1")
 stretch_mode = 3
 
 [node name="row3" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer"]
@@ -363,19 +363,19 @@ layout_mode = 2
 [node name="Knight" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row3"]
 texture_filter = 3
 layout_mode = 2
-texture = ExtResource("15_664ys")
+texture = ExtResource("5_c40c1")
 stretch_mode = 3
 
 [node name="Knight2" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row3"]
 texture_filter = 3
 layout_mode = 2
-texture = ExtResource("15_664ys")
+texture = ExtResource("5_c40c1")
 stretch_mode = 3
 
 [node name="Knight3" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row3"]
 texture_filter = 3
 layout_mode = 2
-texture = ExtResource("15_664ys")
+texture = ExtResource("5_c40c1")
 stretch_mode = 3
 
 [node name="Button" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer"]

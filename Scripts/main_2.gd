@@ -61,7 +61,10 @@ var upgrades := {
 @onready var row_2: HBoxContainer = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row2
 @onready var row_3: HBoxContainer = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row3
 
-var slain: int = 0
+var slain: int = 10000000000000000
+var wood: int = 0
+var meat: int = 0
+var gold: int = 0
 var output: int = 3
 var output_multiplier: float = 2
 var knight_set_level: int = 0
@@ -108,7 +111,7 @@ func update_text():
 	var speed = snapped(animation_2.speed_scale, 0.1)
 
 	win_label.text = "Go to the next phase...?\nCost: %d\nEnemies left: %d" % [win_cost, max(slain_left, 0)]
-	label.text = "Enemies slain: %d" % slain
+	label.text = "Enemies slain: %d\nWood avaiable: %d\nMeat avaiable: %d\nGold avaiable: %d" % [slain, wood, meat, gold]
 
 	out_label.text = "Output\nCost: %d\nOutput: %d" % [
 		upgrades[UpgradeType.OUTPUT_2].cost,

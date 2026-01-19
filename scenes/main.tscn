@@ -1,173 +1,92 @@
-[gd_scene load_steps=59 format=3 uid="uid://cbslel71cfdb3"]
+[gd_scene load_steps=102 format=3 uid="uid://cbslel71cfdb3"]
 
 [ext_resource type="Script" uid="uid://nrfi2y2wrie" path="res://Scripts/main.gd" id="1_0ld40"]
-[ext_resource type="Texture2D" uid="uid://dt8lebws3jmw6" path="res://UnitsTextureRect/WarAtt/warriorattack1.png" id="2_0ld40"]
-[ext_resource type="Texture2D" uid="uid://daw0bj5qch8kq" path="res://TinySword/Units/Blue Units/Pawn/Pawn_Idle.png" id="2_pm3ni"]
-[ext_resource type="Texture2D" uid="uid://bl48kbwnndmqh" path="res://UnitsTextureRect/WarAtt/warriorattack2.png" id="3_gqmmt"]
+[ext_resource type="Texture2D" uid="uid://dlj2ljnxx08xn" path="res://TinySword/UI Elements/UI Elements/Icons/Icon_02.png" id="2_11yus"]
+[ext_resource type="Texture2D" uid="uid://c26y02kgmunxc" path="res://TinySword/UI Elements/UI Elements/Icons/Icon_03.png" id="2_ndrjj"]
+[ext_resource type="Texture2D" uid="uid://p7yky6prd5g8" path="res://TinySword/UI Elements/UI Elements/Icons/Icon_04.png" id="3_b6ruc"]
 [ext_resource type="Texture2D" uid="uid://bulnhqdarkokt" path="res://UnitsTextureRect/Buildings/House2.png" id="3_jscy8"]
-[ext_resource type="Texture2D" uid="uid://bbo03fure6pf5" path="res://TinySword/Units/Blue Units/Pawn/Pawn_Run.png" id="3_y6deb"]
 [ext_resource type="Texture2D" uid="uid://cnd71xoeqyohg" path="res://UnitsTextureRect/Buildings/House1.png" id="3_yc10j"]
-[ext_resource type="Texture2D" uid="uid://t82swpmnh5nw" path="res://UnitsTextureRect/WarAtt/warriorattack3.png" id="4_yc10j"]
-[ext_resource type="Texture2D" uid="uid://d2d6081upc11k" path="res://UnitsTextureRect/WarAtt/warriorattack4.png" id="5_jscy8"]
-[ext_resource type="Texture2D" uid="uid://br45vxyolitio" path="res://UnitsTextureRect/WarAtt/warriorattack4.2.png" id="6_pm3ni"]
-[ext_resource type="Texture2D" uid="uid://bh4ska0vps6fe" path="res://UnitsTextureRect/WarAtt/warriorattack5.png" id="7_y6deb"]
-[ext_resource type="Texture2D" uid="uid://dv1r1wk105bra" path="res://UnitsTextureRect/WarAtt/warriorattack6.png" id="8_og1vs"]
-[ext_resource type="Texture2D" uid="uid://b4rm8tamfp7y0" path="res://UnitsTextureRect/WarAtt/warriorattack7.png" id="9_2wyq8"]
-[ext_resource type="Texture2D" uid="uid://t14lok77j4ei" path="res://UnitsTextureRect/WarAtt_2/warriorattack8.png" id="10_vxglm"]
-[ext_resource type="Texture2D" uid="uid://5ttj7dfgjrit" path="res://UnitsTextureRect/WarAtt_2/warriorattack8.2.png" id="11_2f3dj"]
-[ext_resource type="Texture2D" uid="uid://cfyxpu5mgr1fa" path="res://UnitsTextureRect/WarIdle/warrioridle1.png" id="12_yq6so"]
-[ext_resource type="Texture2D" uid="uid://dtlei5hi4kdu2" path="res://UnitsTextureRect/WarIdle/warrioridle2.png" id="13_fv21b"]
-[ext_resource type="Texture2D" uid="uid://t13xykt8uvsv" path="res://UnitsTextureRect/WarIdle/warrioridle3.png" id="14_tel4y"]
-[ext_resource type="Texture2D" uid="uid://g6lpm3fo21n3" path="res://UnitsTextureRect/WarIdle/warrioridle4.png" id="15_qkpxi"]
-[ext_resource type="Texture2D" uid="uid://h6h65bd2sp0d" path="res://UnitsTextureRect/WarIdle/warrioridle5.png" id="16_5q0nq"]
-[ext_resource type="Texture2D" uid="uid://d2qirx17r6iv1" path="res://UnitsTextureRect/WarIdle/warrioridle6.png" id="17_dgi5k"]
-[ext_resource type="Texture2D" uid="uid://bm2dj1bdi8qgu" path="res://UnitsTextureRect/WarIdle/warrioridle7.png" id="18_j8jky"]
-[ext_resource type="Texture2D" uid="uid://dmxxdhe4dhseq" path="res://UnitsTextureRect/WarIdle/warrioridle8.png" id="19_kmb1v"]
+[ext_resource type="Texture2D" uid="uid://c0npv3tr5b5b" path="res://UnitsTextureRect/WarAttOversized/warriorattack1.png" id="4_t5ykj"]
+[ext_resource type="Texture2D" uid="uid://c4sxddytb7526" path="res://UnitsTextureRect/WarAttOversized/warriorattack2.png" id="5_e755i"]
+[ext_resource type="Texture2D" uid="uid://cmpb03spyb0ry" path="res://UnitsTextureRect/WarAttOversized/warriorattack3.png" id="6_ro3en"]
+[ext_resource type="Texture2D" uid="uid://c8p5p16jdwfbt" path="res://UnitsTextureRect/WarAttOversized/warriorattack4.png" id="7_od4ux"]
+[ext_resource type="Texture2D" uid="uid://p8ybggyt4jhc" path="res://UnitsTextureRect/WarAttOversized/warriorattack5.1.png" id="8_t5ykj"]
+[ext_resource type="Texture2D" uid="uid://c31nmr46eaygl" path="res://UnitsTextureRect/WarAttOversized/warriorattack6.png" id="9_1epgm"]
+[ext_resource type="Texture2D" uid="uid://buxacg7gdk3da" path="res://UnitsTextureRect/WarAttOversized/warriorattack7.png" id="10_152kg"]
+[ext_resource type="Texture2D" uid="uid://0oqi2y0rnrrl" path="res://UnitsTextureRect/WarAttOversized/warriorattack8.png" id="11_r4e17"]
+[ext_resource type="Texture2D" uid="uid://cpr8qhk7bbf0f" path="res://UnitsTextureRect/WarAttOversized/warriorattack9.png" id="12_y57op"]
+[ext_resource type="Texture2D" uid="uid://buohhpmqiljpp" path="res://UnitsTextureRect/WarAttOversized/warriorattack11.png" id="13_e755i"]
+[ext_resource type="Texture2D" uid="uid://ct067lsb7bcc5" path="res://UnitsTextureRect/PawnIdle/Pawn_1.png" id="20_vxglm"]
+[ext_resource type="Texture2D" uid="uid://cjacyh5nw12xx" path="res://UnitsTextureRect/PawnIdle/Pawn_2.png" id="21_2f3dj"]
+[ext_resource type="Texture2D" uid="uid://cfyxpu5mgr1fa" path="res://UnitsTextureRect/WarIdle_2/warrioridle1.png" id="21_ro3en"]
+[ext_resource type="Texture2D" uid="uid://bqb3mn3fkmcy5" path="res://UnitsTextureRect/WarIdleOversized/warrioridle1.png" id="21_t5ykj"]
+[ext_resource type="Texture2D" uid="uid://cvy03pq1upd1e" path="res://UnitsTextureRect/WarIdleOversized/warrioridle2.png" id="22_e755i"]
+[ext_resource type="Texture2D" uid="uid://dtlei5hi4kdu2" path="res://UnitsTextureRect/WarIdle_2/warrioridle2.png" id="22_od4ux"]
+[ext_resource type="Texture2D" uid="uid://dcbt14a753rb1" path="res://UnitsTextureRect/PawnIdle/Pawn_3.png" id="22_yq6so"]
+[ext_resource type="Texture2D" uid="uid://b0jtqego0bw0j" path="res://UnitsTextureRect/PawnIdle/Pawn_4.png" id="23_fv21b"]
+[ext_resource type="Texture2D" uid="uid://dmi3s26ds37cu" path="res://UnitsTextureRect/WarIdleOversized/warrioridle3.png" id="23_ro3en"]
+[ext_resource type="Texture2D" uid="uid://t13xykt8uvsv" path="res://UnitsTextureRect/WarIdle_2/warrioridle3.png" id="23_xhfw6"]
+[ext_resource type="Texture2D" uid="uid://g6lpm3fo21n3" path="res://UnitsTextureRect/WarIdle_2/warrioridle4.png" id="24_1epgm"]
+[ext_resource type="Texture2D" uid="uid://c7uj8h07a1bfy" path="res://UnitsTextureRect/WarIdleOversized/warrioridle4.png" id="24_od4ux"]
+[ext_resource type="Texture2D" uid="uid://b6wetes44yiex" path="res://UnitsTextureRect/PawnIdle/Pawn_5.png" id="24_tel4y"]
+[ext_resource type="Texture2D" uid="uid://h6h65bd2sp0d" path="res://UnitsTextureRect/WarIdle_2/warrioridle5.png" id="25_152kg"]
+[ext_resource type="Texture2D" uid="uid://ddatnkgk85xdj" path="res://UnitsTextureRect/PawnIdle/Pawn_6.png" id="25_qkpxi"]
+[ext_resource type="Texture2D" uid="uid://bkkb1n43nysej" path="res://UnitsTextureRect/WarIdleOversized/warrioridle5.png" id="25_xhfw6"]
+[ext_resource type="Texture2D" uid="uid://bg3tgm7x75u3y" path="res://UnitsTextureRect/WarIdleOversized/warrioridle6.png" id="26_1epgm"]
+[ext_resource type="Texture2D" uid="uid://b7y886gvwqnsg" path="res://UnitsTextureRect/PawnIdle/Pawn_7.png" id="26_5q0nq"]
+[ext_resource type="Texture2D" uid="uid://d2qirx17r6iv1" path="res://UnitsTextureRect/WarIdle_2/warrioridle6.png" id="26_r4e17"]
+[ext_resource type="Texture2D" uid="uid://bws5ooo11hqmd" path="res://UnitsTextureRect/WarIdleOversized/warrioridle7.png" id="27_152kg"]
+[ext_resource type="Texture2D" uid="uid://jnlemv00sjlr" path="res://UnitsTextureRect/PawnIdle/Pawn_8.png" id="27_dgi5k"]
+[ext_resource type="Texture2D" uid="uid://bm2dj1bdi8qgu" path="res://UnitsTextureRect/WarIdle_2/warrioridle7.png" id="27_y57op"]
+[ext_resource type="Texture2D" uid="uid://dmxxdhe4dhseq" path="res://UnitsTextureRect/WarIdle_2/warrioridle8.png" id="28_mlv25"]
+[ext_resource type="Texture2D" uid="uid://qm1exgbhljkt" path="res://UnitsTextureRect/WarIdleOversized/warrioridle8.png" id="28_r4e17"]
+[ext_resource type="Texture2D" uid="uid://bq3cyp7fy0j41" path="res://UnitsTextureRect/PawnRun/EmptyHanded/PawnEmpty1.png" id="29_dgi5k"]
+[ext_resource type="Texture2D" uid="uid://bp2i5cbkw4t32" path="res://UnitsTextureRect/PawnRun/EmptyHanded/PawnEmpty2.png" id="30_j8jky"]
+[ext_resource type="Texture2D" uid="uid://d3te06lap1quf" path="res://UnitsTextureRect/PawnRun/EmptyHanded/PawnEmpty3.png" id="31_kmb1v"]
+[ext_resource type="Texture2D" uid="uid://deml2sk4xodwq" path="res://UnitsTextureRect/PawnRun/EmptyHanded/PawnEmpty4.png" id="32_fuf3a"]
+[ext_resource type="Texture2D" uid="uid://di1drvvopv88n" path="res://UnitsTextureRect/PawnRun/EmptyHanded/PawnEmpty5.png" id="33_pibwh"]
+[ext_resource type="Texture2D" uid="uid://02clsuyfc44q" path="res://UnitsTextureRect/PawnRun/EmptyHanded/PawnEmpty6.png" id="34_c6pm6"]
+[ext_resource type="Texture2D" uid="uid://nrs7gwihjtv8" path="res://UnitsTextureRect/PawnRun/GoldInHand/PawnGold1.png" id="36_o7ddy"]
+[ext_resource type="Texture2D" uid="uid://2rlnyla53f7r" path="res://UnitsTextureRect/PawnRun/GoldInHand/PawnGold2.png" id="37_0loja"]
+[ext_resource type="Texture2D" uid="uid://cln0fn3hho1wk" path="res://UnitsTextureRect/PawnRun/GoldInHand/PawnGold3.png" id="38_ids8r"]
+[ext_resource type="Texture2D" uid="uid://bgvsmxxk26tnq" path="res://UnitsTextureRect/PawnRun/GoldInHand/PawnGold4.png" id="39_dnhof"]
+[ext_resource type="Texture2D" uid="uid://by2u674bspkjy" path="res://UnitsTextureRect/PawnRun/GoldInHand/PawnGold5.png" id="40_1v6qk"]
+[ext_resource type="Texture2D" uid="uid://dfda0v05im081" path="res://UnitsTextureRect/PawnRun/GoldInHand/PawnGold6.png" id="41_augu2"]
+[ext_resource type="Texture2D" uid="uid://diqjqp027nk4a" path="res://UnitsTextureRect/PawnRun/MeatInHand/PawnMeat1.png" id="42_tm6hj"]
+[ext_resource type="Texture2D" uid="uid://c3bb2qirg8plq" path="res://UnitsTextureRect/PawnRun/MeatInHand/PawnMeat2.png" id="43_kf5aa"]
+[ext_resource type="Texture2D" uid="uid://b5323tyjcavn7" path="res://UnitsTextureRect/PawnRun/MeatInHand/PawnMeat3.png" id="44_t5ykj"]
+[ext_resource type="Texture2D" uid="uid://burs8q5bqvonb" path="res://UnitsTextureRect/PawnRun/MeatInHand/PawnMeat4.png" id="45_e755i"]
+[ext_resource type="Texture2D" uid="uid://c2v5hf8rptulk" path="res://UnitsTextureRect/PawnRun/MeatInHand/PawnMeat5.png" id="46_ro3en"]
+[ext_resource type="Texture2D" uid="uid://bkwqlmxwxo4pe" path="res://UnitsTextureRect/PawnRun/MeatInHand/PawnMeat6.png" id="47_od4ux"]
+[ext_resource type="Texture2D" uid="uid://dp4vvcysfvn8x" path="res://UnitsTextureRect/PawnRun/WoodInHand/PawnWood1.png" id="48_xhfw6"]
+[ext_resource type="Texture2D" uid="uid://deasjfciiuc5w" path="res://UnitsTextureRect/PawnRun/WoodInHand/PawnWood2.png" id="49_1epgm"]
+[ext_resource type="Texture2D" uid="uid://btnren5m8dbv4" path="res://UnitsTextureRect/PawnRun/WoodInHand/PawnWood3.png" id="50_152kg"]
+[ext_resource type="Texture2D" uid="uid://druhfahgqwjlo" path="res://UnitsTextureRect/PawnRun/WoodInHand/PawnWood4.png" id="51_r4e17"]
+[ext_resource type="Texture2D" uid="uid://7qblegtnnjqt" path="res://UnitsTextureRect/PawnRun/WoodInHand/PawnWood5.png" id="52_y57op"]
+[ext_resource type="Texture2D" uid="uid://cr0bjqq8vb3hf" path="res://UnitsTextureRect/PawnRun/WoodInHand/PawnWood6.png" id="53_mlv25"]
+[ext_resource type="Texture2D" uid="uid://d0duj1ps1bkyy" path="res://UnitsTextureRect/WarBlock/WarBlock1.png" id="62_152kg"]
+[ext_resource type="Texture2D" uid="uid://d1yslcusj5pb" path="res://UnitsTextureRect/WarBlock/WarBlock2.png" id="63_r4e17"]
+[ext_resource type="Texture2D" uid="uid://bb25blvfnx8bh" path="res://UnitsTextureRect/WarBlock/WarBlock3.png" id="64_y57op"]
+[ext_resource type="Texture2D" uid="uid://cw4oklbkw4stc" path="res://UnitsTextureRect/WarBlock/WarBlock4.png" id="65_mlv25"]
+[ext_resource type="Texture2D" uid="uid://fxruxvu3lqp6" path="res://UnitsTextureRect/WarBlock/WarBlock5.png" id="66_a82wo"]
+[ext_resource type="Texture2D" uid="uid://nfbs6ou218ve" path="res://UnitsTextureRect/WarBlock/WarBlock6.png" id="67_gdvew"]
+[ext_resource type="Texture2D" uid="uid://i3lapqy7aofp" path="res://UnitsTextureRect/WarLootOversized/WarriorLooting1.png" id="68_r4e17"]
+[ext_resource type="Texture2D" uid="uid://dne14slvio4rt" path="res://UnitsTextureRect/WarLootOversized/WarriorLooting.png" id="68_xaipn"]
+[ext_resource type="Texture2D" uid="uid://dghom10gaku8i" path="res://UnitsTextureRect/WarLootOversized/WarriorLooting2.png" id="70_ndrjj"]
+[ext_resource type="Texture2D" uid="uid://bygtav74klkn8" path="res://UnitsTextureRect/WarLootOversized/WarriorLooting3.png" id="71_ih3m7"]
+[ext_resource type="Texture2D" uid="uid://hiq26buyr6t" path="res://UnitsTextureRect/WarLootOversized/WarriorLooting4.png" id="72_11yus"]
+[ext_resource type="Texture2D" uid="uid://co0flxd2hiwqj" path="res://UnitsTextureRect/WarLootOversized/WarriorLooting5.png" id="73_b6ruc"]
+[ext_resource type="Texture2D" uid="uid://b46blm7vwt07a" path="res://UnitsTextureRect/WarLootOversized/WarriorLooting6.png" id="74_155or"]
+[ext_resource type="Texture2D" uid="uid://dt8qj8ax3n4bk" path="res://UnitsTextureRect/WarLootOversized/WarriorLooting7.png" id="75_vtx2l"]
+[ext_resource type="Texture2D" uid="uid://b56mn2x15ycgk" path="res://UnitsTextureRect/WarLootOversized/WarriorLooting8.png" id="76_63lxy"]
+[ext_resource type="Texture2D" uid="uid://b5jf7ga81rli3" path="res://UnitsTextureRect/WarLootOversized/WarriorLooting9.png" id="77_fjhjs"]
+[ext_resource type="Texture2D" uid="uid://biujwj6v1m650" path="res://UnitsTextureRect/WarLootOversized/WarriorLooting10.png" id="78_bfu41"]
+[ext_resource type="Texture2D" uid="uid://bjcepopuxmy10" path="res://UnitsTextureRect/WarLootOversized/WarriorLooting11.png" id="79_r4ag1"]
+[ext_resource type="Texture2D" uid="uid://cmdud0ipmka5a" path="res://UnitsTextureRect/WarLootOversized/WarriorLooting12.png" id="80_v0wtd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sgp6g"]
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_yc10j"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2wyq8"]
-atlas = ExtResource("2_pm3ni")
-region = Rect2(0, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vxglm"]
-atlas = ExtResource("2_pm3ni")
-region = Rect2(192, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2f3dj"]
-atlas = ExtResource("2_pm3ni")
-region = Rect2(384, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yq6so"]
-atlas = ExtResource("2_pm3ni")
-region = Rect2(576, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fv21b"]
-atlas = ExtResource("2_pm3ni")
-region = Rect2(768, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tel4y"]
-atlas = ExtResource("2_pm3ni")
-region = Rect2(960, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qkpxi"]
-atlas = ExtResource("2_pm3ni")
-region = Rect2(1152, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5q0nq"]
-atlas = ExtResource("2_pm3ni")
-region = Rect2(1344, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dgi5k"]
-atlas = ExtResource("3_y6deb")
-region = Rect2(0, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j8jky"]
-atlas = ExtResource("3_y6deb")
-region = Rect2(192, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kmb1v"]
-atlas = ExtResource("3_y6deb")
-region = Rect2(384, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fuf3a"]
-atlas = ExtResource("3_y6deb")
-region = Rect2(576, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pibwh"]
-atlas = ExtResource("3_y6deb")
-region = Rect2(768, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c6pm6"]
-atlas = ExtResource("3_y6deb")
-region = Rect2(960, 0, 192, 192)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_jscy8"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2wyq8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vxglm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2f3dj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yq6so")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fv21b")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tel4y")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qkpxi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5q0nq")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 12.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dgi5k")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j8jky")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kmb1v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fuf3a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pibwh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c6pm6")
-}],
-"loop": true,
-"name": &"walking",
-"speed": 12.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pm3ni"]
-atlas = ExtResource("3_jscy8")
-region = Rect2(0, 0, 128, 192)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_y6deb"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pm3ni")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_og1vs"]
-atlas = ExtResource("3_yc10j")
-region = Rect2(0, 0, 128, 192)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_2wyq8"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_og1vs")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [sub_resource type="Resource" id="Resource_o5qli"]
 metadata/__load_path__ = "res://Tiny Swords (Free Pack)/UnitsTextureRect/WarAtt/warriorattack1.png"
@@ -279,50 +198,50 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
+tracks/8/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(596, 96)]
+"values": [Vector2(1, 1)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
+tracks/9/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:flip_h")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [false]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:animation")
+tracks/10/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"walking"]
+"update": 0,
+"values": [Vector2(400, 400)]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:flip_h")
+tracks/11/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:texture")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [null]
 }
 
 [sub_resource type="Animation" id="Animation_kmb1v"]
@@ -339,7 +258,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.40000004, 0.5, 0.6, 0.70000005, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("2_0ld40"), ExtResource("2_0ld40"), ExtResource("2_0ld40"), ExtResource("3_gqmmt"), ExtResource("4_yc10j"), ExtResource("5_jscy8"), ExtResource("6_pm3ni"), ExtResource("6_pm3ni"), ExtResource("7_y6deb"), ExtResource("8_og1vs"), ExtResource("9_2wyq8"), ExtResource("10_vxglm"), ExtResource("11_2f3dj"), ExtResource("11_2f3dj"), ExtResource("11_2f3dj"), ExtResource("11_2f3dj")]
+"values": [ExtResource("4_t5ykj"), ExtResource("4_t5ykj"), ExtResource("4_t5ykj"), ExtResource("5_e755i"), ExtResource("6_ro3en"), ExtResource("7_od4ux"), ExtResource("8_t5ykj"), ExtResource("8_t5ykj"), ExtResource("9_1epgm"), ExtResource("10_152kg"), ExtResource("11_r4e17"), ExtResource("12_y57op"), ExtResource("13_e755i"), ExtResource("13_e755i"), ExtResource("13_e755i"), ExtResource("13_e755i")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -351,7 +270,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.40000004, 0.5, 0.6, 0.70000005, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("2_0ld40"), ExtResource("2_0ld40"), ExtResource("2_0ld40"), ExtResource("3_gqmmt"), ExtResource("4_yc10j"), ExtResource("5_jscy8"), ExtResource("6_pm3ni"), ExtResource("6_pm3ni"), ExtResource("7_y6deb"), ExtResource("8_og1vs"), ExtResource("9_2wyq8"), ExtResource("10_vxglm"), ExtResource("11_2f3dj"), ExtResource("11_2f3dj"), ExtResource("11_2f3dj"), ExtResource("11_2f3dj")]
+"values": [ExtResource("4_t5ykj"), ExtResource("4_t5ykj"), ExtResource("4_t5ykj"), ExtResource("5_e755i"), ExtResource("6_ro3en"), ExtResource("7_od4ux"), ExtResource("8_t5ykj"), ExtResource("8_t5ykj"), ExtResource("9_1epgm"), ExtResource("10_152kg"), ExtResource("11_r4e17"), ExtResource("12_y57op"), ExtResource("13_e755i"), ExtResource("13_e755i"), ExtResource("13_e755i"), ExtResource("13_e755i")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -363,7 +282,100 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.40000004, 0.5, 0.6, 0.70000005, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("2_0ld40"), ExtResource("2_0ld40"), ExtResource("2_0ld40"), ExtResource("3_gqmmt"), ExtResource("4_yc10j"), ExtResource("5_jscy8"), ExtResource("6_pm3ni"), ExtResource("6_pm3ni"), ExtResource("7_y6deb"), ExtResource("8_og1vs"), ExtResource("9_2wyq8"), ExtResource("10_vxglm"), ExtResource("11_2f3dj"), ExtResource("11_2f3dj"), ExtResource("11_2f3dj"), ExtResource("11_2f3dj")]
+"values": [ExtResource("4_t5ykj"), ExtResource("4_t5ykj"), ExtResource("4_t5ykj"), ExtResource("5_e755i"), ExtResource("6_ro3en"), ExtResource("7_od4ux"), ExtResource("8_t5ykj"), ExtResource("8_t5ykj"), ExtResource("9_1epgm"), ExtResource("10_152kg"), ExtResource("11_r4e17"), ExtResource("12_y57op"), ExtResource("13_e755i"), ExtResource("13_e755i"), ExtResource("13_e755i"), ExtResource("13_e755i")]
+}
+
+[sub_resource type="Animation" id="Animation_o7ddy"]
+resource_name = "block"
+length = 1.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.70000005, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3, 1.4000001, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("62_152kg"), ExtResource("62_152kg"), ExtResource("63_r4e17"), ExtResource("64_y57op"), ExtResource("65_mlv25"), ExtResource("66_a82wo"), ExtResource("67_gdvew"), ExtResource("67_gdvew"), ExtResource("62_152kg"), ExtResource("62_152kg"), ExtResource("63_r4e17"), ExtResource("64_y57op"), ExtResource("65_mlv25"), ExtResource("66_a82wo"), ExtResource("67_gdvew"), ExtResource("67_gdvew")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Knight2:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.70000005, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3, 1.4000001, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("62_152kg"), ExtResource("62_152kg"), ExtResource("63_r4e17"), ExtResource("64_y57op"), ExtResource("65_mlv25"), ExtResource("66_a82wo"), ExtResource("67_gdvew"), ExtResource("67_gdvew"), ExtResource("62_152kg"), ExtResource("62_152kg"), ExtResource("63_r4e17"), ExtResource("64_y57op"), ExtResource("65_mlv25"), ExtResource("66_a82wo"), ExtResource("67_gdvew"), ExtResource("67_gdvew")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Knight3:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.70000005, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3, 1.4000001, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("62_152kg"), ExtResource("62_152kg"), ExtResource("63_r4e17"), ExtResource("64_y57op"), ExtResource("65_mlv25"), ExtResource("66_a82wo"), ExtResource("67_gdvew"), ExtResource("67_gdvew"), ExtResource("62_152kg"), ExtResource("62_152kg"), ExtResource("63_r4e17"), ExtResource("64_y57op"), ExtResource("65_mlv25"), ExtResource("66_a82wo"), ExtResource("67_gdvew"), ExtResource("67_gdvew")]
+}
+
+[sub_resource type="Animation" id="Animation_yq6so"]
+resource_name = "gold_to_mount"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0002, 0.00029999999, 0.0004, 0.099999994, 0.2, 0.3, 0.4, 0.5, 0.6, 0.60010004, 0.6002, 0.6003, 0.60040003, 0.70000005, 0.8, 0.90000004, 1, 1.1, 1.2, 1.2001001, 1.2002001, 1.2003001, 1.2004, 1.3000001, 1.4000001, 1.5, 1.6, 1.7, 1.8000001, 1.8001001, 1.8002, 1.8003001, 1.8004, 1.9000001, 2, 2.1000001, 2.2, 2.3000002, 2.4, 2.4001, 2.4002001, 2.4003, 2.4004002, 2.5, 2.6000001, 2.7, 2.8000002, 2.9, 3, 3.0001001, 3.0002, 3.0003002, 3.0004, 3.1000001, 3.2, 3.3000002, 3.4, 3.5, 3.6000001, 3.6001, 3.6002002, 3.6003003, 3.6004, 3.7000003, 3.8000002, 3.9, 4, 4.1000004, 4.2000003, 4.2001, 4.2002, 4.2003, 4.2004004, 4.3, 4.4, 4.5, 4.6000004, 4.7000003, 4.7996, 4.7997003, 4.7998, 4.7999, 4.8, 4.8996, 4.9996),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(100, 180), Vector2(400, 400)]
 }
 
 [sub_resource type="Animation" id="Animation_pibwh"]
@@ -381,7 +393,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("12_yq6so"), ExtResource("13_fv21b"), ExtResource("14_tel4y"), ExtResource("15_qkpxi"), ExtResource("16_5q0nq"), ExtResource("17_dgi5k"), ExtResource("18_j8jky"), ExtResource("19_kmb1v"), ExtResource("19_kmb1v")]
+"values": [ExtResource("21_t5ykj"), ExtResource("22_e755i"), ExtResource("23_ro3en"), ExtResource("24_od4ux"), ExtResource("25_xhfw6"), ExtResource("26_1epgm"), ExtResource("27_152kg"), ExtResource("28_r4e17"), ExtResource("28_r4e17")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -390,10 +402,10 @@ tracks/1/path = NodePath("../Knight2:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.001654321, 0.1, 0.10165432, 0.2, 0.20165433, 0.3, 0.30165434, 0.4, 0.40165433, 0.5, 0.5016543, 0.6, 0.60165435, 0.7, 0.7016543, 0.8, 0.80165434),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("12_yq6so"), ExtResource("13_fv21b"), ExtResource("14_tel4y"), ExtResource("15_qkpxi"), ExtResource("16_5q0nq"), ExtResource("17_dgi5k"), ExtResource("18_j8jky"), ExtResource("19_kmb1v"), ExtResource("19_kmb1v")]
+"values": [ExtResource("21_ro3en"), ExtResource("21_t5ykj"), ExtResource("22_od4ux"), ExtResource("22_e755i"), ExtResource("23_xhfw6"), ExtResource("23_ro3en"), ExtResource("24_1epgm"), ExtResource("24_od4ux"), ExtResource("25_152kg"), ExtResource("25_xhfw6"), ExtResource("26_r4e17"), ExtResource("26_1epgm"), ExtResource("27_y57op"), ExtResource("27_152kg"), ExtResource("28_mlv25"), ExtResource("28_r4e17"), ExtResource("28_mlv25"), ExtResource("28_r4e17")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -402,246 +414,51 @@ tracks/2/path = NodePath("../Knight3:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.001654321, 0.1, 0.10165432, 0.2, 0.20165433, 0.3, 0.30165434, 0.4, 0.40165433, 0.5, 0.5016543, 0.6, 0.60165435, 0.7, 0.7016543, 0.8, 0.80165434),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("12_yq6so"), ExtResource("13_fv21b"), ExtResource("14_tel4y"), ExtResource("15_qkpxi"), ExtResource("16_5q0nq"), ExtResource("17_dgi5k"), ExtResource("18_j8jky"), ExtResource("19_kmb1v"), ExtResource("19_kmb1v")]
+"values": [ExtResource("21_ro3en"), ExtResource("21_t5ykj"), ExtResource("22_od4ux"), ExtResource("22_e755i"), ExtResource("23_xhfw6"), ExtResource("23_ro3en"), ExtResource("24_1epgm"), ExtResource("24_od4ux"), ExtResource("25_152kg"), ExtResource("25_xhfw6"), ExtResource("26_r4e17"), ExtResource("26_1epgm"), ExtResource("27_y57op"), ExtResource("27_152kg"), ExtResource("28_mlv25"), ExtResource("28_r4e17"), ExtResource("28_mlv25"), ExtResource("28_r4e17")]
 }
 
-[sub_resource type="Animation" id="Animation_2f3dj"]
-resource_name = "villager_to_gold"
-length = 5.0
+[sub_resource type="Animation" id="Animation_0loja"]
+resource_name = "loot"
+length = 1.5
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
+tracks/0/path = NodePath(".:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(400, 380), Vector2(400, 150)]
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("68_xaipn"), ExtResource("68_xaipn"), ExtResource("68_r4e17"), ExtResource("70_ndrjj"), ExtResource("71_ih3m7"), ExtResource("72_11yus"), ExtResource("73_b6ruc"), ExtResource("74_155or"), ExtResource("75_vtx2l"), ExtResource("76_63lxy"), ExtResource("77_fjhjs"), ExtResource("78_bfu41"), ExtResource("79_r4ag1"), ExtResource("80_v0wtd"), ExtResource("80_v0wtd"), ExtResource("80_v0wtd")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
+tracks/1/path = NodePath("../Knight2:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(4.733333, 5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0, 0)]
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("68_xaipn"), ExtResource("68_xaipn"), ExtResource("68_r4e17"), ExtResource("70_ndrjj"), ExtResource("71_ih3m7"), ExtResource("72_11yus"), ExtResource("73_b6ruc"), ExtResource("74_155or"), ExtResource("75_vtx2l"), ExtResource("76_63lxy"), ExtResource("77_fjhjs"), ExtResource("78_bfu41"), ExtResource("79_r4ag1"), ExtResource("80_v0wtd"), ExtResource("80_v0wtd"), ExtResource("80_v0wtd")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:animation")
+tracks/2/path = NodePath("../Knight3:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [&"walking"]
-}
-
-[sub_resource type="Animation" id="Animation_gqmmt"]
-resource_name = "villager_to_wood"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(400, 380), Vector2(80, 190)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(4.1666665, 4.4333334),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:animation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"walking"]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:flip_h")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_5he1u"]
-resource_name = "villager_to_meat"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(400, 380), Vector2(700, 200)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(4.5, 4.8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:animation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"walking"]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:flip_h")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_yq6so"]
-resource_name = "gold_to_mount"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(400, 150), Vector2(400, 380)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(2.9802322e-08, 0.23333335),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:animation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"walking"]
-}
-
-[sub_resource type="Animation" id="Animation_vxglm"]
-resource_name = "wood_to_mount"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(80, 190), Vector2(400, 380)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.46666667, 0.8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:animation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"walking"]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:flip_h")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"values": [ExtResource("68_xaipn"), ExtResource("68_xaipn"), ExtResource("68_r4e17"), ExtResource("70_ndrjj"), ExtResource("71_ih3m7"), ExtResource("72_11yus"), ExtResource("73_b6ruc"), ExtResource("74_155or"), ExtResource("75_vtx2l"), ExtResource("76_63lxy"), ExtResource("77_fjhjs"), ExtResource("78_bfu41"), ExtResource("79_r4ag1"), ExtResource("80_v0wtd"), ExtResource("80_v0wtd"), ExtResource("80_v0wtd")]
 }
 
 [sub_resource type="Animation" id="Animation_5poiv"]
@@ -650,14 +467,14 @@ length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
+tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.0001, 0.0002, 0.00029999999, 0.0004, 0.099999994, 0.2, 0.3, 0.4, 0.5, 0.6, 0.60010004, 0.6002, 0.6003, 0.60040003, 0.70000005, 0.8, 0.90000004, 1, 1.1, 1.2, 1.2001001, 1.2002001, 1.2003001, 1.2004, 1.3000001, 1.4000001, 1.5, 1.6, 1.7, 1.8000001, 1.8001001, 1.8002, 1.8003001, 1.8004, 1.9000001, 2, 2.1000001, 2.2, 2.3000002, 2.4, 2.4001, 2.4002001, 2.4003, 2.4004002, 2.5, 2.6000001, 2.7, 2.8000002, 2.9, 3, 3.0001001, 3.0002, 3.0003002, 3.0004, 3.1000001, 3.2, 3.3000002, 3.4, 3.5, 3.6000001, 3.6001, 3.6002002, 3.6003003, 3.6004, 3.7000003, 3.8000002, 3.9, 4, 4.1000004, 4.2000003, 4.2001, 4.2002, 4.2003, 4.2004004, 4.3, 4.4, 4.5, 4.6000004, 4.7000003, 4.7996, 4.7997003, 4.7998, 4.7999, 4.8, 4.8996, 4.9996),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(700, 200), Vector2(400, 380)]
+"values": [ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -666,40 +483,29 @@ tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.23333335),
+"times": PackedFloat32Array(0.5, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(1, 1)]
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:animation")
+tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"walking"]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:flip_h")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(400, 100), Vector2(400, 400)]
 }
 
 [sub_resource type="Animation" id="Animation_2cjbq"]
 resource_name = "pawn_idle"
-length = 0.1
+length = 0.7
 loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -710,7 +516,89 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(400, 380)]
+"values": [Vector2(400, 400)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [ExtResource("20_vxglm"), ExtResource("21_2f3dj"), ExtResource("22_yq6so"), ExtResource("23_fv21b"), ExtResource("24_tel4y"), ExtResource("25_qkpxi"), ExtResource("26_5q0nq"), ExtResource("27_dgi5k")]
+}
+
+[sub_resource type="Animation" id="Animation_2f3dj"]
+resource_name = "pawn_to_gold"
+length = 5.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4.2, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0002, 0.00029999999, 0.0004, 0.099999994, 0.2, 0.3, 0.4, 0.5, 0.6, 0.60010004, 0.6002, 0.6003, 0.60040003, 0.70000005, 0.8, 0.90000004, 1, 1.1, 1.2, 1.2001001, 1.2002001, 1.2003001, 1.2004, 1.3000001, 1.4000001, 1.5, 1.6, 1.7, 1.8000001, 1.8001001, 1.8002, 1.8003001, 1.8004, 1.9000001, 2, 2.1000001, 2.2, 2.3000002, 2.4, 2.4001, 2.4002001, 2.4003, 2.4004002, 2.5, 2.6000001, 2.7, 2.8000002, 2.9, 3, 3.0001001, 3.0002, 3.0003002, 3.0004, 3.1000001, 3.2, 3.3000002, 3.4, 3.5, 3.6000001, 3.6001, 3.6002002, 3.6003003, 3.6004, 3.7000003, 3.8000002, 3.9, 4, 4.1000004, 4.2000003, 4.2001, 4.2002, 4.2003, 4.2004004, 4.3, 4.4, 4.5, 4.6000004, 4.7000003, 4.8, 4.8001003, 4.8002, 4.8003, 4.8004003, 4.9, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [ExtResource("36_o7ddy"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("36_o7ddy"), ExtResource("37_0loja"), ExtResource("38_ids8r"), ExtResource("39_dnhof"), ExtResource("40_1v6qk"), ExtResource("41_augu2"), ExtResource("36_o7ddy"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("36_o7ddy"), ExtResource("37_0loja"), ExtResource("38_ids8r"), ExtResource("39_dnhof"), ExtResource("40_1v6qk"), ExtResource("41_augu2"), ExtResource("36_o7ddy"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("36_o7ddy"), ExtResource("37_0loja"), ExtResource("38_ids8r"), ExtResource("39_dnhof"), ExtResource("40_1v6qk"), ExtResource("41_augu2"), ExtResource("36_o7ddy"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("36_o7ddy"), ExtResource("37_0loja"), ExtResource("38_ids8r"), ExtResource("39_dnhof"), ExtResource("40_1v6qk"), ExtResource("41_augu2"), ExtResource("36_o7ddy"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("36_o7ddy"), ExtResource("37_0loja"), ExtResource("38_ids8r"), ExtResource("39_dnhof"), ExtResource("40_1v6qk"), ExtResource("41_augu2"), ExtResource("36_o7ddy"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("36_o7ddy"), ExtResource("37_0loja"), ExtResource("38_ids8r"), ExtResource("39_dnhof"), ExtResource("40_1v6qk"), ExtResource("41_augu2"), ExtResource("36_o7ddy"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("36_o7ddy"), ExtResource("37_0loja"), ExtResource("38_ids8r"), ExtResource("39_dnhof"), ExtResource("40_1v6qk"), ExtResource("41_augu2"), ExtResource("36_o7ddy"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("36_o7ddy"), ExtResource("37_0loja"), ExtResource("38_ids8r"), ExtResource("39_dnhof"), ExtResource("40_1v6qk"), ExtResource("41_augu2"), ExtResource("36_o7ddy"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("36_o7ddy"), ExtResource("37_0loja"), ExtResource("38_ids8r")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(400, 400), Vector2(100, 180)]
+}
+
+[sub_resource type="Animation" id="Animation_5he1u"]
+resource_name = "pawn_to_meat"
+length = 5.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.70000005, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4000001, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.6999998, 3.8, 3.8999999, 4, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [ExtResource("42_tm6hj"), ExtResource("43_kf5aa"), ExtResource("44_t5ykj"), ExtResource("45_e755i"), ExtResource("46_ro3en"), ExtResource("47_od4ux"), ExtResource("42_tm6hj"), ExtResource("43_kf5aa"), ExtResource("44_t5ykj"), ExtResource("45_e755i"), ExtResource("46_ro3en"), ExtResource("47_od4ux"), ExtResource("42_tm6hj"), ExtResource("43_kf5aa"), ExtResource("44_t5ykj"), ExtResource("45_e755i"), ExtResource("46_ro3en"), ExtResource("47_od4ux"), ExtResource("42_tm6hj"), ExtResource("43_kf5aa"), ExtResource("44_t5ykj"), ExtResource("45_e755i"), ExtResource("46_ro3en"), ExtResource("47_od4ux"), ExtResource("42_tm6hj"), ExtResource("43_kf5aa"), ExtResource("44_t5ykj"), ExtResource("45_e755i"), ExtResource("46_ro3en"), ExtResource("47_od4ux"), ExtResource("42_tm6hj"), ExtResource("43_kf5aa"), ExtResource("44_t5ykj"), ExtResource("45_e755i"), ExtResource("46_ro3en"), ExtResource("47_od4ux"), ExtResource("42_tm6hj"), ExtResource("43_kf5aa"), ExtResource("44_t5ykj"), ExtResource("45_e755i"), ExtResource("46_ro3en"), ExtResource("47_od4ux"), ExtResource("42_tm6hj"), ExtResource("43_kf5aa"), ExtResource("44_t5ykj"), ExtResource("45_e755i"), ExtResource("46_ro3en"), ExtResource("47_od4ux"), ExtResource("42_tm6hj"), ExtResource("43_kf5aa"), ExtResource("44_t5ykj")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -719,35 +607,142 @@ tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0, 4, 4.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": []
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1e-05, 1e-05)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:animation")
+tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(400, 400), Vector2(400, 100)]
+}
+
+[sub_resource type="Animation" id="Animation_gqmmt"]
+resource_name = "pawn_to_wood"
+length = 5.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4.2, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"idle"]
+"update": 0,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0002, 0.00029999999, 0.0004, 0.099999994, 0.2, 0.3, 0.4, 0.5, 0.6, 0.60010004, 0.6002, 0.6003, 0.60040003, 0.70000005, 0.8, 0.90000004, 1, 1.1, 1.2, 1.2001001, 1.2002001, 1.2003001, 1.2004, 1.3000001, 1.4000001, 1.5, 1.6, 1.7, 1.8000001, 1.8001001, 1.8002, 1.8003001, 1.8004, 1.9000001, 2, 2.1000001, 2.2, 2.3000002, 2.4, 2.4001, 2.4002001, 2.4003, 2.4004002, 2.5, 2.6000001, 2.7, 2.8000002, 2.9, 3, 3.0001001, 3.0002, 3.0003002, 3.0004, 3.1000001, 3.2, 3.3000002, 3.4, 3.5, 3.6000001, 3.6001, 3.6002002, 3.6003003, 3.6004, 3.7000003, 3.8000002, 3.9, 4, 4.1000004, 4.2000003, 4.2001, 4.2002, 4.2003, 4.2004004, 4.3, 4.4, 4.5, 4.6000004, 4.7000003, 4.8, 4.8001003, 4.8002, 4.8003, 4.8004003, 4.9, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [ExtResource("48_xhfw6"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("48_xhfw6"), ExtResource("49_1epgm"), ExtResource("50_152kg"), ExtResource("51_r4e17"), ExtResource("52_y57op"), ExtResource("53_mlv25"), ExtResource("48_xhfw6"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("48_xhfw6"), ExtResource("49_1epgm"), ExtResource("50_152kg"), ExtResource("51_r4e17"), ExtResource("52_y57op"), ExtResource("53_mlv25"), ExtResource("48_xhfw6"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("48_xhfw6"), ExtResource("49_1epgm"), ExtResource("50_152kg"), ExtResource("51_r4e17"), ExtResource("52_y57op"), ExtResource("53_mlv25"), ExtResource("48_xhfw6"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("48_xhfw6"), ExtResource("49_1epgm"), ExtResource("50_152kg"), ExtResource("51_r4e17"), ExtResource("52_y57op"), ExtResource("53_mlv25"), ExtResource("48_xhfw6"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("48_xhfw6"), ExtResource("49_1epgm"), ExtResource("50_152kg"), ExtResource("51_r4e17"), ExtResource("52_y57op"), ExtResource("53_mlv25"), ExtResource("48_xhfw6"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("48_xhfw6"), ExtResource("49_1epgm"), ExtResource("50_152kg"), ExtResource("51_r4e17"), ExtResource("52_y57op"), ExtResource("53_mlv25"), ExtResource("48_xhfw6"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("48_xhfw6"), ExtResource("49_1epgm"), ExtResource("50_152kg"), ExtResource("51_r4e17"), ExtResource("52_y57op"), ExtResource("53_mlv25"), ExtResource("48_xhfw6"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("48_xhfw6"), ExtResource("49_1epgm"), ExtResource("50_152kg"), ExtResource("51_r4e17"), ExtResource("52_y57op"), ExtResource("53_mlv25"), ExtResource("48_xhfw6"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("48_xhfw6"), ExtResource("49_1epgm"), ExtResource("50_152kg")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(400, 400), Vector2(700, 180)]
+}
+
+[sub_resource type="Animation" id="Animation_vxglm"]
+resource_name = "wood_to_mount"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0002, 0.00029999999, 0.0004, 0.099999994, 0.2, 0.3, 0.4, 0.5, 0.6, 0.60010004, 0.6002, 0.6003, 0.60040003, 0.70000005, 0.8, 0.90000004, 1, 1.1, 1.2, 1.2001001, 1.2002001, 1.2003001, 1.2004, 1.3000001, 1.4000001, 1.5, 1.6, 1.7, 1.8000001, 1.8001001, 1.8002, 1.8003001, 1.8004, 1.9000001, 2, 2.1000001, 2.2, 2.3000002, 2.4, 2.4001, 2.4002001, 2.4003, 2.4004002, 2.5, 2.6000001, 2.7, 2.8000002, 2.9, 3, 3.0001001, 3.0002, 3.0003002, 3.0004, 3.1000001, 3.2, 3.3000002, 3.4, 3.5, 3.6000001, 3.6001, 3.6002002, 3.6003003, 3.6004, 3.7000003, 3.8000002, 3.9, 4, 4.1000004, 4.2000003, 4.2001, 4.2002, 4.2003, 4.2004004, 4.3, 4.4, 4.5, 4.6000004, 4.7000003, 4.7996, 4.7997003, 4.7998, 4.7999, 4.8, 4.8996, 4.9996),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v"), ExtResource("32_fuf3a"), ExtResource("33_pibwh"), ExtResource("34_c6pm6"), ExtResource("29_dgi5k"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("20_vxglm"), ExtResource("30_j8jky"), ExtResource("31_kmb1v")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../../../../../../../../ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(700, 180), Vector2(400, 400)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c6pm6"]
 _data = {
 &"RESET": SubResource("Animation_fuf3a"),
 &"attack": SubResource("Animation_kmb1v"),
+&"block": SubResource("Animation_o7ddy"),
 &"gold_to_mount": SubResource("Animation_yq6so"),
 &"idle": SubResource("Animation_pibwh"),
+&"loot": SubResource("Animation_0loja"),
 &"meat_to_mount": SubResource("Animation_5poiv"),
 &"pawn_idle": SubResource("Animation_2cjbq"),
-&"villager_to_gold": SubResource("Animation_2f3dj"),
-&"villager_to_meat": SubResource("Animation_5he1u"),
-&"villager_to_wood": SubResource("Animation_gqmmt"),
+&"pawn_to_gold": SubResource("Animation_2f3dj"),
+&"pawn_to_meat": SubResource("Animation_5he1u"),
+&"pawn_to_wood": SubResource("Animation_gqmmt"),
 &"wood_to_mount": SubResource("Animation_vxglm")
 }
 
@@ -767,17 +762,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 1
+current_tab = 0
 all_tabs_in_front = true
 drag_to_rearrange_enabled = true
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer"]
-visible = false
 layout_mode = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 80
 metadata/_tab_index = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="TabContainer/MarginContainer"]
@@ -799,16 +793,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_sgp6g")
 
-[node name="PanelContainer" type="PanelContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace"]
-layout_mode = 2
-size_flags_vertical = 0
-
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace"]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer"]
 layout_mode = 2
@@ -825,19 +815,19 @@ size_flags_horizontal = 4
 size_flags_vertical = 3
 
 [node name="Knight" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer"]
-texture_filter = 3
+texture_filter = 1
 layout_mode = 2
 expand_mode = 3
 stretch_mode = 4
 
 [node name="Knight2" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer"]
-texture_filter = 3
+texture_filter = 1
 layout_mode = 2
 expand_mode = 3
 stretch_mode = 4
 
 [node name="Knight3" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer"]
-texture_filter = 3
+texture_filter = 1
 layout_mode = 2
 expand_mode = 3
 stretch_mode = 4
@@ -845,13 +835,13 @@ stretch_mode = 4
 [node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="attack" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "attack"
 
-[node name="Button2" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="block" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -859,7 +849,7 @@ size_flags_vertical = 3
 text = "defend
 "
 
-[node name="Button3" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="loot" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -874,10 +864,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_sgp6g")
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades"]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer"]
 layout_mode = 2
@@ -909,13 +899,54 @@ mouse_filter = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.979693, 0.97969264, 1.540184e-05, 1)
 theme_override_constants/outline_size = 0
-theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 text = "Spd"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="HBox1" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="WoodRow" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/MarginContainer/HBox1"]
+layout_mode = 2
+
+[node name="Wood" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/MarginContainer/HBox1/WoodRow"]
+layout_mode = 2
+texture = ExtResource("2_11yus")
+
+[node name="WoodDigits" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/MarginContainer/HBox1/WoodRow"]
+layout_mode = 2
+
+[node name="MeatRow" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/MarginContainer/HBox1"]
+layout_mode = 2
+
+[node name="Meat" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/MarginContainer/HBox1/MeatRow"]
+layout_mode = 2
+texture = ExtResource("3_b6ruc")
+
+[node name="MeatDigits" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/MarginContainer/HBox1/MeatRow"]
+layout_mode = 2
+
+[node name="GoldRow" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/MarginContainer/HBox1"]
+layout_mode = 2
+
+[node name="Gold" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/MarginContainer/HBox1/GoldRow"]
+layout_mode = 2
+texture = ExtResource("2_ndrjj")
+
+[node name="GoldDigits" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/MarginContainer/HBox1/GoldRow"]
+layout_mode = 2
 
 [node name="OutputUpgradeButton" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -935,13 +966,36 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_colors/font_outline_color = Color(0.9372549, 0.9372549, 0, 1)
 theme_override_constants/outline_size = 0
-theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 text = "Spd"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton/CenterContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="HBox2" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton/CenterContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Wood" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton/CenterContainer/MarginContainer/HBox2"]
+layout_mode = 2
+texture = ExtResource("2_11yus")
+
+[node name="Meat" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton/CenterContainer/MarginContainer/HBox2"]
+layout_mode = 2
+texture = ExtResource("3_b6ruc")
+
+[node name="Gold" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton/CenterContainer/MarginContainer/HBox2"]
+layout_mode = 2
+texture = ExtResource("2_ndrjj")
 
 [node name="ExtraKnightUpgrade" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -961,13 +1015,36 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_colors/font_outline_color = Color(0.9388745, 0.9388743, 1.540184e-06, 1)
 theme_override_constants/outline_size = 0
-theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 text = "Spd"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade/CenterContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="HBox3" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade/CenterContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Wood" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade/CenterContainer/MarginContainer/HBox3"]
+layout_mode = 2
+texture = ExtResource("2_11yus")
+
+[node name="Meat" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade/CenterContainer/MarginContainer/HBox3"]
+layout_mode = 2
+texture = ExtResource("3_b6ruc")
+
+[node name="Gold" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade/CenterContainer/MarginContainer/HBox3"]
+layout_mode = 2
+texture = ExtResource("2_ndrjj")
 
 [node name="WinButton" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -987,16 +1064,41 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_colors/font_outline_color = Color(0.9372549, 0.9372549, 0, 1)
 theme_override_constants/outline_size = 0
-theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
-text = "[shake rate=5 level=10]SPD[/shake]"
+text = "SPD"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
+justification_flags = 171
 custom_effects = [SubResource("RichTextEffect_yc10j")]
 
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton/CenterContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="HBox4" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton/CenterContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Wood" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton/CenterContainer/MarginContainer/HBox4"]
+layout_mode = 2
+texture = ExtResource("2_11yus")
+
+[node name="Meat" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton/CenterContainer/MarginContainer/HBox4"]
+layout_mode = 2
+texture = ExtResource("3_b6ruc")
+
+[node name="Gold" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton/CenterContainer/MarginContainer/HBox4"]
+layout_mode = 2
+texture = ExtResource("2_ndrjj")
+
 [node name="ResourcesTab" type="MarginContainer" parent="TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
@@ -1030,27 +1132,22 @@ theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 200
 theme_override_constants/margin_bottom = 20
 
-[node name="Pawn" type="AnimatedSprite2D" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer"]
+[node name="Pawn" type="Sprite2D" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer"]
 z_index = 1
-position = Vector2(596, 96)
-sprite_frames = SubResource("SpriteFrames_jscy8")
-animation = &"walking"
+position = Vector2(400, 400)
 
-[node name="Wood" type="AnimatedSprite2D" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer"]
-position = Vector2(80, 180)
-rotation = 3.1415927
-scale = Vector2(1, -1)
-sprite_frames = SubResource("SpriteFrames_y6deb")
+[node name="Gold" type="Sprite2D" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer"]
+position = Vector2(100, 160)
+texture = ExtResource("3_jscy8")
+flip_h = true
 
-[node name="Gold" type="AnimatedSprite2D" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer"]
+[node name="Meat" type="Sprite2D" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer"]
 position = Vector2(400, 100)
-rotation = 3.1415927
-scale = Vector2(1, -1)
-sprite_frames = SubResource("SpriteFrames_2wyq8")
+texture = ExtResource("3_yc10j")
 
-[node name="Meat" type="AnimatedSprite2D" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer"]
-position = Vector2(720, 180)
-sprite_frames = SubResource("SpriteFrames_y6deb")
+[node name="Wood" type="Sprite2D" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer"]
+position = Vector2(700, 160)
+texture = ExtResource("3_jscy8")
 
 [node name="Upgrades" type="PanelContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -1181,10 +1278,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 custom_effects = [SubResource("RichTextEffect_yc10j")]
 
-[node name="TabContainer" type="TabContainer" parent="TabContainer/ResourcesTab/PanelContainer"]
-visible = false
-layout_mode = 2
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer/Knight")
 libraries = {
@@ -1209,13 +1302,13 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "gOODdow win1!!!!1111im goin gto sleep goodbuye"
 
-[connection signal="gui_input" from="TabContainer" to="." method="_on_tab_container_gui_input"]
-[connection signal="button_down" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/Button" to="." method="_on_button_button_down"]
-[connection signal="button_up" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/Button" to="." method="_on_button_button_up"]
-[connection signal="button_down" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/Button2" to="." method="_on_button_2_button_down"]
-[connection signal="button_up" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/Button2" to="." method="_on_button_2_button_up"]
-[connection signal="button_down" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/Button3" to="." method="_on_button_3_button_down"]
-[connection signal="button_up" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/Button3" to="." method="_on_button_3_button_up"]
+[connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
+[connection signal="button_down" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/attack" to="." method="_on_attack_button_down"]
+[connection signal="button_up" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/attack" to="." method="_on_attack_button_up"]
+[connection signal="button_down" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/block" to="." method="_on_block_button_down"]
+[connection signal="button_up" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/block" to="." method="_on_block_button_up"]
+[connection signal="button_down" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/loot" to="." method="_on_loot_button_down"]
+[connection signal="button_up" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/loot" to="." method="_on_loot_button_up"]
 [connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton" to="." method="_on_speed_upgrade_button_mouse_entered"]
 [connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton" to="." method="_on_speed_upgrade_button_mouse_exited"]
 [connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton" to="." method="_on_output_upgrade_button_mouse_entered"]

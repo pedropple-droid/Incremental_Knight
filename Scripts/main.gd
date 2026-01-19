@@ -3,11 +3,21 @@ extends Control
 const MAIN_2 = preload("uid://ey2i670agjff")
 
 const original_output_correction = 0.08
-const win_cost: int = 60000
 const BASE_UPGRADE_DELAY := 1
 const MIN_UPGRADE_DELAY := 0.01
 const STREAK_THRESHOLD := 1
 const MIN_OUTPUT_UPGRADE := 1.15
+
+const WOODZERO = preload("uid://by3rm72y7rxte")
+const WOODONE = preload("uid://bjefj5hmutwiu")
+const WOODTWO = preload("uid://se336rvi4ebu")
+const WOODTHREE = preload("uid://bckucqks82sn4")
+const WOODFOUR = preload("uid://bxbxj0xiaxavd")
+const WOODFIVE = preload("uid://d1vp6xosyx57h")
+const WOODSIX = preload("uid://bpcigy6ukhwbf")
+const WOODSEVEN = preload("uid://b2mu5vr27w5nx")
+const WOODEIGHT = preload("uid://e3c0k8ddluvh")
+const WOODNINE = preload("uid://cr3mejftlc4m2")
 
 enum UpgradeType { 
 	OUTPUT,
@@ -16,9 +26,24 @@ enum UpgradeType {
 	WIN,
 }
 
+enum ActionType {
+	IDLE,
+	ATTACK,
+	BLOCK,
+	LOOT,
+}
+
+enum ResourceType {
+	WOOD,
+	MEAT,
+	GOLD,
+}
+
 var upgrades := {
 	UpgradeType.OUTPUT: {
-		"cost": 20,
+		"wood_cost": 20,
+		"meat_cost": 50,
+		"gold_cost": 80,
 		"cost_mult": 2.0,
 		"apply": func():
 			@warning_ignore("narrowing_conversion")
@@ -30,13 +55,17 @@ var upgrades := {
 		),
 	},
 	UpgradeType.SPEED: {
-		"cost": 5,
+		"wood_cost": 5,
+		"meat_cost": 10,
+		"gold_cost": 20,
 		"cost_mult": 1.5,
 		"apply": func():
 			animation.speed_scale *= 1.1,
 	},
 	UpgradeType.KNIGHT: {
-		"cost": 500,
+		"wood_cost": 250,
+		"meat_cost": 600,
+		"gold_cost": 750,
 		"cost_mult": 3.0,
 		"apply": func():
 			var amount = knights_per_purchase()
@@ -45,10 +74,42 @@ var upgrades := {
 			update_output_from_knights(),
 	},
 	UpgradeType.WIN: {
-		"cost": 60000,
+		"wood_cost": 30000,
+		"meat_cost": 45000,
+		"gold_cost": 75000,
 		"cost_mult": 1.0,
 		"apply": func():
 			pass,
+	},
+}
+
+var actions := {
+	ActionType.ATTACK: {
+		"animation": "attack",
+		"resource": "meat",
+	},
+	ActionType.BLOCK: {
+		"animation": "block",
+		"resource": "wood",
+	},
+	ActionType.LOOT: {
+		"animation": "loot",
+		"resource": "gold",
+	},
+}
+
+var numbers := {
+	ResourceType.WOOD: {
+		0: WOODZERO,
+		1 : WOODONE,
+		2 : WOODTWO,
+		3 : WOODTHREE,
+		4 : WOODFOUR,
+		5 : WOODFIVE,
+		6 : WOODSIX,
+		7 : WOODSEVEN,
+		8 : WOODEIGHT,
+		9 : WOODNINE,
 	},
 }
 
@@ -62,9 +123,16 @@ var upgrades := {
 @onready var knight: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer/Knight
 @onready var knight_2: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer/Knight2
 @onready var knight_3: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer/Knight3
-@onready var pawn: AnimatedSprite2D = $TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn
+@onready var pawn: Sprite2D = $TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn
+@onready var wood_digits: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/MarginContainer/HBox1/WoodRow/WoodDigits
+@onready var meat_digits: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/MarginContainer/HBox1/MeatRow/MeatDigits
+@onready var gold_digits: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/MarginContainer/HBox1/GoldRow/GoldDigits
 
-var slain: int = 0
+var wood: int = 0
+var meat: int = 0
+var gold: int = 0
+var slain: int = 1000000000000000
+
 var output: int = 1
 var output_multiplier: float = 2
 var knight_set_level: int = 0
@@ -76,24 +144,27 @@ var upgrade_streak := 0
 var upgrade_anim_speed := 1.0
 
 var pressing = false
+var performing = false
 var choosing = false
-var upgrading := false
+var upgrading = false
+
 var current_upgrade : UpgradeType
+var current_action: ActionType
+
+var at_pawn := false
 
 func _ready() -> void:
 	animation.play('idle')
 	update_text()
+	knight.visible = true
 	knight_2.visible = false
 	knight_3.visible = false
 
 func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
-	slain += output
 	if pressing:
-		animation.play('attack')
-		update_text()
+		change_action(current_action)
 		return
-	animation.play("idle")
-	update_text()
+	change_action(ActionType.IDLE)
 
 func update_knight_visuals(): #UPDATE THIS
 	knight.visible = total_knights >= 1
@@ -107,23 +178,32 @@ func knights_per_purchase():
 	return int(pow(3, knight_set_level))
 
 func update_text():
-	var slain_left = win_cost - slain
 	var speed = snapped(animation.speed_scale, 0.1)
-	win_label.text = "Go to the next phase...?\nCost: %d\nEnemies left: %d" % [win_cost, max(slain_left, 0)]
-	label.text = "Enemies slain: %d" % slain
-	out_label.text = "Output\nCost: %d\nOutput: %d" % [
-		upgrades[UpgradeType.OUTPUT].cost,
+	win_label.text = "Go to the next phase\nWood Cost: %d\nMeat Cost: %d\nGold Cost: %d" % [
+		upgrades[UpgradeType.WIN].wood_cost,
+		upgrades[UpgradeType.WIN].meat_cost,
+		upgrades[UpgradeType.WIN].gold_cost,
+	]
+	label.text = "Wood avaiable: %d\nMeat avaiable: %d\nGold avaiable: %d" % [wood, meat, gold]
+	out_label.text = "Output\nWood Cost: %d\nMeat Cost: %d\nGold Cost: %d\nOutput: %d" % [
+		upgrades[UpgradeType.OUTPUT].wood_cost,
+		upgrades[UpgradeType.OUTPUT].meat_cost,
+		upgrades[UpgradeType.OUTPUT].gold_cost,
 		output
 	]
-	spd_label.text = "Speed\nCost: %d\nSpeed Multiplier: %s" % [
-		upgrades[UpgradeType.SPEED].cost,
+	spd_label.text = "Speed\nWood Cost: %d\nMeat Cost: %d\nGold Cost: %d\nSpeed: %d" % [
+		upgrades[UpgradeType.SPEED].wood_cost,
+		upgrades[UpgradeType.SPEED].meat_cost,
+		upgrades[UpgradeType.SPEED].gold_cost,
 		speed
 	]
 	if total_knights >= max_knights_per_run:
 		knight_label.text = "Maxed out!!"
 	else:
-		knight_label.text = "Number of Knights\nCost: %d\nKnights: %d" % [
-			upgrades[UpgradeType.KNIGHT].cost,
+		knight_label.text = "Number of knights\nWood Cost: %d\nMeat Cost: %d\nGold Cost: %d\nOutput: %d" % [
+			upgrades[UpgradeType.KNIGHT].wood_cost,
+			upgrades[UpgradeType.KNIGHT].meat_cost,
+			upgrades[UpgradeType.KNIGHT].gold_cost,
 			total_knights
 		]
 
@@ -152,7 +232,11 @@ func start_upgrade_loop():
 
 func can_buy(type: UpgradeType) -> bool:
 	var up = upgrades[type]
-	if slain < up.cost:
+	if wood < up.wood_cost:
+		return false
+	if meat < up.meat_cost:
+		return false
+	if gold < up.gold_cost:
 		return false
 	if type == UpgradeType.KNIGHT and total_knights >= max_knights_per_run:
 		return false
@@ -248,7 +332,6 @@ func do_upgrade_feedback(type: UpgradeType):
 	)
 	await tween.finished
 
-
 func get_label_from_upgrade(type: UpgradeType) -> RichTextLabel:
 	match type:
 		UpgradeType.SPEED:
@@ -298,7 +381,6 @@ func try_buy_upgrade(type: UpgradeType) -> void:
 			upgrade_anim_speed * 1.15
 		)
 
-
 func _on_speed_upgrade_button_mouse_entered():
 	on_upgrade_mouse_entered(UpgradeType.SPEED)
 
@@ -323,35 +405,108 @@ func _on_win_button_mouse_entered() -> void:
 func _on_win_button_mouse_exited() -> void:
 	on_upgrade_mouse_exited()
 
-func _on_button_button_down() -> void:
+func _on_attack_button_down() -> void:
 	pressing = true
-	animation.play("attack")
+	request_change_action(ActionType.ATTACK)
 
-func _on_button_button_up() -> void:
+func _on_attack_button_up() -> void:
 	pressing = false
 
-func _on_button_2_button_down() -> void:
+func _on_block_button_down() -> void:
 	pressing = true
-	animation.play("blocking")
+	request_change_action(ActionType.BLOCK)
 
-func _on_button_2_button_up() -> void:
+func _on_block_button_up() -> void:
 	pressing = false
 
-func _on_button_3_button_down() -> void:
+func _on_loot_button_down() -> void:
 	pressing = true
-	animation.play("looting")
+	request_change_action(ActionType.LOOT)
 
-func _on_button_3_button_up() -> void:
+func _on_loot_button_up() -> void:
 	pressing = false
 
 func _on_bigger_storage_pressed() -> void:
-	pawn.play("pawn_to")
+	animation.play("pawn_to_gold")
+	await animation.animation_finished
+	await get_tree().create_timer(1).timeout
+	animation.play("gold_to_mount")
 
 func _on_extra_pawn_pressed() -> void:
-	animation.play("looting")
+	animation.play("pawn_to_meat")
+	await animation.animation_finished
+	await get_tree().create_timer(1).timeout
+	animation.play("meat_to_mount")
 
 func _on_speed_upgrade_pressed() -> void:
-	animation.play("looting")
+	animation.play("pawn_to_wood")
+	await animation.animation_finished
+	await get_tree().create_timer(1).timeout
+	animation.play("wood_to_mount")
 
 func _on_carry_capacity_upgrade_pressed() -> void:
 	animation.play("looting")
+
+func _on_tab_container_tab_changed(_tab: int) -> void:
+	if at_pawn:
+		request_change_action(ActionType.IDLE)
+		at_pawn = false
+		return
+	else:
+		animation.play('pawn_idle')
+		at_pawn = true
+		return
+
+func request_change_action(requested_action: ActionType) -> void:
+	if performing:
+		return
+	if pressing:
+		change_action(requested_action)
+		return
+	change_action(ActionType.IDLE)
+
+func change_action(new_action: ActionType) -> void:
+	current_action = new_action
+	match current_action:
+		ActionType.IDLE:
+			animation.play('idle')
+		ActionType.ATTACK:
+			performing = true
+			animation.play('attack')
+			await animation.animation_finished
+			performing = false
+			meat += output
+		ActionType.BLOCK:
+			performing = true
+			animation.play('block')
+			await animation.animation_finished
+			performing = false
+			wood += output
+		ActionType.LOOT:
+			performing = true
+			animation.play('loot')
+			await animation.animation_finished
+			performing = false
+			gold += output
+	update_text()
+
+func clear_container(container: Container) -> void:
+	for child in container.get_children()
+		child.queue_free()
+
+func set_number_icons(
+	container: HBoxContainer,
+	value: int,
+	resource_type: ResourceType
+) -> void:
+	container.queue_free_children()
+	var digit_map = numbers[resource_type] # variável do mapa de números criados
+	var chars := str(value) # variação de 0 a 9
+	for c in chars: # confere de 0 a 9
+		var digit := int(c) # transforma o string em int
+		var tex = digit_map[digit] # confere o int acima e confere de acordo com o mapa de números acima
+		var icon := TextureRect.new() # varíavel do ícone específico para o número específico
+		icon.texture = tex # textura do ícone vira a específica da variável acima
+		icon.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED # seta o stretch mode
+		icon.custom_minimum_size = Vector2(24, 24) # seta o tamanho mínimo
+		container.add_child(icon) # this being, the icons will not be added beforehand, they will be called within my scene
