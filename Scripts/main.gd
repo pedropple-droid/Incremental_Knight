@@ -9,6 +9,7 @@ const STREAK_THRESHOLD := 1
 const MIN_OUTPUT_UPGRADE := 1.15
 const DIGIT_BASE_SIZE := 8
 const DIGIT_SCALE := 2
+const OUTPUT_FLOOR := 1.0
 
 const WOODEIGHT = preload("uid://bhkspl4ccxfw1")
 const WOODFIVE = preload("uid://d372enmkxh3uv")
@@ -180,6 +181,8 @@ var upgrade_digit_containers := {
 	},
 }
 
+var buttons: Array
+
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var spd_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/RichTextLabel
 @onready var output_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton/RichTextLabel
@@ -205,13 +208,18 @@ var upgrade_digit_containers := {
 @onready var wood_digits_total: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer2/ValueBox/WoodRow/WoodDigits
 @onready var meat_digits_total: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer2/ValueBox/MeatRow/MeatDigits
 @onready var gold_digits_total: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer2/ValueBox/GoldRow/GoldDigits
+@onready var block: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/block
+@onready var attack: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/attack
+@onready var loot: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/loot
+
 
 var wood: int = 0
 var meat: int = 0
 var gold: int = 0
 
-var output: int = 1
-var output_multiplier: float = 2
+var output: float = OUTPUT_FLOOR
+var output_tween: Tween
+var output_multiplier := 2.0
 var knight_set_level: int = 0
 var max_knights_per_run: int = 3
 var total_knights: int = 1
@@ -228,10 +236,16 @@ var upgrading = false
 
 var current_upgrade : UpgradeType
 var current_action: ActionType
+var current_button: Button
+
+var heat := 1.8
+
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 var at_pawn := false
 
 func _ready() -> void:
+	buttons = [attack, block, loot]
 	animation.play("idle")
 	knight.visible = true
 	knight_2.visible = false
@@ -259,6 +273,10 @@ func _ready() -> void:
 
 	update_all_upgrade_costs()
 	update_floating_totals()
+	start_qte_loop()
+
+func _process(_delta):
+	print(output)
 
 func update_knight_visuals(): #UPDATE THIS
 	knight.visible = total_knights >= 1
@@ -494,6 +512,7 @@ func _on_loot_button_down() -> void:
 
 func _on_loot_button_up() -> void:
 	pressing = false
+	current_button = null
 
 func _on_bigger_storage_pressed() -> void:
 	animation.play("pawn_to_gold")
@@ -526,6 +545,16 @@ func _on_tab_container_tab_changed(_tab: int) -> void:
 		return
 
 func start_action_loop():
+	match current_action:
+		ActionType.ATTACK:
+			current_button = attack
+		ActionType.BLOCK:
+			current_button = block
+		ActionType.LOOT:
+			current_button = loot
+		ActionType.IDLE:
+			current_button = null
+
 	if action_loop_running:
 		return
 
@@ -593,7 +622,6 @@ func set_number_icons(
 		DIGIT_BASE_SIZE * DIGIT_SCALE
 		) # seta o tamanho mínimo
 		container.add_child(icon)
-
 
 func update_all_upgrade_costs() -> void:
 	for type in upgrades.keys():
@@ -668,3 +696,145 @@ func abbreviate_number(value: int) -> Dictionary:
 			"number_str": str(rounded),
 			"suffix": "B"
 		}
+
+func start_qte_loop():
+	var random_interval = rng.randf_range(2.0, 6.0)
+	await get_tree().create_timer(random_interval).timeout
+	awarn_qte()
+
+func awarn_qte():
+	var random_choice = buttons.pick_random()
+	var tween = get_tree().create_tween()
+	var qte_check := 1.2
+	print('[AWARN_QTE]', random_choice)
+	tween.tween_property(
+		random_choice,
+		"theme_override_font_sizes/font_size",
+		28,
+		qte_check
+	)
+	await tween.finished
+	play_qte(random_choice)
+
+func play_qte(chosen_button):
+	var tween = get_tree().create_tween()
+	var qte_check := 0.2
+	
+	match chosen_button:
+		attack:
+			if chosen_button == current_button:
+				tween.tween_property(
+					chosen_button,
+					"modulate",
+					Color(0.0, 0.937, 0.0, 1.0),
+					qte_check
+				)
+				print('attack qte succeded!')
+				successful_qte()
+				tween.chain().tween_property(
+					chosen_button,
+					"modulate",
+					Color(0.875, 0.875, 0.875),
+					qte_check*2
+				)
+			else:
+				tween.tween_property(
+					chosen_button,
+					"modulate",
+					Color(0.941, 0.063, 0.0, 1.0),
+					qte_check
+				)
+				print('attack qte failed...')
+				tween.chain().tween_property(
+					chosen_button,
+					"modulate",
+					Color(0.875, 0.875, 0.875),
+					qte_check*2
+				)
+		block:
+			if chosen_button == current_button:
+				tween.tween_property(
+					chosen_button,
+					"modulate",
+					Color(0.0, 0.937, 0.141, 1.0),
+					qte_check
+				)
+				print('block qte succeded!')
+				successful_qte()
+				tween.chain().tween_property(
+					chosen_button,
+					"modulate",
+					Color(0.875, 0.875, 0.875),
+					qte_check*2
+				)
+			else:
+				tween.tween_property(
+					chosen_button,
+					"modulate",
+					Color(0.941, 0.063, 0.0, 1.0),
+					qte_check
+				)
+				print('block qte failed...')
+				tween.chain().tween_property(
+					chosen_button,
+					"modulate",
+					Color(0.875, 0.875, 0.875),
+					qte_check*2
+				)
+		loot:
+			if chosen_button == current_button:
+				tween.tween_property(
+					chosen_button,
+					"modulate",
+					Color(0.0, 0.937, 0.0, 1.0),
+					qte_check
+				)
+				print('loot qte succeded!')
+				successful_qte()
+				tween.chain().tween_property(
+					chosen_button,
+					"modulate",
+					Color(0.875, 0.875, 0.875),
+					qte_check*2
+				)
+			else:
+				tween.tween_property(
+					chosen_button,
+					"modulate",
+					Color(0.941, 0.063, 0.0, 1.0),
+					qte_check
+				)
+				print('loot qte failed...')
+				tween.chain().tween_property(
+					chosen_button,
+					"modulate",
+					Color(0.875, 0.875, 0.875),
+					qte_check*2
+				)
+	tween.parallel().tween_property(
+		chosen_button,
+		"theme_override_font_sizes/font_size",
+		16,
+		qte_check
+	)
+	await tween.finished
+	tween.kill()
+	close_qte_loop()
+
+func close_qte_loop():
+	print('[CLOSE_QTE_LOOP] quick time event loop has closed!')
+	start_qte_loop()
+
+func successful_qte():
+	if output_tween and output_tween.is_running():
+		output_tween.kill()
+	output += (output * (heat - 1.0)) * 0.8
+	output_tween = get_tree().create_tween()
+	output_tween.tween_property(
+		self,
+		"output",
+		OUTPUT_FLOOR,
+		10.0
+	).set_delay(1.5)\
+	.set_trans(Tween.TRANS_EXPO)\
+	.set_ease(Tween.EASE_IN_OUT)
