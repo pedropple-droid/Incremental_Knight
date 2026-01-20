@@ -1,7 +1,6 @@
 extends Control
 
 const original_output_correction = 0.08
-const win_cost: int = 1000000
 const BASE_UPGRADE_DELAY := 1
 const MIN_UPGRADE_DELAY := 0.01
 const STREAK_THRESHOLD := 1
@@ -61,7 +60,6 @@ var upgrades := {
 @onready var row_2: HBoxContainer = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row2
 @onready var row_3: HBoxContainer = $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row3
 
-var slain: int = 10000000000000000
 var wood: int = 0
 var meat: int = 0
 var gold: int = 0
@@ -87,7 +85,6 @@ func _ready() -> void:
 	row_3.visible = false
 
 func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
-	slain += output
 	if pressing:
 		animation_2.play('attack_2')
 		update_text()
@@ -107,11 +104,8 @@ func knights_per_purchase():
 	return int(pow(3, knight_set_level))
 
 func update_text():
-	var slain_left = win_cost - slain
 	var speed = snapped(animation_2.speed_scale, 0.1)
 
-	win_label.text = "Go to the next phase...?\nCost: %d\nEnemies left: %d" % [win_cost, max(slain_left, 0)]
-	label.text = "Enemies slain: %d\nWood avaiable: %d\nMeat avaiable: %d\nGold avaiable: %d" % [slain, wood, meat, gold]
 
 	out_label.text = "Output\nCost: %d\nOutput: %d" % [
 		upgrades[UpgradeType.OUTPUT_2].cost,
@@ -166,8 +160,6 @@ func start_upgrade_loop():
 
 func can_buy(type: UpgradeType) -> bool:
 	var up = upgrades[type]
-	if slain < up.cost:
-		return false
 	if type == UpgradeType.KNIGHT_2 and total_knights >= max_knights_per_run:
 		return false
 	return true
@@ -287,13 +279,10 @@ func try_buy_upgrade(type: UpgradeType) -> void:
 
 	var up = upgrades[type]
 
-	if slain < up.cost:
-		return
 	if type == UpgradeType.KNIGHT_2 and total_knights >= max_knights_per_run:
 		knight_label.text = "Maxed out!!"
 		return
 
-	slain -= up.cost
 	up.apply.call()
 	up.cost = int(up.cost * up.cost_mult)
 	update_text()
