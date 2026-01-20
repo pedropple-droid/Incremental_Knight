@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=3 uid="uid://cbslel71cfdb3"]
+[gd_scene load_steps=107 format=3 uid="uid://cbslel71cfdb3"]
 
 [ext_resource type="Script" uid="uid://nrfi2y2wrie" path="res://Scripts/main.gd" id="1_0ld40"]
 [ext_resource type="Texture2D" uid="uid://cscjq4g3wgjmk" path="res://TinySword/UI Elements/UI Elements/Icons/smallwood.png" id="2_11yus"]
@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c8p5p16jdwfbt" path="res://UnitsTextureRect/WarAttOversized/warriorattack4.png" id="11_155or"]
 [ext_resource type="Texture2D" uid="uid://yew6vulxnf6b" path="res://UnitsTextureRect/WarAttOversized/warriorattack5.png" id="12_vtx2l"]
 [ext_resource type="Texture2D" uid="uid://p8ybggyt4jhc" path="res://UnitsTextureRect/WarAttOversized/warriorattack5.1.png" id="13_63lxy"]
-[ext_resource type="Texture2D" uid="uid://dv1r1wk105bra" path="res://UnitsTextureRect/WarAtt/warriorattack6.png" id="13_ih3m7"]
+[ext_resource type="Texture2D" uid="uid://dv1r1wk105bra" path="res://UnitsTextureRect/WarAtt_2/warriorattack6.png" id="13_ih3m7"]
 [ext_resource type="Texture2D" uid="uid://0oqi2y0rnrrl" path="res://UnitsTextureRect/WarAttOversized/warriorattack8.png" id="15_fjhjs"]
 [ext_resource type="Texture2D" uid="uid://cpr8qhk7bbf0f" path="res://UnitsTextureRect/WarAttOversized/warriorattack9.png" id="16_bfu41"]
 [ext_resource type="Texture2D" uid="uid://rfn5t7gph2aq" path="res://UnitsTextureRect/WarAttOversized/warriorattack10.png" id="17_r4ag1"]
@@ -36,20 +36,20 @@
 [ext_resource type="Texture2D" uid="uid://jnlemv00sjlr" path="res://UnitsTextureRect/PawnIdle/Pawn_8.png" id="27_dgi5k"]
 [ext_resource type="Texture2D" uid="uid://bq3cyp7fy0j41" path="res://UnitsTextureRect/PawnRun/EmptyHanded/PawnEmpty1.png" id="29_dgi5k"]
 [ext_resource type="Texture2D" uid="uid://bp2i5cbkw4t32" path="res://UnitsTextureRect/PawnRun/EmptyHanded/PawnEmpty2.png" id="30_j8jky"]
-[ext_resource type="Texture2D" uid="uid://cfyxpu5mgr1fa" path="res://UnitsTextureRect/WarIdle/warrioridle1.png" id="31_j4bwh"]
+[ext_resource type="Texture2D" uid="uid://cfyxpu5mgr1fa" path="res://UnitsTextureRect/WarIdle_2/warrioridle1.png" id="31_j4bwh"]
 [ext_resource type="Texture2D" uid="uid://d3te06lap1quf" path="res://UnitsTextureRect/PawnRun/EmptyHanded/PawnEmpty3.png" id="31_kmb1v"]
 [ext_resource type="Texture2D" uid="uid://deml2sk4xodwq" path="res://UnitsTextureRect/PawnRun/EmptyHanded/PawnEmpty4.png" id="32_fuf3a"]
-[ext_resource type="Texture2D" uid="uid://dtlei5hi4kdu2" path="res://UnitsTextureRect/WarIdle/warrioridle2.png" id="32_ksmap"]
+[ext_resource type="Texture2D" uid="uid://dtlei5hi4kdu2" path="res://UnitsTextureRect/WarIdle_2/warrioridle2.png" id="32_ksmap"]
 [ext_resource type="Texture2D" uid="uid://di1drvvopv88n" path="res://UnitsTextureRect/PawnRun/EmptyHanded/PawnEmpty5.png" id="33_pibwh"]
-[ext_resource type="Texture2D" uid="uid://t13xykt8uvsv" path="res://UnitsTextureRect/WarIdle/warrioridle3.png" id="33_ygd8o"]
-[ext_resource type="Texture2D" uid="uid://g6lpm3fo21n3" path="res://UnitsTextureRect/WarIdle/warrioridle4.png" id="34_2s0kr"]
+[ext_resource type="Texture2D" uid="uid://t13xykt8uvsv" path="res://UnitsTextureRect/WarIdle_2/warrioridle3.png" id="33_ygd8o"]
+[ext_resource type="Texture2D" uid="uid://g6lpm3fo21n3" path="res://UnitsTextureRect/WarIdle_2/warrioridle4.png" id="34_2s0kr"]
 [ext_resource type="Texture2D" uid="uid://02clsuyfc44q" path="res://UnitsTextureRect/PawnRun/EmptyHanded/PawnEmpty6.png" id="34_c6pm6"]
-[ext_resource type="Texture2D" uid="uid://h6h65bd2sp0d" path="res://UnitsTextureRect/WarIdle/warrioridle5.png" id="35_xaipn"]
-[ext_resource type="Texture2D" uid="uid://d2qirx17r6iv1" path="res://UnitsTextureRect/WarIdle/warrioridle6.png" id="36_ndrjj"]
+[ext_resource type="Texture2D" uid="uid://h6h65bd2sp0d" path="res://UnitsTextureRect/WarIdle_2/warrioridle5.png" id="35_xaipn"]
+[ext_resource type="Texture2D" uid="uid://d2qirx17r6iv1" path="res://UnitsTextureRect/WarIdle_2/warrioridle6.png" id="36_ndrjj"]
 [ext_resource type="Texture2D" uid="uid://nrs7gwihjtv8" path="res://UnitsTextureRect/PawnRun/GoldInHand/PawnGold1.png" id="36_o7ddy"]
 [ext_resource type="Texture2D" uid="uid://2rlnyla53f7r" path="res://UnitsTextureRect/PawnRun/GoldInHand/PawnGold2.png" id="37_0loja"]
-[ext_resource type="Texture2D" uid="uid://bm2dj1bdi8qgu" path="res://UnitsTextureRect/WarIdle/warrioridle7.png" id="37_ih3m7"]
-[ext_resource type="Texture2D" uid="uid://dmxxdhe4dhseq" path="res://UnitsTextureRect/WarIdle/warrioridle8.png" id="38_11yus"]
+[ext_resource type="Texture2D" uid="uid://bm2dj1bdi8qgu" path="res://UnitsTextureRect/WarIdle_2/warrioridle7.png" id="37_ih3m7"]
+[ext_resource type="Texture2D" uid="uid://dmxxdhe4dhseq" path="res://UnitsTextureRect/WarIdle_2/warrioridle8.png" id="38_11yus"]
 [ext_resource type="Texture2D" uid="uid://cln0fn3hho1wk" path="res://UnitsTextureRect/PawnRun/GoldInHand/PawnGold3.png" id="38_ids8r"]
 [ext_resource type="Texture2D" uid="uid://bgvsmxxk26tnq" path="res://UnitsTextureRect/PawnRun/GoldInHand/PawnGold4.png" id="39_dnhof"]
 [ext_resource type="Texture2D" uid="uid://by2u674bspkjy" path="res://UnitsTextureRect/PawnRun/GoldInHand/PawnGold5.png" id="40_1v6qk"]
@@ -720,14 +720,50 @@ tracks/3/keys = {
 "values": [Vector2(700, 180), Vector2(400, 400)]
 }
 
+[sub_resource type="Animation" id="Animation_ih3m7"]
+resource_name = "block_qte"
+
+[sub_resource type="Animation" id="Animation_11yus"]
+resource_name = "attack_qte"
+
+[sub_resource type="Animation" id="Animation_b6ruc"]
+resource_name = "loot_qte"
+
+[sub_resource type="Animation" id="Animation_155or"]
+resource_name = "failed_block_qte"
+
+[sub_resource type="Animation" id="Animation_vtx2l"]
+resource_name = "failed_attack_qte"
+
+[sub_resource type="Animation" id="Animation_63lxy"]
+resource_name = "failed_loot_qte"
+
+[sub_resource type="Animation" id="Animation_fjhjs"]
+resource_name = "block_warn"
+
+[sub_resource type="Animation" id="Animation_bfu41"]
+resource_name = "attack_warn"
+
+[sub_resource type="Animation" id="Animation_r4ag1"]
+resource_name = "loot_warn"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c6pm6"]
 _data = {
 &"RESET": SubResource("Animation_fuf3a"),
 &"attack": SubResource("Animation_kmb1v"),
+&"attack_qte": SubResource("Animation_11yus"),
+&"attack_warn": SubResource("Animation_bfu41"),
 &"block": SubResource("Animation_o7ddy"),
+&"block_qte": SubResource("Animation_ih3m7"),
+&"block_warn": SubResource("Animation_fjhjs"),
+&"failed_attack_qte": SubResource("Animation_vtx2l"),
+&"failed_block_qte": SubResource("Animation_155or"),
+&"failed_loot_qte": SubResource("Animation_63lxy"),
 &"gold_to_mount": SubResource("Animation_yq6so"),
 &"idle": SubResource("Animation_pibwh"),
 &"loot": SubResource("Animation_0loja"),
+&"loot_qte": SubResource("Animation_b6ruc"),
+&"loot_warn": SubResource("Animation_r4ag1"),
 &"meat_to_mount": SubResource("Animation_5poiv"),
 &"pawn_idle": SubResource("Animation_2cjbq"),
 &"pawn_to_gold": SubResource("Animation_2f3dj"),
@@ -873,6 +909,8 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_font_sizes/font_size = 16
 text = "defend
 "
 
@@ -881,6 +919,8 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_font_sizes/font_size = 16
 text = "attack"
 
 [node name="loot" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2"]
@@ -888,8 +928,9 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "loot
-"
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_font_sizes/font_size = 16
+text = "loot"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer"]
 layout_mode = 2
