@@ -39,7 +39,7 @@ enum ActionType {
 	IDLE,
 	ATTACK,
 	BLOCK,
-	LOOT,
+	FORAGE,
 }
 
 enum ResourceType {
@@ -95,15 +95,15 @@ var upgrades := {
 var actions := {
 	ActionType.ATTACK: {
 		"animation": "attack",
+		"resource": "gold",
+	},
+	ActionType.FORAGE: {
+		"animation": "forage",
 		"resource": "meat",
 	},
 	ActionType.BLOCK: {
 		"animation": "block",
 		"resource": "wood",
-	},
-	ActionType.LOOT: {
-		"animation": "loot",
-		"resource": "gold",
 	},
 }
 
@@ -184,38 +184,36 @@ var upgrade_digit_containers := {
 var buttons: Array
 
 @onready var animation: AnimationPlayer = $AnimationPlayer
-@onready var spd_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/RichTextLabel
-@onready var output_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton/RichTextLabel
-@onready var knight_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade/RichTextLabel
-@onready var win_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton/RichTextLabel
-@onready var h_box: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer
-@onready var knight: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer/Knight
-@onready var knight_2: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer/Knight2
-@onready var knight_3: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer/Knight3
+@onready var spd_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/RichTextLabel
+@onready var output_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/RichTextLabel
+@onready var knight_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/RichTextLabel
+@onready var win_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/RichTextLabel
+@onready var knight_3: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/HBoxKnights/Knight3
+@onready var knight_2: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/HBoxKnights/Knight2
+@onready var knight: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/HBoxKnights/Knight
 @onready var pawn: Sprite2D = $TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn
-@onready var wood_digits_speed: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer/WoodDigitsSpeed
-@onready var meat_digits_speed: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer/MeatDigitsSpeed
-@onready var gold_digits_speed: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer/GoldDigitsSpeed
-@onready var wood_digits_output: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer/WoodDigitsOutput
-@onready var meat_digits_output: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer/MeatDigitsOutput
-@onready var gold_digits_output: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer/GoldDigitsOutput
-@onready var wood_digits_knight: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer/WoodDigitsKnight
-@onready var meat_digits_knight: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer/MeatDigitsKnight
-@onready var gold_digits_knight: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer/GoldDigitsKnight
-@onready var wood_digits_win: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer/WoodDigitsWin
-@onready var meat_digits_win: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer/MeatDigitsWin
-@onready var gold_digits_win: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer/GoldDigitsWin
-@onready var wood_digits_total: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer2/ValueBox/WoodRow/WoodDigits
-@onready var meat_digits_total: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer2/ValueBox/MeatRow/MeatDigits
-@onready var gold_digits_total: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer2/ValueBox/GoldRow/GoldDigits
-@onready var block: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/block
-@onready var attack: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/attack
-@onready var loot: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/HBoxContainer2/loot
+@onready var wood_digits_speed: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer/WoodDigitsSpeed
+@onready var meat_digits_speed: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer/MeatDigitsSpeed
+@onready var gold_digits_speed: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer/GoldDigitsSpeed
+@onready var wood_digits_output: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer/WoodDigitsOutput
+@onready var meat_digits_output: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer/MeatDigitsOutput
+@onready var gold_digits_output: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer/GoldDigitsOutput
+@onready var wood_digits_knight: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer/WoodDigitsKnight
+@onready var meat_digits_knight: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer/MeatDigitsKnight
+@onready var gold_digits_knight: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer/GoldDigitsKnight
+@onready var wood_digits_win: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer/WoodDigitsWin
+@onready var meat_digits_win: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer/MeatDigitsWin
+@onready var gold_digits_win: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer/GoldDigitsWin
+@onready var wood_digits_total: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginValue/HValueBox/WoodIcon/WoodDigits
+@onready var meat_digits_total: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginValue/HValueBox/MeatIcon/MeatDigits
+@onready var gold_digits_total: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginValue/HValueBox/GoldIcon/GoldDigits
+@onready var block: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/HBoxContainer2/block
+@onready var forage: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/HBoxContainer2/forage
+@onready var attack: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/HBoxContainer2/attack
 
-
-var wood: int = 0
-var meat: int = 0
 var gold: int = 0
+var meat: int = 0
+var wood: int = 0
 
 var output: float = OUTPUT_FLOOR
 var output_tween: Tween
@@ -245,7 +243,7 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var at_pawn := false
 
 func _ready() -> void:
-	buttons = [attack, block, loot]
+	buttons = [attack, block, forage]
 	animation.play("idle")
 	knight.visible = true
 	knight_2.visible = false
@@ -505,12 +503,12 @@ func _on_block_button_down() -> void:
 func _on_block_button_up() -> void:
 	pressing = false
 
-func _on_loot_button_down() -> void:
+func _on_forage_button_down() -> void:
 	pressing = true
-	current_action = ActionType.LOOT
+	current_action = ActionType.FORAGE
 	start_action_loop()
 
-func _on_loot_button_up() -> void:
+func _on_forage_button_up() -> void:
 	pressing = false
 	current_button = null
 
@@ -533,14 +531,13 @@ func _on_speed_upgrade_pressed() -> void:
 	animation.play("wood_to_mount")
 
 func _on_carry_capacity_upgrade_pressed() -> void:
-	animation.play("looting")
+	animation.play("forageing")
 
 func _on_tab_container_tab_changed(_tab: int) -> void:
 	if at_pawn:
 		at_pawn = false
 		return
 	else:
-		animation.play('pawn_idle')
 		at_pawn = true
 		return
 
@@ -550,8 +547,8 @@ func start_action_loop():
 			current_button = attack
 		ActionType.BLOCK:
 			current_button = block
-		ActionType.LOOT:
-			current_button = loot
+		ActionType.FORAGE:
+			current_button = forage
 		ActionType.IDLE:
 			current_button = null
 
@@ -572,13 +569,13 @@ func perform_action(action):
 	match action:
 		ActionType.ATTACK:
 			animation.play("attack")
-			meat += output
+			gold += output
 		ActionType.BLOCK:
 			animation.play("block")
 			wood += output
-		ActionType.LOOT:
-			animation.play("loot")
-			gold += output
+		ActionType.FORAGE:
+			animation.play("forage")
+			meat += output
 		_:
 			animation.play("idle")
 
@@ -704,22 +701,35 @@ func start_qte_loop():
 
 func awarn_qte():
 	var random_choice = buttons.pick_random()
+	print('[AWARN_QTE]', random_choice)
+	tween_chosen_action(random_choice)
+
+
+func tween_chosen_action(action):
 	var tween = get_tree().create_tween()
 	var qte_check := 1.2
-	print('[AWARN_QTE]', random_choice)
+	
 	tween.tween_property(
-		random_choice,
-		"theme_override_font_sizes/font_size",
-		28,
-		qte_check
+		action,
+		"theme_override_constants/outline_size",
+		20,
+		qte_check,
 	)
+	
 	await tween.finished
-	play_qte(random_choice)
+	play_qte(action)
 
 func play_qte(chosen_button):
 	var tween = get_tree().create_tween()
 	var qte_check := 0.2
-	
+
+	tween.tween_property(
+		chosen_button,
+		"theme_override_constants/outline_size",
+		48,
+		qte_check,
+	)
+
 	match chosen_button:
 		attack:
 			if chosen_button == current_button:
@@ -781,7 +791,7 @@ func play_qte(chosen_button):
 					Color(0.875, 0.875, 0.875),
 					qte_check*2
 				)
-		loot:
+		forage:
 			if chosen_button == current_button:
 				tween.tween_property(
 					chosen_button,
@@ -789,7 +799,7 @@ func play_qte(chosen_button):
 					Color(0.0, 0.937, 0.0, 1.0),
 					qte_check
 				)
-				print('loot qte succeded!')
+				print('forage qte succeded!')
 				successful_qte()
 				tween.chain().tween_property(
 					chosen_button,
@@ -804,7 +814,7 @@ func play_qte(chosen_button):
 					Color(0.941, 0.063, 0.0, 1.0),
 					qte_check
 				)
-				print('loot qte failed...')
+				print('forage qte failed...')
 				tween.chain().tween_property(
 					chosen_button,
 					"modulate",
@@ -813,9 +823,9 @@ func play_qte(chosen_button):
 				)
 	tween.parallel().tween_property(
 		chosen_button,
-		"theme_override_font_sizes/font_size",
-		16,
-		qte_check
+		"theme_override_constants/outline_size",
+		0,
+		qte_check,
 	)
 	await tween.finished
 	tween.kill()
