@@ -211,6 +211,47 @@ tracks/2/keys = {
 "values": [ExtResource("23_r4e17"), ExtResource("19_j4bwh"), ExtResource("20_ksmap"), ExtResource("21_ygd8o"), ExtResource("22_2s0kr"), ExtResource("19_j4bwh"), ExtResource("20_ksmap"), ExtResource("21_ygd8o"), ExtResource("22_2s0kr"), ExtResource("62_152kg"), ExtResource("19_j4bwh"), ExtResource("20_ksmap"), ExtResource("21_ygd8o"), ExtResource("22_2s0kr"), ExtResource("62_152kg"), ExtResource("62_152kg")]
 }
 
+[sub_resource type="Animation" id="Animation_0loja"]
+resource_name = "forage"
+length = 1.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.0999999, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("68_r4e17"), ExtResource("70_ndrjj"), ExtResource("71_ih3m7"), ExtResource("72_11yus"), ExtResource("72_11yus"), ExtResource("73_b6ruc"), ExtResource("73_b6ruc"), ExtResource("74_155or"), ExtResource("75_vtx2l"), ExtResource("76_63lxy"), ExtResource("77_fjhjs"), ExtResource("78_bfu41"), ExtResource("79_r4ag1"), ExtResource("80_v0wtd"), ExtResource("68_xaipn"), ExtResource("68_xaipn")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Knight2:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.2999999, 0.3999999, 0.4999999, 0.5999999, 0.6999999, 0.8, 0.90000004, 1, 1.1, 1.1999999, 1.3000001, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("68_xaipn"), ExtResource("68_r4e17"), ExtResource("68_r4e17"), ExtResource("70_ndrjj"), ExtResource("71_ih3m7"), ExtResource("72_11yus"), ExtResource("72_11yus"), ExtResource("73_b6ruc"), ExtResource("74_155or"), ExtResource("75_vtx2l"), ExtResource("76_63lxy"), ExtResource("77_fjhjs"), ExtResource("78_bfu41"), ExtResource("79_r4ag1"), ExtResource("80_v0wtd"), ExtResource("80_v0wtd")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Knight3:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.39999992, 0.49999988, 0.5999999, 0.6999999, 0.79999995, 0.9, 1, 1.1, 1.2, 1.3, 1.4000001, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("68_xaipn"), ExtResource("68_xaipn"), ExtResource("68_r4e17"), ExtResource("68_r4e17"), ExtResource("70_ndrjj"), ExtResource("71_ih3m7"), ExtResource("72_11yus"), ExtResource("72_11yus"), ExtResource("73_b6ruc"), ExtResource("74_155or"), ExtResource("75_vtx2l"), ExtResource("76_63lxy"), ExtResource("77_fjhjs"), ExtResource("78_bfu41"), ExtResource("79_r4ag1"), ExtResource("80_v0wtd")]
+}
+
 [sub_resource type="Animation" id="Animation_pibwh"]
 resource_name = "idle"
 length = 0.8
@@ -251,47 +292,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [ExtResource("37_ih3m7"), ExtResource("38_11yus"), ExtResource("31_j4bwh"), ExtResource("31_j4bwh"), ExtResource("32_ksmap"), ExtResource("33_ygd8o"), ExtResource("34_2s0kr"), ExtResource("35_xaipn"), ExtResource("36_ndrjj")]
-}
-
-[sub_resource type="Animation" id="Animation_0loja"]
-resource_name = "forage"
-length = 1.5
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.0999999, 1.2, 1.3, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("68_r4e17"), ExtResource("70_ndrjj"), ExtResource("71_ih3m7"), ExtResource("72_11yus"), ExtResource("72_11yus"), ExtResource("73_b6ruc"), ExtResource("73_b6ruc"), ExtResource("74_155or"), ExtResource("75_vtx2l"), ExtResource("76_63lxy"), ExtResource("77_fjhjs"), ExtResource("78_bfu41"), ExtResource("79_r4ag1"), ExtResource("80_v0wtd"), ExtResource("68_xaipn"), ExtResource("68_xaipn")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Knight2:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.2999999, 0.3999999, 0.4999999, 0.5999999, 0.6999999, 0.8, 0.90000004, 1, 1.1, 1.1999999, 1.3000001, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("68_xaipn"), ExtResource("68_r4e17"), ExtResource("68_r4e17"), ExtResource("70_ndrjj"), ExtResource("71_ih3m7"), ExtResource("72_11yus"), ExtResource("72_11yus"), ExtResource("73_b6ruc"), ExtResource("74_155or"), ExtResource("75_vtx2l"), ExtResource("76_63lxy"), ExtResource("77_fjhjs"), ExtResource("78_bfu41"), ExtResource("79_r4ag1"), ExtResource("80_v0wtd"), ExtResource("80_v0wtd")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Knight3:texture")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.39999992, 0.49999988, 0.5999999, 0.6999999, 0.79999995, 0.9, 1, 1.1, 1.2, 1.3, 1.4000001, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("68_xaipn"), ExtResource("68_xaipn"), ExtResource("68_r4e17"), ExtResource("68_r4e17"), ExtResource("70_ndrjj"), ExtResource("71_ih3m7"), ExtResource("72_11yus"), ExtResource("72_11yus"), ExtResource("73_b6ruc"), ExtResource("74_155or"), ExtResource("75_vtx2l"), ExtResource("76_63lxy"), ExtResource("77_fjhjs"), ExtResource("78_bfu41"), ExtResource("79_r4ag1"), ExtResource("80_v0wtd")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c6pm6"]
@@ -470,23 +470,32 @@ size_flags_vertical = 3
 theme_override_constants/separation = -500
 
 [node name="Knight3" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/HBoxKnights"]
+show_behind_parent = true
+light_mask = 0
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_behavior_recursive = 1
 texture = ExtResource("31_j4bwh")
 expand_mode = 2
 
 [node name="Knight2" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/HBoxKnights"]
+show_behind_parent = true
+light_mask = 0
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_behavior_recursive = 1
 texture = ExtResource("31_j4bwh")
 expand_mode = 2
 
 [node name="Knight" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/HBoxKnights"]
+show_behind_parent = true
+light_mask = 0
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_behavior_recursive = 1
 texture = ExtResource("31_j4bwh")
 expand_mode = 2
 
@@ -886,11 +895,11 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="WinButton" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade"]
+[node name="PlaceholderButton" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton"]
 z_index = 1
 layout_mode = 1
 anchors_preset = 15
@@ -903,7 +912,7 @@ theme_override_colors/font_outline_color = Color(0.9372549, 0.9372549, 0, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
-text = "win!!"
+text = "PLACEHOLDER (knights asap)"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
@@ -911,103 +920,103 @@ vertical_alignment = 1
 justification_flags = 171
 custom_effects = [SubResource("RichTextEffect_yc10j")]
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton/CenterContainer"]
 layout_mode = 2
 theme_override_constants/separation = -50
 
-[node name="GoldContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer"]
+[node name="GoldContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/GoldContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton/CenterContainer/HBoxContainer/GoldContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Gold" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
+[node name="Gold" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("4_b6ruc")
 stretch_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 use_top_left = true
 
-[node name="GoldDigitsWin" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer"]
+[node name="GoldDigitsPlaceholder" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="MeatContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer"]
+[node name="MeatContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/MeatContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton/CenterContainer/HBoxContainer/MeatContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Meat" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
+[node name="Meat" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("3_11yus")
 stretch_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 use_top_left = true
 
-[node name="MeatDigitsWin" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer"]
+[node name="MeatDigitsPlaceholder" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="WoodContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer"]
+[node name="WoodContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/WoodContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton/CenterContainer/HBoxContainer/WoodContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Wood" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
+[node name="Wood" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("2_11yus")
 stretch_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 use_top_left = true
 
-[node name="WoodDigitsWin" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer"]
+[node name="WoodDigitsPlaceholder" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
@@ -1230,8 +1239,8 @@ text = "gOODdow win1!!!!1111im goin gto sleep goodbuye"
 [connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton" to="." method="_on_output_upgrade_button_mouse_exited"]
 [connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade" to="." method="_on_extra_knight_upgrade_mouse_entered"]
 [connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade" to="." method="_on_extra_knight_upgrade_mouse_exited"]
-[connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton" to="." method="_on_win_button_mouse_entered"]
-[connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton" to="." method="_on_win_button_mouse_exited"]
+[connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton" to="." method="_on_win_button_mouse_entered"]
+[connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/PlaceholderButton" to="." method="_on_win_button_mouse_exited"]
 [connection signal="pressed" from="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/CarryCapacityUpgrade" to="." method="_on_carry_capacity_upgrade_pressed"]
 [connection signal="pressed" from="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgrade" to="." method="_on_speed_upgrade_pressed"]
 [connection signal="pressed" from="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraPawn" to="." method="_on_extra_pawn_pressed"]

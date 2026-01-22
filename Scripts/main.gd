@@ -9,7 +9,6 @@ const STREAK_THRESHOLD := 1
 const MIN_OUTPUT_UPGRADE := 1.15
 const DIGIT_BASE_SIZE := 8
 const DIGIT_SCALE := 2
-const OUTPUT_FLOOR := 1.0
 
 const WOODEIGHT = preload("uid://bhkspl4ccxfw1")
 const WOODFIVE = preload("uid://d372enmkxh3uv")
@@ -31,8 +30,8 @@ enum UpgradeType {
 	TOTAL,
 	OUTPUT,
 	SPEED,
+	TOUGHNESS,
 	KNIGHT,
-	WIN,
 }
 
 enum ActionType {
@@ -56,7 +55,7 @@ var upgrades := {
 		"cost_mult": 2.0,
 		"apply": func():
 			@warning_ignore("narrowing_conversion")
-			output *= output_multiplier
+			output_floor *= output_multiplier
 			output_multiplier -= original_output_correction
 			output_multiplier = max(
 			output_multiplier,
@@ -71,24 +70,24 @@ var upgrades := {
 		"apply": func():
 			animation.speed_scale *= 1.1,
 	},
-	UpgradeType.KNIGHT: {
+	UpgradeType.TOUGHNESS: {
 		"wood_cost": 150,
 		"meat_cost": 300,
 		"gold_cost": 450,
+		"cost_mult": 3.0,
+		"apply": func():
+			pass,
+	},
+	UpgradeType.KNIGHT: {
+		"wood_cost": 40000,
+		"meat_cost": 55000,
+		"gold_cost": 85000,
 		"cost_mult": 3.0,
 		"apply": func():
 			var amount = knights_per_purchase()
 			total_knights += amount
 			update_knight_visuals()
 			update_output_from_knights(),
-	},
-	UpgradeType.WIN: {
-		"wood_cost": 40000,
-		"meat_cost": 55000,
-		"gold_cost": 85000,
-		"cost_mult": 1.0,
-		"apply": func():
-			pass,
 	},
 }
 
@@ -174,7 +173,7 @@ var upgrade_digit_containers := {
 		ResourceType.MEAT: null,
 		ResourceType.GOLD: null,
 	},
-	UpgradeType.WIN: {
+	UpgradeType.PLACEHOLDER: {
 		ResourceType.WOOD: null,
 		ResourceType.MEAT: null,
 		ResourceType.GOLD: null,
@@ -187,7 +186,7 @@ var buttons: Array
 @onready var spd_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/RichTextLabel
 @onready var output_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/RichTextLabel
 @onready var knight_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/RichTextLabel
-@onready var win_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/RichTextLabel
+@onready var placeholder_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/placeholderButton/RichTextLabel
 @onready var knight_3: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/HBoxKnights/Knight3
 @onready var knight_2: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/HBoxKnights/Knight2
 @onready var knight: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/HBoxKnights/Knight
@@ -201,9 +200,9 @@ var buttons: Array
 @onready var wood_digits_knight: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer/WoodDigitsKnight
 @onready var meat_digits_knight: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer/MeatDigitsKnight
 @onready var gold_digits_knight: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer/GoldDigitsKnight
-@onready var wood_digits_win: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer/WoodDigitsWin
-@onready var meat_digits_win: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer/MeatDigitsWin
-@onready var gold_digits_win: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/WinButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer/GoldDigitsWin
+@onready var wood_digits_placeholder: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/placeholderButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer/WoodDigitsplaceholder
+@onready var meat_digits_placeholder: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/placeholderButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer/MeatDigitsplaceholder
+@onready var gold_digits_placeholder: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/placeholderButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer/GoldDigitsplaceholder
 @onready var wood_digits_total: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginValue/HValueBox/WoodIcon/WoodDigits
 @onready var meat_digits_total: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginValue/HValueBox/MeatIcon/MeatDigits
 @onready var gold_digits_total: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginValue/HValueBox/GoldIcon/GoldDigits
@@ -211,11 +210,12 @@ var buttons: Array
 @onready var forage: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/HBoxContainer2/forage
 @onready var attack: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/HBoxContainer2/attack
 
-var gold: int = 0
-var meat: int = 0
-var wood: int = 0
+var gold: int = 11110
+var meat: int = 11110
+var wood: int = 11111110
 
-var output: float = OUTPUT_FLOOR
+var output_floor: float = 1.0
+var output: float = 1.0
 var output_tween: Tween
 var output_multiplier := 2.0
 var knight_set_level: int = 0
@@ -261,9 +261,9 @@ func _ready() -> void:
 	upgrade_digit_containers[UpgradeType.KNIGHT][ResourceType.MEAT] = meat_digits_knight
 	upgrade_digit_containers[UpgradeType.KNIGHT][ResourceType.GOLD] = gold_digits_knight
 
-	upgrade_digit_containers[UpgradeType.WIN][ResourceType.WOOD] = wood_digits_win
-	upgrade_digit_containers[UpgradeType.WIN][ResourceType.MEAT] = meat_digits_win
-	upgrade_digit_containers[UpgradeType.WIN][ResourceType.GOLD] = gold_digits_win
+	upgrade_digit_containers[UpgradeType.PLACEHOLDER][ResourceType.WOOD] = wood_digits_placeholder
+	upgrade_digit_containers[UpgradeType.PLACEHOLDER][ResourceType.MEAT] = meat_digits_placeholder
+	upgrade_digit_containers[UpgradeType.PLACEHOLDER][ResourceType.GOLD] = gold_digits_placeholder
 
 	upgrade_digit_containers[UpgradeType.TOTAL][ResourceType.WOOD] = wood_digits_total
 	upgrade_digit_containers[UpgradeType.TOTAL][ResourceType.MEAT] = meat_digits_total
@@ -329,16 +329,16 @@ func do_upgrade_feedback(type: UpgradeType):
 	var in_time := 0.5 / upgrade_anim_speed
 	var pop_time := 0.2 / upgrade_anim_speed
 	var out_time := 0.5 / upgrade_anim_speed
-	var win_time := 0.8
+	var placeholder_time := 0.8
 
-	if type == UpgradeType.WIN:
+	if type == UpgradeType.PLACEHOLDER:
 		var tween = get_tree().create_tween()
 		while choosing:
 			tween.tween_property(
 				label_type,
 				"theme_override_font_sizes/normal_font_size",
 				30,
-				win_time
+				placeholder_time
 			).set_trans(Tween.TRANS_BACK)
 			await tween.finished
 			if choosing:
@@ -350,7 +350,7 @@ func do_upgrade_feedback(type: UpgradeType):
 					pop_time
 				)
 				await tween.finished
-				try_buy_upgrade(UpgradeType.WIN)
+				try_buy_upgrade(UpgradeType.PLACEHOLDER)
 			tween = get_tree().create_tween()
 			tween.tween_property(
 				label_type,
@@ -421,12 +421,12 @@ func get_label_from_upgrade(type: UpgradeType) -> RichTextLabel:
 			return output_label
 		UpgradeType.KNIGHT:
 			return knight_label
-		UpgradeType.WIN:
-			return win_label
+		UpgradeType.PLACEHOLDER:
+			return placeholder_label
 	return null
 
 func try_buy_upgrade(type: UpgradeType) -> void:
-	if type == UpgradeType.WIN:
+	if type == UpgradeType.PLACEHOLDER:
 		choosing = false
 		upgrading = false
 		await get_tree().process_frame
@@ -481,10 +481,10 @@ func _on_extra_knight_upgrade_mouse_entered() -> void:
 func _on_extra_knight_upgrade_mouse_exited() -> void:
 	on_upgrade_mouse_exited()
 
-func _on_win_button_mouse_entered() -> void:
-	on_upgrade_mouse_entered(UpgradeType.WIN)
+func _on_placeholder_button_mouse_entered() -> void:
+	on_upgrade_mouse_entered(UpgradeType.PLACEHOLDER)
 
-func _on_win_button_mouse_exited() -> void:
+func _on_placeholder_button_mouse_exited() -> void:
 	on_upgrade_mouse_exited()
 
 func _on_attack_button_down() -> void:
@@ -494,6 +494,7 @@ func _on_attack_button_down() -> void:
 
 func _on_attack_button_up() -> void:
 	pressing = false
+	current_button = null
 
 func _on_block_button_down() -> void:
 	pressing = true
@@ -502,6 +503,7 @@ func _on_block_button_down() -> void:
 
 func _on_block_button_up() -> void:
 	pressing = false
+	current_button = null
 
 func _on_forage_button_down() -> void:
 	pressing = true
@@ -569,13 +571,13 @@ func perform_action(action):
 	match action:
 		ActionType.ATTACK:
 			animation.play("attack")
-			gold += output
+			gold += max(output_floor, output)
 		ActionType.BLOCK:
 			animation.play("block")
-			wood += output
+			wood += max(output_floor, output)
 		ActionType.FORAGE:
 			animation.play("forage")
-			meat += output
+			meat += max(output_floor, output)
 		_:
 			animation.play("idle")
 
@@ -838,12 +840,12 @@ func close_qte_loop():
 func successful_qte():
 	if output_tween and output_tween.is_running():
 		output_tween.kill()
-	output += (output * (heat - 1.0)) * 0.8
+	output += (output_floor * (heat - 1.0)) * 0.8
 	output_tween = get_tree().create_tween()
 	output_tween.tween_property(
 		self,
 		"output",
-		OUTPUT_FLOOR,
+		output_floor,
 		10.0
 	).set_delay(1.5)\
 	.set_trans(Tween.TRANS_EXPO)\
