@@ -9,6 +9,8 @@ const STREAK_THRESHOLD := 1
 const MIN_OUTPUT_UPGRADE := 1.15
 const DIGIT_BASE_SIZE := 8
 const DIGIT_SCALE := 2
+const CURSOR_01 = preload("uid://bigflnfdn68dm")
+const CURSOR_02 = preload("uid://cxshok2ga3xac")
 
 const WOODEIGHT = preload("uid://bhkspl4ccxfw1")
 const WOODFIVE = preload("uid://d372enmkxh3uv")
@@ -173,7 +175,7 @@ var upgrade_digit_containers := {
 		ResourceType.MEAT: null,
 		ResourceType.GOLD: null,
 	},
-	UpgradeType.PLACEHOLDER: {
+	UpgradeType.TOUGHNESS: {
 		ResourceType.WOOD: null,
 		ResourceType.MEAT: null,
 		ResourceType.GOLD: null,
@@ -185,8 +187,8 @@ var buttons: Array
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var spd_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/RichTextLabel
 @onready var output_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/RichTextLabel
-@onready var knight_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/RichTextLabel
-@onready var placeholder_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/placeholderButton/RichTextLabel
+@onready var knight_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/RichTextLabel
+@onready var toughness_label: RichTextLabel = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/RichTextLabel
 @onready var knight_3: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/HBoxKnights/Knight3
 @onready var knight_2: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/HBoxKnights/Knight2
 @onready var knight: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/HBoxKnights/Knight
@@ -200,19 +202,19 @@ var buttons: Array
 @onready var wood_digits_knight: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer/WoodDigitsKnight
 @onready var meat_digits_knight: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer/MeatDigitsKnight
 @onready var gold_digits_knight: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer/GoldDigitsKnight
-@onready var wood_digits_placeholder: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/placeholderButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer/WoodDigitsplaceholder
-@onready var meat_digits_placeholder: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/placeholderButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer/MeatDigitsplaceholder
-@onready var gold_digits_placeholder: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/placeholderButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer/GoldDigitsplaceholder
+@onready var gold_digits_toughness: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer/GoldDigitsTOughness
+@onready var meat_digits_toughness: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer/MeatDigitsToughness
+@onready var wood_digits_toughness: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer/WoodDigitsToughness
 @onready var wood_digits_total: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginValue/HValueBox/WoodIcon/WoodDigits
 @onready var meat_digits_total: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginValue/HValueBox/MeatIcon/MeatDigits
 @onready var gold_digits_total: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginValue/HValueBox/GoldIcon/GoldDigits
-@onready var block: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/HBoxContainer2/block
-@onready var forage: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/HBoxContainer2/forage
-@onready var attack: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/HBoxContainer2/attack
+@onready var block: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block
+@onready var forage: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/ForagePanel/forage
+@onready var attack: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/AttackPanel/attack
 
-var gold: int = 11110
-var meat: int = 11110
-var wood: int = 11111110
+var gold: int = 0
+var meat: int = 0
+var wood: int = 0
 
 var output_floor: float = 1.0
 var output: float = 1.0
@@ -231,6 +233,7 @@ var pressing = false
 var performing = false
 var choosing = false
 var upgrading = false
+var hovering = false
 
 var current_upgrade : UpgradeType
 var current_action: ActionType
@@ -261,9 +264,9 @@ func _ready() -> void:
 	upgrade_digit_containers[UpgradeType.KNIGHT][ResourceType.MEAT] = meat_digits_knight
 	upgrade_digit_containers[UpgradeType.KNIGHT][ResourceType.GOLD] = gold_digits_knight
 
-	upgrade_digit_containers[UpgradeType.PLACEHOLDER][ResourceType.WOOD] = wood_digits_placeholder
-	upgrade_digit_containers[UpgradeType.PLACEHOLDER][ResourceType.MEAT] = meat_digits_placeholder
-	upgrade_digit_containers[UpgradeType.PLACEHOLDER][ResourceType.GOLD] = gold_digits_placeholder
+	upgrade_digit_containers[UpgradeType.TOUGHNESS][ResourceType.WOOD] = wood_digits_toughness
+	upgrade_digit_containers[UpgradeType.TOUGHNESS][ResourceType.MEAT] = meat_digits_toughness
+	upgrade_digit_containers[UpgradeType.TOUGHNESS][ResourceType.GOLD] = gold_digits_toughness
 
 	upgrade_digit_containers[UpgradeType.TOTAL][ResourceType.WOOD] = wood_digits_total
 	upgrade_digit_containers[UpgradeType.TOTAL][ResourceType.MEAT] = meat_digits_total
@@ -274,7 +277,7 @@ func _ready() -> void:
 	start_qte_loop()
 
 func _process(_delta):
-	print(output)
+	pass
 
 func update_knight_visuals(): #UPDATE THIS
 	knight.visible = total_knights >= 1
@@ -282,6 +285,7 @@ func update_knight_visuals(): #UPDATE THIS
 	knight_3.visible = total_knights >= 3
 
 func update_output_from_knights():
+	print('[UPDATE_OUTPUT_FROM_KNIGHTS]')
 	output *= total_knights
 
 func knights_per_purchase():
@@ -331,7 +335,7 @@ func do_upgrade_feedback(type: UpgradeType):
 	var out_time := 0.5 / upgrade_anim_speed
 	var placeholder_time := 0.8
 
-	if type == UpgradeType.PLACEHOLDER:
+	if type == UpgradeType.TOUGHNESS:
 		var tween = get_tree().create_tween()
 		while choosing:
 			tween.tween_property(
@@ -350,7 +354,7 @@ func do_upgrade_feedback(type: UpgradeType):
 					pop_time
 				)
 				await tween.finished
-				try_buy_upgrade(UpgradeType.PLACEHOLDER)
+				try_buy_upgrade(UpgradeType.TOUGHNESS)
 			tween = get_tree().create_tween()
 			tween.tween_property(
 				label_type,
@@ -421,12 +425,12 @@ func get_label_from_upgrade(type: UpgradeType) -> RichTextLabel:
 			return output_label
 		UpgradeType.KNIGHT:
 			return knight_label
-		UpgradeType.PLACEHOLDER:
-			return placeholder_label
+		UpgradeType.TOUGHNESS:
+			return toughness_label
 	return null
 
 func try_buy_upgrade(type: UpgradeType) -> void:
-	if type == UpgradeType.PLACEHOLDER:
+	if type == UpgradeType.TOUGHNESS:
 		choosing = false
 		upgrading = false
 		await get_tree().process_frame
@@ -482,7 +486,7 @@ func _on_extra_knight_upgrade_mouse_exited() -> void:
 	on_upgrade_mouse_exited()
 
 func _on_placeholder_button_mouse_entered() -> void:
-	on_upgrade_mouse_entered(UpgradeType.PLACEHOLDER)
+	on_upgrade_mouse_entered(UpgradeType.TOUGHNESS)
 
 func _on_placeholder_button_mouse_exited() -> void:
 	on_upgrade_mouse_exited()
@@ -713,8 +717,8 @@ func tween_chosen_action(action):
 	
 	tween.tween_property(
 		action,
-		"theme_override_constants/outline_size",
-		20,
+		"modulate",
+		Color(1.07, 1.222, 0.0, 1.0),
 		qte_check,
 	)
 	
@@ -727,8 +731,8 @@ func play_qte(chosen_button):
 
 	tween.tween_property(
 		chosen_button,
-		"theme_override_constants/outline_size",
-		48,
+		"modulate",
+		Color(1.0, 1.0, 1.0),
 		qte_check,
 	)
 
@@ -738,7 +742,7 @@ func play_qte(chosen_button):
 				tween.tween_property(
 					chosen_button,
 					"modulate",
-					Color(0.0, 0.937, 0.0, 1.0),
+					Color(0.0, 1.544, 0.0, 1.0),
 					qte_check
 				)
 				print('attack qte succeded!')
@@ -746,21 +750,21 @@ func play_qte(chosen_button):
 				tween.chain().tween_property(
 					chosen_button,
 					"modulate",
-					Color(0.875, 0.875, 0.875),
+					Color(1.0, 1.0, 1.0),
 					qte_check*2
 				)
 			else:
 				tween.tween_property(
 					chosen_button,
 					"modulate",
-					Color(0.941, 0.063, 0.0, 1.0),
+					Color(1.551, 0.135, 0.0, 1.0),
 					qte_check
 				)
 				print('attack qte failed...')
 				tween.chain().tween_property(
 					chosen_button,
 					"modulate",
-					Color(0.875, 0.875, 0.875),
+					Color(1.0, 1.0, 1.0),
 					qte_check*2
 				)
 		block:
@@ -768,7 +772,7 @@ func play_qte(chosen_button):
 				tween.tween_property(
 					chosen_button,
 					"modulate",
-					Color(0.0, 0.937, 0.141, 1.0),
+					Color(0.0, 1.544, 0.261, 1.0),
 					qte_check
 				)
 				print('block qte succeded!')
@@ -776,21 +780,21 @@ func play_qte(chosen_button):
 				tween.chain().tween_property(
 					chosen_button,
 					"modulate",
-					Color(0.875, 0.875, 0.875),
+					Color(1.0, 1.0, 1.0),
 					qte_check*2
 				)
 			else:
 				tween.tween_property(
 					chosen_button,
 					"modulate",
-					Color(0.941, 0.063, 0.0, 1.0),
+					Color(1.551, 0.135, 0.0, 1.0),
 					qte_check
 				)
 				print('block qte failed...')
 				tween.chain().tween_property(
 					chosen_button,
 					"modulate",
-					Color(0.875, 0.875, 0.875),
+					Color(1.0, 1.0, 1.0),
 					qte_check*2
 				)
 		forage:
@@ -798,7 +802,7 @@ func play_qte(chosen_button):
 				tween.tween_property(
 					chosen_button,
 					"modulate",
-					Color(0.0, 0.937, 0.0, 1.0),
+					Color(0.0, 1.544, 0.0, 1.0),
 					qte_check
 				)
 				print('forage qte succeded!')
@@ -806,29 +810,23 @@ func play_qte(chosen_button):
 				tween.chain().tween_property(
 					chosen_button,
 					"modulate",
-					Color(0.875, 0.875, 0.875),
+					Color(1.0, 1.0, 1.0),
 					qte_check*2
 				)
 			else:
 				tween.tween_property(
 					chosen_button,
 					"modulate",
-					Color(0.941, 0.063, 0.0, 1.0),
+					Color(1.551, 0.135, 0.0, 1.0),
 					qte_check
 				)
 				print('forage qte failed...')
 				tween.chain().tween_property(
 					chosen_button,
 					"modulate",
-					Color(0.875, 0.875, 0.875),
+					Color(1.0, 1.0, 1.0),
 					qte_check*2
 				)
-	tween.parallel().tween_property(
-		chosen_button,
-		"theme_override_constants/outline_size",
-		0,
-		qte_check,
-	)
 	await tween.finished
 	tween.kill()
 	close_qte_loop()
@@ -850,3 +848,66 @@ func successful_qte():
 	).set_delay(1.5)\
 	.set_trans(Tween.TRANS_EXPO)\
 	.set_ease(Tween.EASE_IN_OUT)
+
+func declare_hovered(button):
+	var tween = get_tree().create_tween()
+	if hovering:
+		tween.tween_property(
+			button,
+			"size",
+			Vector2 (80, 110),
+			0.2
+		).set_trans(Tween.TRANS_EXPO)
+		tween.parallel().tween_property(
+			button,
+			"position",
+			Vector2 (-10, -5),
+			0.2
+		).set_trans(Tween.TRANS_EXPO)
+		await tween.finished
+	else:
+		tween.kill()
+		await get_tree().create_timer(0.2).timeout
+		tween = get_tree().create_tween()
+		tween.tween_property(
+			button,
+			"size",
+			Vector2 (60, 100),
+			0.2
+		).set_trans(Tween.TRANS_EXPO)
+		tween.parallel().tween_property(
+			button,
+			"position",
+			Vector2 (0, 0),
+			0.2
+		).set_trans(Tween.TRANS_EXPO)
+
+func _on_attack_mouse_entered() -> void:
+	hovering = true
+	Input.set_custom_mouse_cursor(CURSOR_02, Input.CURSOR_ARROW, Vector2 (25, 18))
+	declare_hovered(attack)
+
+func _on_attack_mouse_exited() -> void:
+	hovering = false
+	Input.set_custom_mouse_cursor(CURSOR_01, Input.CURSOR_ARROW, Vector2 (25, 18))
+	declare_hovered(attack)
+
+func _on_forage_mouse_entered() -> void:
+	hovering = true
+	Input.set_custom_mouse_cursor(CURSOR_02, Input.CURSOR_ARROW, Vector2 (25, 18))
+	declare_hovered(forage)
+
+func _on_forage_mouse_exited() -> void:
+	hovering = false
+	Input.set_custom_mouse_cursor(CURSOR_01, Input.CURSOR_ARROW, Vector2 (25, 18))
+	declare_hovered(forage)
+
+func _on_block_mouse_entered() -> void:
+	hovering = true
+	Input.set_custom_mouse_cursor(CURSOR_02, Input.CURSOR_ARROW, Vector2 (25, 18))
+	declare_hovered(block)
+
+func _on_block_mouse_exited() -> void:
+	hovering = false
+	Input.set_custom_mouse_cursor(CURSOR_01, Input.CURSOR_ARROW, Vector2 (25, 18))
+	declare_hovered(block)
