@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://cbslel71cfdb3"]
+[gd_scene load_steps=67 format=3 uid="uid://cbslel71cfdb3"]
 
 [ext_resource type="Script" uid="uid://nrfi2y2wrie" path="res://Scripts/main.gd" id="1_0ld40"]
 [ext_resource type="Texture2D" uid="uid://cscjq4g3wgjmk" path="res://TinySword/UI Elements/UI Elements/Icons/smallwood.png" id="2_11yus"]
@@ -77,6 +77,9 @@ expand_margin_bottom = 5.0
 bg_color = Color(0.46098474, 0.46098474, 0.46098474, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1v6qk"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0loja"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_yc10j"]
@@ -423,7 +426,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ids8r")
 
 [node name="attack" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/AttackPanel"]
-custom_minimum_size = Vector2(60, 100)
+custom_minimum_size = Vector2(110, 110)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
@@ -431,7 +434,7 @@ theme_override_font_sizes/font_size = 16
 icon_alignment = 1
 expand_icon = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/AttackPanel/attack"]
+[node name="Attack9PRect" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/AttackPanel/attack"]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -447,7 +450,7 @@ patch_margin_top = 52
 patch_margin_right = 36
 patch_margin_bottom = 52
 
-[node name="attacklabel" type="Label" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/AttackPanel/attack/NinePatchRect"]
+[node name="attacklabel" type="Label" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/AttackPanel/attack/Attack9PRect"]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -473,7 +476,7 @@ size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_dnhof")
 
 [node name="forage" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/ForagePanel"]
-custom_minimum_size = Vector2(60, 100)
+custom_minimum_size = Vector2(110, 110)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -482,7 +485,7 @@ theme_override_colors/font_outline_color = Color(1, 1, 0, 0.21568628)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 16
 
-[node name="NinePatchRect" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/ForagePanel/forage"]
+[node name="Forage9PRect" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/ForagePanel/forage"]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -498,7 +501,7 @@ patch_margin_top = 52
 patch_margin_right = 36
 patch_margin_bottom = 52
 
-[node name="foragelabel" type="Label" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/ForagePanel/forage/NinePatchRect"]
+[node name="foragelabel" type="Label" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/ForagePanel/forage/Forage9PRect"]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -524,7 +527,7 @@ size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_1v6qk")
 
 [node name="block" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel"]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(110, 110)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -533,7 +536,7 @@ theme_override_colors/font_outline_color = Color(1, 1, 0, 0.21568628)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 16
 
-[node name="NinePatchRect" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block"]
+[node name="Block9PRect" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block"]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -548,7 +551,7 @@ patch_margin_top = 52
 patch_margin_right = 36
 patch_margin_bottom = 52
 
-[node name="blocklabel" type="Label" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block/NinePatchRect"]
+[node name="blocklabel" type="Label" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block/Block9PRect"]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -578,7 +581,6 @@ uppercase = true
 
 [node name="VisualSpace" type="PanelContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer"]
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_styles/panel = ExtResource("2_b6ruc")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace"]
@@ -638,14 +640,14 @@ size_flags_vertical = 8
 [node name="MarginKnight" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 40
+theme_override_constants/margin_top = 160
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="HBoxKnights" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = -490
+theme_override_constants/separation = -370
 
 [node name="Knight3" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/HBoxKnights"]
 show_behind_parent = true
@@ -678,6 +680,7 @@ texture = ExtResource("31_j4bwh")
 expand_mode = 2
 
 [node name="UpgradeSpace" type="PanelContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer"]
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("2_b6ruc")
@@ -693,520 +696,615 @@ patch_margin_bottom = 15
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace"]
 layout_mode = 2
-theme_override_constants/margin_left = 20
+theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
+theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxupgrade" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer"]
+[node name="UpgradePanel" type="PanelContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0loja")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel"]
+layout_mode = 2
+texture = ExtResource("4_0loja")
+region_rect = Rect2(11.864949, 10.881134, 168.08778, 170.15854)
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="UpgradeMargin" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="HBoxupgrade" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="UpgradeLabel" type="Label" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade"]
+[node name="UpgradeLabel" type="Label" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade"]
 layout_mode = 2
 text = "Upgrades"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="SpeedUpgradeButton" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade"]
+[node name="SpeedUpgradeButton" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 16
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton"]
+[node name="Speed9PRect" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_0loja")
+region_rect = Rect2(19.0475, 17.013971, 89.983215, 93.88389)
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 92.0
 grow_horizontal = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton/CenterContainer"]
 layout_mode = 2
 theme_override_constants/separation = -50
 
-[node name="GoldContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer"]
+[node name="GoldContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/GoldContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/GoldContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Gold" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
+[node name="Gold" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("4_b6ruc")
 stretch_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 use_top_left = true
 
-[node name="GoldDigitsSpeed" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer"]
+[node name="GoldDigitsSpeed" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="MeatContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer"]
+[node name="MeatContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/MeatContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/MeatContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Meat" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
+[node name="Meat" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("3_11yus")
 stretch_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 use_top_left = true
 
-[node name="MeatDigitsSpeed" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer"]
+[node name="MeatDigitsSpeed" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="WoodContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer"]
+[node name="WoodContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/WoodContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/WoodContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Wood" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
+[node name="Wood" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("2_11yus")
 stretch_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 use_top_left = true
 
-[node name="WoodDigitsSpeed" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer"]
+[node name="WoodDigitsSpeed" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton"]
-z_index = 1
+[node name="SpdLabel" type="Label" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -8.5
+offset_right = 18.0
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.39215687)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 12
+text = "Speed"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="OutputUpgradeButton" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Output9PRect" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.979693, 0.97969264, 1.540184e-05, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/normal_font_size = 12
-bbcode_enabled = true
-text = "Spd"
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1
+texture = ExtResource("5_0loja")
+region_rect = Rect2(19.0475, 17.013971, 89.983215, 93.88389)
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
 
-[node name="OutputUpgradeButton" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton/CenterContainer"]
 layout_mode = 2
 theme_override_constants/separation = -50
 
-[node name="GoldContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer"]
+[node name="GoldContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/GoldContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/GoldContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Gold" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
+[node name="Gold" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("4_b6ruc")
 stretch_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 use_top_left = true
 
-[node name="GoldDigitsOutput" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer"]
+[node name="GoldDigitsOutput" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="MeatContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer"]
+[node name="MeatContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/MeatContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/MeatContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Meat" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
+[node name="Meat" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("3_11yus")
 stretch_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 use_top_left = true
 
-[node name="MeatDigitsOutput" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer"]
+[node name="MeatDigitsOutput" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="WoodContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer"]
+[node name="WoodContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/WoodContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/WoodContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Wood" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
+[node name="Wood" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("2_11yus")
 stretch_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 use_top_left = true
 
-[node name="WoodDigitsOutput" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer"]
+[node name="WoodDigitsOutput" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton"]
-z_index = 1
+[node name="OutputLabel" type="Label" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton"]
+texture_filter = 1
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -8.5
+offset_right = 21.0
+offset_bottom = 8.5
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-theme_override_colors/font_outline_color = Color(0.9372549, 0.9372549, 0, 1)
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.39215687)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 0
-theme_override_font_sizes/normal_font_size = 12
-bbcode_enabled = true
-text = "Output"
-fit_content = true
-autowrap_mode = 0
+theme_override_font_sizes/font_size = 12
+text = "OutPut"
 horizontal_alignment = 1
-vertical_alignment = 1
+vertical_alignment = 2
 
-[node name="ExtraKnightUpgrade" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade"]
+[node name="ExtraKnightUpgrade" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade"]
-z_index = 1
+[node name="EKnight9PRect" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-theme_override_colors/font_outline_color = Color(0.9388745, 0.9388743, 1.540184e-06, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/normal_font_size = 12
-bbcode_enabled = true
-text = "Knights"
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1
+texture = ExtResource("5_0loja")
+region_rect = Rect2(19.0475, 17.013971, 89.983215, 93.88389)
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 92.0
 grow_horizontal = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade/CenterContainer"]
 layout_mode = 2
 theme_override_constants/separation = -50
 
-[node name="GoldContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer"]
+[node name="GoldContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/GoldContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/GoldContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/GoldContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/GoldContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Gold" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
+[node name="Gold" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("4_b6ruc")
 stretch_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 use_top_left = true
 
-[node name="GoldDigitsKnight" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer"]
+[node name="GoldDigitsKnight" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="MeatContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer"]
+[node name="MeatContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/MeatContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/MeatContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/MeatContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/MeatContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Meat" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
+[node name="Meat" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("3_11yus")
 stretch_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 use_top_left = true
 
-[node name="MeatDigitsKnight" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer"]
+[node name="MeatDigitsKnight" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="WoodContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer"]
+[node name="WoodContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/WoodContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/WoodContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/WoodContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/WoodContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Wood" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
+[node name="Wood" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("2_11yus")
 stretch_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 use_top_left = true
 
-[node name="WoodDigitsKnight" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer"]
+[node name="WoodDigitsKnight" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="ToughnessButton" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade"]
+[node name="KnightLabel" type="Label" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -8.5
+offset_right = 19.0
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.39215687)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 12
+text = "Knight"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ToughnessButton" type="Button" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton"]
-z_index = 1
+[node name="Toughness9PRect" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-theme_override_colors/font_outline_color = Color(0.9372549, 0.9372549, 0, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/normal_font_size = 12
-bbcode_enabled = true
-text = "PLACEHOLDER (knights asap)"
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1
-justification_flags = 171
-custom_effects = [SubResource("RichTextEffect_yc10j")]
+texture = ExtResource("5_0loja")
+region_rect = Rect2(19.0475, 17.013971, 89.983215, 93.88389)
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton/CenterContainer"]
 layout_mode = 2
 theme_override_constants/separation = -50
 
-[node name="GoldContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer"]
+[node name="GoldContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/GoldContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/GoldContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Gold" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
+[node name="Gold" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("4_b6ruc")
 stretch_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 use_top_left = true
 
-[node name="GoldDigitsTOughness" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer"]
+[node name="GoldDigitsToughness" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="MeatContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer"]
+[node name="MeatContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/MeatContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/MeatContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Meat" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
+[node name="Meat" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("3_11yus")
 stretch_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 use_top_left = true
 
-[node name="MeatDigitsToughness" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer"]
+[node name="MeatDigitsToughness" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="WoodContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer"]
+[node name="WoodContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/WoodContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/WoodContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Wood" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
+[node name="Wood" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("2_11yus")
 stretch_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 use_top_left = true
 
-[node name="WoodDigitsToughness" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer"]
+[node name="WoodDigitsToughness" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+
+[node name="ToughnessLabel" type="Label" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.39215687)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 12
+text = "PlaceHolder"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ResourcesTab" type="MarginContainer" parent="TabContainer"]
 visible = false
@@ -1426,14 +1524,14 @@ text = "gOODdow win1!!!!1111im goin gto sleep goodbuye"
 [connection signal="button_up" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block" to="." method="_on_block_button_up"]
 [connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block" to="." method="_on_block_mouse_entered"]
 [connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block" to="." method="_on_block_mouse_exited"]
-[connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton" to="." method="_on_speed_upgrade_button_mouse_entered"]
-[connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/SpeedUpgradeButton" to="." method="_on_speed_upgrade_button_mouse_exited"]
-[connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton" to="." method="_on_output_upgrade_button_mouse_entered"]
-[connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/OutputUpgradeButton" to="." method="_on_output_upgrade_button_mouse_exited"]
-[connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade" to="." method="_on_extra_knight_upgrade_mouse_entered"]
-[connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ExtraKnightUpgrade" to="." method="_on_extra_knight_upgrade_mouse_exited"]
-[connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton" to="." method="_on_win_button_mouse_entered"]
-[connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/HBoxupgrade/ToughnessButton" to="." method="_on_win_button_mouse_exited"]
+[connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton" to="." method="_on_speed_upgrade_button_mouse_entered"]
+[connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpeedUpgradeButton" to="." method="_on_speed_upgrade_button_mouse_exited"]
+[connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton" to="." method="_on_output_upgrade_button_mouse_entered"]
+[connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutputUpgradeButton" to="." method="_on_output_upgrade_button_mouse_exited"]
+[connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade" to="." method="_on_extra_knight_upgrade_mouse_entered"]
+[connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ExtraKnightUpgrade" to="." method="_on_extra_knight_upgrade_mouse_exited"]
+[connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton" to="." method="_on_toughness_button_mouse_entered"]
+[connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessButton" to="." method="_on_toughness_button_mouse_exited"]
 [connection signal="pressed" from="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/CarryCapacityUpgrade" to="." method="_on_carry_capacity_upgrade_pressed"]
 [connection signal="pressed" from="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgrade" to="." method="_on_speed_upgrade_pressed"]
 [connection signal="pressed" from="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraPawn" to="." method="_on_extra_pawn_pressed"]
