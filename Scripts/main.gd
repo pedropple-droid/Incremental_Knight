@@ -862,6 +862,7 @@ func successful_qte():
 	).set_delay(1.5)\
 	.set_trans(Tween.TRANS_EXPO)\
 	.set_ease(Tween.EASE_IN_OUT)
+
 func declare_hovered_upgrade(button, ninepatch):
 	var tween = get_tree().create_tween()
 	if hovering:
@@ -869,16 +870,9 @@ func declare_hovered_upgrade(button, ninepatch):
 		tween.tween_property(
 			button,
 			"size",
-			Vector2 (115, 115),
+			Vector2 (524, 92),
 			0.2
 		).set_trans(Tween.TRANS_SINE)
-		tween.parallel().tween_property(
-			button,
-			"position",
-			Vector2 (-3, -3),
-			0.2
-		).set_trans(Tween.TRANS_SINE)
-		await tween.finished
 	else:
 		Input.set_custom_mouse_cursor(CURSOR_01, Input.CURSOR_ARROW, Vector2 (25, 18))
 		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_REGULAR)
@@ -888,13 +882,7 @@ func declare_hovered_upgrade(button, ninepatch):
 		tween.tween_property(
 			button,
 			"size",
-			Vector2 (110, 110),
-			0.1
-		).set_trans(Tween.TRANS_BACK)
-		tween.parallel().tween_property(
-			button,
-			"position",
-			Vector2 (0, 0),
+			Vector2 (500, 80),
 			0.1
 		).set_trans(Tween.TRANS_BACK)
 
