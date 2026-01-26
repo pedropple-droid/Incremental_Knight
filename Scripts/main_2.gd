@@ -159,7 +159,6 @@ func start_upgrade_loop():
 	upgrading = false
 
 func can_buy(type: UpgradeType) -> bool:
-	var up = upgrades[type]
 	if type == UpgradeType.KNIGHT_2 and total_knights >= max_knights_per_run:
 		return false
 	return true
@@ -171,9 +170,9 @@ func do_upgrade_feedback(type: UpgradeType):
 	var pop_time := 0.1 / upgrade_anim_speed
 	var out_time := 0.4 / upgrade_anim_speed
 	var win_time := 0.8
+	var tween = get_tree().create_tween()
 
 	if type == UpgradeType.WIN_2:
-		var tween = get_tree().create_tween()
 		while choosing:
 			tween.tween_property(
 				label_type,
@@ -205,7 +204,7 @@ func do_upgrade_feedback(type: UpgradeType):
 		try_buy_upgrade(type)
 		return
 
-	var tween := get_tree().create_tween()
+	tween = get_tree().create_tween()
 	tween.tween_property(
 		label_type,
 		"theme_override_font_sizes/normal_font_size",
