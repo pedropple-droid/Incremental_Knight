@@ -9,14 +9,13 @@ const STREAK_THRESHOLD := 1
 const MIN_OUTPUT_UPGRADE := 1.15
 const DIGIT_BASE_SIZE := 8
 const DIGIT_SCALE := 2
+
 const CURSOR_01 = preload("uid://bigflnfdn68dm")
 const CURSOR_02 = preload("uid://cxshok2ga3xac")
 const CURSOR_03 = preload("uid://7jg0px7vfs51")
 const CURSOR_04 = preload("uid://m2j7b6we60s3")
 const SMALL_RED_SQUARE_BUTTON_REGULAR = preload("uid://cwxlgqhhovp82")
 const SMALL_RED_SQUARE_BUTTON_PRESSED = preload("uid://bd3ec46nfqfdd")
-
-
 const WOODEIGHT = preload("uid://bhkspl4ccxfw1")
 const WOODFIVE = preload("uid://d372enmkxh3uv")
 const WOODFOUR = preload("uid://bs518fa5fw1dq")
@@ -56,9 +55,9 @@ enum ResourceType {
 
 var upgrades := {
 	UpgradeType.OUTPUT: {
-		"wood_cost": 15,
-		"meat_cost": 25,
-		"gold_cost": 40,
+		"wood_cost": 75,
+		"meat_cost": 125,
+		"gold_cost": 200,
 		"cost_mult": 2.0,
 		"apply": func():
 			@warning_ignore("narrowing_conversion")
@@ -78,17 +77,18 @@ var upgrades := {
 			animation.speed_scale *= 1.1,
 	},
 	UpgradeType.TOUGHNESS: {
-		"wood_cost": 150,
-		"meat_cost": 300,
-		"gold_cost": 450,
+		"wood_cost": 15,
+		"meat_cost": 30,
+		"gold_cost": 45,
 		"cost_mult": 3.0,
 		"apply": func():
-			pass,
+			toughness_level += 1
+			timer_speed_multiplier *= 0.9,
 	},
 	UpgradeType.KNIGHT: {
-		"wood_cost": 40000,
-		"meat_cost": 55000,
-		"gold_cost": 85000,
+		"wood_cost": 4000,
+		"meat_cost": 5500,
+		"gold_cost": 8500,
 		"cost_mult": 3.0,
 		"apply": func():
 			var amount = knights_per_purchase()
@@ -187,6 +187,20 @@ var upgrade_digit_containers := {
 	},
 }
 
+var upgrade_patches := {
+	UpgradeType.SPEED: speed_9p_rect,
+	UpgradeType.OUTPUT: output_9p_rect,
+	UpgradeType.KNIGHT: e_knight_9p_rect,
+	UpgradeType.TOUGHNESS: toughness_9p_rect,
+}
+
+var upgrade_buttons := {
+	UpgradeType.SPEED: speed_btt,
+	UpgradeType.OUTPUT: output_btt,
+	UpgradeType.KNIGHT: knight_btt,
+	UpgradeType.TOUGHNESS: toughness_btt,
+}
+
 var buttons: Array
 
 @onready var animation: AnimationPlayer = $AnimationPlayer
@@ -227,16 +241,21 @@ var buttons: Array
 @onready var output_9p_rect: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton/Output9PRect
 @onready var e_knight_9p_rect: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel/ExtraKnightUpgrade/EKnight9PRect
 @onready var toughness_9p_rect: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessPanel/ToughnessButton/Toughness9PRect
+@onready var timer_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginTimer/TimerLabel
+@onready var countdown_timer: Timer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginTimer/Timer
 
 var gold: int = 0
 var meat: int = 0
 var wood: int = 0
 
-var output_floor: float = 1.0
-var output: float = 1.0
+var time_left := 120.0
+var output_floor := 1.0
+var output := 1.0
 var output_tween: Tween
 var output_multiplier := 2.0
-var knight_set_level: int = 0
+var knight_set_level := 0
+var toughness_level := 0
+var timer_speed_multiplier: float = 1.0
 var max_knights_per_run: int = 3
 var total_knights: int = 1
 
@@ -257,9 +276,9 @@ var current_upgrade : UpgradeType
 var current_action: ActionType
 var current_button: Button
 
-var heat := 1.8
-
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
+var heat := 1.8
 
 var at_pawn := false
 
@@ -290,17 +309,66 @@ func _ready() -> void:
 	upgrade_digit_containers[UpgradeType.TOTAL][ResourceType.MEAT] = meat_digits_total
 	upgrade_digit_containers[UpgradeType.TOTAL][ResourceType.GOLD] = gold_digits_total
 
+	upgrade_patches[UpgradeType.SPEED] = speed_9p_rect
+	upgrade_patches[UpgradeType.OUTPUT] = output_9p_rect
+	upgrade_patches[UpgradeType.KNIGHT] = e_knight_9p_rect
+	upgrade_patches[UpgradeType.TOUGHNESS] = toughness_9p_rect
+	upgrade_buttons[UpgradeType.SPEED] = speed_btt
+	upgrade_buttons[UpgradeType.OUTPUT] = output_btt
+	upgrade_buttons[UpgradeType.KNIGHT] = knight_btt
+	upgrade_buttons[UpgradeType.TOUGHNESS] = toughness_btt
+
 	update_all_upgrade_costs()
 	update_floating_totals()
 	start_qte_loop()
+	setup_timer()
 
-func _process(_delta):
-	pass
+func _process(delta):
+	for type in upgrade_patches.keys():
+		update_upgrade_patch(type)
+	time_left = max(time_left - delta, 0)
+	timer_label.text = format_time(time_left)
 
-func update_knight_visuals(): #UPDATE THIS
+func setup_timer():
+	countdown_timer.wait_time = 1.0
+	countdown_timer.start()
+
+func _on_countdown_timer_timeout():
+	time_left -= 1.0 * timer_speed_multiplier
+	timer_label.text = format_time(time_left)
+
+	if time_left <= 0:
+		countdown_timer.stop()
+		timer_label.text = "00:00"
+
+func format_time(seconds: float) -> String:
+	var s := int(seconds)
+	var mins := s / 60
+	var secs := s % 60
+	return "%02d:%02d" % [mins, secs]
+
+
+func update_knight_visuals(): 
 	knight.visible = total_knights >= 1
 	knight_2.visible = total_knights >= 2
 	knight_3.visible = total_knights >= 3
+
+func update_all_upgrade_patches() -> void:
+	for type in upgrade_patches.keys():
+		update_upgrade_patch(type)
+
+func update_upgrade_patch(type: UpgradeType) -> void:
+	var patch: NinePatchRect = upgrade_patches[type]
+	var button: Button = upgrade_buttons[type]
+
+	if can_buy(type):
+		patch.texture = SMALL_RED_SQUARE_BUTTON_REGULAR
+		patch.position = Vector2(0, 0)
+		button.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_INHERITED 
+	else:
+		patch.texture = SMALL_RED_SQUARE_BUTTON_PRESSED
+		patch.position = Vector2(0, -10)
+		button.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
 
 func update_output_from_knights():
 	output *= total_knights
@@ -324,7 +392,6 @@ func on_upgrade_mouse_exited():
 	if not choosing:
 		Input.set_custom_mouse_cursor(CURSOR_01, Input.CURSOR_ARROW, Vector2 (25, 18))
 
-
 func start_upgrade_loop():
 	while choosing:
 		if can_buy(current_upgrade):
@@ -336,15 +403,16 @@ func start_upgrade_loop():
 
 func can_buy(type: UpgradeType) -> bool:
 	var up = upgrades[type]
-	if wood < up.wood_cost:
+	if wood < up["wood_cost"]:
 		return false
-	if meat < up.meat_cost:
+	if meat < up["meat_cost"]:
 		return false
-	if gold < up.gold_cost:
+	if gold < up["gold_cost"]:
 		return false
 	if type == UpgradeType.KNIGHT and total_knights >= max_knights_per_run:
 		return false
 	return true
+
 
 func do_upgrade_feedback(type: UpgradeType):
 	var label_type := get_label_from_upgrade(type)
@@ -451,6 +519,7 @@ func try_buy_upgrade(type: UpgradeType) -> void:
 func _on_speed_upgrade_button_mouse_entered():
 	hovering = true
 	on_upgrade_mouse_entered(UpgradeType.SPEED)
+	
 	declare_hovered_upgrade(speed_btt, speed_9p_rect)
 
 func _on_speed_upgrade_button_mouse_exited():
@@ -917,6 +986,8 @@ func _on_block_mouse_entered() -> void:
 func _on_block_mouse_exited() -> void:
 	hovering = false
 	declare_hovered_action(block, block_9p_rect)
+
+
 
 func _on_bigger_storage_pressed() -> void:
 	animation.play("pawn_to_gold")
