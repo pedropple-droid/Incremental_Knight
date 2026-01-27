@@ -642,45 +642,41 @@ size_flags_vertical = 8
 
 [node name="MarginKnight" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace"]
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 160
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
 
 [node name="HBoxKnights" type="HBoxContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = -370
+theme_override_constants/separation = 0
 
 [node name="Knight3" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/HBoxKnights"]
 show_behind_parent = true
 light_mask = 0
 texture_filter = 1
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_behavior_recursive = 1
 texture = ExtResource("31_j4bwh")
-expand_mode = 2
+stretch_mode = 2
 
 [node name="Knight2" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/HBoxKnights"]
 show_behind_parent = true
 light_mask = 0
 texture_filter = 1
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_behavior_recursive = 1
 texture = ExtResource("31_j4bwh")
-expand_mode = 2
+stretch_mode = 2
 
 [node name="Knight" type="TextureRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/HBoxKnights"]
 show_behind_parent = true
 light_mask = 0
 texture_filter = 1
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_behavior_recursive = 1
 texture = ExtResource("31_j4bwh")
-expand_mode = 2
+stretch_mode = 2
 
 [node name="MarginTimer" type="MarginContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace"]
 texture_filter = 1

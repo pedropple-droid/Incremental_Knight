@@ -1,3 +1,8 @@
+# add a mouse hidden animation for action hold and upgrade success
+# man, fixx your knight, it looks weird
+# qte still kinda sucks, it's kinda just there in number and in visual
+# fixd some numbers, game might go much smoother now, but i do need to add difficulty increase
+
 extends Control
 
 const MAIN_2 = preload("uid://ey2i670agjff")
@@ -77,10 +82,10 @@ var upgrades := {
 			animation.speed_scale *= 1.1,
 	},
 	UpgradeType.TOUGHNESS: {
-		"wood_cost": 15,
+		"wood_cost": 20,
 		"meat_cost": 30,
-		"gold_cost": 45,
-		"cost_mult": 3.0,
+		"gold_cost": 40,
+		"cost_mult": 2.0,
 		"apply": func():
 			toughness_level += 1
 			timer_speed_multiplier *= 0.9,
@@ -89,7 +94,7 @@ var upgrades := {
 		"wood_cost": 4000,
 		"meat_cost": 5500,
 		"gold_cost": 8500,
-		"cost_mult": 3.0,
+		"cost_mult": 2.5,
 		"apply": func():
 			var amount = knights_per_purchase()
 			total_knights += amount
@@ -201,6 +206,13 @@ var upgrade_buttons := {
 	UpgradeType.TOUGHNESS: toughness_btt,
 }
 
+var upgrade_panels := {
+	UpgradeType.SPEED: spd_panel,
+	UpgradeType.OUTPUT: out_put_panel,
+	UpgradeType.KNIGHT: knight_panel,
+	UpgradeType.TOUGHNESS: toughness_panel,
+}
+
 var buttons: Array
 
 @onready var animation: AnimationPlayer = $AnimationPlayer
@@ -243,10 +255,15 @@ var buttons: Array
 @onready var toughness_9p_rect: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessPanel/ToughnessButton/Toughness9PRect
 @onready var timer_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginTimer/TimerLabel
 @onready var countdown_timer: Timer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginTimer/Timer
+@onready var upgrade_margin: MarginContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin
+@onready var spd_panel: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel
+@onready var toughness_panel: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessPanel
+@onready var out_put_panel: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel
+@onready var knight_panel: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel
 
-var gold: int = 0
-var meat: int = 0
-var wood: int = 0
+var gold: int = 100000
+var meat: int = 100000
+var wood: int = 100000
 
 var time_left := 120.0
 var output_floor := 1.0
@@ -326,11 +343,10 @@ func _ready() -> void:
 func _process(delta):
 	for type in upgrade_patches.keys():
 		update_upgrade_patch(type)
-	time_left = max(time_left - delta, 0)
+	time_left = max(time_left - delta * timer_speed_multiplier, 0)
 	timer_label.text = format_time(time_left)
 
 func setup_timer():
-	countdown_timer.wait_time = 1.0
 	countdown_timer.start()
 
 func _on_countdown_timer_timeout():
@@ -343,10 +359,10 @@ func _on_countdown_timer_timeout():
 
 func format_time(seconds: float) -> String:
 	var s := int(seconds)
+	@warning_ignore("integer_division")
 	var mins := s / 60
 	var secs := s % 60
 	return "%02d:%02d" % [mins, secs]
-
 
 func update_knight_visuals(): 
 	knight.visible = total_knights >= 1
@@ -381,7 +397,6 @@ func on_upgrade_mouse_entered(type: UpgradeType):
 		return
 	current_upgrade = type
 	choosing = true
-	upgrading = true
 	start_upgrade_loop()
 
 func on_upgrade_mouse_exited():
@@ -394,6 +409,7 @@ func on_upgrade_mouse_exited():
 
 func start_upgrade_loop():
 	while choosing:
+		upgrading = true
 		if can_buy(current_upgrade):
 			await do_upgrade_feedback(current_upgrade)
 			await get_tree().create_timer(current_upgrade_delay).timeout
@@ -413,15 +429,12 @@ func can_buy(type: UpgradeType) -> bool:
 		return false
 	return true
 
-
 func do_upgrade_feedback(type: UpgradeType):
 	var label_type := get_label_from_upgrade(type)
-
 	var in_time := 0.5 / upgrade_anim_speed
 	var pop_time := 0.2 / upgrade_anim_speed
 	var out_time := 0.5 / upgrade_anim_speed
 	var tween = get_tree().create_tween()
-
 
 	tween = get_tree().create_tween()
 	tween.tween_property(
@@ -511,7 +524,7 @@ func try_buy_upgrade(type: UpgradeType) -> void:
 	up.wood_cost = int(up.wood_cost * up.cost_mult)
 	up.meat_cost = int(up.meat_cost * up.cost_mult)
 	up.gold_cost = int(up.gold_cost * up.cost_mult)
-	Input.set_custom_mouse_cursor(CURSOR_04, Input.CURSOR_ARROW, Vector2 (15, 8))
+	Input.set_custom_mouse_cursor(CURSOR_04, Input.CURSOR_ARROW, Vector2 (0, 0))
 
 	update_upgrade_cost(type)
 	update_floating_totals()
@@ -519,43 +532,42 @@ func try_buy_upgrade(type: UpgradeType) -> void:
 func _on_speed_upgrade_button_mouse_entered():
 	hovering = true
 	on_upgrade_mouse_entered(UpgradeType.SPEED)
-	
-	declare_hovered_upgrade(speed_btt, speed_9p_rect)
+	declare_hovered_upgrade(speed_btt, speed_9p_rect, spd_panel)
 
 func _on_speed_upgrade_button_mouse_exited():
 	hovering = false
 	on_upgrade_mouse_exited()
-	declare_hovered_upgrade(speed_btt, speed_9p_rect)
+	declare_hovered_upgrade(speed_btt, speed_9p_rect, spd_panel)
 
 func _on_output_upgrade_button_mouse_entered():
 	hovering = true
 	on_upgrade_mouse_entered(UpgradeType.OUTPUT)
-	declare_hovered_upgrade(output_btt, output_9p_rect)
+	declare_hovered_upgrade(output_btt, output_9p_rect, out_put_panel)
 
 func _on_output_upgrade_button_mouse_exited():
 	hovering = false
 	on_upgrade_mouse_exited()
-	declare_hovered_upgrade(output_btt, output_9p_rect)
+	declare_hovered_upgrade(output_btt, output_9p_rect, out_put_panel)
 
 func _on_extra_knight_upgrade_mouse_entered() -> void:
 	hovering = true
 	on_upgrade_mouse_entered(UpgradeType.KNIGHT)
-	declare_hovered_upgrade(knight_btt, e_knight_9p_rect)
+	declare_hovered_upgrade(knight_btt, e_knight_9p_rect, knight_panel)
 
 func _on_extra_knight_upgrade_mouse_exited() -> void:
 	hovering = false
 	on_upgrade_mouse_exited()
-	declare_hovered_upgrade(knight_btt, e_knight_9p_rect)
+	declare_hovered_upgrade(knight_btt, e_knight_9p_rect, knight_panel)
 
 func _on_toughness_button_mouse_entered() -> void:
 	hovering = true
-	on_upgrade_mouse_entered(UpgradeType.KNIGHT)
-	declare_hovered_upgrade(toughness_btt, toughness_9p_rect)
+	on_upgrade_mouse_entered(UpgradeType.TOUGHNESS)
+	declare_hovered_upgrade(toughness_btt, toughness_9p_rect,toughness_panel)
 
 func _on_toughness_button_mouse_exited() -> void:
 	hovering = false
 	on_upgrade_mouse_exited()
-	declare_hovered_upgrade(toughness_btt, toughness_9p_rect)
+	declare_hovered_upgrade(toughness_btt, toughness_9p_rect, toughness_panel)
 
 func _on_attack_button_down() -> void:
 	pressing = true
@@ -893,19 +905,22 @@ func successful_qte():
 	.set_trans(Tween.TRANS_EXPO)\
 	.set_ease(Tween.EASE_IN_OUT)
 
-func declare_hovered_upgrade(button, ninepatch):
+func declare_hovered_upgrade(button, ninepatch, panel):
 	var tween = get_tree().create_tween()
+	var panel_size: Vector2 = panel.size
+	var vector_hover_in := Vector2(15, 15)
+	var vector_hover_out := Vector2(-5, -5)
 	if hovering:
 		tween.tween_property(
 			button,
 			"size",
-			Vector2 (500, 131),
+			Vector2 (panel_size + vector_hover_in),
 			0.2
 		).set_trans(Tween.TRANS_SINE)
 		tween.parallel().tween_property(
 			button,
 			"position",
-			Vector2 (-3, -3),
+			vector_hover_out,
 			0.2
 		).set_trans(Tween.TRANS_SINE)
 		await tween.finished
@@ -917,7 +932,7 @@ func declare_hovered_upgrade(button, ninepatch):
 		tween.tween_property(
 			button,
 			"size",
-			Vector2 (492, 111),
+			panel_size,
 			0.1
 		).set_trans(Tween.TRANS_BACK)
 		tween.parallel().tween_property(
@@ -927,20 +942,24 @@ func declare_hovered_upgrade(button, ninepatch):
 			0.1
 		).set_trans(Tween.TRANS_BACK)
 
+# this one has a differnte var aspect than the one above, fix hereby
 func declare_hovered_action(button, ninepatch):
 	var tween = get_tree().create_tween()
+	var vector_hover_in := Vector2(115, 115)
+	var vector_hover_out := Vector2(110, 110)
+	var vector_position_adjust := Vector2(-3, -3)
 	if hovering:
 		Input.set_custom_mouse_cursor(CURSOR_02, Input.CURSOR_ARROW, Vector2 (25, 18))
 		tween.tween_property(
 			button,
 			"size",
-			Vector2 (115, 115),
+			vector_hover_in,
 			0.2
 		).set_trans(Tween.TRANS_SINE)
 		tween.parallel().tween_property(
 			button,
 			"position",
-			Vector2 (-3, -3),
+			vector_position_adjust,
 			0.2
 		).set_trans(Tween.TRANS_SINE)
 		await tween.finished
@@ -953,7 +972,7 @@ func declare_hovered_action(button, ninepatch):
 		tween.tween_property(
 			button,
 			"size",
-			Vector2 (110, 110),
+			vector_hover_out,
 			0.1
 		).set_trans(Tween.TRANS_BACK)
 		tween.parallel().tween_property(
@@ -986,7 +1005,6 @@ func _on_block_mouse_entered() -> void:
 func _on_block_mouse_exited() -> void:
 	hovering = false
 	declare_hovered_action(block, block_9p_rect)
-
 
 
 func _on_bigger_storage_pressed() -> void:
