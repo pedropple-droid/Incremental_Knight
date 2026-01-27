@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bygtav74klkn8"
-path="res://.godot/imported/WarriorLooting3.png-54b7d130f0c7d2a1eb9f789606869462.ctex"
+uid="uid://dhhnv8oxr5orh"
+path="res://.godot/imported/WarriorAttack9.png-ee789c5dadd2b7a233eab94799d91d2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UnitsTextureRect/WarLootOversized/WarriorLooting3.png"
-dest_files=["res://.godot/imported/WarriorLooting3.png-54b7d130f0c7d2a1eb9f789606869462.ctex"]
+source_file="res://UnitsTextureRect/NativeSprites/Attack/WarriorAttack9.png"
+dest_files=["res://.godot/imported/WarriorAttack9.png-ee789c5dadd2b7a233eab94799d91d2c.ctex"]
 
 [params]
 

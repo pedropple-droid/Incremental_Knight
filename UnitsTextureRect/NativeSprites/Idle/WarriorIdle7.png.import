@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjcepopuxmy10"
-path="res://.godot/imported/WarriorLooting11.png-9e8ddbdf8ea372c28db4c1ff91db12e0.ctex"
+uid="uid://bm46om57pmjta"
+path="res://.godot/imported/WarriorIdle7.png-c960764948d0cf07d9dce3234af71c98.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UnitsTextureRect/WarLootOversized/WarriorLooting11.png"
-dest_files=["res://.godot/imported/WarriorLooting11.png-9e8ddbdf8ea372c28db4c1ff91db12e0.ctex"]
+source_file="res://UnitsTextureRect/NativeSprites/Idle/WarriorIdle7.png"
+dest_files=["res://.godot/imported/WarriorIdle7.png-c960764948d0cf07d9dce3234af71c98.ctex"]
 
 [params]
 

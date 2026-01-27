@@ -1,6 +1,8 @@
 # add a mouse hidden animation for action hold and upgrade success
-# man, fixx your knight, it looks weird
 # qte still kinda sucks, it's kinda just there in number and in visual
+# still about qte, i could add a differente color meter for when my knight is 
+# waiting to finish an action to perform another one, or, maybe, make different
+# animations for him to change between actions so qte would make more sense in a sense
 # fixd some numbers, game might go much smoother now, but i do need to add difficulty increase
 
 extends Control
@@ -12,8 +14,8 @@ const BASE_UPGRADE_DELAY := 1
 const MIN_UPGRADE_DELAY := 0.01
 const STREAK_THRESHOLD := 1
 const MIN_OUTPUT_UPGRADE := 1.15
-const DIGIT_BASE_SIZE := 8
-const DIGIT_SCALE := 2
+const DIGIT_BASE_SIZE := 6
+const DIGIT_SCALE := 0.5
 
 const CURSOR_01 = preload("uid://bigflnfdn68dm")
 const CURSOR_02 = preload("uid://cxshok2ga3xac")
@@ -220,9 +222,9 @@ var buttons: Array
 @onready var output_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton/OutputLabel
 @onready var knight_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel/ExtraKnightUpgrade/KnightLabel
 @onready var toughness_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessPanel/ToughnessButton/ToughnessLabel
-@onready var knight_3: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/HBoxKnights/Knight3
-@onready var knight_2: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/HBoxKnights/Knight2
-@onready var knight: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/HBoxKnights/Knight
+@onready var knight_3: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/KnightCentering/HBoxKnights/Knight3
+@onready var knight_2: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/KnightCentering/HBoxKnights/Knight2
+@onready var knight: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/KnightCentering/HBoxKnights/Knight
 @onready var pawn: Sprite2D = $TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn
 @onready var gold_digits_speed: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer/GoldDigitsSpeed
 @onready var meat_digits_speed: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer/MeatDigitsSpeed
@@ -280,6 +282,7 @@ var current_upgrade_delay := BASE_UPGRADE_DELAY
 var upgrade_streak := 0
 var upgrade_anim_speed := 1.5
 
+var last_action: ActionType = ActionType.IDLE
 var action_loop_running := false
 var pressing = false
 var performing = false
@@ -300,6 +303,7 @@ var heat := 1.8
 var at_pawn := false
 
 func _ready() -> void:
+	await get_tree().process_frame
 	buttons = [attack, block, forage]
 	animation.play("idle")
 	knight.visible = true
@@ -569,45 +573,6 @@ func _on_toughness_button_mouse_exited() -> void:
 	on_upgrade_mouse_exited()
 	declare_hovered_upgrade(toughness_btt, toughness_9p_rect, toughness_panel)
 
-func _on_attack_button_down() -> void:
-	pressing = true
-	current_action = ActionType.ATTACK
-	start_action_loop()
-	check_nine_patch(attack_9p_rect)
-
-func _on_attack_button_up() -> void:
-	pressing = false
-	current_button = null
-	check_nine_patch(attack_9p_rect)
-
-func _on_block_button_down() -> void:
-	pressing = true
-	current_action = ActionType.BLOCK
-	start_action_loop()
-	check_nine_patch(block_9p_rect)
-
-func _on_block_button_up() -> void:
-	pressing = false
-	current_button = null
-	check_nine_patch(block_9p_rect)
-
-func _on_forage_button_down() -> void:
-	pressing = true
-	current_action = ActionType.FORAGE
-	start_action_loop()
-	check_nine_patch(forage_9p_rect)
-
-func _on_forage_button_up() -> void:
-	pressing = false
-	current_button = null
-	check_nine_patch(forage_9p_rect)
-
-func check_nine_patch(ninepatch):
-	if pressing:
-		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_PRESSED)
-	else:
-		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_REGULAR)
-
 func start_action_loop():
 	match current_action:
 		ActionType.ATTACK:
@@ -666,25 +631,16 @@ func set_number_icons(
 	var digit_map = numbers[resource_type] # variável do mapa de números criados
 	for c in number_str: # confere de 0 a 9
 		var icon := TextureRect.new() # varíavel do ícone específico para o número específico
+		icon.scale = Vector2(20, 20)
 		if c == ".":
 			icon.texture = suffixes["."] # adiciona o ponto
 		else:
 			var digit = int(c)
 			icon.texture = digit_map[digit] # textura do ícone vira a específica da variável acima
-		icon.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED # seta o stretch mode
-		icon.custom_minimum_size = Vector2(
-			DIGIT_BASE_SIZE * DIGIT_SCALE,
-			DIGIT_BASE_SIZE * DIGIT_SCALE
-			) # seta o tamanho mínimo
 		container.add_child(icon) # this being, the icons will not be added beforehand, they will be called within my scene
 	if suffix != "":
 		var icon = TextureRect.new()
 		icon.texture = suffixes[suffix]
-		icon.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED # seta o stretch mode
-		icon.custom_minimum_size = Vector2(
-		DIGIT_BASE_SIZE * DIGIT_SCALE,
-		DIGIT_BASE_SIZE * DIGIT_SCALE
-		) # seta o tamanho mínimo
 		container.add_child(icon)
 
 func update_all_upgrade_costs() -> void:
@@ -765,7 +721,7 @@ func abbreviate_number(value: int) -> Dictionary:
 		}
 
 func start_qte_loop():
-	var random_interval = rng.randf_range(2.0, 6.0)
+	var random_interval = rng.randf_range(2.0, 4.0)
 	await get_tree().create_timer(random_interval).timeout
 	awarn_qte()
 
@@ -907,7 +863,7 @@ func successful_qte():
 
 func declare_hovered_upgrade(button, ninepatch, panel):
 	var tween = get_tree().create_tween()
-	var panel_size: Vector2 = panel.size
+	var panel_size: Vector2 = panel.get_size()
 	var vector_hover_in := Vector2(15, 15)
 	var vector_hover_out := Vector2(-5, -5)
 	if hovering:
@@ -943,7 +899,7 @@ func declare_hovered_upgrade(button, ninepatch, panel):
 		).set_trans(Tween.TRANS_BACK)
 
 # this one has a differnte var aspect than the one above, fix hereby
-func declare_hovered_action(button, ninepatch):
+func declare_hovered_action(button):
 	var tween = get_tree().create_tween()
 	var vector_hover_in := Vector2(115, 115)
 	var vector_hover_out := Vector2(110, 110)
@@ -965,7 +921,6 @@ func declare_hovered_action(button, ninepatch):
 		await tween.finished
 	else:
 		Input.set_custom_mouse_cursor(CURSOR_01, Input.CURSOR_ARROW, Vector2 (25, 18))
-		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_REGULAR)
 		tween.kill()
 		await get_tree().create_timer(0.1).timeout
 		tween = get_tree().create_tween()
@@ -984,28 +939,27 @@ func declare_hovered_action(button, ninepatch):
 
 func _on_attack_mouse_entered() -> void:
 	hovering = true
-	declare_hovered_action(attack, attack_9p_rect)
+	declare_hovered_action(attack)
 
 func _on_attack_mouse_exited() -> void:
 	hovering = false
-	declare_hovered_action(attack, attack_9p_rect)
+	declare_hovered_action(attack)
 
 func _on_forage_mouse_entered() -> void:
 	hovering = true
-	declare_hovered_action(forage, forage_9p_rect)
+	declare_hovered_action(forage)
 
 func _on_forage_mouse_exited() -> void:
 	hovering = false
-	declare_hovered_action(forage, forage_9p_rect)
+	declare_hovered_action(forage)
 
 func _on_block_mouse_entered() -> void:
 	hovering = true
-	declare_hovered_action(block, block_9p_rect)
+	declare_hovered_action(block)
 
 func _on_block_mouse_exited() -> void:
 	hovering = false
-	declare_hovered_action(block, block_9p_rect)
-
+	declare_hovered_action(block)
 
 func _on_bigger_storage_pressed() -> void:
 	animation.play("pawn_to_gold")
@@ -1035,3 +989,44 @@ func _on_tab_container_tab_changed(_tab: int) -> void:
 	else:
 		at_pawn = true
 		return
+
+func _on_attack_pressed() -> void:
+	switch_action(ActionType.ATTACK)
+
+func _on_forage_pressed() -> void:
+	switch_action(ActionType.FORAGE)
+
+func _on_block_pressed() -> void:
+	switch_action(ActionType.BLOCK)
+
+func switch_action(new_action: ActionType) -> void:
+	if current_action == new_action and pressing:
+		pressing = false
+		current_action = ActionType.IDLE
+		check_nine_patch_for_action(new_action)
+		return
+	if pressing:
+		pressing = false
+		check_nine_patch_for_action(current_action)
+	pressing = true
+	last_action = current_action
+	current_action = new_action
+	check_nine_patch_for_action(current_action)
+	start_action_loop()
+
+func check_nine_patch_for_action(action: ActionType) -> void:
+	match action:
+		ActionType.ATTACK:
+			check_nine_patch(attack_9p_rect)
+		ActionType.BLOCK:
+			check_nine_patch(block_9p_rect)
+		ActionType.FORAGE:
+			check_nine_patch(forage_9p_rect)
+
+func check_nine_patch(ninepatch):
+	if pressing:
+		print("[CHECK_NINE_PATCH] pressing")
+		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_PRESSED)
+	else:
+		print("[CHECK_NINE_PATCH] not pressing")
+		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_REGULAR)
