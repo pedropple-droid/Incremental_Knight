@@ -1,4 +1,5 @@
-# add a mouse hidden animation for action hold and upgrade success
+# your ai added a function where foragin pauses the timing, work with that
+# add a mouse hidden animation for upgrade success
 # qte still kinda sucks, it's kinda just there in number and in visual
 # still about qte, i could add a differente color meter for when my knight is 
 # waiting to finish an action to perform another one, or, maybe, make different
@@ -58,6 +59,13 @@ enum ResourceType {
 	WOOD,
 	MEAT,
 	GOLD,
+}
+
+enum CursorState {
+	NORMAL,
+	HOVER_ACTION,
+	STICKY_ACTION,
+	FREE_HOVER,
 }
 
 var upgrades := {
@@ -215,8 +223,6 @@ var upgrade_panels := {
 	UpgradeType.TOUGHNESS: toughness_panel,
 }
 
-var buttons: Array
-
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var spd_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton/SpdLabel
 @onready var output_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton/OutputLabel
@@ -262,7 +268,9 @@ var buttons: Array
 @onready var toughness_panel: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessPanel
 @onready var out_put_panel: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel
 @onready var knight_panel: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel
+@onready var fake_cursor: TextureRect = $FakeCursor
 
+var buttons: Array
 var gold: int = 100000
 var meat: int = 100000
 var wood: int = 100000
@@ -301,6 +309,11 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var heat := 1.8
 
 var at_pawn := false
+
+var cursor_state := CursorState.NORMAL
+var sticky_button: Button = null
+var sticky_offset := Vector2(-6, 0)
+var normal_offset := Vector2(-60, -60)
 
 func _ready() -> void:
 	await get_tree().process_frame
@@ -345,6 +358,28 @@ func _ready() -> void:
 	setup_timer()
 
 func _process(delta):
+	match cursor_state:
+		CursorState.NORMAL:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			fake_cursor.visible = false
+		CursorState.HOVER_ACTION:
+			if pressing:
+				return
+			fake_cursor.visible = true
+			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+			fake_cursor.global_position = get_global_mouse_position() + normal_offset
+		CursorState.STICKY_ACTION:
+			if sticky_button:
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+				fake_cursor.visible = true
+				fake_cursor.global_position = sticky_button.global_position + sticky_offset
+		CursorState.FREE_HOVER:
+			if pressing:
+				fake_cursor.visible = true
+			else:
+				fake_cursor.visible = false
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 	for type in upgrade_patches.keys():
 		update_upgrade_patch(type)
 	time_left = max(time_left - delta * timer_speed_multiplier, 0)
@@ -440,7 +475,6 @@ func do_upgrade_feedback(type: UpgradeType):
 	var out_time := 0.5 / upgrade_anim_speed
 	var tween = get_tree().create_tween()
 
-	tween = get_tree().create_tween()
 	tween.tween_property(
 		label_type,
 		"theme_override_font_sizes/font_size",
@@ -901,14 +935,14 @@ func declare_hovered_upgrade(button, ninepatch, panel):
 # this one has a differnte var aspect than the one above, fix hereby
 func declare_hovered_action(button):
 	var tween = get_tree().create_tween()
-	var vector_hover_in := Vector2(115, 115)
-	var vector_hover_out := Vector2(110, 110)
+	var vector_hover_in := Vector2(1.05, 1.05)
+	var vector_hover_out := Vector2(1, 1)
 	var vector_position_adjust := Vector2(-3, -3)
 	if hovering:
-		Input.set_custom_mouse_cursor(CURSOR_02, Input.CURSOR_ARROW, Vector2 (25, 18))
+		cursor_state = CursorState.HOVER_ACTION
 		tween.tween_property(
 			button,
-			"size",
+			"scale",
 			vector_hover_in,
 			0.2
 		).set_trans(Tween.TRANS_SINE)
@@ -920,22 +954,21 @@ func declare_hovered_action(button):
 		).set_trans(Tween.TRANS_SINE)
 		await tween.finished
 	else:
-		Input.set_custom_mouse_cursor(CURSOR_01, Input.CURSOR_ARROW, Vector2 (25, 18))
 		tween.kill()
 		await get_tree().create_timer(0.1).timeout
 		tween = get_tree().create_tween()
 		tween.tween_property(
 			button,
-			"size",
+			"scale",
 			vector_hover_out,
 			0.1
-		).set_trans(Tween.TRANS_BACK)
+		).set_trans(Tween.TRANS_BOUNCE)
 		tween.parallel().tween_property(
 			button,
 			"position",
-			Vector2 (0, 0),
+			Vector2(0, 0),
 			0.1
-		).set_trans(Tween.TRANS_BACK)
+		)
 
 func _on_attack_mouse_entered() -> void:
 	hovering = true
@@ -991,13 +1024,23 @@ func _on_tab_container_tab_changed(_tab: int) -> void:
 		return
 
 func _on_attack_pressed() -> void:
+	sticky_button = attack
+	cursor_state = CursorState.STICKY_ACTION
 	switch_action(ActionType.ATTACK)
 
 func _on_forage_pressed() -> void:
+	sticky_button = forage
+	cursor_state = CursorState.STICKY_ACTION
 	switch_action(ActionType.FORAGE)
 
 func _on_block_pressed() -> void:
+	sticky_button = block
+	cursor_state = CursorState.STICKY_ACTION
 	switch_action(ActionType.BLOCK)
+
+func clear_sticky():
+	sticky_button = null
+	cursor_state = CursorState.NORMAL
 
 func switch_action(new_action: ActionType) -> void:
 	if current_action == new_action and pressing:
@@ -1030,3 +1073,7 @@ func check_nine_patch(ninepatch):
 	else:
 		print("[CHECK_NINE_PATCH] not pressing")
 		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_REGULAR)
+
+func _on_visual_space_mouse_entered() -> void:
+	if cursor_state == CursorState.STICKY_ACTION or CursorState.HOVER_ACTION:
+		cursor_state = CursorState.FREE_HOVER
