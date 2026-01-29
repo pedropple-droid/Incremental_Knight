@@ -1,22 +1,32 @@
-# [UPGRADE PANELS]
-# i could probably change all tohse chosen funcs and all with states, think about it
+# 🔴🟠🟢🔵⚪
+# [QOL]🟠
+# add a data packet for all that extra information that doesn't define as code, mostly as data
+# ---------------------------------------------------------------
+# [UPGRADE PANELS]🟢
 # you should really fix the upgrade panel, it needs to be able to change freely from
 # one mouse state to the other without bugging out like it does
 # atm it doesn't quite register its entering states
-# and it bugs out when going from one upgrade to the other
-# make it so it can freely jump from one upgrade to the next one
-# thanks
+# it should register that the mouse is hovering, and, let's change it to clicking and holding
+# it will feel much better, trust me
 # ---------------------------------------------------------------
-# [TOUGHNESS TIMER]
+# [ACTION PANELS]🟢
+# MOUSE_02 should appear when hovering over the action panel when another one
+# is being chosen
+# ---------------------------------------------------------------
+# [VISUAL PANEL]🟢
+# it kinda bugged out after buying some upgrades and let my cursor maintain its
+# special cursor, check on that
+# ---------------------------------------------------------------
+# [TOUGHNESS TIMER]🔵
 # for a reason my timing slows down to a halt when i attack or upgrade idk i have to find out
 # ---------------------------------------------------------------
-# [QTE]
+# [QTE]🔵
 # qte still kinda sucks, it's kinda just there in number and in visual
 # still about qte, i could add a differente color meter for when my knight is 
 # waiting to finish an action to perform another one, or, maybe, make different
 # animations for him to change between actions so qte would make more sense in a sense
 #  ---------------------------------------------------------------
-# [GAME FEEL]
+# [GAME FEEL]⚪
 # fixd some numbers, game might go much smoother now, but i do need to add difficulty increase7
 #  ---------------------------------------------------------------
 
@@ -53,7 +63,6 @@ const WOODDOT = preload("uid://cuhmaq0a2nrtr")
 const WOODK = preload("uid://c7l2phebs2ogq")
 const WOODM = preload("uid://psqabx6t4f86")
 
-
 enum UpgradeType { 
 	TOTAL,
 	OUTPUT,
@@ -81,7 +90,6 @@ enum CursorState {
 	STICKY_ACTION,
 	FREE_HOVER_VISUAL,
 	FREE_HOVER_ACTION,
-	UPGRADE_HOVERING_ACTIVE,
 }
 
 var upgrades := {
@@ -232,12 +240,6 @@ var upgrade_buttons := {
 	UpgradeType.TOUGHNESS: toughness_btt,
 }
 
-var upgrade_chosen := {
-	UpgradeType.SPEED: speed_chosen,
-	UpgradeType.OUTPUT: output_chosen,
-	UpgradeType.KNIGHT: knight_chosen,
-	UpgradeType.TOUGHNESS: toughness_chosen,
-}
 
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var spd_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton/SpdLabel
@@ -287,7 +289,6 @@ var upgrade_chosen := {
 @onready var knight_chosen: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel/ExtraKnightUpgrade/KnightChosen
 
 var buttons: Array
-var chosen_panels: Array
 var gold: int = 1110
 var meat: int = 1110
 var wood: int = 1110
@@ -335,7 +336,6 @@ var normal_offset := Vector2(-60, -60)
 func _ready() -> void:
 	await get_tree().process_frame
 	buttons = [attack, block, forage]
-	chosen_panels = [speed_chosen, output_chosen, toughness_chosen, knight_chosen]
 	perform_action(ActionType.IDLE)
 	knight.visible = true
 	knight_2.visible = false
@@ -374,6 +374,7 @@ func _ready() -> void:
 	update_floating_totals()
 	start_qte_loop()
 	setup_timer()
+	nullify_all()
 
 func _process(delta):
 	match cursor_state:
@@ -382,6 +383,7 @@ func _process(delta):
 			fake_cursor.visible = false
 		CursorState.HOVER_ACTION:
 			if pressing:
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 				return
 			fake_cursor.visible = true
 			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -394,6 +396,7 @@ func _process(delta):
 		CursorState.FREE_HOVER_VISUAL:
 			if pressing:
 				fake_cursor.visible = true
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			else:
 				fake_cursor.visible = false
 				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -401,9 +404,6 @@ func _process(delta):
 			fake_cursor.visible = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			Input.set_custom_mouse_cursor(CURSOR_02, Input.CURSOR_POINTING_HAND, Vector2(15,25))
-		CursorState.UPGRADE_HOVERING_ACTIVE:
-			fake_cursor.visible = false
-			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 	for type in upgrade_patches.keys():
 		update_upgrade_patch(type)
@@ -461,8 +461,6 @@ func on_upgrade_mouse_entered(type: UpgradeType):
 		return
 	current_upgrade = type
 	choosing = true
-	cursor_state = CursorState.UPGRADE_HOVERING_ACTIVE
-	active_upgrade(type)
 	start_upgrade_loop()
 
 func on_upgrade_mouse_exited():
@@ -470,38 +468,6 @@ func on_upgrade_mouse_exited():
 	upgrade_streak = 0
 	current_upgrade_delay = BASE_UPGRADE_DELAY
 	upgrade_anim_speed = BASE_UPGRADE_DELAY
-	cursor_state = CursorState.NORMAL
-	nullify_upgrades()
-	Input.set_custom_mouse_cursor(CURSOR_01, Input.CURSOR_ARROW, Vector2 (25, 18))
-
-func active_upgrade(upgrade):
-	match upgrade:
-		UpgradeType.OUTPUT:
-			speed_chosen.visible = false
-			toughness_chosen.visible = false
-			knight_chosen.visible = false
-			output_chosen.visible = true
-		UpgradeType.SPEED:
-			speed_chosen.visible = true
-			toughness_chosen.visible = false
-			knight_chosen.visible = false
-			output_chosen.visible = false
-		UpgradeType.TOUGHNESS:
-			speed_chosen.visible = false
-			toughness_chosen.visible = true
-			knight_chosen.visible = false
-			output_chosen.visible = false
-		UpgradeType.KNIGHT:
-			speed_chosen.visible = false
-			toughness_chosen.visible = false
-			knight_chosen.visible = true
-			output_chosen.visible = false
-
-func nullify_upgrades():
-	speed_chosen.visible = false
-	toughness_chosen.visible = false
-	knight_chosen.visible = false
-	output_chosen.visible = false
 
 func start_upgrade_loop():
 	while choosing:
@@ -626,46 +592,43 @@ func try_buy_upgrade(type: UpgradeType) -> void:
 
 func _on_speed_upgrade_button_mouse_entered():
 	hovering = true
-	cursor_state = CursorState.HOVER_ACTION
 	on_upgrade_mouse_entered(UpgradeType.SPEED)
-	declare_hovered_upgrade(speed_btt, speed_9p_rect)
+	declare_hovered_upgrade(speed_btt, speed_9p_rect, speed_chosen)
 
 func _on_speed_upgrade_button_mouse_exited():
 	hovering = false
 	on_upgrade_mouse_exited()
-	declare_hovered_upgrade(speed_btt, speed_9p_rect)
+	declare_hovered_upgrade(speed_btt, speed_9p_rect, speed_chosen)
 
 func _on_output_upgrade_button_mouse_entered():
 	hovering = true
-	cursor_state = CursorState.HOVER_ACTION
 	on_upgrade_mouse_entered(UpgradeType.OUTPUT)
-	declare_hovered_upgrade(output_btt, output_9p_rect)
+	declare_hovered_upgrade(output_btt, output_9p_rect, output_chosen)
 
 func _on_output_upgrade_button_mouse_exited():
 	hovering = false
 	on_upgrade_mouse_exited()
-	declare_hovered_upgrade(output_btt, output_9p_rect)
+	declare_hovered_upgrade(output_btt, output_9p_rect, output_chosen)
 
 func _on_extra_knight_upgrade_mouse_entered() -> void:
 	hovering = true
-	cursor_state = CursorState.HOVER_ACTION
 	on_upgrade_mouse_entered(UpgradeType.KNIGHT)
-	declare_hovered_upgrade(knight_btt, e_knight_9p_rect)
+	declare_hovered_upgrade(knight_btt, e_knight_9p_rect, knight_chosen)
 
 func _on_extra_knight_upgrade_mouse_exited() -> void:
 	hovering = false
 	on_upgrade_mouse_exited()
-	declare_hovered_upgrade(knight_btt, e_knight_9p_rect)
+	declare_hovered_upgrade(knight_btt, e_knight_9p_rect, knight_chosen)
 
 func _on_toughness_button_mouse_entered() -> void:
 	hovering = true
 	on_upgrade_mouse_entered(UpgradeType.TOUGHNESS)
-	declare_hovered_upgrade(toughness_btt, toughness_9p_rect)
+	declare_hovered_upgrade(toughness_btt, toughness_9p_rect, toughness_chosen)
 
 func _on_toughness_button_mouse_exited() -> void:
 	hovering = false
 	on_upgrade_mouse_exited()
-	declare_hovered_upgrade(toughness_btt, toughness_9p_rect)
+	declare_hovered_upgrade(toughness_btt, toughness_9p_rect, toughness_chosen)
 
 func start_action_loop():
 	match current_action:
@@ -897,12 +860,17 @@ func successful_qte():
 	.set_trans(Tween.TRANS_EXPO)\
 	.set_ease(Tween.EASE_IN_OUT)
 
-func declare_hovered_upgrade(button, ninepatch):
+func declare_hovered_upgrade(button, ninepatch, panel):
 	var tween = get_tree().create_tween()
 	var vector_hover_in := Vector2(1.05, 1.05)
 	var vector_hover_out := Vector2(1, 1)
 	var vector_position_adjust := Vector2(-8, -8)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
+	chosen_panel(panel)
+
 	if hovering:
+		print("[DECLARE_HOVERED_UPGRADE] hovering at:", button)
 		tween.tween_property(
 			button,
 			"scale",
@@ -933,6 +901,50 @@ func declare_hovered_upgrade(button, ninepatch):
 			Vector2 (0, 0),
 			0.1
 		).set_trans(Tween.TRANS_BACK)
+
+	chosen_panel(null)
+
+func chosen_panel(panel):
+	match panel:
+		speed_chosen:
+			speed_chosen.visible = true
+		output_chosen:
+			output_chosen.visible = true
+		toughness_chosen:
+			toughness_chosen.visible = true
+		knight_chosen:
+			knight_chosen.visible = true
+	nullify_others(panel)
+
+func nullify_others(panel):
+	match panel:
+		speed_chosen:
+			knight_chosen.visible = false
+			toughness_chosen.visible = false
+			output_chosen.visible = false
+			speed_chosen.visible = true
+		output_chosen:
+			knight_chosen.visible = false
+			toughness_chosen.visible = false
+			output_chosen.visible = true
+			speed_chosen.visible = false
+		toughness_chosen:
+			knight_chosen.visible = false
+			toughness_chosen.visible = true
+			output_chosen.visible = false
+			speed_chosen.visible = false
+		knight_chosen:
+			knight_chosen.visible = true
+			toughness_chosen.visible = false
+			output_chosen.visible = false
+			speed_chosen.visible = false
+
+func nullify_all():
+	knight_chosen.visible = false
+	toughness_chosen.visible = false
+	output_chosen.visible = false
+	speed_chosen.visible = false
+
 
 func declare_hovered_action(button):
 	var tween = get_tree().create_tween()
@@ -1069,10 +1081,8 @@ func check_nine_patch_for_action(action: ActionType) -> void:
 
 func check_nine_patch(ninepatch):
 	if pressing:
-		print("[CHECK_NINE_PATCH] pressing")
 		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_PRESSED)
 	else:
-		print("[CHECK_NINE_PATCH] not pressing")
 		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_REGULAR)
 
 func _on_visual_space_mouse_entered() -> void:
