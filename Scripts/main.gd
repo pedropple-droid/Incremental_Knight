@@ -1,21 +1,27 @@
 # 🔴🟠🟢🔵⚪
-# [QOL]🟠
-# add a data packet for all that extra information that doesn't define as code, mostly as data
+# [QOL]🔴
+# This script has crossed the “single file maximum entropy” line.
+# Next step is not more fixes — it’s extraction:
+# ActionController.gd
+# UpgradeController.gd
+# QTEController.gd
+# UI stays here
+# If you want, next message I can:
+# extract one of those cleanly
+#or rewrite just QTE so it finally feels good
+#or do a cursor state machine (you’re halfway there already)
 # ---------------------------------------------------------------
-# [UPGRADE PANELS]🟢
-# you should really fix the upgrade panel, it needs to be able to change freely from
-# one mouse state to the other without bugging out like it does
-# atm it doesn't quite register its entering states
+# [UPGRADE PANELS]🟠
 # it should register that the mouse is hovering, and, let's change it to clicking and holding
 # it will feel much better, trust me
+# also, it upgrades too fast
 # ---------------------------------------------------------------
-# [ACTION PANELS]🟢
-# MOUSE_02 should appear when hovering over the action panel when another one
-# is being chosen
+# [ACTION PANELS]🟠
+# it should register the CURSOR_02 when on top of it
+# actions don't really happen, and my knight simply doesn't do it more than once
+# when it did happen
 # ---------------------------------------------------------------
-# [VISUAL PANEL]🟢
-# it kinda bugged out after buying some upgrades and let my cursor maintain its
-# special cursor, check on that
+# [VISUAL PANEL]⚪
 # ---------------------------------------------------------------
 # [TOUGHNESS TIMER]🔵
 # for a reason my timing slows down to a halt when i attack or upgrade idk i have to find out
@@ -41,6 +47,7 @@ const STREAK_THRESHOLD := 1
 const MIN_OUTPUT_UPGRADE := 1.15
 const DIGIT_BASE_SIZE := 6
 const DIGIT_SCALE := 0.5
+const GLOBAL_ACTION := true
 
 const CURSOR_01 = preload("uid://bigflnfdn68dm")
 const CURSOR_02 = preload("uid://cxshok2ga3xac")
@@ -86,11 +93,6 @@ enum ResourceType {
 
 enum CursorState {
 	NORMAL,
-	HOVER_ACTION,
-	STICKY_ACTION,
-	FREE_HOVER_VISUAL,
-	FREE_HOVER_ACTION,
-	FREE_HOVER_UPGRADING,
 }
 
 var upgrades := {
@@ -241,7 +243,6 @@ var upgrade_buttons := {
 	UpgradeType.TOUGHNESS: toughness_btt,
 }
 
-
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var spd_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton/SpdLabel
 @onready var output_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton/OutputLabel
@@ -282,17 +283,30 @@ var upgrade_buttons := {
 @onready var toughness_9p_rect: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessPanel/ToughnessButton/Toughness9PRect
 @onready var timer_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginTimer/TimerLabel
 @onready var countdown_timer: Timer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginTimer/Timer
-@onready var upgrade_margin: MarginContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin
 @onready var fake_cursor: TextureRect = $FakeCursor
 @onready var speed_chosen: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton/SpeedChosen
 @onready var toughness_chosen: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessPanel/ToughnessButton/ToughnessChosen
 @onready var output_chosen: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton/OutputChosen
 @onready var knight_chosen: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel/ExtraKnightUpgrade/KnightChosen
+@onready var speed_choosing: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton/SpeedChoosing
+@onready var toughness_choosing: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessPanel/ToughnessButton/ToughnessChoosing
+@onready var output_choosing: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton/OutputChoosing
+@onready var knight_choosing: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel/ExtraKnightUpgrade/KnightChoosing
+@onready var attack_chosen: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/AttackPanel/attack/AttackChosen
+@onready var forage_chosen: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/ForagePanel/forage/ForageChosen
+@onready var block_chosen: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block/BlockChosen
+@onready var attack_choosing: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/AttackPanel/attack/AttackChoosing
+@onready var forage_choosing: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/ForagePanel/forage/ForageChoosing
+@onready var block_choosing: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block/BlockChoosing
+
+@onready var action_space: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace
+@onready var visual_space: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace
+@onready var upgrade_space: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace
 
 var buttons: Array
-var gold: int = 1110
-var meat: int = 1110
-var wood: int = 1110
+var gold: int = 0
+var meat: int = 0
+var wood: int = 0
 
 var time_left := 120.0
 var output_floor := 1.0
@@ -305,19 +319,15 @@ var timer_speed_multiplier: float = 1.0
 var max_knights_per_run: int = 3
 var total_knights: int = 1
 
+var looping := false
+var is_busy := false
+
 var current_upgrade_delay := BASE_UPGRADE_DELAY
 var upgrade_streak := 0
 var upgrade_anim_speed := 1.5
 
 var last_action: ActionType = ActionType.IDLE
-var action_loop_running := false
-var pressing = false
-var performing = false
-var choosing = false
-var upgrading = false
-var hovering = false
-
-var start_button_position: Vector2
+var last_panel: NinePatchRect 
 
 var current_upgrade: UpgradeType
 var current_action: ActionType
@@ -336,6 +346,7 @@ var normal_offset := Vector2(-60, -60)
 
 func _ready() -> void:
 	await get_tree().process_frame
+	nullify_all()
 	buttons = [attack, block, forage]
 	perform_action(ActionType.IDLE)
 	knight.visible = true
@@ -382,32 +393,6 @@ func _process(delta):
 		CursorState.NORMAL:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			fake_cursor.visible = false
-		CursorState.HOVER_ACTION:
-			if pressing:
-				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-				return
-			fake_cursor.visible = true
-			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-			fake_cursor.global_position = get_global_mouse_position() + normal_offset
-		CursorState.STICKY_ACTION:
-			if sticky_button:
-				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-				fake_cursor.visible = true
-				fake_cursor.global_position = sticky_button.global_position + sticky_offset
-		CursorState.FREE_HOVER_VISUAL:
-			if pressing:
-				fake_cursor.visible = true
-				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			else:
-				fake_cursor.visible = false
-				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		CursorState.FREE_HOVER_ACTION:
-			fake_cursor.visible = false
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			Input.set_custom_mouse_cursor(CURSOR_02, Input.CURSOR_POINTING_HAND, Vector2(15,25))
-		CursorState.FREE_HOVER_UPGRADING:
-			fake_cursor.visible = false
-			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 	for type in upgrade_patches.keys():
 		update_upgrade_patch(type)
@@ -416,14 +401,6 @@ func _process(delta):
 
 func setup_timer():
 	countdown_timer.start()
-
-func _on_countdown_timer_timeout():
-	time_left -= 1.0 * timer_speed_multiplier
-	timer_label.text = format_time(time_left)
-
-	if time_left <= 0:
-		countdown_timer.stop()
-		timer_label.text = "00:00"
 
 func format_time(seconds: float) -> String:
 	var s := int(seconds)
@@ -484,82 +461,6 @@ func get_label_from_upgrade(type: UpgradeType) -> Label:
 			return toughness_label
 	return null
 
-func _on_speed_upgrade_button_mouse_entered():
-	hovering = true
-	declare_hovered_upgrade(speed_btt, speed_9p_rect, speed_chosen)
-
-func _on_speed_upgrade_button_mouse_exited():
-	if choosing:
-		choosing = false
-		do_upgrade_feedback(UpgradeType.SPEED)
-	hovering = false
-	declare_hovered_upgrade(speed_btt, speed_9p_rect, speed_chosen)
-
-func _on_output_upgrade_button_mouse_entered():
-	hovering = true
-	declare_hovered_upgrade(output_btt, output_9p_rect, output_chosen)
-
-func _on_output_upgrade_button_mouse_exited():
-	hovering = false
-	declare_hovered_upgrade(output_btt, output_9p_rect, output_chosen)
-
-func _on_extra_knight_upgrade_mouse_entered() -> void:
-	hovering = true
-	declare_hovered_upgrade(knight_btt, e_knight_9p_rect, knight_chosen)
-
-func _on_extra_knight_upgrade_mouse_exited() -> void:
-	hovering = false
-	declare_hovered_upgrade(knight_btt, e_knight_9p_rect, knight_chosen)
-
-func _on_toughness_button_mouse_entered() -> void:
-	hovering = true
-	declare_hovered_upgrade(toughness_btt, toughness_9p_rect, toughness_chosen)
-
-func _on_toughness_button_mouse_exited() -> void:
-	hovering = false
-	declare_hovered_upgrade(toughness_btt, toughness_9p_rect, toughness_chosen)
-
-func start_action_loop():
-	match current_action:
-		ActionType.ATTACK:
-			current_button = attack
-		ActionType.BLOCK:
-			current_button = block
-		ActionType.FORAGE:
-			current_button = forage
-		ActionType.IDLE:
-			current_button = null
-
-	if action_loop_running:
-		return
-
-	action_loop_running = true
-
-	while pressing:
-		await perform_action(current_action)
-
-	action_loop_running = false
-	perform_action(ActionType.IDLE)
-
-func perform_action(action):
-	performing = true
-
-	match action:
-		ActionType.ATTACK:
-			animation.play("attack")
-			gold += max(output_floor, output)
-		ActionType.BLOCK:
-			animation.play("block")
-			wood += max(output_floor, output)
-		ActionType.FORAGE:
-			animation.play("forage")
-			meat += max(output_floor, output)
-		_:
-			animation.play("idle")
-
-	await animation.animation_finished
-	performing = false
-	update_floating_totals()
 
 func clear_container(container: Container) -> void:
 	for child in container.get_children():
@@ -749,16 +650,14 @@ func successful_qte():
 	.set_trans(Tween.TRANS_EXPO)\
 	.set_ease(Tween.EASE_IN_OUT)
 
-func declare_hovered_upgrade(button, ninepatch, panel):
+func declare_hovered_upgrade(button, action, ninepatch, panel):
 	var tween = get_tree().create_tween()
 	var vector_hover_in := Vector2(1.05, 1.05)
 	var vector_hover_out := Vector2(1, 1)
 	var vector_position_adjust := Vector2(-8, -8)
 
-	chosen_panel(panel)
-
-	if hovering:
-		cursor_state = CursorState.FREE_HOVER_ACTION
+	if action:
+		choosing_panel(panel, GLOBAL_ACTION)
 		tween.tween_property(
 			button,
 			"scale",
@@ -773,7 +672,7 @@ func declare_hovered_upgrade(button, ninepatch, panel):
 		).set_trans(Tween.TRANS_SINE)
 		await tween.finished
 	else:
-		cursor_state = CursorState.FREE_HOVER_VISUAL
+		choosing_panel(panel, null)
 		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_REGULAR)
 		tween.kill()
 		await get_tree().create_timer(0.1).timeout
@@ -791,18 +690,18 @@ func declare_hovered_upgrade(button, ninepatch, panel):
 			0.1
 		).set_trans(Tween.TRANS_BACK)
 
-	chosen_panel(null)
+func chosen_panel(panel, action):
+	if action:
+		panel.visible = true
+	else:
+		panel.visible = false
+	nullify_others(panel)
 
-func chosen_panel(panel):
-	match panel:
-		speed_chosen:
-			speed_chosen.visible = true
-		output_chosen:
-			output_chosen.visible = true
-		toughness_chosen:
-			toughness_chosen.visible = true
-		knight_chosen:
-			knight_chosen.visible = true
+func choosing_panel(panel, action):
+	if action:
+		panel.visible = true
+	else:
+		panel.visible = false
 	nullify_others(panel)
 
 func nullify_others(panel):
@@ -823,21 +722,43 @@ func nullify_others(panel):
 			toughness_chosen.visible = false
 			output_chosen.visible = false
 			speed_chosen.visible = false
+		attack_chosen:
+			output_chosen.visible = false
+			speed_chosen.visible = false
+		output_chosen:
+			attack_chosen.visible = false
+			speed_chosen.visible = false
+		speed_chosen:
+			attack_chosen.visible = false
+			output_chosen.visible = false
 
 func nullify_all():
 	knight_chosen.visible = false
 	toughness_chosen.visible = false
 	output_chosen.visible = false
 	speed_chosen.visible = false
+	attack_chosen.visible = false
+	forage_chosen.visible = false
+	block_chosen.visible = false
+	knight_choosing.visible = false
+	toughness_choosing.visible = false
+	output_choosing.visible = false
+	speed_choosing.visible = false
+	attack_choosing.visible = false
+	forage_choosing.visible = false
+	block_choosing.visible = false
 
+func declare_hovered_action(button, action, panel):
+	if button == current_button:
+		return
 
-func declare_hovered_action(button):
 	var tween = get_tree().create_tween()
 	var vector_hover_in := Vector2(1.05, 1.05)
 	var vector_hover_out := Vector2(1, 1)
 	var vector_position_adjust := Vector2(-3, -3)
-	if hovering:
-		cursor_state = CursorState.HOVER_ACTION
+	last_panel = panel
+	if action:
+		chosen_panel(panel, GLOBAL_ACTION)
 		tween.tween_property(
 			button,
 			"scale",
@@ -852,6 +773,7 @@ func declare_hovered_action(button):
 		).set_trans(Tween.TRANS_SINE)
 		await tween.finished
 	else:
+		chosen_panel(panel, null)
 		tween.kill()
 		await get_tree().create_timer(0.1).timeout
 		tween = get_tree().create_tween()
@@ -869,28 +791,22 @@ func declare_hovered_action(button):
 		)
 
 func _on_attack_mouse_entered() -> void:
-	hovering = true
-	declare_hovered_action(attack)
+	declare_hovered_action(attack, GLOBAL_ACTION, attack_choosing)
 
 func _on_attack_mouse_exited() -> void:
-	hovering = false
-	declare_hovered_action(attack)
+	declare_hovered_action(attack, null, attack_choosing)
 
 func _on_forage_mouse_entered() -> void:
-	hovering = true
-	declare_hovered_action(forage)
+	declare_hovered_action(forage, GLOBAL_ACTION, forage_choosing)
 
 func _on_forage_mouse_exited() -> void:
-	hovering = false
-	declare_hovered_action(forage)
+	declare_hovered_action(forage, null, forage_choosing)
 
 func _on_block_mouse_entered() -> void:
-	hovering = true
-	declare_hovered_action(block)
+	declare_hovered_action(block, GLOBAL_ACTION, block_choosing)
 
 func _on_block_mouse_exited() -> void:
-	hovering = false
-	declare_hovered_action(block)
+	declare_hovered_action(block, null, block_choosing)
 
 func _on_bigger_storage_pressed() -> void:
 	animation.play("pawn_to_gold")
@@ -919,102 +835,142 @@ func _on_tab_container_tab_changed(_tab: int) -> void:
 		return
 
 func _on_attack_pressed() -> void:
-	sticky_button = attack
-	cursor_state = CursorState.STICKY_ACTION
-	switch_action(ActionType.ATTACK)
+	request_switch_action(ActionType.ATTACK)
 
 func _on_forage_pressed() -> void:
-	sticky_button = forage
-	cursor_state = CursorState.STICKY_ACTION
-	switch_action(ActionType.FORAGE)
+	request_switch_action(ActionType.FORAGE)
 
 func _on_block_pressed() -> void:
-	sticky_button = block
-	cursor_state = CursorState.STICKY_ACTION
-	switch_action(ActionType.BLOCK)
+	request_switch_action(ActionType.BLOCK)
+
+func request_switch_action(queued_action: ActionType):
+	if looping:
+		return
+	switch_action(queued_action)
 
 func switch_action(new_action: ActionType) -> void:
-	if current_action == new_action and pressing:
-		pressing = false
-		current_action = ActionType.IDLE
-		check_nine_patch_for_action(new_action)
+	check_nine_patch_for_action(current_action, null)
+	if current_action == new_action:
+		last_panel.visible = true
+		switch_action(ActionType.IDLE)
 		return
-	if pressing:
-		pressing = false
-		check_nine_patch_for_action(current_action)
-	pressing = true
 	last_action = current_action
 	current_action = new_action
-	check_nine_patch_for_action(current_action)
+	check_nine_patch_for_action(current_action, GLOBAL_ACTION)
 	start_action_loop()
 
-func check_nine_patch_for_action(action: ActionType) -> void:
+func start_action_loop():
+	match current_action:
+		ActionType.ATTACK:
+			current_button = attack
+			perform_action(ActionType.ATTACK)
+		ActionType.BLOCK:
+			current_button = block
+			perform_action(ActionType.BLOCK)
+		ActionType.FORAGE:
+			current_button = forage
+			perform_action(ActionType.FORAGE)
+		ActionType.IDLE:
+			current_button = null
+			perform_action(ActionType.IDLE)
+
+func perform_action(action):
+	if is_busy:
+		return
+	is_busy = true
 	match action:
 		ActionType.ATTACK:
-			check_nine_patch(attack_9p_rect)
+			animation.play("attack")
+			await animation.animation_finished
+			gold += max(output_floor, output)
 		ActionType.BLOCK:
-			check_nine_patch(block_9p_rect)
+			animation.play("block")
+			await animation.animation_finished
+			wood += max(output_floor, output)
 		ActionType.FORAGE:
-			check_nine_patch(forage_9p_rect)
+			animation.play("forage")
+			await animation.animation_finished
+			meat += max(output_floor, output)
+		_:
+			animation.play("idle")
+	await animation.animation_finished
+	update_floating_totals()
+	is_busy = false
 
-func check_nine_patch(ninepatch):
-	if pressing:
+func check_nine_patch_for_action(action: ActionType, global_action) -> void:
+	match action:
+		ActionType.ATTACK:
+			check_nine_patch(attack_9p_rect, attack_chosen, attack_choosing, global_action)
+		ActionType.BLOCK:
+			check_nine_patch(block_9p_rect, block_chosen, block_choosing, global_action)
+		ActionType.FORAGE:
+			check_nine_patch(forage_9p_rect, forage_chosen, forage_choosing, global_action)
+
+func check_nine_patch_for_upgrade(upgrade: UpgradeType, global_action) -> void:
+	match upgrade:
+		UpgradeType.OUTPUT:
+			check_nine_patch(output_9p_rect, output_chosen, output_choosing, global_action)
+		UpgradeType.SPEED:
+			check_nine_patch(speed_9p_rect, speed_chosen, speed_choosing, global_action)
+		UpgradeType.TOUGHNESS:
+			check_nine_patch(toughness_9p_rect, toughness_chosen, toughness_choosing, global_action)
+		UpgradeType.KNIGHT:
+			check_nine_patch(e_knight_9p_rect, knight_chosen, knight_choosing, global_action)
+
+func check_nine_patch(ninepatch, panel, panel_two, action):
+	if action:
 		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_PRESSED)
+		panel.visible = true
+		panel_two.visible = false
 	else:
 		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_REGULAR)
+		panel.visible = false
 
-func _on_visual_space_mouse_entered() -> void:
-	if cursor_state == CursorState.STICKY_ACTION or CursorState.HOVER_ACTION:
-		cursor_state = CursorState.FREE_HOVER_VISUAL
+func do_upgrade_feedback(type: UpgradeType, action):
+	check_nine_patch_for_upgrade(current_upgrade, null)
 
-func _on_speed_upgrade_button_button_down() -> void:
-	cursor_state = CursorState.FREE_HOVER_UPGRADING
-	choosing = true
-	do_upgrade_feedback(UpgradeType.SPEED)
+	if action:
+		var label_type := get_label_from_upgrade(type)
+		var in_time := 0.5 / upgrade_anim_speed
+		var pop_time := 0.2 / upgrade_anim_speed
+		var out_time := 0.5 / upgrade_anim_speed
+		var tween = get_tree().create_tween()
+		tween.tween_property(
+			label_type,
+			"theme_override_font_sizes/font_size",
+			14,
+			in_time
+		)
+		await tween.finished
 
-func do_upgrade_feedback(type: UpgradeType):
-	var label_type := get_label_from_upgrade(type)
-	var in_time := 0.5 / upgrade_anim_speed
-	var pop_time := 0.2 / upgrade_anim_speed
-	var out_time := 0.5 / upgrade_anim_speed
-	var tween = get_tree().create_tween()
+		try_buy_upgrade(type)
 
-	tween.tween_property(
-		label_type,
-		"theme_override_font_sizes/font_size",
-		14,
-		in_time
-	)
-	await tween.finished
-
-	try_buy_upgrade(type)
-
-	tween = get_tree().create_tween()
-	tween.tween_property(
-		label_type,
-		"theme_override_font_sizes/font_size",
-		24,
-		pop_time
-	)
-	tween.parallel().tween_property(
-		label_type,
-		"theme_override_constants/outline_size",
-		4,
-		pop_time
-	)
-	tween.chain().tween_property(
-		label_type,
-		"theme_override_font_sizes/font_size",
-		16,
-		out_time
-	)
-	tween.parallel().tween_property(
-		label_type,
-		"theme_override_constants/outline_size",
-		0,
-		out_time
-	)
-	await tween.finished
+		tween = get_tree().create_tween()
+		tween.tween_property(
+			label_type,
+			"theme_override_font_sizes/font_size",
+			24,
+			pop_time
+		)
+		tween.parallel().tween_property(
+			label_type,
+			"theme_override_constants/outline_size",
+			4,
+			pop_time
+		)
+		tween.chain().tween_property(
+			label_type,
+			"theme_override_font_sizes/font_size",
+			16,
+			out_time
+		)
+		tween.parallel().tween_property(
+			label_type,
+			"theme_override_constants/outline_size",
+			0,
+			out_time
+		)
+		await tween.finished
 
 func try_buy_upgrade(type: UpgradeType) -> void:
 	var up = upgrades[type]
@@ -1022,20 +978,6 @@ func try_buy_upgrade(type: UpgradeType) -> void:
 	if type == UpgradeType.KNIGHT and total_knights >= max_knights_per_run:
 		knight_label.text = "Maxed out!!"
 		return
-
-	upgrade_streak += 1
-
-	if upgrade_streak >= STREAK_THRESHOLD:
-		current_upgrade_delay -= 0.1
-		current_upgrade_delay = max(
-			MIN_UPGRADE_DELAY,
-			current_upgrade_delay 
-		)
-
-		upgrade_anim_speed = min(
-			3.0,
-			upgrade_anim_speed * 1.15
-		)
 
 	wood -= up.wood_cost
 	meat -= up.meat_cost
@@ -1047,6 +989,33 @@ func try_buy_upgrade(type: UpgradeType) -> void:
 
 	update_upgrade_cost(type)
 	update_floating_totals()
-	if choosing:
-		await get_tree().create_timer(current_upgrade_delay).timeout
-		do_upgrade_feedback(type)
+
+func _on_speed_upgrade_button_mouse_entered():
+	declare_hovered_upgrade(speed_btt, GLOBAL_ACTION, speed_9p_rect, speed_choosing)
+
+func _on_speed_upgrade_button_mouse_exited():
+	declare_hovered_upgrade(speed_btt, null, speed_9p_rect, speed_choosing)
+
+func _on_output_upgrade_button_mouse_entered():
+	declare_hovered_upgrade(output_btt, GLOBAL_ACTION, output_9p_rect, output_choosing)
+
+func _on_output_upgrade_button_mouse_exited():
+	declare_hovered_upgrade(output_btt, null, output_9p_rect, output_choosing)
+
+func _on_extra_knight_upgrade_mouse_entered() -> void:
+	declare_hovered_upgrade(knight_btt, GLOBAL_ACTION, e_knight_9p_rect, knight_choosing)
+
+func _on_extra_knight_upgrade_mouse_exited() -> void:
+	declare_hovered_upgrade(knight_btt, null, e_knight_9p_rect, knight_choosing)
+
+func _on_toughness_button_mouse_entered() -> void:
+	declare_hovered_upgrade(toughness_btt, GLOBAL_ACTION, toughness_9p_rect, toughness_choosing)
+
+func _on_toughness_button_mouse_exited() -> void:
+	declare_hovered_upgrade(toughness_btt, null, toughness_9p_rect, toughness_choosing)
+
+func _on_speed_upgrade_button_button_down() -> void:
+	do_upgrade_feedback(UpgradeType.SPEED, GLOBAL_ACTION)
+
+func _on_speed_upgrade_button_button_up() -> void:
+	do_upgrade_feedback(UpgradeType.SPEED, null)

@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c4wthxchsbrtm" path="res://TinySword/UI Elements/UI Elements/Wood Table/WoodTable_Slots.png" id="4_0loja"]
 [ext_resource type="Texture2D" uid="uid://cvb4kc0pw5gxr" path="res://TinySword/UI Elements/UI Elements/Icons/smallgold.png" id="4_b6ruc"]
 [ext_resource type="Texture2D" uid="uid://cwxlgqhhovp82" path="res://TinySword/UI Elements/UI Elements/Buttons/SmallRedSquareButton_Regular.png" id="5_0loja"]
+[ext_resource type="Texture2D" uid="uid://bd3ec46nfqfdd" path="res://TinySword/UI Elements/UI Elements/Buttons/SmallRedSquareButton_Pressed.png" id="5_ids8r"]
 [ext_resource type="Texture2D" uid="uid://xy6skgkraj64" path="res://UnitsTextureRect/NativeSprites/Attack/WarriorAttack1.png" id="12_ids8r"]
 [ext_resource type="Texture2D" uid="uid://dcwyp7mn0um4a" path="res://UnitsTextureRect/NativeSprites/Attack/WarriorAttack2.png" id="13_dnhof"]
 [ext_resource type="Texture2D" uid="uid://dmhrro3djp5pc" path="res://UnitsTextureRect/NativeSprites/Attack/WarriorAttack3.png" id="14_1v6qk"]
@@ -493,6 +494,32 @@ text = "ATTACK"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="AttackChosen" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/AttackPanel/attack" unique_id=716886614]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.5
+offset_top = 8.0
+offset_right = 3.5
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("53_o7ddy")
+
+[node name="AttackChoosing" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/AttackPanel/attack" unique_id=770476861]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.5
+offset_top = -5.0
+offset_right = 3.5
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("53_o7ddy")
+
 [node name="ForagePanel" type="PanelContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer" unique_id=361727984]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -554,6 +581,32 @@ text = "FORAGE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ForageChosen" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/ForagePanel/forage" unique_id=1959444039]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.5
+offset_top = 8.0
+offset_right = 3.5
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("53_o7ddy")
+
+[node name="ForageChoosing" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/ForagePanel/forage" unique_id=1887067416]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.5
+offset_top = -5.0
+offset_right = 3.5
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("53_o7ddy")
+
 [node name="BlockPanel" type="PanelContainer" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer" unique_id=1542132863]
 layout_mode = 2
 size_flags_vertical = 8
@@ -612,6 +665,32 @@ theme_override_font_sizes/font_size = 12
 text = "BLOCK"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BlockChosen" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block" unique_id=1716877546]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.5
+offset_top = 8.0
+offset_right = 3.5
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("53_o7ddy")
+
+[node name="BlockChoosing" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block" unique_id=2016854094]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.5
+offset_top = -5.0
+offset_right = 3.5
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("53_o7ddy")
 
 [node name="Label" type="Label" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel" unique_id=1079839169]
 layout_mode = 2
@@ -943,12 +1022,30 @@ text = "Speed"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="SpeedChosen" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton" unique_id=1578797995]
+[node name="SpeedChoosing" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton" unique_id=152788919]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("53_o7ddy")
+region_rect = Rect2(3.058011, 2.9408355, 121.934616, 122.03697)
+patch_margin_left = 21
+patch_margin_top = 21
+patch_margin_right = 21
+patch_margin_bottom = 21
+
+[node name="SpeedChosen" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton" unique_id=1977587628]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.5
+offset_top = 12.0
+offset_right = 0.5
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("53_o7ddy")
@@ -1104,12 +1201,30 @@ text = "Toughness"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ToughnessChosen" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessPanel/ToughnessButton" unique_id=911475082]
+[node name="ToughnessChoosing" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessPanel/ToughnessButton" unique_id=593772145]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("53_o7ddy")
+region_rect = Rect2(3.058011, 2.9408355, 121.934616, 122.03697)
+patch_margin_left = 21
+patch_margin_top = 21
+patch_margin_right = 21
+patch_margin_bottom = 21
+
+[node name="ToughnessChosen" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessPanel/ToughnessButton" unique_id=477492529]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.5
+offset_top = 12.0
+offset_right = 0.5
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("53_o7ddy")
@@ -1270,12 +1385,30 @@ text = "OutPut"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="OutputChosen" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton" unique_id=731370064]
+[node name="OutputChoosing" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton" unique_id=1457222241]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("53_o7ddy")
+region_rect = Rect2(3.058011, 2.9408355, 121.934616, 122.03697)
+patch_margin_left = 21
+patch_margin_top = 21
+patch_margin_right = 21
+patch_margin_bottom = 21
+
+[node name="OutputChosen" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton" unique_id=495830350]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.5
+offset_top = 12.0
+offset_right = 0.5
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("53_o7ddy")
@@ -1303,7 +1436,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("5_0loja")
+texture = ExtResource("5_ids8r")
 region_rect = Rect2(19.0475, 17.013971, 89.983215, 93.88389)
 patch_margin_left = 10
 patch_margin_top = 10
@@ -1437,12 +1570,30 @@ text = "Knight"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="KnightChosen" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel/ExtraKnightUpgrade" unique_id=1154193055]
+[node name="KnightChoosing" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel/ExtraKnightUpgrade" unique_id=1943188381]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("53_o7ddy")
+region_rect = Rect2(3.058011, 2.9408355, 121.934616, 122.03697)
+patch_margin_left = 21
+patch_margin_top = 21
+patch_margin_right = 21
+patch_margin_bottom = 21
+
+[node name="KnightChosen" type="NinePatchRect" parent="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel/ExtraKnightUpgrade" unique_id=1154193055]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.5
+offset_top = 12.0
+offset_right = 0.5
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("53_o7ddy")
@@ -1657,6 +1808,7 @@ texture = ExtResource("53_o7ddy")
 [connection signal="pressed" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block" to="." method="_on_block_pressed"]
 [connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace" to="." method="_on_visual_space_mouse_entered"]
 [connection signal="button_down" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton" to="." method="_on_speed_upgrade_button_button_down"]
+[connection signal="button_up" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton" to="." method="_on_speed_upgrade_button_button_up"]
 [connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton" to="." method="_on_speed_upgrade_button_mouse_entered"]
 [connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton" to="." method="_on_speed_upgrade_button_mouse_exited"]
 [connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessPanel/ToughnessButton" to="." method="_on_toughness_button_mouse_entered"]
