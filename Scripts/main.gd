@@ -90,6 +90,7 @@ enum CursorState {
 	STICKY_ACTION,
 	FREE_HOVER_VISUAL,
 	FREE_HOVER_ACTION,
+	FREE_HOVER_UPGRADING,
 }
 
 var upgrades := {
@@ -318,7 +319,7 @@ var hovering = false
 
 var start_button_position: Vector2
 
-var current_upgrade : UpgradeType
+var current_upgrade: UpgradeType
 var current_action: ActionType
 var current_button: Button
 
@@ -404,6 +405,9 @@ func _process(delta):
 			fake_cursor.visible = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			Input.set_custom_mouse_cursor(CURSOR_02, Input.CURSOR_POINTING_HAND, Vector2(15,25))
+		CursorState.FREE_HOVER_UPGRADING:
+			fake_cursor.visible = false
+			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 	for type in upgrade_patches.keys():
 		update_upgrade_patch(type)
@@ -456,29 +460,6 @@ func update_output_from_knights():
 func knights_per_purchase():
 	return int(pow(3, knight_set_level))
 
-func on_upgrade_mouse_entered(type: UpgradeType):
-	if upgrading:
-		return
-	current_upgrade = type
-	choosing = true
-	start_upgrade_loop()
-
-func on_upgrade_mouse_exited():
-	choosing = false
-	upgrade_streak = 0
-	current_upgrade_delay = BASE_UPGRADE_DELAY
-	upgrade_anim_speed = BASE_UPGRADE_DELAY
-
-func start_upgrade_loop():
-	while choosing:
-		upgrading = true
-		if can_buy(current_upgrade):
-			await do_upgrade_feedback(current_upgrade)
-			await get_tree().create_timer(current_upgrade_delay).timeout
-		else:
-			await get_tree().process_frame
-	upgrading = false
-
 func can_buy(type: UpgradeType) -> bool:
 	var up = upgrades[type]
 	if wood < up["wood_cost"]:
@@ -490,61 +471,6 @@ func can_buy(type: UpgradeType) -> bool:
 	if type == UpgradeType.KNIGHT and total_knights >= max_knights_per_run:
 		return false
 	return true
-
-func do_upgrade_feedback(type: UpgradeType):
-	var label_type := get_label_from_upgrade(type)
-	var in_time := 0.5 / upgrade_anim_speed
-	var pop_time := 0.2 / upgrade_anim_speed
-	var out_time := 0.5 / upgrade_anim_speed
-	var tween = get_tree().create_tween()
-
-	tween.tween_property(
-		label_type,
-		"theme_override_font_sizes/font_size",
-		14,
-		in_time
-	)
-	await tween.finished
-
-	if not choosing:
-		tween = get_tree().create_tween()
-		tween.tween_property(
-			label_type,
-			"theme_override_font_sizes/font_size",
-			16,
-			0.1
-		)
-		await tween.finished
-		return
-
-	try_buy_upgrade(type)
-
-	tween = get_tree().create_tween()
-	tween.tween_property(
-		label_type,
-		"theme_override_font_sizes/font_size",
-		24,
-		pop_time
-	)
-	tween.parallel().tween_property(
-		label_type,
-		"theme_override_constants/outline_size",
-		4,
-		pop_time
-	)
-	tween.chain().tween_property(
-		label_type,
-		"theme_override_font_sizes/font_size",
-		16,
-		out_time
-	)
-	tween.parallel().tween_property(
-		label_type,
-		"theme_override_constants/outline_size",
-		0,
-		out_time
-	)
-	await tween.finished
 
 func get_label_from_upgrade(type: UpgradeType) -> Label:
 	match type:
@@ -558,76 +484,39 @@ func get_label_from_upgrade(type: UpgradeType) -> Label:
 			return toughness_label
 	return null
 
-func try_buy_upgrade(type: UpgradeType) -> void:
-	var up = upgrades[type]
-
-	if type == UpgradeType.KNIGHT and total_knights >= max_knights_per_run:
-		knight_label.text = "Maxed out!!"
-		return
-
-	upgrade_streak += 1
-
-	if upgrade_streak >= STREAK_THRESHOLD:
-		current_upgrade_delay = max(
-			MIN_UPGRADE_DELAY,
-			current_upgrade_delay * 0.85
-		)
-
-		upgrade_anim_speed = min(
-			3.0,
-			upgrade_anim_speed * 1.15
-		)
-
-	wood -= up.wood_cost
-	meat -= up.meat_cost
-	gold -= up.gold_cost
-	up.apply.call()
-	up.wood_cost = int(up.wood_cost * up.cost_mult)
-	up.meat_cost = int(up.meat_cost * up.cost_mult)
-	up.gold_cost = int(up.gold_cost * up.cost_mult)
-	Input.set_custom_mouse_cursor(CURSOR_04, Input.CURSOR_ARROW, Vector2 (0, 0))
-
-	update_upgrade_cost(type)
-	update_floating_totals()
-
 func _on_speed_upgrade_button_mouse_entered():
 	hovering = true
-	on_upgrade_mouse_entered(UpgradeType.SPEED)
 	declare_hovered_upgrade(speed_btt, speed_9p_rect, speed_chosen)
 
 func _on_speed_upgrade_button_mouse_exited():
+	if choosing:
+		choosing = false
+		do_upgrade_feedback(UpgradeType.SPEED)
 	hovering = false
-	on_upgrade_mouse_exited()
 	declare_hovered_upgrade(speed_btt, speed_9p_rect, speed_chosen)
 
 func _on_output_upgrade_button_mouse_entered():
 	hovering = true
-	on_upgrade_mouse_entered(UpgradeType.OUTPUT)
 	declare_hovered_upgrade(output_btt, output_9p_rect, output_chosen)
 
 func _on_output_upgrade_button_mouse_exited():
 	hovering = false
-	on_upgrade_mouse_exited()
 	declare_hovered_upgrade(output_btt, output_9p_rect, output_chosen)
 
 func _on_extra_knight_upgrade_mouse_entered() -> void:
 	hovering = true
-	on_upgrade_mouse_entered(UpgradeType.KNIGHT)
 	declare_hovered_upgrade(knight_btt, e_knight_9p_rect, knight_chosen)
 
 func _on_extra_knight_upgrade_mouse_exited() -> void:
 	hovering = false
-	on_upgrade_mouse_exited()
 	declare_hovered_upgrade(knight_btt, e_knight_9p_rect, knight_chosen)
 
 func _on_toughness_button_mouse_entered() -> void:
 	hovering = true
-	on_upgrade_mouse_entered(UpgradeType.TOUGHNESS)
 	declare_hovered_upgrade(toughness_btt, toughness_9p_rect, toughness_chosen)
 
 func _on_toughness_button_mouse_exited() -> void:
 	hovering = false
-	on_upgrade_mouse_exited()
 	declare_hovered_upgrade(toughness_btt, toughness_9p_rect, toughness_chosen)
 
 func start_action_loop():
@@ -865,12 +754,11 @@ func declare_hovered_upgrade(button, ninepatch, panel):
 	var vector_hover_in := Vector2(1.05, 1.05)
 	var vector_hover_out := Vector2(1, 1)
 	var vector_position_adjust := Vector2(-8, -8)
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 	chosen_panel(panel)
 
 	if hovering:
-		print("[DECLARE_HOVERED_UPGRADE] hovering at:", button)
+		cursor_state = CursorState.FREE_HOVER_ACTION
 		tween.tween_property(
 			button,
 			"scale",
@@ -885,6 +773,7 @@ func declare_hovered_upgrade(button, ninepatch, panel):
 		).set_trans(Tween.TRANS_SINE)
 		await tween.finished
 	else:
+		cursor_state = CursorState.FREE_HOVER_VISUAL
 		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_REGULAR)
 		tween.kill()
 		await get_tree().create_timer(0.1).timeout
@@ -922,19 +811,15 @@ func nullify_others(panel):
 			knight_chosen.visible = false
 			toughness_chosen.visible = false
 			output_chosen.visible = false
-			speed_chosen.visible = true
 		output_chosen:
 			knight_chosen.visible = false
 			toughness_chosen.visible = false
-			output_chosen.visible = true
 			speed_chosen.visible = false
 		toughness_chosen:
 			knight_chosen.visible = false
-			toughness_chosen.visible = true
 			output_chosen.visible = false
 			speed_chosen.visible = false
 		knight_chosen:
-			knight_chosen.visible = true
 			toughness_chosen.visible = false
 			output_chosen.visible = false
 			speed_chosen.visible = false
@@ -1012,19 +897,16 @@ func _on_bigger_storage_pressed() -> void:
 	await animation.animation_finished
 	await get_tree().create_timer(1).timeout
 	animation.play("gold_to_mount")
-
 func _on_extra_pawn_pressed() -> void:
 	animation.play("pawn_to_meat")
 	await animation.animation_finished
 	await get_tree().create_timer(1).timeout
 	animation.play("meat_to_mount")
-
 func _on_speed_upgrade_pressed() -> void:
 	animation.play("pawn_to_wood")
 	await animation.animation_finished
 	await get_tree().create_timer(1).timeout
 	animation.play("wood_to_mount")
-
 func _on_carry_capacity_upgrade_pressed() -> void:
 	animation.play("forageing")
 
@@ -1050,10 +932,6 @@ func _on_block_pressed() -> void:
 	sticky_button = block
 	cursor_state = CursorState.STICKY_ACTION
 	switch_action(ActionType.BLOCK)
-
-func clear_sticky():
-	sticky_button = null
-	cursor_state = CursorState.NORMAL
 
 func switch_action(new_action: ActionType) -> void:
 	if current_action == new_action and pressing:
@@ -1088,3 +966,87 @@ func check_nine_patch(ninepatch):
 func _on_visual_space_mouse_entered() -> void:
 	if cursor_state == CursorState.STICKY_ACTION or CursorState.HOVER_ACTION:
 		cursor_state = CursorState.FREE_HOVER_VISUAL
+
+func _on_speed_upgrade_button_button_down() -> void:
+	cursor_state = CursorState.FREE_HOVER_UPGRADING
+	choosing = true
+	do_upgrade_feedback(UpgradeType.SPEED)
+
+func do_upgrade_feedback(type: UpgradeType):
+	var label_type := get_label_from_upgrade(type)
+	var in_time := 0.5 / upgrade_anim_speed
+	var pop_time := 0.2 / upgrade_anim_speed
+	var out_time := 0.5 / upgrade_anim_speed
+	var tween = get_tree().create_tween()
+
+	tween.tween_property(
+		label_type,
+		"theme_override_font_sizes/font_size",
+		14,
+		in_time
+	)
+	await tween.finished
+
+	try_buy_upgrade(type)
+
+	tween = get_tree().create_tween()
+	tween.tween_property(
+		label_type,
+		"theme_override_font_sizes/font_size",
+		24,
+		pop_time
+	)
+	tween.parallel().tween_property(
+		label_type,
+		"theme_override_constants/outline_size",
+		4,
+		pop_time
+	)
+	tween.chain().tween_property(
+		label_type,
+		"theme_override_font_sizes/font_size",
+		16,
+		out_time
+	)
+	tween.parallel().tween_property(
+		label_type,
+		"theme_override_constants/outline_size",
+		0,
+		out_time
+	)
+	await tween.finished
+
+func try_buy_upgrade(type: UpgradeType) -> void:
+	var up = upgrades[type]
+
+	if type == UpgradeType.KNIGHT and total_knights >= max_knights_per_run:
+		knight_label.text = "Maxed out!!"
+		return
+
+	upgrade_streak += 1
+
+	if upgrade_streak >= STREAK_THRESHOLD:
+		current_upgrade_delay -= 0.1
+		current_upgrade_delay = max(
+			MIN_UPGRADE_DELAY,
+			current_upgrade_delay 
+		)
+
+		upgrade_anim_speed = min(
+			3.0,
+			upgrade_anim_speed * 1.15
+		)
+
+	wood -= up.wood_cost
+	meat -= up.meat_cost
+	gold -= up.gold_cost
+	up.apply.call()
+	up.wood_cost = int(up.wood_cost * up.cost_mult)
+	up.meat_cost = int(up.meat_cost * up.cost_mult)
+	up.gold_cost = int(up.gold_cost * up.cost_mult)
+
+	update_upgrade_cost(type)
+	update_floating_totals()
+	if choosing:
+		await get_tree().create_timer(current_upgrade_delay).timeout
+		do_upgrade_feedback(type)
