@@ -1,15 +1,16 @@
 # 🔴🟠🟢🔵⚪
 # [QOL]🔴
-# This script has crossed the “single file maximum entropy” line.
-# Next step is not more fixes — it’s extraction:
-# ActionController.gd
-# UpgradeController.gd
-# QTEController.gd
-# UI stays here
-# If you want, next message I can:
-# extract one of those cleanly
-#or rewrite just QTE so it finally feels good
-#or do a cursor state machine (you’re halfway there already)
+# not even QOL anymore, the code is just broken completely
+# i'm at a point where i need to refactor my main script where it only:
+# divides functions into other scripts (called beforehand)
+# adjust visuals at most
+# handles all of that
+# otherwise this code will just keep on growing and becoming a gigantic monster god code, wich sucks
+# start with making the ActionController done
+# then refactor the Data script, take any numbers and and data out of this code
+# then see what's left and start ripping it out
+# makes sense that it broke, it was litterally glued together, let's try to not do that anymore
+# and start finnaly learning a little bit more about signals and shit
 # ---------------------------------------------------------------
 # [UPGRADE PANELS]🟠
 # it should register that the mouse is hovering, and, let's change it to clicking and holding
@@ -77,12 +78,6 @@ enum UpgradeType {
 	KNIGHT,
 }
 
-enum ActionType {
-	IDLE,
-	ATTACK,
-	BLOCK,
-	FORAGE,
-}
 
 enum ResourceType {
 	WOOD,
@@ -115,7 +110,7 @@ var upgrades := {
 		"gold_cost": 10,
 		"cost_mult": 1.5,
 		"apply": func():
-			animation.speed_scale *= 1.1,
+			pass,
 	},
 	UpgradeType.TOUGHNESS: {
 		"wood_cost": 20,
@@ -227,7 +222,6 @@ var upgrade_buttons := {
 	UpgradeType.TOUGHNESS: toughness_btt,
 }
 
-@onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var spd_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton/SpdLabel
 @onready var output_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton/OutputLabel
 @onready var knight_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel/ExtraKnightUpgrade/KnightLabel
@@ -282,10 +276,12 @@ var upgrade_buttons := {
 @onready var attack_choosing: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/AttackPanel/attack/AttackChoosing
 @onready var forage_choosing: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/ForagePanel/forage/ForageChoosing
 @onready var block_choosing: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block/BlockChoosing
-@onready var qte: QTEController = QTEController.new()
 @onready var action_space: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace
 @onready var visual_space: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace
 @onready var upgrade_space: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace
+
+@onready var qte: QTEController = QTEController.new()
+@onready var action_controller: ActionController = ActionController.new()
 
 # ======= NUMBERS ========
 var gold: int = 10000
@@ -326,8 +322,6 @@ var normal_offset := Vector2(-60, -60)
 
 # ======= TYPES ========
 var current_upgrade: UpgradeType
-var current_action: ActionType
-var last_action: ActionType = ActionType.IDLE
 var cursor_state: CursorState = CursorState.NORMAL
 # ========================
 
@@ -342,7 +336,6 @@ func _ready() -> void:
 	await get_tree().process_frame
 	nullify_all()
 	buttons = [attack, block, forage]
-	perform_action(ActionType.IDLE)
 	knight.visible = true
 	knight_2.visible = false
 	knight_3.visible = false
@@ -383,6 +376,13 @@ func _ready() -> void:
 	qte.qte_fail.connect(_on_qte_fail)
 	qte.start()
 
+	var current_animations_avaiable = ["attack", "block", "forage"]
+	add_child(action_controller)
+	action_controller.setup(current_animations_avaiable)
+	action_controller.action_started.connect(_on_action_started)
+	action_controller.action_active.connect(_on_action_active)
+	action_controller.action_ended.connect(_on_action_ended)
+	#action_controller.start()
 
 	update_all_upgrade_costs()
 	update_floating_totals()
@@ -458,6 +458,14 @@ func successful_qte():
 	.set_ease(Tween.EASE_IN_OUT)
 # ========================
 
+# ========= ACTION ==========
+func _on_action_started(animation):
+	pass
+func _on_action_active(animation):
+	pass
+func _on_action_ended(animation):
+	pass
+# ===========================
 
 # ======= VISUALS =========
 func update_knight_visuals(): 
@@ -623,28 +631,28 @@ func _on_block_mouse_entered() -> void:
 func _on_block_mouse_exited() -> void:
 	declare_hovered_action(block, null, block_choosing)
 
-# === shit code ===
-func _on_bigger_storage_pressed() -> void:
-	animation.play("pawn_to_gold")
-	await animation.animation_finished
-	await get_tree().create_timer(1).timeout
-	animation.play("gold_to_mount")
-func _on_extra_pawn_pressed() -> void:
-	animation.play("pawn_to_meat")
-	await animation.animation_finished
-	await get_tree().create_timer(1).timeout
-	animation.play("meat_to_mount")
-func _on_speed_upgrade_pressed() -> void:
-	animation.play("pawn_to_wood")
-	await animation.animation_finished
-	await get_tree().create_timer(1).timeout
-	animation.play("wood_to_mount")
-func _on_carry_capacity_upgrade_pressed() -> void:
-	animation.play("forageing")
-# ================
+func check_nine_patch(ninepatch, panel, panel_two, action):
+	if action:
+		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_PRESSED)
+		panel.visible = true
+		panel_two.visible = false
+	else:
+		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_REGULAR)
+		panel.visible = false
 
+func update_upgrade_patch(type: UpgradeType) -> void:
+	var patch: NinePatchRect = upgrade_patches[type]
+	var button: Button = upgrade_buttons[type]
+
+	if can_buy(type):
+		patch.texture = SMALL_RED_SQUARE_BUTTON_REGULAR
+		patch.position = Vector2(0, 0)
+		button.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_INHERITED 
+	else:
+		patch.texture = SMALL_RED_SQUARE_BUTTON_PRESSED
+		patch.position = Vector2(0, -10)
+		button.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
 # ========================
-
 
 # ======= NUMBERS ========
 func setup_timer():
@@ -662,23 +670,29 @@ func update_output_from_knights():
 
 func knights_per_purchase():
 	return int(pow(3, knight_set_level))
+
+func try_buy_upgrade(type: UpgradeType) -> void:
+	var up = upgrades[type]
+
+	if type == UpgradeType.KNIGHT and total_knights >= max_knights_per_run:
+		knight_label.text = "Maxed out!!"
+		return
+
+	wood -= up.wood_cost
+	meat -= up.meat_cost
+	gold -= up.gold_cost
+	up.apply.call()
+	up.wood_cost = int(up.wood_cost * up.cost_mult)
+	up.meat_cost = int(up.meat_cost * up.cost_mult)
+	up.gold_cost = int(up.gold_cost * up.cost_mult)
+
+	update_upgrade_cost(type)
+	update_floating_totals()
+
 # ========================
 
 
 # ======== DIFFERENTIATORS =========
-func update_upgrade_patch(type: UpgradeType) -> void:
-	var patch: NinePatchRect = upgrade_patches[type]
-	var button: Button = upgrade_buttons[type]
-
-	if can_buy(type):
-		patch.texture = SMALL_RED_SQUARE_BUTTON_REGULAR
-		patch.position = Vector2(0, 0)
-		button.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_INHERITED 
-	else:
-		patch.texture = SMALL_RED_SQUARE_BUTTON_PRESSED
-		patch.position = Vector2(0, -10)
-		button.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
-
 func get_label_from_upgrade(type: UpgradeType) -> Label:
 	match type:
 		UpgradeType.SPEED:
@@ -772,6 +786,53 @@ func declare_hovered_action(button, action, panel):
 			Vector2(0, 0),
 			0.1
 		)
+
+
+func do_upgrade_feedback(type: UpgradeType, action):
+	check_nine_patch_for_upgrade(current_upgrade, null)
+
+	if action:
+		var label_type := get_label_from_upgrade(type)
+		var in_time := 0.5 / upgrade_anim_speed
+		var pop_time := 0.2 / upgrade_anim_speed
+		var out_time := 0.5 / upgrade_anim_speed
+		var tween = get_tree().create_tween()
+		tween.tween_property(
+			label_type,
+			"theme_override_font_sizes/font_size",
+			14,
+			in_time
+		)
+		await tween.finished
+
+		try_buy_upgrade(type)
+
+		tween = get_tree().create_tween()
+		tween.tween_property(
+			label_type,
+			"theme_override_font_sizes/font_size",
+			24,
+			pop_time
+		)
+		tween.parallel().tween_property(
+			label_type,
+			"theme_override_constants/outline_size",
+			4,
+			pop_time
+		)
+		tween.chain().tween_property(
+			label_type,
+			"theme_override_font_sizes/font_size",
+			16,
+			out_time
+		)
+		tween.parallel().tween_property(
+			label_type,
+			"theme_override_constants/outline_size",
+			0,
+			out_time
+		)
+		await tween.finished
 # ========================
 
 
@@ -827,84 +888,11 @@ func _on_tab_container_tab_changed(_tab: int) -> void:
 		return
 
 func _on_attack_pressed() -> void:
-	request_switch_action(ActionType.ATTACK)
-
+	pass
 func _on_forage_pressed() -> void:
-	request_switch_action(ActionType.FORAGE)
-
+	pass
 func _on_block_pressed() -> void:
-	request_switch_action(ActionType.BLOCK)
-# ==================================
-
-
-
-
-
-
-
-
-func request_switch_action(queued_action: ActionType):
-	if looping:
-		return
-	switch_action(queued_action)
-
-func switch_action(new_action: ActionType) -> void:
-	check_nine_patch_for_action(current_action, null)
-	if current_action == new_action:
-		last_panel.visible = true
-		switch_action(ActionType.IDLE)
-		return
-	last_action = current_action
-	current_action = new_action
-	check_nine_patch_for_action(current_action, GLOBAL_ACTION)
-	start_action_loop()
-
-func start_action_loop():
-	match current_action:
-		ActionType.ATTACK:
-			current_button = attack
-			perform_action(ActionType.ATTACK)
-		ActionType.BLOCK:
-			current_button = block
-			perform_action(ActionType.BLOCK)
-		ActionType.FORAGE:
-			current_button = forage
-			perform_action(ActionType.FORAGE)
-		ActionType.IDLE:
-			current_button = null
-			perform_action(ActionType.IDLE)
-
-func perform_action(action):
-	if is_busy:
-		return
-	is_busy = true
-	match action:
-		ActionType.ATTACK:
-			animation.play("attack")
-			await animation.animation_finished
-			gold += max(output_floor, output)
-		ActionType.BLOCK:
-			animation.play("block")
-			await animation.animation_finished
-			wood += max(output_floor, output)
-		ActionType.FORAGE:
-			animation.play("forage")
-			await animation.animation_finished
-			meat += max(output_floor, output)
-		_:
-			animation.play("idle")
-	await animation.animation_finished
-	update_floating_totals()
-	is_busy = false
-
-func check_nine_patch_for_action(action: ActionType, global_action) -> void:
-	match action:
-		ActionType.ATTACK:
-			check_nine_patch(attack_9p_rect, attack_chosen, attack_choosing, global_action)
-		ActionType.BLOCK:
-			check_nine_patch(block_9p_rect, block_chosen, block_choosing, global_action)
-		ActionType.FORAGE:
-			check_nine_patch(forage_9p_rect, forage_chosen, forage_choosing, global_action)
+	pass
 
 func check_nine_patch_for_upgrade(upgrade: UpgradeType, global_action) -> void:
 	match upgrade:
@@ -916,80 +904,9 @@ func check_nine_patch_for_upgrade(upgrade: UpgradeType, global_action) -> void:
 			check_nine_patch(toughness_9p_rect, toughness_chosen, toughness_choosing, global_action)
 		UpgradeType.KNIGHT:
 			check_nine_patch(e_knight_9p_rect, knight_chosen, knight_choosing, global_action)
+# ==================================
 
-func check_nine_patch(ninepatch, panel, panel_two, action):
-	if action:
-		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_PRESSED)
-		panel.visible = true
-		panel_two.visible = false
-	else:
-		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_REGULAR)
-		panel.visible = false
-
-func do_upgrade_feedback(type: UpgradeType, action):
-	check_nine_patch_for_upgrade(current_upgrade, null)
-
-	if action:
-		var label_type := get_label_from_upgrade(type)
-		var in_time := 0.5 / upgrade_anim_speed
-		var pop_time := 0.2 / upgrade_anim_speed
-		var out_time := 0.5 / upgrade_anim_speed
-		var tween = get_tree().create_tween()
-		tween.tween_property(
-			label_type,
-			"theme_override_font_sizes/font_size",
-			14,
-			in_time
-		)
-		await tween.finished
-
-		try_buy_upgrade(type)
-
-		tween = get_tree().create_tween()
-		tween.tween_property(
-			label_type,
-			"theme_override_font_sizes/font_size",
-			24,
-			pop_time
-		)
-		tween.parallel().tween_property(
-			label_type,
-			"theme_override_constants/outline_size",
-			4,
-			pop_time
-		)
-		tween.chain().tween_property(
-			label_type,
-			"theme_override_font_sizes/font_size",
-			16,
-			out_time
-		)
-		tween.parallel().tween_property(
-			label_type,
-			"theme_override_constants/outline_size",
-			0,
-			out_time
-		)
-		await tween.finished
-
-func try_buy_upgrade(type: UpgradeType) -> void:
-	var up = upgrades[type]
-
-	if type == UpgradeType.KNIGHT and total_knights >= max_knights_per_run:
-		knight_label.text = "Maxed out!!"
-		return
-
-	wood -= up.wood_cost
-	meat -= up.meat_cost
-	gold -= up.gold_cost
-	up.apply.call()
-	up.wood_cost = int(up.wood_cost * up.cost_mult)
-	up.meat_cost = int(up.meat_cost * up.cost_mult)
-	up.gold_cost = int(up.gold_cost * up.cost_mult)
-
-	update_upgrade_cost(type)
-	update_floating_totals()
-
+# ======== SIGNAL FUNCTIONS =======
 func _on_speed_upgrade_button_mouse_entered():
 	declare_hovered_upgrade(speed_btt, GLOBAL_ACTION, speed_9p_rect, speed_choosing)
 
@@ -1019,3 +936,4 @@ func _on_speed_upgrade_button_button_down() -> void:
 
 func _on_speed_upgrade_button_button_up() -> void:
 	do_upgrade_feedback(UpgradeType.SPEED, null)
+# ==================================
