@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cbslel71cfdb3"]
 
-[ext_resource type="Script" uid="uid://nrfi2y2wrie" path="res://Scripts/main.gd" id="1_0ld40"]
+[ext_resource type="Script" uid="uid://dww7cfo3v2lu1" path="res://Scripts/Main.gd" id="1_0ld40"]
 [ext_resource type="Texture2D" uid="uid://cscjq4g3wgjmk" path="res://TinySword/UI Elements/UI Elements/Icons/smallwood.png" id="2_11yus"]
 [ext_resource type="StyleBox" uid="uid://dvhnwjwkpgr14" path="res://panelstyle.tres" id="2_b6ruc"]
 [ext_resource type="Texture2D" uid="uid://82flurevs4jv" path="res://TinySword/UI Elements/UI Elements/Icons/smallmeat.png" id="3_11yus"]
