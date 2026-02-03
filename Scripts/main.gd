@@ -459,26 +459,20 @@ func _on_action_started(action: ActionController.ActionType) -> void:
 		ActionController.ActionType.BLOCK:
 			start_block()
 
-func start_attack(): # REPLACE WITH ACTUAL START ATTACK CODE
+func start_attack():
 	is_busy = true
 
 	animation.play("attack")
 
-	lock_action_buttons()
-
-func start_forage(): # REPLACE WITH ACTUAL START FORAGE CODE
+func start_forage(): 
 	is_busy = true
 
 	animation.play("forage")
 
-	lock_action_buttons()
-
-func start_block(): # REPLACE WITH ACTUAL START BLOCK CODE
+func start_block():
 	is_busy = true
 
 	animation.play("block")
-
-	lock_action_buttons()
 
 func action_running(action):
 	print(action)
