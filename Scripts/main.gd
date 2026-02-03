@@ -25,14 +25,6 @@
 
 extends Control
 
-const original_output_correction = 0.08
-const BASE_UPGRADE_DELAY := 1
-const MIN_UPGRADE_DELAY := 0.01
-const STREAK_THRESHOLD := 1
-const MIN_OUTPUT_UPGRADE := 1.15
-const DIGIT_BASE_SIZE := 6
-const DIGIT_SCALE := 0.5
-const GLOBAL_ACTION := true
 
 const CURSOR_01 = preload("uid://bigflnfdn68dm")
 const CURSOR_02 = preload("uid://cxshok2ga3xac")
@@ -55,13 +47,7 @@ const WOODDOT = preload("uid://cuhmaq0a2nrtr")
 const WOODK = preload("uid://c7l2phebs2ogq")
 const WOODM = preload("uid://psqabx6t4f86")
 
-enum UpgradeType { 
-	TOTAL,
-	OUTPUT,
-	SPEED,
-	TOUGHNESS,
-	KNIGHT,
-}
+
 
 enum ResourceType {
 	WOOD,
@@ -73,51 +59,6 @@ enum CursorState {
 	NORMAL,
 }
 
-
-var upgrades := {
-	UpgradeType.OUTPUT: {
-		"wood_cost": 75,
-		"meat_cost": 125,
-		"gold_cost": 200,
-		"cost_mult": 2.0,
-		"apply": func():
-			@warning_ignore("narrowing_conversion")
-			output_floor *= output_multiplier
-			output_multiplier -= original_output_correction
-			output_multiplier = max(
-			output_multiplier,
-			MIN_OUTPUT_UPGRADE,
-		),
-	},
-	UpgradeType.SPEED: {
-		"wood_cost": 4,
-		"meat_cost": 5,
-		"gold_cost": 10,
-		"cost_mult": 1.5,
-		"apply": func():
-			pass,
-	},
-	UpgradeType.TOUGHNESS: {
-		"wood_cost": 20,
-		"meat_cost": 30,
-		"gold_cost": 40,
-		"cost_mult": 2.0,
-		"apply": func():
-			toughness_level += 1
-			timer_speed_multiplier *= 0.9,
-	},
-	UpgradeType.KNIGHT: {
-		"wood_cost": 4000,
-		"meat_cost": 5500,
-		"gold_cost": 8500,
-		"cost_mult": 2.5,
-		"apply": func():
-			var amount = knights_per_purchase()
-			total_knights += amount
-			update_knight_visuals()
-			update_output_from_knights(),
-	},
-}
 
 var numbers := {
 	ResourceType.WOOD: {
@@ -166,27 +107,27 @@ var suffixes := {
 }
 
 var upgrade_digit_containers := {
-	UpgradeType.TOTAL: {
+	DataHandler.TOTAL: {
 		ResourceType.WOOD: null,
 		ResourceType.MEAT: null,
 		ResourceType.GOLD: null,
 	},
-	UpgradeType.SPEED: {
+	UpgradeController.UpgradeType.SPEED: {
 		ResourceType.WOOD: null,
 		ResourceType.MEAT: null,
 		ResourceType.GOLD: null,
 	},
-	UpgradeType.OUTPUT: {
+	UpgradeController.UpgradeType.OUTPUT: {
 		ResourceType.WOOD: null,
 		ResourceType.MEAT: null,
 		ResourceType.GOLD: null,
 	},
-	UpgradeType.KNIGHT: {
+	UpgradeController.UpgradeType.KNIGHT: {
 		ResourceType.WOOD: null,
 		ResourceType.MEAT: null,
 		ResourceType.GOLD: null,
 	},
-	UpgradeType.TOUGHNESS: {
+	UpgradeController.UpgradeType.TOUGHNESS: {
 		ResourceType.WOOD: null,
 		ResourceType.MEAT: null,
 		ResourceType.GOLD: null,
@@ -194,17 +135,17 @@ var upgrade_digit_containers := {
 }
 
 var upgrade_patches := {
-	UpgradeType.SPEED: speed_9p_rect,
-	UpgradeType.OUTPUT: output_9p_rect,
-	UpgradeType.KNIGHT: e_knight_9p_rect,
-	UpgradeType.TOUGHNESS: toughness_9p_rect,
+	UpgradeController.UpgradeType.SPEED: speed_9p_rect,
+	UpgradeController.UpgradeType.OUTPUT: output_9p_rect,
+	UpgradeController.UpgradeType.KNIGHT: e_knight_9p_rect,
+	UpgradeController.UpgradeType.TOUGHNESS: toughness_9p_rect,
 }
 
 var upgrade_buttons := {
-	UpgradeType.SPEED: speed_btt,
-	UpgradeType.OUTPUT: output_btt,
-	UpgradeType.KNIGHT: knight_btt,
-	UpgradeType.TOUGHNESS: toughness_btt,
+	UpgradeController.UpgradeType.SPEED: speed_btt,
+	UpgradeController.UpgradeType.OUTPUT: output_btt,
+	UpgradeController.UpgradeType.KNIGHT: knight_btt,
+	UpgradeController.UpgradeType.TOUGHNESS: toughness_btt,
 }
 
 @onready var spd_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton/SpdLabel
@@ -266,33 +207,21 @@ var upgrade_buttons := {
 @onready var upgrade_space: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var action_panels := [
-	$AttackPanel,
-	$ForagePanel,
-	$BlockPanel,
+	$TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/AttackPanel,
+	$TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/ForagePanel,
+	$TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel,
 ]
 
 @onready var qte: QTEController = QTEController.new()
 @onready var action_controller: ActionController = ActionController.new()
 
 # ======= NUMBERS ========
-var gold: int = 10000
-var meat: int = 100000
-var wood: int = 1000000
-var time_left := 120.0
-var output_floor := 1.0
-var output := 1.0
+
 var output_tween: Tween
-var output_multiplier := 2.0
-var knight_set_level := 0
-var toughness_level := 0
-var timer_speed_multiplier: float = 1.0
-var max_knights_per_run: int = 3
-var total_knights: int = 1
-var current_upgrade_delay := BASE_UPGRADE_DELAY
-var upgrade_streak := 0
-var upgrade_anim_speed := 1.5
-var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-var heat := 1.8
+
+
+
+
 # ========================
 
 # ======= ARRAYS ========
@@ -311,11 +240,7 @@ var normal_offset := Vector2(-60, -60)
 # ========================
 
 # ======= TYPES ========
-var current_upgrade: UpgradeType
 var cursor_state: CursorState = CursorState.NORMAL
-# ========================
-
-# ======= NODES ========
 var sticky_button: Button = null
 var last_panel: NinePatchRect 
 var current_button: Button
@@ -367,9 +292,6 @@ func _ready() -> void:
 
 	add_child(action_controller)
 	action_controller.current_action.connect(_on_action_started)
-
-	for panel in action_panels:
-		panel.action_pressed.connect(_on_action_pressed)
 
 	update_all_upgrade_costs()
 	update_floating_totals()
@@ -561,7 +483,7 @@ func check_nine_patch(ninepatch, panel, panel_two, action):
 		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_REGULAR)
 		panel.visible = false
 
-func update_upgrade_patch(type: UpgradeType) -> void:
+func update_upgrade_patch(type: UpgradeType) -> void: # signal here
 	var patch: NinePatchRect = upgrade_patches[type]
 	var button: Button = upgrade_buttons[type]
 
@@ -574,20 +496,18 @@ func update_upgrade_patch(type: UpgradeType) -> void:
 		patch.position = Vector2(0, -10)
 		button.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
 
-func do_upgrade_feedback(type: UpgradeType, action):
+func do_upgrade_feedback(type: UpgradeType, action): # signal here
 	check_nine_patch_for_upgrade(current_upgrade, null)
 
 	if action:
 		var label_type := get_label_from_upgrade(type)
-		var in_time := 0.5 / upgrade_anim_speed
-		var pop_time := 0.2 / upgrade_anim_speed
-		var out_time := 0.5 / upgrade_anim_speed
+
 		var tween = get_tree().create_tween()
 		tween.tween_property(
 			label_type,
 			"theme_override_font_sizes/font_size",
 			14,
-			in_time
+			DataHandler.in_time
 		)
 		await tween.finished
 
@@ -598,25 +518,25 @@ func do_upgrade_feedback(type: UpgradeType, action):
 			label_type,
 			"theme_override_font_sizes/font_size",
 			24,
-			pop_time
+			DataHandler.pop_time
 		)
 		tween.parallel().tween_property(
 			label_type,
 			"theme_override_constants/outline_size",
 			4,
-			pop_time
+			DataHandler.pop_time
 		)
 		tween.chain().tween_property(
 			label_type,
 			"theme_override_font_sizes/font_size",
 			16,
-			out_time
+			DataHandler.out_time
 		)
 		tween.parallel().tween_property(
 			label_type,
 			"theme_override_constants/outline_size",
 			0,
-			out_time
+			DataHandler.out_time
 		)
 		await tween.finished
 
