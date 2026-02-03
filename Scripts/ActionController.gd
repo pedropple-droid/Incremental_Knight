@@ -1,48 +1,43 @@
 extends Node
-<<<<<<< HEAD
-<<<<<<< HEAD
 class_name ActionController
-@onready var main: Control = $"."
-=======
->>>>>>> parent of 5ddee56 (0.1.1.5.6)
 
+signal current_action
 
-<<<<<<< HEAD
-var animations: Array = []
-var animation_running = null
-var performing := false
+enum ActionType { 
+	ATTACK,
+	FORAGE,
+	BLOCK,
+	IDLE,
+}
 
-func _ready() -> void:
-	main.action_queued.connect()
+var actions := {
+	ActionType.ATTACK: {
+		"animation": "attack",
+		"resource": "gold",
+	},
+	ActionType.FORAGE: {
+		"animation": "forage",
+		"resource": "meat",
+	},
+	ActionType.BLOCK: {
+		"animation": "block",
+		"resource": "wood",
+	},
+	ActionType.IDLE: {
+		"animation": "idle",
+		"resource": null,
+	}
+}
 
-func setup(animations_avaiable) -> void:
-	animations = animations_avaiable
+var action_running = ActionType.IDLE
+var old_action = null
 
-func action_queued() -> void:
-	pass
+func action_clicked(action: ActionType) -> void:
+	if action_running != ActionType.IDLE:
+		return
+	old_action = action_running
+	action_running = action
+	current_action.emit(action_running)
 
 func action_active() -> void:
-	pass
-
-func action_ended() -> void:
-=======
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
->>>>>>> parent of 5ddee56 (0.1.1.5.6)
-=======
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
->>>>>>> parent of 5ddee56 (0.1.1.5.6)
-	pass
+	current_action.emit(action_running)
