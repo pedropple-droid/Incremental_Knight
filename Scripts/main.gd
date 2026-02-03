@@ -38,7 +38,11 @@
 
 extends Control
 
+<<<<<<< HEAD
 signal action_queued
+=======
+const MAIN_2 = preload("uid://ey2i670agjff")
+>>>>>>> parent of 2163f38 (0.1.1.5.5)
 
 const original_output_correction = 0.08
 const BASE_UPGRADE_DELAY := 1
@@ -137,6 +141,21 @@ var upgrades := {
 			total_knights += amount
 			update_knight_visuals()
 			update_output_from_knights(),
+	},
+}
+
+var actions := {
+	ActionType.ATTACK: {
+		"animation": "attack",
+		"resource": "gold",
+	},
+	ActionType.FORAGE: {
+		"animation": "forage",
+		"resource": "meat",
+	},
+	ActionType.BLOCK: {
+		"animation": "block",
+		"resource": "wood",
 	},
 }
 
@@ -283,15 +302,16 @@ var upgrade_buttons := {
 @onready var attack_choosing: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/AttackPanel/attack/AttackChoosing
 @onready var forage_choosing: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/ForagePanel/forage/ForageChoosing
 @onready var block_choosing: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block/BlockChoosing
-@onready var qte: QTEController = QTEController.new()
+
 @onready var action_space: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace
 @onready var visual_space: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace
 @onready var upgrade_space: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace
 
-# ======= NUMBERS ========
-var gold: int = 10000
-var meat: int = 100000
-var wood: int = 1000000
+var buttons: Array
+var gold: int = 0
+var meat: int = 0
+var wood: int = 0
+
 var time_left := 120.0
 var output_floor := 1.0
 var output := 1.0
@@ -302,42 +322,31 @@ var toughness_level := 0
 var timer_speed_multiplier: float = 1.0
 var max_knights_per_run: int = 3
 var total_knights: int = 1
+
+var looping := false
+var is_busy := false
+
 var current_upgrade_delay := BASE_UPGRADE_DELAY
 var upgrade_streak := 0
 var upgrade_anim_speed := 1.5
-var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-var heat := 1.8
-# ========================
 
-# ======= ARRAYS ========
-var buttons: Array
-# ========================
+var last_action: ActionType = ActionType.IDLE
+var last_panel: NinePatchRect 
 
-# ======= BOOLS ========
-var looping := false
-var is_busy := false
-var at_pawn := false
-# ========================
-
-# ======= VECTOR2 ========
-var sticky_offset := Vector2(-6, 0)
-var normal_offset := Vector2(-60, -60)
-# ========================
-
-
-# ======= TYPES ========
 var current_upgrade: UpgradeType
 var current_action: ActionType
-var last_action: ActionType = ActionType.IDLE
-var cursor_state: CursorState = CursorState.NORMAL
-# ========================
-
-
-# ======= NODES ========
-var sticky_button: Button = null
-var last_panel: NinePatchRect 
 var current_button: Button
-# ========================
+
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
+var heat := 1.8
+
+var at_pawn := false
+
+var cursor_state := CursorState.NORMAL
+var sticky_button: Button = null
+var sticky_offset := Vector2(-6, 0)
+var normal_offset := Vector2(-60, -60)
 
 func _ready() -> void:
 	await get_tree().process_frame
@@ -377,6 +386,7 @@ func _ready() -> void:
 	upgrade_buttons[UpgradeType.KNIGHT] = knight_btt
 	upgrade_buttons[UpgradeType.TOUGHNESS] = toughness_btt
 
+<<<<<<< HEAD
 	add_child(qte)
 	qte.setup([attack, block, forage])
 	qte.qte_started.connect(_on_qte_started)
@@ -393,8 +403,11 @@ func _ready() -> void:
 =======
 >>>>>>> parent of 5ddee56 (0.1.1.5.6)
 
+=======
+>>>>>>> parent of 2163f38 (0.1.1.5.5)
 	update_all_upgrade_costs()
 	update_floating_totals()
+	start_qte_loop()
 	setup_timer()
 	nullify_all()
 
@@ -409,20 +422,17 @@ func _process(delta):
 	time_left = max(time_left - delta * timer_speed_multiplier, 0)
 	timer_label.text = format_time(time_left)
 
-# ========= QTE ==========
-func _on_qte_started(button: Button) -> void:
-	# VISUAL ONLY
-	var tween := get_tree().create_tween()
-	tween.tween_property(
-		button,
-		"modulate",
-		Color(1.1, 1.2, 0.0),
-		0.3
-	)
+func setup_timer():
+	countdown_timer.start()
 
-func _on_qte_success(button: Button) -> void:
-	successful_qte()
+func format_time(seconds: float) -> String:
+	var s := int(seconds)
+	@warning_ignore("integer_division")
+	var mins := s / 60
+	var secs := s % 60
+	return "%02d:%02d" % [mins, secs]
 
+<<<<<<< HEAD
 	var tween := get_tree().create_tween()
 	tween.tween_property(
 		button,
@@ -474,6 +484,12 @@ func action_clicked(animation):
 
 func _on_attack_mouse_entered() -> void:
 	declare_hovered_action(attack, GLOBAL_ACTION, attack_choosing)
+=======
+func update_knight_visuals(): 
+	knight.visible = total_knights >= 1
+	knight_2.visible = total_knights >= 2
+	knight_3.visible = total_knights >= 3
+>>>>>>> parent of 2163f38 (0.1.1.5.5)
 
 func _on_attack_mouse_exited() -> void:
 	declare_hovered_action(attack, null, attack_choosing)
@@ -549,6 +565,7 @@ func update_all_upgrade_patches() -> void:
 	for type in upgrade_patches.keys():
 		update_upgrade_patch(type)
 
+<<<<<<< HEAD
 func check_nine_patch(ninepatch, panel, panel_two, action):
 	if action:
 		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_PRESSED)
@@ -558,6 +575,8 @@ func check_nine_patch(ninepatch, panel, panel_two, action):
 		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_REGULAR)
 		panel.visible = false
 
+=======
+>>>>>>> parent of 2163f38 (0.1.1.5.5)
 func update_upgrade_patch(type: UpgradeType) -> void:
 	var patch: NinePatchRect = upgrade_patches[type]
 	var button: Button = upgrade_buttons[type]
@@ -571,6 +590,7 @@ func update_upgrade_patch(type: UpgradeType) -> void:
 		patch.position = Vector2(0, -10)
 		button.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
 
+<<<<<<< HEAD
 func do_upgrade_feedback(type: UpgradeType, action):
 	check_nine_patch_for_upgrade(current_upgrade, null)
 
@@ -736,6 +756,13 @@ func check_nine_patch_for_upgrade(upgrade: UpgradeType, global_action) -> void:
 			check_nine_patch(toughness_9p_rect, toughness_chosen, toughness_choosing, global_action)
 		UpgradeType.KNIGHT:
 			check_nine_patch(e_knight_9p_rect, knight_chosen, knight_choosing, global_action)
+=======
+func update_output_from_knights():
+	output *= total_knights
+
+func knights_per_purchase():
+	return int(pow(3, knight_set_level))
+>>>>>>> parent of 2163f38 (0.1.1.5.5)
 
 func can_buy(type: UpgradeType) -> bool:
 	var up = upgrades[type]
@@ -749,6 +776,7 @@ func can_buy(type: UpgradeType) -> bool:
 		return false
 	return true
 
+<<<<<<< HEAD
 func chosen_panel(panel, action):
 	if action:
 		panel.visible = true
@@ -770,6 +798,25 @@ func update_knight_visuals():
 # ================================
 
 # ======= VISUALS =========
+=======
+func get_label_from_upgrade(type: UpgradeType) -> Label:
+	match type:
+		UpgradeType.SPEED:
+			return spd_label
+		UpgradeType.OUTPUT:
+			return output_label
+		UpgradeType.KNIGHT:
+			return knight_label
+		UpgradeType.TOUGHNESS:
+			return toughness_label
+	return null
+
+
+func clear_container(container: Container) -> void:
+	for child in container.get_children():
+		child.queue_free()
+
+>>>>>>> parent of 2163f38 (0.1.1.5.5)
 func set_number_icons(
 	container: HBoxContainer,
 	value: int,
@@ -794,6 +841,7 @@ func set_number_icons(
 		icon.texture = suffixes[suffix]
 		container.add_child(icon)
 
+<<<<<<< HEAD
 func clear_container(container: Container) -> void:
 	for child in container.get_children():
 		child.queue_free()
@@ -825,6 +873,16 @@ func abbreviate_number(value: int) -> Dictionary:
 			"number_str": str(rounded),
 			"suffix": "B"
 		}
+=======
+func update_all_upgrade_costs() -> void:
+	for type in upgrades.keys():
+		update_upgrade_cost(type)
+
+func update_upgrade_cost(type: UpgradeType) -> void:
+	var up = upgrades[type]
+	var containers = upgrade_digit_containers[type]
+	set_crossroad(up, containers)
+>>>>>>> parent of 2163f38 (0.1.1.5.5)
 
 func update_floating_totals() -> void:
 	var containers = upgrade_digit_containers[UpgradeType.TOTAL]
@@ -865,6 +923,171 @@ func set_crossroad(up, containers):
 		up.gold_cost,
 		ResourceType.GOLD
 	)
+
+func abbreviate_number(value: int) -> Dictionary:
+	if value < 1_000:
+		return {
+			"number_str": str(value),
+			"suffix": ""
+		}
+	elif value < 1_000_000:
+		@warning_ignore("integer_division")
+		var rounded = int(value/1_000)
+		return {
+			"number_str": str(rounded),
+			"suffix": "K"
+		}
+	elif value < 1_000_000_000:
+		@warning_ignore("integer_division")
+		var rounded = int(value/1_000_000)
+		return {
+			"number_str": str(rounded),
+			"suffix": "M"
+		}
+	else:
+		@warning_ignore("integer_division")
+		var rounded = int(value/1_000_000_000)
+		return {
+			"number_str": str(rounded),
+			"suffix": "B"
+		}
+
+func start_qte_loop():
+	var random_interval = rng.randf_range(2.0, 4.0)
+	await get_tree().create_timer(random_interval).timeout
+	awarn_qte()
+
+func awarn_qte():
+	var random_choice = buttons.pick_random()
+	tween_chosen_action(random_choice)
+
+func tween_chosen_action(action):
+	var tween = get_tree().create_tween()
+	var qte_check := 1.2
+	
+	tween.tween_property(
+		action,
+		"modulate",
+		Color(1.07, 1.222, 0.0, 1.0),
+		qte_check,
+	)
+	
+	await tween.finished
+	play_qte(action)
+
+func play_qte(chosen_button):
+	var tween = get_tree().create_tween()
+	var qte_check := 0.2
+
+	tween.tween_property(
+		chosen_button,
+		"modulate",
+		Color(1.0, 1.0, 1.0),
+		qte_check,
+	)
+
+	if chosen_button == current_button:
+		tween.tween_property(
+			chosen_button,
+			"modulate",
+			Color(0.0, 1.544, 0.0, 1.0),
+			qte_check
+		)
+		successful_qte()
+		tween.chain().tween_property(
+			chosen_button,
+			"modulate",
+			Color(1.0, 1.0, 1.0),
+			qte_check*2
+		)
+	else:
+		tween.tween_property(
+			chosen_button,
+			"modulate",
+			Color(1.551, 0.135, 0.0, 1.0),
+			qte_check
+		)
+		tween.chain().tween_property(
+			chosen_button,
+			"modulate",
+			Color(1.0, 1.0, 1.0),
+			qte_check*2
+		)
+
+	await tween.finished
+	tween.kill()
+	close_qte_loop()
+
+func close_qte_loop():
+	start_qte_loop()
+
+func successful_qte():
+	if output_tween and output_tween.is_running():
+		output_tween.kill()
+	output += (output_floor * (heat - 1.0)) * 0.8
+	output_tween = get_tree().create_tween()
+	output_tween.tween_property(
+		self,
+		"output",
+		output_floor,
+		10.0
+	).set_delay(1.5)\
+	.set_trans(Tween.TRANS_EXPO)\
+	.set_ease(Tween.EASE_IN_OUT)
+
+func declare_hovered_upgrade(button, action, ninepatch, panel):
+	var tween = get_tree().create_tween()
+	var vector_hover_in := Vector2(1.05, 1.05)
+	var vector_hover_out := Vector2(1, 1)
+	var vector_position_adjust := Vector2(-8, -8)
+
+	if action:
+		choosing_panel(panel, GLOBAL_ACTION)
+		tween.tween_property(
+			button,
+			"scale",
+			vector_hover_in,
+			0.2
+		).set_trans(Tween.TRANS_SINE)
+		tween.parallel().tween_property(
+			button,
+			"position",
+			vector_position_adjust,
+			0.2
+		).set_trans(Tween.TRANS_SINE)
+		await tween.finished
+	else:
+		choosing_panel(panel, null)
+		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_REGULAR)
+		tween.kill()
+		await get_tree().create_timer(0.1).timeout
+		tween = get_tree().create_tween()
+		tween.tween_property(
+			button,
+			"scale",
+			vector_hover_out,
+			0.1
+		).set_trans(Tween.TRANS_BACK)
+		tween.parallel().tween_property(
+			button,
+			"position",
+			Vector2 (0, 0),
+			0.1
+		).set_trans(Tween.TRANS_BACK)
+
+func chosen_panel(panel, action):
+	if action:
+		panel.visible = true
+	else:
+		panel.visible = false
+	nullify_others(panel)
+
+func choosing_panel(panel, action):
+	if action:
+		panel.visible = true
+	else:
+		panel.visible = false
+	nullify_others(panel)
 
 func nullify_others(panel):
 	match panel:
@@ -912,6 +1135,7 @@ func nullify_all():
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 func _on_attack_mouse_entered() -> void:
 	declare_hovered_action(attack, GLOBAL_ACTION, attack_choosing)
 
@@ -1041,6 +1265,8 @@ func declare_hovered_upgrade(button, action, ninepatch, panel):
 			0.1
 		).set_trans(Tween.TRANS_BACK)
 
+=======
+>>>>>>> parent of 2163f38 (0.1.1.5.5)
 func declare_hovered_action(button, action, panel):
 	if button == current_button:
 		return
@@ -1082,51 +1308,42 @@ func declare_hovered_action(button, action, panel):
 			Vector2(0, 0),
 			0.1
 		)
-# ========================
 
+func _on_attack_mouse_entered() -> void:
+	declare_hovered_action(attack, GLOBAL_ACTION, attack_choosing)
 
-# ======== BOOL FUNCTIONS =========
-func can_buy(type: UpgradeType) -> bool:
-	var up = upgrades[type]
-	if wood < up["wood_cost"]:
-		return false
-	if meat < up["meat_cost"]:
-		return false
-	if gold < up["gold_cost"]:
-		return false
-	if type == UpgradeType.KNIGHT and total_knights >= max_knights_per_run:
-		return false
-	return true
+func _on_attack_mouse_exited() -> void:
+	declare_hovered_action(attack, null, attack_choosing)
 
-func chosen_panel(panel, action):
-	if action:
-		panel.visible = true
-	else:
-		panel.visible = false
-	nullify_others(panel)
+func _on_forage_mouse_entered() -> void:
+	declare_hovered_action(forage, GLOBAL_ACTION, forage_choosing)
 
-func choosing_panel(panel, action):
-	if action:
-		panel.visible = true
-	else:
-		panel.visible = false
-	nullify_others(panel)
-# ==================================
+func _on_forage_mouse_exited() -> void:
+	declare_hovered_action(forage, null, forage_choosing)
 
+func _on_block_mouse_entered() -> void:
+	declare_hovered_action(block, GLOBAL_ACTION, block_choosing)
 
-# ======== AUXILIAR FUNCTIONS =======
-func clear_container(container: Container) -> void:
-	for child in container.get_children():
-		child.queue_free()
+func _on_block_mouse_exited() -> void:
+	declare_hovered_action(block, null, block_choosing)
 
-func update_all_upgrade_costs() -> void:
-	for type in upgrades.keys():
-		update_upgrade_cost(type)
-
-func update_upgrade_cost(type: UpgradeType) -> void:
-	var up = upgrades[type]
-	var containers = upgrade_digit_containers[type]
-	set_crossroad(up, containers)
+func _on_bigger_storage_pressed() -> void:
+	animation.play("pawn_to_gold")
+	await animation.animation_finished
+	await get_tree().create_timer(1).timeout
+	animation.play("gold_to_mount")
+func _on_extra_pawn_pressed() -> void:
+	animation.play("pawn_to_meat")
+	await animation.animation_finished
+	await get_tree().create_timer(1).timeout
+	animation.play("meat_to_mount")
+func _on_speed_upgrade_pressed() -> void:
+	animation.play("pawn_to_wood")
+	await animation.animation_finished
+	await get_tree().create_timer(1).timeout
+	animation.play("wood_to_mount")
+func _on_carry_capacity_upgrade_pressed() -> void:
+	animation.play("forageing")
 
 func _on_tab_container_tab_changed(_tab: int) -> void:
 	if at_pawn:
@@ -1144,14 +1361,6 @@ func _on_forage_pressed() -> void:
 
 func _on_block_pressed() -> void:
 	request_switch_action(ActionType.BLOCK)
-# ==================================
-
-
-
-
-
-
-
 
 func request_switch_action(queued_action: ActionType):
 	if looping:

@@ -1,0 +1,275 @@
+[gd_scene load_steps=4 format=3 uid="uid://ey2i670agjff"]
+
+[ext_resource type="Script" uid="uid://y0su3to2evjo" path="res://Scripts/main_2.gd" id="1_1k1ng"]
+[ext_resource type="Texture2D" uid="uid://dt8lebws3jmw6" path="res://UnitsTextureRect/WarAtt_2/warriorattack1.png" id="5_c40c1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eq8gu"]
+
+[node name="Main2" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1k1ng")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="MiningSpace" type="PanelContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_eq8gu")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="row1" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Knight" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row1"]
+texture_filter = 3
+layout_mode = 2
+texture = ExtResource("5_c40c1")
+stretch_mode = 3
+
+[node name="Knight2" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row1"]
+texture_filter = 3
+layout_mode = 2
+texture = ExtResource("5_c40c1")
+stretch_mode = 3
+
+[node name="Knight3" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row1"]
+texture_filter = 3
+layout_mode = 2
+texture = ExtResource("5_c40c1")
+stretch_mode = 3
+
+[node name="row2" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Knight" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row2"]
+texture_filter = 3
+layout_mode = 2
+texture = ExtResource("5_c40c1")
+stretch_mode = 3
+
+[node name="Knight2" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row2"]
+texture_filter = 3
+layout_mode = 2
+texture = ExtResource("5_c40c1")
+stretch_mode = 3
+
+[node name="Knight3" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row2"]
+texture_filter = 3
+layout_mode = 2
+texture = ExtResource("5_c40c1")
+stretch_mode = 3
+
+[node name="row3" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Knight" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row3"]
+texture_filter = 3
+layout_mode = 2
+texture = ExtResource("5_c40c1")
+stretch_mode = 3
+
+[node name="Knight2" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row3"]
+texture_filter = 3
+layout_mode = 2
+texture = ExtResource("5_c40c1")
+stretch_mode = 3
+
+[node name="Knight3" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/VBoxContainer/row3"]
+texture_filter = 3
+layout_mode = 2
+texture = ExtResource("5_c40c1")
+stretch_mode = 3
+
+[node name="Button" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "attack"
+
+[node name="Upgrades" type="PanelContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_eq8gu")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Upgrades"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedUpgradeButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton/CenterContainer"]
+z_index = 1
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.979693, 0.97969264, 1.540184e-05, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Spd"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OutputUpgradeButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton/CenterContainer"]
+z_index = 1
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.979693, 0.97969264, 1.540184e-05, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Spd"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExtraKnightUpgrade" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade/CenterContainer"]
+z_index = 1
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.979693, 0.97969264, 1.540184e-05, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Spd"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WinButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton/CenterContainer"]
+z_index = 1
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.979693, 0.97969264, 1.540184e-05, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Spd"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/Button" to="." method="_on_button_button_down"]
+[connection signal="button_up" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/MiningSpace/MarginContainer/VBoxContainer/Button" to="." method="_on_button_button_up"]
+[connection signal="mouse_entered" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton" to="." method="_on_speed_upgrade_button_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgradeButton" to="." method="_on_speed_upgrade_button_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton" to="." method="_on_output_upgrade_button_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/OutputUpgradeButton" to="." method="_on_output_upgrade_button_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade" to="." method="_on_extra_knight_upgrade_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraKnightUpgrade" to="." method="_on_extra_knight_upgrade_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton" to="." method="_on_win_button_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/WinButton" to="." method="_on_win_button_mouse_exited"]
