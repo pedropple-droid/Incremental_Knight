@@ -25,6 +25,8 @@
 
 extends Control
 
+signal action_queued
+
 const original_output_correction = 0.08
 const BASE_UPGRADE_DELAY := 1
 const MIN_UPGRADE_DELAY := 0.01
@@ -63,6 +65,7 @@ enum UpgradeType {
 	KNIGHT,
 }
 
+
 enum ResourceType {
 	WOOD,
 	MEAT,
@@ -72,7 +75,6 @@ enum ResourceType {
 enum CursorState {
 	NORMAL,
 }
-
 
 var upgrades := {
 	UpgradeType.OUTPUT: {
@@ -264,12 +266,6 @@ var upgrade_buttons := {
 @onready var action_space: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace
 @onready var visual_space: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace
 @onready var upgrade_space: PanelContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace
-@onready var animation: AnimationPlayer = $AnimationPlayer
-@onready var action_panels := [
-	$AttackPanel,
-	$ForagePanel,
-	$BlockPanel,
-]
 
 @onready var qte: QTEController = QTEController.new()
 @onready var action_controller: ActionController = ActionController.new()
@@ -310,10 +306,12 @@ var sticky_offset := Vector2(-6, 0)
 var normal_offset := Vector2(-60, -60)
 # ========================
 
+
 # ======= TYPES ========
 var current_upgrade: UpgradeType
 var cursor_state: CursorState = CursorState.NORMAL
 # ========================
+
 
 # ======= NODES ========
 var sticky_button: Button = null
@@ -365,11 +363,11 @@ func _ready() -> void:
 	qte.qte_fail.connect(_on_qte_fail)
 	qte.start()
 
+	var current_animations_avaiable = ["attack", "block", "forage"]
 	add_child(action_controller)
-	action_controller.current_action.connect(_on_action_started)
+	action_controller.setup(current_animations_avaiable)
 
-	for panel in action_panels:
-		panel.action_pressed.connect(_on_action_pressed)
+	#action_controller.start()
 
 	update_all_upgrade_costs()
 	update_floating_totals()
@@ -386,10 +384,6 @@ func _process(delta):
 		update_upgrade_patch(type)
 	time_left = max(time_left - delta * timer_speed_multiplier, 0)
 	timer_label.text = format_time(time_left)
-
-func _on_action_pressed(action_type: ActionController.ActionType) -> void:
-	action_controller.action_clicked(action_type)
-
 
 # ========= QTE ==========
 func _on_qte_started(button: Button) -> void:
@@ -450,38 +444,8 @@ func successful_qte():
 # ========================
 
 # ========= ACTION ==========
-func _on_action_started(action: ActionController.ActionType) -> void:
-	match action:
-		ActionController.ActionType.ATTACK:
-			start_attack()
-		ActionController.ActionType.FORAGE:
-			start_forage()
-		ActionController.ActionType.BLOCK:
-			start_block()
-
-func start_attack(): # REPLACE WITH ACTUAL START ATTACK CODE
-	is_busy = true
-
-	animation.play("attack")
-
-	lock_action_buttons()
-
-func start_forage(): # REPLACE WITH ACTUAL START FORAGE CODE
-	is_busy = true
-
-	animation.play("forage")
-
-	lock_action_buttons()
-
-func start_block(): # REPLACE WITH ACTUAL START BLOCK CODE
-	is_busy = true
-
-	animation.play("block")
-
-	lock_action_buttons()
-
-func action_running(action):
-	print(action)
+func action_clicked(animation):
+	action_queued.emit()
 
 func _on_attack_mouse_entered() -> void:
 	declare_hovered_action(attack, GLOBAL_ACTION, attack_choosing)
@@ -544,13 +508,13 @@ func declare_hovered_action(button, action, panel):
 		)
 
 func _on_attack_pressed() -> void:
-	action_controller.action_clicked(action_controller.ActionType.ATTACK)
+	action_clicked(attack)
 
 func _on_forage_pressed() -> void:
-	action_controller.action_clicked(action_controller.ActionType.FORAGE)
+	action_clicked(forage)
 
 func _on_block_pressed() -> void:
-	action_controller.action_clicked(action_controller.ActionType.BLOCK)
+	action_clicked(block)
 # ===========================
 
 # =========== UPGRADE ============

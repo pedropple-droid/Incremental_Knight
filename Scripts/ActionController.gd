@@ -1,43 +1,29 @@
 extends Node
 class_name ActionController
+@onready var main: Control = $"."
 
-signal current_action
-
-enum ActionType { 
-	ATTACK,
-	FORAGE,
-	BLOCK,
+enum ActionType {
 	IDLE,
+	ATTACK,
+	BLOCK,
+	FORAGE,
 }
 
-var actions := {
-	ActionType.ATTACK: {
-		"animation": "attack",
-		"resource": "gold",
-	},
-	ActionType.FORAGE: {
-		"animation": "forage",
-		"resource": "meat",
-	},
-	ActionType.BLOCK: {
-		"animation": "block",
-		"resource": "wood",
-	},
-	ActionType.IDLE: {
-		"animation": "idle",
-		"resource": null,
-	}
-}
+var animations: Array = []
+var animation_running = null
+var performing := false
 
-var action_running = ActionType.IDLE
-var old_action = null
+func _ready() -> void:
+	main.action_queued.connect()
 
-func action_clicked(action: ActionType) -> void:
-	if action_running != ActionType.IDLE:
-		return
-	old_action = action_running
-	action_running = action
-	current_action.emit(action_running)
+func setup(animations_avaiable) -> void:
+	animations = animations_avaiable
+
+func action_queued() -> void:
+	pass
 
 func action_active() -> void:
-	current_action.emit(action_running)
+	pass
+
+func action_ended() -> void:
+	pass
