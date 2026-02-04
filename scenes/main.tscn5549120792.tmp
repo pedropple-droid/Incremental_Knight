@@ -38,7 +38,6 @@
 [ext_resource type="Texture2D" uid="uid://bm46om57pmjta" path="res://UnitsTextureRect/NativeSprites/Idle/WarriorIdle7.png" id="51_augu2"]
 [ext_resource type="Texture2D" uid="uid://pcuq8484b6i1" path="res://UnitsTextureRect/NativeSprites/Idle/WarriorIdle8.png" id="52_tm6hj"]
 [ext_resource type="Texture2D" uid="uid://m2j7b6we60s3" path="res://TinySword/UI Elements/UI Elements/Cursors/Cursor_04.png" id="53_o7ddy"]
-[ext_resource type="Script" uid="uid://blbjv4038df5e" path="res://Scripts/VisualController.gd" id="55_ids8r"]
 [ext_resource type="Texture2D" uid="uid://d0duj1ps1bkyy" path="res://UnitsTextureRect/WarBlock/WarBlock1.png" id="62_152kg"]
 [ext_resource type="Texture2D" uid="uid://d1yslcusj5pb" path="res://UnitsTextureRect/WarBlock/WarBlock2.png" id="63_r4e17"]
 [ext_resource type="Texture2D" uid="uid://cw4oklbkw4stc" path="res://UnitsTextureRect/WarBlock/WarBlock4.png" id="65_mlv25"]
@@ -1796,12 +1795,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 texture = ExtResource("53_o7ddy")
-
-[node name="VisualController" type="Control" parent="." unique_id=271225021]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("55_ids8r")
 
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/AttackPanel/attack" to="." method="_on_attack_mouse_entered"]

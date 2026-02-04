@@ -8,7 +8,6 @@ var current_upgrade: UpgradeType
 func _ready() -> void:
 	add_child(data_handler)
 
-
 enum UpgradeType { 
 	OUTPUT,
 	SPEED,

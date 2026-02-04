@@ -217,10 +217,6 @@ var upgrade_buttons := {
 
 var output_tween: Tween
 
-# ======= ARRAYS ========
-var buttons: Array
-# ========================
-
 # ======= BOOLS ========
 var looping := false
 var is_busy := false
@@ -234,15 +230,20 @@ var normal_offset := Vector2(-60, -60)
 
 # ======= TYPES ========
 var sticky_button: Button = null
+var last_button: Button
 var last_panel: NinePatchRect 
+var last_choosing: NinePatchRect
+var last_chosen: NinePatchRect
 var current_button: Button
+var current_panel: NinePatchRect
+var current_choosing: NinePatchRect
+var current_chosen: NinePatchRect
+var action_queued: ActionController.ActionType
 # ========================
 
 func _ready() -> void:
-	start_idle()
 	await get_tree().process_frame
 	nullify_all()
-	buttons = [attack, block, forage]
 	knight.visible = true
 	knight_2.visible = false
 	knight_3.visible = false
@@ -284,7 +285,7 @@ func _ready() -> void:
 	qte.start()
 
 	add_child(action_controller)
-	action_controller.current_action.connect(_on_action_pressed)
+	action_controller.queued_action.connect(_on_action_pressed)
 
 	add_child(upgrade_controller)
 	add_child(visual_controller)
@@ -345,43 +346,88 @@ func _on_qte_fail(button: Button) -> void:
 
 # ========= ACTION ==========
 func _on_attack_pressed() -> void:
-	_on_action_pressed(ActionController.ActionType.ATTACK)
+	action_controller._on_action_pressed(ActionController.ActionType.ATTACK, attack)
 
 func _on_forage_pressed() -> void:
-	_on_action_pressed(ActionController.ActionType.FORAGE)
+	action_controller._on_action_pressed(ActionController.ActionType.FORAGE, forage)
 
 func _on_block_pressed() -> void:
-	_on_action_pressed(ActionController.ActionType.BLOCK)
+	action_controller._on_action_pressed(ActionController.ActionType.BLOCK, block)
 
-func _on_action_pressed(action_type: ActionController.ActionType) -> void:
+func _on_action_pressed(action_type: ActionController.ActionType, button_type: Button) -> void:
+	current_button = get_button_from_action(action_type)
+	current_panel = get_9p_from_action(action_type)
+	current_choosing = get_choosing_panel_from_action(action_type)
+	current_chosen = get_chosen_panel_from_action(action_type)
+	current_button = last_button
+	current_panel = last_panel
+	current_choosing = last_choosing
+	current_chosen = last_chosen
+	declare_action_pressed(current_button, current_panel)
+	await run_action(action_type)
+
+func get_button_from_action(action_type):
 	match action_type:
 		ActionController.ActionType.ATTACK:
-			start_attack()
+			return attack
 		ActionController.ActionType.FORAGE:
-			start_forage()
+			return forage
 		ActionController.ActionType.BLOCK:
-			start_block()
+			return block
 		ActionController.ActionType.IDLE:
-			start_idle()
+			return null
 
-func start_idle():
-	animation.play("idle")
-	data_handler.check_resource_gain(ActionController.ActionType.IDLE)
+func get_9p_from_action(action_type):
+	match action_type:
+		ActionController.ActionType.ATTACK:
+			return attack_9p_rect
+		ActionController.ActionType.FORAGE:
+			return forage_9p_rect
+		ActionController.ActionType.BLOCK:
+			return block_9p_rect
+		ActionController.ActionType.IDLE:
+			return null
 
-func start_attack():
-	animation.play("attack")
+func get_choosing_panel_from_action(action_type):
+	match action_type:
+		ActionController.ActionType.ATTACK:
+			return attack_choosing
+		ActionController.ActionType.FORAGE:
+			return forage_choosing
+		ActionController.ActionType.BLOCK:
+			return block_choosing
+		ActionController.ActionType.IDLE:
+			return null
+
+func get_chosen_panel_from_action(action_type):
+	match action_type:
+		ActionController.ActionType.ATTACK:
+			return attack_chosen
+		ActionController.ActionType.FORAGE:
+			return forage_chosen
+		ActionController.ActionType.BLOCK:
+			return block_chosen
+		ActionController.ActionType.IDLE:
+			return null
+
+func run_action(action: ActionController.ActionType) -> void:
+	if is_busy:
+		return
+
+	is_busy = true
+
+	match action:
+		ActionController.ActionType.ATTACK:
+			animation.play("attack")
+		ActionController.ActionType.FORAGE:
+			animation.play("forage")
+		ActionController.ActionType.BLOCK:
+			animation.play("block")
+		ActionController.ActionType.IDLE:
+			animation.play("idle")
+
 	await animation.animation_finished
-	data_handler.check_resource_gain(ActionController.ActionType.ATTACK)
-
-func start_forage(): 
-	animation.play("forage")
-	await animation.animation_finished
-	data_handler.check_resource_gain(ActionController.ActionType.FORAGE)
-
-func start_block():
-	animation.play("block")
-	await animation.animation_finished
-	data_handler.check_resource_gain(ActionController.ActionType.BLOCK)
+	is_busy = false
 
 func _on_attack_mouse_entered() -> void:
 	declare_hovered_action(attack, true, attack_choosing)
@@ -401,41 +447,33 @@ func _on_block_mouse_entered() -> void:
 func _on_block_mouse_exited() -> void:
 	declare_hovered_action(block, false, block_choosing)
 
-func declare_hovered_action(button, action, panel):
-	if button == current_button:
-		return
+func declare_hovered_action(button: Button, hovering: bool, panel: NinePatchRect):
+	panel.visible = hovering
 
 	var tween = get_tree().create_tween()
 	var vector_hover_in := Vector2(1.05, 1.05)
 	var vector_hover_out := Vector2(1, 1)
 	var vector_position_adjust := Vector2(-3, -3)
-	last_panel = panel
-	if action:
-		chosen_panel(panel, true)
+	if hovering: 
 		tween.tween_property(
 			button,
 			"scale",
 			vector_hover_in,
 			0.2
-		).set_trans(Tween.TRANS_SINE)
+	)
 		tween.parallel().tween_property(
 			button,
 			"position",
 			vector_position_adjust,
 			0.2
-		).set_trans(Tween.TRANS_SINE)
-		await tween.finished
+		)
 	else:
-		chosen_panel(panel, null)
-		tween.kill()
-		await get_tree().create_timer(0.1).timeout
-		tween = get_tree().create_tween()
 		tween.tween_property(
 			button,
 			"scale",
 			vector_hover_out,
 			0.1
-		).set_trans(Tween.TRANS_BOUNCE)
+	)
 		tween.parallel().tween_property(
 			button,
 			"position",
@@ -443,7 +481,11 @@ func declare_hovered_action(button, action, panel):
 			0.1
 		)
 
-# ===========================
+func declare_action_pressed(button: Button, ninepatch: NinePatchRect):
+	if current_button == last_button:
+		check_nine_patch(ninepatch, attack_choosing, attack_chosen, false)
+		return
+	check_nine_patch(ninepatch, attack_choosing, attack_chosen, false)
 
 # =========== UPGRADE ============
 func update_all_upgrade_patches() -> void:

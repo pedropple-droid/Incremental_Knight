@@ -1,7 +1,7 @@
 extends Node
 class_name ActionController
 
-signal current_action
+signal queued_action
 
 enum ActionType { 
 	ATTACK,
@@ -10,8 +10,10 @@ enum ActionType {
 	IDLE,
 }
 
-var action_running = ActionType.IDLE
-var old_action = null
+var action_to_play = null
+var old_button = null
 
-func action_active() -> void:
-	current_action.emit(action_running)
+func _on_action_pressed(action_type: ActionController.ActionType, button_type: Button) -> void:
+	action_to_play = action_type
+	old_button = button_type
+	queued_action.emit(action_to_play, old_button)
