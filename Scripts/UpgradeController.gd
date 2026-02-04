@@ -1,10 +1,15 @@
 extends Node
 class_name UpgradeController
 
+@onready var data_handler: DataHandler = DataHandler.new()
+
 var current_upgrade: UpgradeType
 
+func _ready() -> void:
+	add_child(data_handler)
+
+
 enum UpgradeType { 
-	TOTAL,
 	OUTPUT,
 	SPEED,
 	TOUGHNESS,
@@ -19,11 +24,11 @@ var upgrades := {
 		"cost_mult": 2.0,
 		"apply": func():
 			@warning_ignore("narrowing_conversion")
-			output_floor *= output_multiplier
-			output_multiplier -= DataHandler.original_output_correction
-			output_multiplier = max(
-			output_multiplier,
-			DataHandler.MIN_OUTPUT_UPGRADE,
+			data_handler.output_floor *= data_handler.output_multiplier
+			data_handler.output_multiplier -= data_handler.original_output_correction
+			data_handler.output_multiplier = max(
+			data_handler.output_multiplier,
+			data_handler.MIN_OUTPUT_UPGRADE,
 		),
 	},
 	UpgradeType.SPEED: {
@@ -40,8 +45,8 @@ var upgrades := {
 		"gold_cost": 40,
 		"cost_mult": 2.0,
 		"apply": func():
-			toughness_level += 1
-			timer_speed_multiplier *= 0.9,
+			data_handler.toughness_level += 1
+			data_handler.timer_speed_multiplier *= 0.9,
 	},
 	UpgradeType.KNIGHT: {
 		"wood_cost": 4000,
@@ -49,9 +54,8 @@ var upgrades := {
 		"gold_cost": 8500,
 		"cost_mult": 2.5,
 		"apply": func():
-			var amount = knights_per_purchase()
-			total_knights += amount
-			update_knight_visuals()
-			update_output_from_knights(),
+			var amount = data_handler.knights_per_purchase()
+			data_handler.total_knights += amount
+			data_handler.update_output_from_knights(),
 	},
 }

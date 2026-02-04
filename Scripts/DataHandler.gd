@@ -1,5 +1,4 @@
 extends Node
-
 class_name DataHandler
 
 const BASE_UPGRADE_DELAY := 1
@@ -31,3 +30,9 @@ var heat := 1.8
 var output_multiplier := 2.0
 var output_floor := 1.0
 var output := 1.0
+
+func knights_per_purchase():
+	return int(pow(3, knight_set_level))
+
+func update_output_from_knights():
+	output *= total_knights

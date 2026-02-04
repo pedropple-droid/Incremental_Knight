@@ -25,6 +25,7 @@
 
 extends Control
 
+class_name MainController
 
 const CURSOR_01 = preload("uid://bigflnfdn68dm")
 const CURSOR_02 = preload("uid://cxshok2ga3xac")
@@ -54,11 +55,6 @@ enum ResourceType {
 	MEAT,
 	GOLD,
 }
-
-enum CursorState {
-	NORMAL,
-}
-
 
 var numbers := {
 	ResourceType.WOOD: {
@@ -214,15 +210,12 @@ var upgrade_buttons := {
 
 @onready var qte: QTEController = QTEController.new()
 @onready var action_controller: ActionController = ActionController.new()
+@onready var upgrade_controller: UpgradeController = UpgradeController.new()
+@onready var visual_controller: VisualController = VisualController.new()
+@onready var data_handler: DataHandler = DataHandler.new()
 
-# ======= NUMBERS ========
 
 var output_tween: Tween
-
-
-
-
-# ========================
 
 # ======= ARRAYS ========
 var buttons: Array
@@ -240,7 +233,6 @@ var normal_offset := Vector2(-60, -60)
 # ========================
 
 # ======= TYPES ========
-var cursor_state: CursorState = CursorState.NORMAL
 var sticky_button: Button = null
 var last_panel: NinePatchRect 
 var current_button: Button
@@ -254,34 +246,34 @@ func _ready() -> void:
 	knight_2.visible = false
 	knight_3.visible = false
 
-	upgrade_digit_containers[UpgradeType.SPEED][ResourceType.WOOD] = wood_digits_speed
-	upgrade_digit_containers[UpgradeType.SPEED][ResourceType.MEAT] = meat_digits_speed
-	upgrade_digit_containers[UpgradeType.SPEED][ResourceType.GOLD] = gold_digits_speed
+	upgrade_digit_containers[UpgradeController.UpgradeType.SPEED][ResourceType.WOOD] = wood_digits_speed
+	upgrade_digit_containers[UpgradeController.UpgradeType.SPEED][ResourceType.MEAT] = meat_digits_speed
+	upgrade_digit_containers[UpgradeController.UpgradeType.SPEED][ResourceType.GOLD] = gold_digits_speed
 
-	upgrade_digit_containers[UpgradeType.OUTPUT][ResourceType.WOOD] = wood_digits_output
-	upgrade_digit_containers[UpgradeType.OUTPUT][ResourceType.MEAT] = meat_digits_output
-	upgrade_digit_containers[UpgradeType.OUTPUT][ResourceType.GOLD] = gold_digits_output
+	upgrade_digit_containers[UpgradeController.UpgradeType.OUTPUT][ResourceType.WOOD] = wood_digits_output
+	upgrade_digit_containers[UpgradeController.UpgradeType.OUTPUT][ResourceType.MEAT] = meat_digits_output
+	upgrade_digit_containers[UpgradeController.UpgradeType.OUTPUT][ResourceType.GOLD] = gold_digits_output
 
-	upgrade_digit_containers[UpgradeType.KNIGHT][ResourceType.WOOD] = wood_digits_knight
-	upgrade_digit_containers[UpgradeType.KNIGHT][ResourceType.MEAT] = meat_digits_knight
-	upgrade_digit_containers[UpgradeType.KNIGHT][ResourceType.GOLD] = gold_digits_knight
+	upgrade_digit_containers[UpgradeController.UpgradeType.KNIGHT][ResourceType.WOOD] = wood_digits_knight
+	upgrade_digit_containers[UpgradeController.UpgradeType.KNIGHT][ResourceType.MEAT] = meat_digits_knight
+	upgrade_digit_containers[UpgradeController.UpgradeType.KNIGHT][ResourceType.GOLD] = gold_digits_knight
 
-	upgrade_digit_containers[UpgradeType.TOUGHNESS][ResourceType.WOOD] = wood_digits_toughness
-	upgrade_digit_containers[UpgradeType.TOUGHNESS][ResourceType.MEAT] = meat_digits_toughness
-	upgrade_digit_containers[UpgradeType.TOUGHNESS][ResourceType.GOLD] = gold_digits_toughness
+	upgrade_digit_containers[UpgradeController.UpgradeType.TOUGHNESS][ResourceType.WOOD] = wood_digits_toughness
+	upgrade_digit_containers[UpgradeController.UpgradeType.TOUGHNESS][ResourceType.MEAT] = meat_digits_toughness
+	upgrade_digit_containers[UpgradeController.UpgradeType.TOUGHNESS][ResourceType.GOLD] = gold_digits_toughness
 
-	upgrade_digit_containers[UpgradeType.TOTAL][ResourceType.WOOD] = wood_digits_total
-	upgrade_digit_containers[UpgradeType.TOTAL][ResourceType.MEAT] = meat_digits_total
-	upgrade_digit_containers[UpgradeType.TOTAL][ResourceType.GOLD] = gold_digits_total
+	upgrade_digit_containers[DataHandler.TOTAL][ResourceType.WOOD] = wood_digits_total
+	upgrade_digit_containers[DataHandler.TOTAL][ResourceType.MEAT] = meat_digits_total
+	upgrade_digit_containers[DataHandler.TOTAL][ResourceType.GOLD] = gold_digits_total
 
-	upgrade_patches[UpgradeType.SPEED] = speed_9p_rect
-	upgrade_patches[UpgradeType.OUTPUT] = output_9p_rect
-	upgrade_patches[UpgradeType.KNIGHT] = e_knight_9p_rect
-	upgrade_patches[UpgradeType.TOUGHNESS] = toughness_9p_rect
-	upgrade_buttons[UpgradeType.SPEED] = speed_btt
-	upgrade_buttons[UpgradeType.OUTPUT] = output_btt
-	upgrade_buttons[UpgradeType.KNIGHT] = knight_btt
-	upgrade_buttons[UpgradeType.TOUGHNESS] = toughness_btt
+	upgrade_patches[UpgradeController.UpgradeType.SPEED] = speed_9p_rect
+	upgrade_patches[UpgradeController.UpgradeType.OUTPUT] = output_9p_rect
+	upgrade_patches[UpgradeController.UpgradeType.KNIGHT] = e_knight_9p_rect
+	upgrade_patches[UpgradeController.UpgradeType.TOUGHNESS] = toughness_9p_rect
+	upgrade_buttons[UpgradeController.UpgradeType.SPEED] = speed_btt
+	upgrade_buttons[UpgradeController.UpgradeType.OUTPUT] = output_btt
+	upgrade_buttons[UpgradeController.UpgradeType.KNIGHT] = knight_btt
+	upgrade_buttons[UpgradeController.UpgradeType.TOUGHNESS] = toughness_btt
 
 	add_child(qte)
 	qte.setup([attack, block, forage])
@@ -293,21 +285,20 @@ func _ready() -> void:
 	add_child(action_controller)
 	action_controller.current_action.connect(_on_action_started)
 
+	add_child(upgrade_controller)
+	add_child(visual_controller)
+	add_child(data_handler)
+
 	update_all_upgrade_costs()
 	update_floating_totals()
 	setup_timer()
 	nullify_all()
 
 func _process(delta):
-	match cursor_state:
-		CursorState.NORMAL:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			fake_cursor.visible = false
-
 	for type in upgrade_patches.keys():
 		update_upgrade_patch(type)
-	time_left = max(time_left - delta * timer_speed_multiplier, 0)
-	timer_label.text = format_time(time_left)
+	data_handler.time_left = max(data_handler.time_left - delta * data_handler.timer_speed_multiplier, 0)
+	timer_label.text = format_time(data_handler.time_left)
 
 func _on_action_pressed(action_type: ActionController.ActionType) -> void:
 	action_controller.action_clicked(action_type)
@@ -325,7 +316,6 @@ func _on_qte_started(button: Button) -> void:
 	)
 
 func _on_qte_success(button: Button) -> void:
-	successful_qte()
 
 	var tween := get_tree().create_tween()
 	tween.tween_property(
@@ -356,19 +346,7 @@ func _on_qte_fail(button: Button) -> void:
 		0.3
 	)
 
-func successful_qte():
-	if output_tween and output_tween.is_running():
-		output_tween.kill()
-	output += (output_floor * (heat - 1.0)) * 0.8
-	output_tween = get_tree().create_tween()
-	output_tween.tween_property(
-		self,
-		"output",
-		output_floor,
-		10.0
-	).set_delay(1.5)\
-	.set_trans(Tween.TRANS_EXPO)\
-	.set_ease(Tween.EASE_IN_OUT)
+
 # ========================
 
 # ========= ACTION ==========
@@ -400,22 +378,22 @@ func action_running(action):
 	print(action)
 
 func _on_attack_mouse_entered() -> void:
-	declare_hovered_action(attack, GLOBAL_ACTION, attack_choosing)
+	declare_hovered_action(attack, true, attack_choosing)
 
 func _on_attack_mouse_exited() -> void:
-	declare_hovered_action(attack, null, attack_choosing)
+	declare_hovered_action(attack, false, attack_choosing)
 
 func _on_forage_mouse_entered() -> void:
-	declare_hovered_action(forage, GLOBAL_ACTION, forage_choosing)
+	declare_hovered_action(forage, true, forage_choosing)
 
 func _on_forage_mouse_exited() -> void:
-	declare_hovered_action(forage, null, forage_choosing)
+	declare_hovered_action(forage, false, forage_choosing)
 
 func _on_block_mouse_entered() -> void:
-	declare_hovered_action(block, GLOBAL_ACTION, block_choosing)
+	declare_hovered_action(block, true, block_choosing)
 
 func _on_block_mouse_exited() -> void:
-	declare_hovered_action(block, null, block_choosing)
+	declare_hovered_action(block, false, block_choosing)
 
 func declare_hovered_action(button, action, panel):
 	if button == current_button:
@@ -427,7 +405,7 @@ func declare_hovered_action(button, action, panel):
 	var vector_position_adjust := Vector2(-3, -3)
 	last_panel = panel
 	if action:
-		chosen_panel(panel, GLOBAL_ACTION)
+		chosen_panel(panel, true)
 		tween.tween_property(
 			button,
 			"scale",
@@ -483,7 +461,7 @@ func check_nine_patch(ninepatch, panel, panel_two, action):
 		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_REGULAR)
 		panel.visible = false
 
-func update_upgrade_patch(type: UpgradeType) -> void: # signal here
+func update_upgrade_patch(type: UpgradeController.UpgradeType) -> void: # signal here
 	var patch: NinePatchRect = upgrade_patches[type]
 	var button: Button = upgrade_buttons[type]
 
@@ -496,8 +474,8 @@ func update_upgrade_patch(type: UpgradeType) -> void: # signal here
 		patch.position = Vector2(0, -10)
 		button.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
 
-func do_upgrade_feedback(type: UpgradeType, action): # signal here
-	check_nine_patch_for_upgrade(current_upgrade, null)
+func do_upgrade_feedback(type: UpgradeController.UpgradeType, action): # signal here
+	check_nine_patch_for_upgrade(upgrade_controller.current_upgrade, false)
 
 	if action:
 		var label_type := get_label_from_upgrade(type)
@@ -507,7 +485,7 @@ func do_upgrade_feedback(type: UpgradeType, action): # signal here
 			label_type,
 			"theme_override_font_sizes/font_size",
 			14,
-			DataHandler.in_time
+			data_handler.in_time
 		)
 		await tween.finished
 
@@ -518,38 +496,38 @@ func do_upgrade_feedback(type: UpgradeType, action): # signal here
 			label_type,
 			"theme_override_font_sizes/font_size",
 			24,
-			DataHandler.pop_time
+			data_handler.pop_time
 		)
 		tween.parallel().tween_property(
 			label_type,
 			"theme_override_constants/outline_size",
 			4,
-			DataHandler.pop_time
+			data_handler.pop_time
 		)
 		tween.chain().tween_property(
 			label_type,
 			"theme_override_font_sizes/font_size",
 			16,
-			DataHandler.out_time
+			data_handler.out_time
 		)
 		tween.parallel().tween_property(
 			label_type,
 			"theme_override_constants/outline_size",
 			0,
-			DataHandler.out_time
+			data_handler.out_time
 		)
 		await tween.finished
 
-func try_buy_upgrade(type: UpgradeType) -> void:
-	var up = upgrades[type]
+func try_buy_upgrade(type: UpgradeController.UpgradeType) -> void:
+	var up = data_handler.upgrades[type]
 
-	if type == UpgradeType.KNIGHT and total_knights >= max_knights_per_run:
+	if type == UpgradeController.UpgradeType.KNIGHT and data_handler.total_knights >= data_handler.max_knights_per_run:
 		knight_label.text = "Maxed out!!"
 		return
 
-	wood -= up.wood_cost
-	meat -= up.meat_cost
-	gold -= up.gold_cost
+	data_handler.wood -= up.wood_cost
+	data_handler.meat -= up.meat_cost
+	data_handler.gold -= up.gold_cost
 	up.apply.call()
 	up.wood_cost = int(up.wood_cost * up.cost_mult)
 	up.meat_cost = int(up.meat_cost * up.cost_mult)
@@ -565,7 +543,7 @@ func declare_hovered_upgrade(button, action, ninepatch, panel):
 	var vector_position_adjust := Vector2(-8, -8)
 
 	if action:
-		choosing_panel(panel, GLOBAL_ACTION)
+		choosing_panel(panel, true)
 		tween.tween_property(
 			button,
 			"scale",
@@ -580,7 +558,7 @@ func declare_hovered_upgrade(button, action, ninepatch, panel):
 		).set_trans(Tween.TRANS_SINE)
 		await tween.finished
 	else:
-		choosing_panel(panel, null)
+		choosing_panel(panel, false)
 		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_REGULAR)
 		tween.kill()
 		await get_tree().create_timer(0.1).timeout
@@ -598,77 +576,77 @@ func declare_hovered_upgrade(button, action, ninepatch, panel):
 			0.1
 		).set_trans(Tween.TRANS_BACK)
 
-func get_label_from_upgrade(type: UpgradeType) -> Label:
+func get_label_from_upgrade(type: UpgradeController.UpgradeType) -> Label:
 	match type:
-		UpgradeType.SPEED:
+		UpgradeController.UpgradeType.SPEED:
 			return spd_label
-		UpgradeType.OUTPUT:
+		UpgradeController.UpgradeType.OUTPUT:
 			return output_label
-		UpgradeType.KNIGHT:
+		UpgradeController.UpgradeType.KNIGHT:
 			return knight_label
-		UpgradeType.TOUGHNESS:
+		UpgradeController.UpgradeType.TOUGHNESS:
 			return toughness_label
 	return null
 
 func update_all_upgrade_costs() -> void:
-	for type in upgrades.keys():
+	for type in upgrade_controller.upgrades.keys():
 		update_upgrade_cost(type)
 
-func update_upgrade_cost(type: UpgradeType) -> void:
-	var up = upgrades[type]
+func update_upgrade_cost(type: UpgradeController.UpgradeType) -> void:
+	var up = upgrade_controller.upgrades[type]
 	var containers = upgrade_digit_containers[type]
 	set_crossroad(up, containers)
 
 func _on_speed_upgrade_button_mouse_entered():
-	declare_hovered_upgrade(speed_btt, GLOBAL_ACTION, speed_9p_rect, speed_choosing)
+	declare_hovered_upgrade(speed_btt, true, speed_9p_rect, speed_choosing)
 
 func _on_speed_upgrade_button_mouse_exited():
-	declare_hovered_upgrade(speed_btt, null, speed_9p_rect, speed_choosing)
+	declare_hovered_upgrade(speed_btt, false, speed_9p_rect, speed_choosing)
 
 func _on_output_upgrade_button_mouse_entered():
-	declare_hovered_upgrade(output_btt, GLOBAL_ACTION, output_9p_rect, output_choosing)
+	declare_hovered_upgrade(output_btt, true, output_9p_rect, output_choosing)
 
 func _on_output_upgrade_button_mouse_exited():
-	declare_hovered_upgrade(output_btt, null, output_9p_rect, output_choosing)
+	declare_hovered_upgrade(output_btt, false, output_9p_rect, output_choosing)
 
 func _on_extra_knight_upgrade_mouse_entered() -> void:
-	declare_hovered_upgrade(knight_btt, GLOBAL_ACTION, e_knight_9p_rect, knight_choosing)
+	declare_hovered_upgrade(knight_btt, true, e_knight_9p_rect, knight_choosing)
 
 func _on_extra_knight_upgrade_mouse_exited() -> void:
-	declare_hovered_upgrade(knight_btt, null, e_knight_9p_rect, knight_choosing)
+	declare_hovered_upgrade(knight_btt, false, e_knight_9p_rect, knight_choosing)
 
 func _on_toughness_button_mouse_entered() -> void:
-	declare_hovered_upgrade(toughness_btt, GLOBAL_ACTION, toughness_9p_rect, toughness_choosing)
+	declare_hovered_upgrade(toughness_btt, true, toughness_9p_rect, toughness_choosing)
 
 func _on_toughness_button_mouse_exited() -> void:
-	declare_hovered_upgrade(toughness_btt, null, toughness_9p_rect, toughness_choosing)
+	declare_hovered_upgrade(toughness_btt, false, toughness_9p_rect, toughness_choosing)
 
 func _on_speed_upgrade_button_button_down() -> void:
-	do_upgrade_feedback(UpgradeType.SPEED, GLOBAL_ACTION)
+	do_upgrade_feedback(upgrade_controller.UpgradeType.SPEED, true)
 
 func _on_speed_upgrade_button_button_up() -> void:
-	do_upgrade_feedback(UpgradeType.SPEED, null)
+	do_upgrade_feedback(upgrade_controller.UpgradeType.SPEED, false)
 
-func check_nine_patch_for_upgrade(upgrade: UpgradeType, global_action) -> void:
+func check_nine_patch_for_upgrade(upgrade: UpgradeController.UpgradeType, action) -> void:
 	match upgrade:
-		UpgradeType.OUTPUT:
-			check_nine_patch(output_9p_rect, output_chosen, output_choosing, global_action)
-		UpgradeType.SPEED:
-			check_nine_patch(speed_9p_rect, speed_chosen, speed_choosing, global_action)
-		UpgradeType.TOUGHNESS:
-			check_nine_patch(toughness_9p_rect, toughness_chosen, toughness_choosing, global_action)
-		UpgradeType.KNIGHT:
-			check_nine_patch(e_knight_9p_rect, knight_chosen, knight_choosing, global_action)
+		UpgradeController.UpgradeType.OUTPUT:
+			check_nine_patch(output_9p_rect, output_chosen, output_choosing, action)
+		UpgradeController.UpgradeType.SPEED:
+			check_nine_patch(speed_9p_rect, speed_chosen, speed_choosing, action)
+		UpgradeController.UpgradeType.TOUGHNESS:
+			check_nine_patch(toughness_9p_rect, toughness_chosen, toughness_choosing, action)
+		UpgradeController.UpgradeType.KNIGHT:
+			check_nine_patch(e_knight_9p_rect, knight_chosen, knight_choosing, action)
 
-func can_buy(type: UpgradeType) -> bool:
-	var up = upgrades[type]
-	if wood < up["wood_cost"]:
+func can_buy(type: UpgradeController.UpgradeType) -> bool:
+	var up = upgrade_controller.upgrades[type]
+	if data_handler.wood < up["wood_cost"]:
 		return false
-	if meat < up["meat_cost"]:
+	if data_handler.meat < up["meat_cost"]:
 		return false
-	if gold < up["gold_cost"]:
+	if data_handler.gold < up["gold_cost"]:
 		return false
-	if type == UpgradeType.KNIGHT and total_knights >= max_knights_per_run:
+	if type == upgrade_controller.UpgradeType.KNIGHT and data_handler.total_knights >= data_handler.max_knights_per_run:
 		return false
 	return true
 
@@ -686,10 +664,7 @@ func choosing_panel(panel, action):
 		panel.visible = false
 	nullify_others(panel)
 
-func update_knight_visuals(): 
-	knight.visible = total_knights >= 1
-	knight_2.visible = total_knights >= 2
-	knight_3.visible = total_knights >= 3
+
 # ================================
 
 # ======= VISUALS =========
@@ -750,23 +725,23 @@ func abbreviate_number(value: int) -> Dictionary:
 		}
 
 func update_floating_totals() -> void:
-	var containers = upgrade_digit_containers[UpgradeType.TOTAL]
+	var containers = upgrade_digit_containers[DataHandler.TOTAL]
 
 	set_number_icons(
 		containers[ResourceType.WOOD],
-		wood,
+		data_handler.wood,
 		ResourceType.WOOD
 	)
 
 	set_number_icons(
 		containers[ResourceType.MEAT],
-		meat,
+		data_handler.meat,
 		ResourceType.MEAT
 	)
 
 	set_number_icons(
 		containers[ResourceType.GOLD],
-		gold,
+		data_handler.gold,
 		ResourceType.GOLD
 	)
 
@@ -845,9 +820,6 @@ func format_time(seconds: float) -> String:
 	var secs := s % 60
 	return "%02d:%02d" % [mins, secs]
 
-func update_output_from_knights():
-	output *= total_knights
 
-func knights_per_purchase():
-	return int(pow(3, knight_set_level))
+
 # ========================
