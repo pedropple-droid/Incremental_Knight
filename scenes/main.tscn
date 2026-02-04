@@ -4,9 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cscjq4g3wgjmk" path="res://TinySword/UI Elements/UI Elements/Icons/smallwood.png" id="2_11yus"]
 [ext_resource type="StyleBox" uid="uid://dvhnwjwkpgr14" path="res://panelstyle.tres" id="2_b6ruc"]
 [ext_resource type="Texture2D" uid="uid://82flurevs4jv" path="res://TinySword/UI Elements/UI Elements/Icons/smallmeat.png" id="3_11yus"]
-[ext_resource type="Texture2D" uid="uid://bulnhqdarkokt" path="res://UnitsTextureRect/Buildings/House2.png" id="3_jscy8"]
 [ext_resource type="Texture2D" uid="uid://mr70fxyhp0qn" path="res://TinySword/UI Elements/UI Elements/Banners/Banner_Slots.png" id="3_o7ddy"]
-[ext_resource type="Texture2D" uid="uid://cnd71xoeqyohg" path="res://UnitsTextureRect/Buildings/House1.png" id="3_yc10j"]
 [ext_resource type="Texture2D" uid="uid://c4wthxchsbrtm" path="res://TinySword/UI Elements/UI Elements/Wood Table/WoodTable_Slots.png" id="4_0loja"]
 [ext_resource type="Texture2D" uid="uid://cvb4kc0pw5gxr" path="res://TinySword/UI Elements/UI Elements/Icons/smallgold.png" id="4_b6ruc"]
 [ext_resource type="Texture2D" uid="uid://cwxlgqhhovp82" path="res://TinySword/UI Elements/UI Elements/Buttons/SmallRedSquareButton_Regular.png" id="5_0loja"]
@@ -98,8 +96,6 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ids8r"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="RichTextEffect" id="RichTextEffect_yc10j"]
 
 [sub_resource type="Animation" id="Animation_fuf3a"]
 length = 0.001
@@ -1604,187 +1600,6 @@ patch_margin_top = 21
 patch_margin_right = 21
 patch_margin_bottom = 21
 
-[node name="ResourcesTab" type="MarginContainer" parent="TabContainer" unique_id=1937880804]
-visible = false
-layout_mode = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
-metadata/_tab_index = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="TabContainer/ResourcesTab" unique_id=280387393]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/ResourcesTab/PanelContainer" unique_id=1320917039]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer" unique_id=1191363995]
-layout_mode = 2
-theme_override_constants/separation = 7
-
-[node name="HutSpace" type="PanelContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer" unique_id=1148147944]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = ExtResource("2_b6ruc")
-
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace" unique_id=2039668773]
-layout_mode = 2
-theme_override_constants/margin_left = 600
-theme_override_constants/margin_top = 80
-theme_override_constants/margin_right = 200
-theme_override_constants/margin_bottom = 20
-
-[node name="Pawn" type="Sprite2D" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer" unique_id=886291096]
-z_index = 1
-position = Vector2(400, 400)
-
-[node name="Gold" type="Sprite2D" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer" unique_id=339001835]
-position = Vector2(100, 160)
-texture = ExtResource("3_jscy8")
-flip_h = true
-
-[node name="Meat" type="Sprite2D" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer" unique_id=2086602790]
-position = Vector2(400, 100)
-texture = ExtResource("3_yc10j")
-
-[node name="Wood" type="Sprite2D" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer" unique_id=551508369]
-position = Vector2(700, 160)
-texture = ExtResource("3_jscy8")
-
-[node name="Upgrades" type="PanelContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer" unique_id=977046383]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = ExtResource("2_b6ruc")
-
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades" unique_id=695327428]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer" unique_id=1034664673]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="Label" type="Label" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer" unique_id=1890002433]
-layout_mode = 2
-text = "Upgrades"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CarryCapacityUpgrade" type="Button" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer" unique_id=1087645032]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 16
-
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/CarryCapacityUpgrade" unique_id=288366765]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/CarryCapacityUpgrade/CenterContainer" unique_id=36768583]
-z_index = 1
-layout_mode = 2
-mouse_filter = 2
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.979693, 0.97969264, 1.540184e-05, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "CarryWeight"
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SpeedUpgrade" type="Button" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer" unique_id=1500259044]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgrade" unique_id=1084445668]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgrade/CenterContainer" unique_id=1292015868]
-z_index = 1
-layout_mode = 2
-mouse_filter = 2
-theme_override_colors/font_outline_color = Color(0.9372549, 0.9372549, 0, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "SpeedUpgrade"
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ExtraPawn" type="Button" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer" unique_id=1083474026]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraPawn" unique_id=455663202]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraPawn/CenterContainer" unique_id=1889732805]
-z_index = 1
-layout_mode = 2
-mouse_filter = 2
-theme_override_colors/font_outline_color = Color(0.9388745, 0.9388743, 1.540184e-06, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "ExtraPawn"
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="BiggerStorage" type="Button" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer" unique_id=985962446]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/BiggerStorage" unique_id=131962281]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/BiggerStorage/CenterContainer" unique_id=1545319978]
-z_index = 1
-layout_mode = 2
-mouse_filter = 2
-theme_override_colors/font_outline_color = Color(0.9372549, 0.9372549, 0, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "Storage"
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1
-custom_effects = [SubResource("RichTextEffect_yc10j")]
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=60888399]
 root_node = NodePath("../TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/KnightCentering/HBoxKnights/Knight")
 libraries/ = SubResource("AnimationLibrary_c6pm6")
@@ -1803,7 +1618,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("55_ids8r")
 
-[connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/AttackPanel/attack" to="." method="_on_attack_mouse_entered"]
 [connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/AttackPanel/attack" to="." method="_on_attack_mouse_exited"]
 [connection signal="pressed" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/AttackPanel/attack" to="." method="_on_attack_pressed"]
@@ -1813,7 +1627,6 @@ script = ExtResource("55_ids8r")
 [connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block" to="." method="_on_block_mouse_entered"]
 [connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block" to="." method="_on_block_mouse_exited"]
 [connection signal="pressed" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block" to="." method="_on_block_pressed"]
-[connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace" to="." method="_on_visual_space_mouse_entered"]
 [connection signal="button_down" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton" to="." method="_on_speed_upgrade_button_button_down"]
 [connection signal="button_up" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton" to="." method="_on_speed_upgrade_button_button_up"]
 [connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton" to="." method="_on_speed_upgrade_button_mouse_entered"]
@@ -1824,7 +1637,3 @@ script = ExtResource("55_ids8r")
 [connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton" to="." method="_on_output_upgrade_button_mouse_exited"]
 [connection signal="mouse_entered" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel/ExtraKnightUpgrade" to="." method="_on_extra_knight_upgrade_mouse_entered"]
 [connection signal="mouse_exited" from="TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel/ExtraKnightUpgrade" to="." method="_on_extra_knight_upgrade_mouse_exited"]
-[connection signal="pressed" from="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/CarryCapacityUpgrade" to="." method="_on_carry_capacity_upgrade_pressed"]
-[connection signal="pressed" from="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/SpeedUpgrade" to="." method="_on_speed_upgrade_pressed"]
-[connection signal="pressed" from="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/ExtraPawn" to="." method="_on_extra_pawn_pressed"]
-[connection signal="pressed" from="TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/Upgrades/MarginContainer/VBoxContainer/BiggerStorage" to="." method="_on_bigger_storage_pressed"]
