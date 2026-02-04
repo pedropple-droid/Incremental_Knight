@@ -13,9 +13,9 @@ const TOTAL := -1
 var in_time := 0.5 / upgrade_anim_speed
 var pop_time := 0.2 / upgrade_anim_speed
 var out_time := 0.5 / upgrade_anim_speed
-var gold: int = 10000
-var meat: int = 100000
-var wood: int = 1000000
+var gold: int = 0
+var meat: int = 0
+var wood: int = 0
 var time_left := 120.0
 var knight_set_level := 0
 var toughness_level := 0
@@ -36,3 +36,20 @@ func knights_per_purchase():
 
 func update_output_from_knights():
 	output *= total_knights
+
+func check_resource_gain(action: ActionController.ActionType):
+	match action:
+		ActionController.ActionType.ATTACK:
+			@warning_ignore("narrowing_conversion")
+			gold += output 
+			print(gold, meat, wood)
+		ActionController.ActionType.FORAGE:
+			@warning_ignore("narrowing_conversion")
+			meat += output
+			print(gold, meat, wood)
+		ActionController.ActionType.BLOCK:
+			@warning_ignore("narrowing_conversion")
+			wood += output
+			print(gold, meat, wood)
+		ActionController.ActionType.IDLE:
+			pass

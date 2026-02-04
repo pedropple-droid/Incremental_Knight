@@ -239,6 +239,7 @@ var current_button: Button
 # ========================
 
 func _ready() -> void:
+	start_idle()
 	await get_tree().process_frame
 	nullify_all()
 	buttons = [attack, block, forage]
@@ -283,7 +284,7 @@ func _ready() -> void:
 	qte.start()
 
 	add_child(action_controller)
-	action_controller.current_action.connect(_on_action_started)
+	action_controller.current_action.connect(_on_action_pressed)
 
 	add_child(upgrade_controller)
 	add_child(visual_controller)
@@ -299,10 +300,6 @@ func _process(delta):
 		update_upgrade_patch(type)
 	data_handler.time_left = max(data_handler.time_left - delta * data_handler.timer_speed_multiplier, 0)
 	timer_label.text = format_time(data_handler.time_left)
-
-func _on_action_pressed(action_type: ActionController.ActionType) -> void:
-	action_controller.action_clicked(action_type)
-
 
 # ========= QTE ==========
 func _on_qte_started(button: Button) -> void:
@@ -346,36 +343,45 @@ func _on_qte_fail(button: Button) -> void:
 		0.3
 	)
 
-
-# ========================
-
 # ========= ACTION ==========
-func _on_action_started(action: ActionController.ActionType) -> void:
-	match action:
+func _on_attack_pressed() -> void:
+	_on_action_pressed(ActionController.ActionType.ATTACK)
+
+func _on_forage_pressed() -> void:
+	_on_action_pressed(ActionController.ActionType.FORAGE)
+
+func _on_block_pressed() -> void:
+	_on_action_pressed(ActionController.ActionType.BLOCK)
+
+func _on_action_pressed(action_type: ActionController.ActionType) -> void:
+	match action_type:
 		ActionController.ActionType.ATTACK:
 			start_attack()
 		ActionController.ActionType.FORAGE:
 			start_forage()
 		ActionController.ActionType.BLOCK:
 			start_block()
+		ActionController.ActionType.IDLE:
+			start_idle()
+
+func start_idle():
+	animation.play("idle")
+	data_handler.check_resource_gain(ActionController.ActionType.IDLE)
 
 func start_attack():
-	is_busy = true
-
 	animation.play("attack")
+	await animation.animation_finished
+	data_handler.check_resource_gain(ActionController.ActionType.ATTACK)
 
 func start_forage(): 
-	is_busy = true
-
 	animation.play("forage")
+	await animation.animation_finished
+	data_handler.check_resource_gain(ActionController.ActionType.FORAGE)
 
 func start_block():
-	is_busy = true
-
 	animation.play("block")
-
-func action_running(action):
-	print(action)
+	await animation.animation_finished
+	data_handler.check_resource_gain(ActionController.ActionType.BLOCK)
 
 func _on_attack_mouse_entered() -> void:
 	declare_hovered_action(attack, true, attack_choosing)
@@ -437,14 +443,6 @@ func declare_hovered_action(button, action, panel):
 			0.1
 		)
 
-func _on_attack_pressed() -> void:
-	action_controller.action_clicked(action_controller.ActionType.ATTACK)
-
-func _on_forage_pressed() -> void:
-	action_controller.action_clicked(action_controller.ActionType.FORAGE)
-
-func _on_block_pressed() -> void:
-	action_controller.action_clicked(action_controller.ActionType.BLOCK)
 # ===========================
 
 # =========== UPGRADE ============
@@ -663,9 +661,6 @@ func choosing_panel(panel, action):
 	else:
 		panel.visible = false
 	nullify_others(panel)
-
-
-# ================================
 
 # ======= VISUALS =========
 func set_number_icons(
