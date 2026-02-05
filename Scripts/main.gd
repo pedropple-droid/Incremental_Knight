@@ -6,12 +6,14 @@
 # it should register that the mouse is hovering, and, let's change it to clicking and holding
 # ---------------------------------------------------------------
 # [ACTION PANELS]🟠
-# it should register the CURSOR_02 when on top of it
+# somehow, we've made it much harder for ourselfs in the way that it worked eprfectly and now it doesn't
+# but, that's not a problem, we've managed to refactor a lot of code, nice
+# atm, i've got some issues with the chosen and choosing panel, don't overcomplicate it, just try to fix it
 # ---------------------------------------------------------------
 # [VISUAL PANEL]⚪
 # ---------------------------------------------------------------
 # [TOUGHNESS TIMER]🔵
-# for a reason my timing slows down to a halt when i attack or upgrade idk i have to find out
+# unresponsive, refactor its idea whenever
 # ---------------------------------------------------------------
 # [QTE]🔵
 # qte still kinda sucks, it's kinda just there in number and in visual
@@ -322,16 +324,18 @@ func _on_qte_fail(button: Button) -> void:
 
 # ========= ACTION ==========
 func _on_attack_pressed():
+	_update_action_visuals(ActionController.ActionType.ATTACK, true)
 	action_controller.request_action(ActionController.ActionType.ATTACK)
 
 func _on_forage_pressed():
+	_update_action_visuals(ActionController.ActionType.FORAGE, true)
 	action_controller.request_action(ActionController.ActionType.FORAGE)
 
 func _on_block_pressed():
+	_update_action_visuals(ActionController.ActionType.BLOCK, true)
 	action_controller.request_action(ActionController.ActionType.BLOCK)
 
 func _on_action_changed(action: ActionController.ActionType) -> void:
-	_update_action_visuals(action, true)
 	_play_action_animation(action)
 
 func _play_action_animation(action: ActionController.ActionType) -> void:
@@ -349,22 +353,31 @@ func _on_animation_finished(anim_name: StringName) -> void:
 	action_controller.animation_finished()
 
 func _update_action_visuals(action: ActionController.ActionType, toggle) -> void:
-	_reset_all_action_patches()
-
 	if toggle:
+		_reset_action_patches(action, true)
 		match action:
 			ActionController.ActionType.ATTACK:
 				attack_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_PRESSED
+				attack_choosing.visible = false
 				attack_chosen.visible = true
+				forage_chosen.visible = false
+				block_chosen.visible = false
 
 			ActionController.ActionType.FORAGE:
 				forage_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_PRESSED
+				forage_choosing.visible = false
 				forage_chosen.visible = true
+				attack_chosen.visible = false
+				block_chosen.visible = false
 
 			ActionController.ActionType.BLOCK:
 				block_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_PRESSED
+				block_choosing.visible = false
 				block_chosen.visible = true
+				attack_chosen.visible = false
+				forage_chosen.visible = false
 	else:
+		_reset_action_patches(action, false)
 		match action:
 			ActionController.ActionType.ATTACK:
 				attack_choosing.visible = false
@@ -375,19 +388,36 @@ func _update_action_visuals(action: ActionController.ActionType, toggle) -> void
 			ActionController.ActionType.BLOCK:
 				block_choosing.visible = false
 
-func _reset_all_action_patches():
-	attack_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_REGULAR
-	forage_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_REGULAR
-	block_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_REGULAR
+func _reset_action_patches(patch, pressed):
+	if not pressed:
+		match patch:
+			action_controller.ActionType.ATTACK:
+				attack_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_PRESSED
+				forage_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_REGULAR
+				block_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_REGULAR
+			action_controller.ActionType.FORAGE:
+				attack_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_REGULAR
+				forage_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_PRESSED
+				block_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_REGULAR
+			action_controller.ActionType.BLOCK:
+				attack_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_REGULAR
+				forage_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_REGULAR
+				block_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_PRESSED
+	else:
+		match patch:
+			action_controller.ActionType.ATTACK:
+				attack_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_PRESSED
+			action_controller.ActionType.FORAGE:
+				forage_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_REGULAR
+			action_controller.ActionType.BLOCK:
+				block_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_REGULAR
 
 func _on_attack_mouse_entered() -> void:
 	hovered_action = ActionController.ActionType.ATTACK
-	_update_action_visuals(hovered_action, false)
 	refresh_action_panels(true, attack, CURSOR_02, attack_choosing)
 
 func _on_attack_mouse_exited() -> void:
 	hovered_action = ActionController.ActionType.IDLE
-	_update_action_visuals(hovered_action, false)
 	refresh_action_panels(false, attack, CURSOR_01, attack_choosing)
 
 func _on_forage_mouse_entered() -> void:
@@ -415,7 +445,6 @@ func refresh_action_panels(hovering, button, texture, panel1):
 	Input.set_custom_mouse_cursor(texture, 0, Vector2(23, 23))
 
 	if hovering: 
-		panel1.visible = true
 		tween.tween_property(
 			button,
 			"scale",
@@ -429,7 +458,6 @@ func refresh_action_panels(hovering, button, texture, panel1):
 			0.05
 		)
 	else:
-		panel1.visible = false
 		tween.tween_property(
 			button,
 			"scale",
