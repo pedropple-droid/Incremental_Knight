@@ -48,8 +48,6 @@ const WOODDOT = preload("uid://cuhmaq0a2nrtr")
 const WOODK = preload("uid://c7l2phebs2ogq")
 const WOODM = preload("uid://psqabx6t4f86")
 
-
-
 enum ResourceType {
 	WOOD,
 	MEAT,
@@ -333,7 +331,7 @@ func _on_block_pressed():
 	action_controller.request_action(ActionController.ActionType.BLOCK)
 
 func _on_action_changed(action: ActionController.ActionType) -> void:
-	_update_action_visuals(action)
+	_update_action_visuals(action, true)
 	_play_action_animation(action)
 
 func _play_action_animation(action: ActionController.ActionType) -> void:
@@ -350,84 +348,88 @@ func _play_action_animation(action: ActionController.ActionType) -> void:
 func _on_animation_finished(anim_name: StringName) -> void:
 	action_controller.animation_finished()
 
-func _update_action_visuals(action: ActionController.ActionType) -> void:
+func _update_action_visuals(action: ActionController.ActionType, toggle) -> void:
 	_reset_all_action_patches()
 
-	match action:
-		ActionController.ActionType.ATTACK:
-			attack_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_PRESSED
-			attack_chosen.visible = true
+	if toggle:
+		match action:
+			ActionController.ActionType.ATTACK:
+				attack_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_PRESSED
+				attack_chosen.visible = true
 
-		ActionController.ActionType.FORAGE:
-			forage_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_PRESSED
-			forage_chosen.visible = true
+			ActionController.ActionType.FORAGE:
+				forage_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_PRESSED
+				forage_chosen.visible = true
 
-		ActionController.ActionType.BLOCK:
-			block_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_PRESSED
-			block_chosen.visible = true
+			ActionController.ActionType.BLOCK:
+				block_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_PRESSED
+				block_chosen.visible = true
+	else:
+		match action:
+			ActionController.ActionType.ATTACK:
+				attack_choosing.visible = false
+
+			ActionController.ActionType.FORAGE:
+				forage_choosing.visible = false
+
+			ActionController.ActionType.BLOCK:
+				block_choosing.visible = false
 
 func _reset_all_action_patches():
 	attack_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_REGULAR
 	forage_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_REGULAR
 	block_9p_rect.texture = SMALL_RED_SQUARE_BUTTON_REGULAR
 
-	attack_chosen.visible = false
-	forage_chosen.visible = false
-	block_chosen.visible = false
-
 func _on_attack_mouse_entered() -> void:
-	refresh_action_panels(true)
+	hovered_action = ActionController.ActionType.ATTACK
+	_update_action_visuals(hovered_action, false)
+	refresh_action_panels(true, attack, CURSOR_02, attack_choosing)
 
 func _on_attack_mouse_exited() -> void:
-	refresh_action_panels(false)
+	hovered_action = ActionController.ActionType.IDLE
+	_update_action_visuals(hovered_action, false)
+	refresh_action_panels(false, attack, CURSOR_01, attack_choosing)
 
 func _on_forage_mouse_entered() -> void:
-	refresh_action_panels(true)
+	hovered_action = ActionController.ActionType.FORAGE
+	refresh_action_panels(true, forage, CURSOR_02, forage_choosing)
 
 func _on_forage_mouse_exited() -> void:
-	refresh_action_panels(false)
+	hovered_action = ActionController.ActionType.IDLE
+	refresh_action_panels(false, forage, CURSOR_01, forage_choosing)
 
 func _on_block_mouse_entered() -> void:
-	refresh_action_panels(true)
+	hovered_action = ActionController.ActionType.BLOCK
+	refresh_action_panels(true, block, CURSOR_02, block_choosing)
 
 func _on_block_mouse_exited() -> void:
-	refresh_action_panels(false)
+	hovered_action = ActionController.ActionType.IDLE
+	refresh_action_panels(false, block, CURSOR_01, block_choosing)
 
-func refresh_action_panels(hovering):
-	var button: Button
-
-	for p in [attack_choosing, forage_choosing, block_choosing]:
-		p.visible = false
-
-	for p in [attack_chosen, forage_chosen, block_chosen]:
-		p.visible = false
-
-	match chosen_action:
-		ActionController.ActionType.ATTACK:
-			button = attack
-		ActionController.ActionType.FORAGE:
-			button = forage
-		ActionController.ActionType.BLOCK:
-			button = block
-
+func refresh_action_panels(hovering, button, texture, panel1):
 	var tween = get_tree().create_tween()
 	var vector_hover_in := Vector2(1.05, 1.05)
 	var vector_hover_out := Vector2(1, 1)
 	var vector_position_adjust := Vector2(-3, -3)
+	@warning_ignore("int_as_enum_without_cast", "int_as_enum_without_match")
+	Input.set_custom_mouse_cursor(texture, 0, Vector2(23, 23))
+
 	if hovering: 
+		panel1.visible = true
 		tween.tween_property(
 			button,
 			"scale",
 			vector_hover_in,
-			0.2
+			0.05
 	)
 		tween.parallel().tween_property(
 			button,
 			"position",
 			vector_position_adjust,
-			0.2
+			0.05
 		)
 	else:
+		panel1.visible = false
 		tween.tween_property(
 			button,
 			"scale",
@@ -440,7 +442,6 @@ func refresh_action_panels(hovering):
 			Vector2(0, 0),
 			0.1
 		)
-
 
 # =========== UPGRADE ============
 func update_all_upgrade_patches() -> void:
