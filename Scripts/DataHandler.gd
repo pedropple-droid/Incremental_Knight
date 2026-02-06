@@ -10,9 +10,14 @@ const original_output_correction = 0.08
 const MIN_OUTPUT_UPGRADE := 1.15
 const TOTAL := -1
 
-@onready var upgrade_controller: UpgradeController = UpgradeController.new()
-@onready var data_handler: DataHandler = DataHandler.new()
-@onready var visual_controller: VisualController = VisualController.new()
+enum UpgradeType { 
+	OUTPUT,
+	SPEED,
+	TOUGHNESS,
+	KNIGHT,
+}
+
+@onready var main_controller: MainController = MainController.new()
 
 var in_time := 0.5 / upgrade_anim_speed
 var pop_time := 0.2 / upgrade_anim_speed
@@ -21,11 +26,9 @@ var gold: int = 0
 var meat: int = 0
 var wood: int = 0
 var time_left := 120.0
-var knight_set_level := 0
 var toughness_level := 0
 var timer_speed_multiplier: float = 1.0
 var max_knights_per_run: int = 3
-var total_knights: int = 1
 var current_upgrade_delay := BASE_UPGRADE_DELAY
 var upgrade_streak := 0
 var upgrade_anim_speed := 1.5
@@ -33,6 +36,8 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var heat := 1.8
 var output_multiplier := 2.0
 var output_floor := 1.0
+var knight_set_level := 0
+var total_knights: int = 1
 var output := 1.0
 
 func knights_per_purchase():
@@ -61,39 +66,39 @@ func check_resource_gain(action: ActionController.ActionType):
 			pass
 
 
-func can_buy(type: UpgradeController.UpgradeType) -> bool:
-	var up = upgrade_controller.upgrades[type]
-	if data_handler.wood < up["wood_cost"]:
+func can_buy(type: UpgradeType) -> bool:
+	var up = main_controller.upgrades[type]
+	if wood < up["wood_cost"]:
 		return false
-	if data_handler.meat < up["meat_cost"]:
+	if meat < up["meat_cost"]:
 		return false
-	if data_handler.gold < up["gold_cost"]:
+	if gold < up["gold_cost"]:
 		return false
-	if type == upgrade_controller.UpgradeType.KNIGHT and data_handler.total_knights >= data_handler.max_knights_per_run:
+	if type == UpgradeType.KNIGHT and total_knights >= max_knights_per_run:
 		return false
 	return true
 
 
-func try_buy_upgrade(type: UpgradeController.UpgradeType) -> void:
-	var up = data_handler.upgrades[type]
+func try_buy_upgrade(type: UpgradeType) -> void:
+	var up = main_controller.upgrades[type]
 
-	if type == UpgradeController.UpgradeType.KNIGHT and data_handler.total_knights >= data_handler.max_knights_per_run:
-		visual_controller.knight_label.text = "Maxed out!!"
+	if type == UpgradeType.KNIGHT and total_knights >= max_knights_per_run:
+		main_controller.knight_label.text = "Maxed out!!"
 		return
 
-	data_handler.wood -= up.wood_cost
-	data_handler.meat -= up.meat_cost
-	data_handler.gold -= up.gold_cost
+	wood -= up.wood_cost
+	meat -= up.meat_cost
+	gold -= up.gold_cost
 	up.apply.call()
 	up.wood_cost = int(up.wood_cost * up.cost_mult)
 	up.meat_cost = int(up.meat_cost * up.cost_mult)
 	up.gold_cost = int(up.gold_cost * up.cost_mult)
 
 	update_upgrade_cost(type)
-	visual_controller.update_floating_totals()
+	update_floating_totals()
 
 
-func update_upgrade_cost(type: UpgradeController.UpgradeType) -> void:
-	var up = upgrade_controller.upgrades[type]
+func update_upgrade_cost(type: UpgradeType) -> void:
+	var up = main_controller.upgrades[type]
 	var containers = visual_controller.upgrade_digit_containers[type]
 	visual_controller.set_crossroad(up, containers)
