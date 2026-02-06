@@ -2,6 +2,7 @@ extends Node
 class_name UpgradeController
 
 @onready var data_handler: DataHandler = DataHandler.new()
+@onready var visual_controller: VisualController = VisualController.new()
 
 var current_upgrade: UpgradeType
 
