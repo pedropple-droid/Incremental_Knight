@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://ey2i670agjff"]
+[gd_scene format=3 uid="uid://ey2i670agjff"]
 
 [ext_resource type="Script" uid="uid://y0su3to2evjo" path="res://Scripts/main_2.gd" id="1_1k1ng"]
 [ext_resource type="Texture2D" uid="uid://dt8lebws3jmw6" path="res://UnitsTextureRect/WarAtt_2/warriorattack1.png" id="5_c40c1"]
