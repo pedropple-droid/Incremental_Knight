@@ -5,7 +5,6 @@
 # [UPGRADE PANELS]🟢
 # you should really fix the upgrade panel, it needs to be able to change freely from
 # one mouse state to the other without bugging out like it does
-# atm it doesn't quite register its entering states
 # it should register that the mouse is hovering, and, let's change it to clicking and holding
 # it will feel much better, trust me
 # ---------------------------------------------------------------
@@ -33,14 +32,6 @@
 extends Control
 
 const MAIN_2 = preload("uid://ey2i670agjff")
-
-const original_output_correction = 0.08
-const BASE_UPGRADE_DELAY := 1
-const MIN_UPGRADE_DELAY := 0.01
-const STREAK_THRESHOLD := 1
-const MIN_OUTPUT_UPGRADE := 1.15
-const DIGIT_BASE_SIZE := 6
-const DIGIT_SCALE := 0.5
 
 const CURSOR_01 = preload("uid://bigflnfdn68dm")
 const CURSOR_02 = preload("uid://cxshok2ga3xac")
@@ -92,6 +83,7 @@ enum CursorState {
 	FREE_HOVER_ACTION,
 }
 
+
 var upgrades := {
 	UpgradeType.OUTPUT: {
 		"wood_cost": 75,
@@ -100,11 +92,11 @@ var upgrades := {
 		"cost_mult": 2.0,
 		"apply": func():
 			@warning_ignore("narrowing_conversion")
-			output_floor *= output_multiplier
-			output_multiplier -= original_output_correction
-			output_multiplier = max(
-			output_multiplier,
-			MIN_OUTPUT_UPGRADE,
+			game_state.output_floor *= game_state.output_multiplier
+			game_state.output_multiplier -= game_state.original_output_correction
+			game_state.output_multiplier = max(
+			game_state.output_multiplier,
+			game_state.MIN_OUTPUT_UPGRADE,
 		),
 	},
 	UpgradeType.SPEED: {
@@ -121,8 +113,8 @@ var upgrades := {
 		"gold_cost": 40,
 		"cost_mult": 2.0,
 		"apply": func():
-			toughness_level += 1
-			timer_speed_multiplier *= 0.9,
+			game_state.toughness_level += 1
+			game_state.timer_speed_multiplier *= 0.9,
 	},
 	UpgradeType.KNIGHT: {
 		"wood_cost": 4000,
@@ -131,7 +123,7 @@ var upgrades := {
 		"cost_mult": 2.5,
 		"apply": func():
 			var amount = knights_per_purchase()
-			total_knights += amount
+			game_state.total_knights += amount
 			update_knight_visuals()
 			update_output_from_knights(),
 	},
@@ -241,6 +233,7 @@ var upgrade_buttons := {
 }
 
 
+@onready var game_state: GameState = GameState.new()
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var spd_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton/SpdLabel
 @onready var output_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton/OutputLabel
@@ -289,24 +282,6 @@ var upgrade_buttons := {
 @onready var knight_chosen: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel/ExtraKnightUpgrade/KnightChosen
 
 var buttons: Array
-var gold: int = 1110
-var meat: int = 1110
-var wood: int = 1110
-
-var time_left := 120.0
-var output_floor := 1.0
-var output := 1.0
-var output_tween: Tween
-var output_multiplier := 2.0
-var knight_set_level := 0
-var toughness_level := 0
-var timer_speed_multiplier: float = 1.0
-var max_knights_per_run: int = 3
-var total_knights: int = 1
-
-var current_upgrade_delay := BASE_UPGRADE_DELAY
-var upgrade_streak := 0
-var upgrade_anim_speed := 1.5
 
 var last_action: ActionType = ActionType.IDLE
 var action_loop_running := false
@@ -324,7 +299,6 @@ var current_button: Button
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
-var heat := 1.8
 
 var at_pawn := false
 
@@ -373,10 +347,12 @@ func _ready() -> void:
 	update_all_upgrade_costs()
 	update_floating_totals()
 	start_qte_loop()
-	setup_timer()
 	nullify_all()
 
 func _process(delta):
+	if game_state.time_left > 0:
+		game_state.time_left -= delta * game_state.timer_speed_multiplier
+		timer_label.text = format_time(game_state.time_left)
 	match cursor_state:
 		CursorState.NORMAL:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -407,19 +383,8 @@ func _process(delta):
 
 	for type in upgrade_patches.keys():
 		update_upgrade_patch(type)
-	time_left = max(time_left - delta * timer_speed_multiplier, 0)
-	timer_label.text = format_time(time_left)
-
-func setup_timer():
-	countdown_timer.start()
-
-func _on_countdown_timer_timeout():
-	time_left -= 1.0 * timer_speed_multiplier
-	timer_label.text = format_time(time_left)
-
-	if time_left <= 0:
-		countdown_timer.stop()
-		timer_label.text = "00:00"
+	game_state.time_left = max(game_state.time_left - delta * game_state.timer_speed_multiplier, 0)
+	timer_label.text = format_time(game_state.time_left)
 
 func format_time(seconds: float) -> String:
 	var s := int(seconds)
@@ -429,9 +394,9 @@ func format_time(seconds: float) -> String:
 	return "%02d:%02d" % [mins, secs]
 
 func update_knight_visuals(): 
-	knight.visible = total_knights >= 1
-	knight_2.visible = total_knights >= 2
-	knight_3.visible = total_knights >= 3
+	knight.visible = game_state.total_knights >= 1
+	knight_2.visible = game_state.total_knights >= 2
+	knight_3.visible = game_state.total_knights >= 3
 
 func update_all_upgrade_patches() -> void:
 	for type in upgrade_patches.keys():
@@ -451,10 +416,10 @@ func update_upgrade_patch(type: UpgradeType) -> void:
 		button.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
 
 func update_output_from_knights():
-	output *= total_knights
+	game_state.output *= game_state.total_knights
 
 func knights_per_purchase():
-	return int(pow(3, knight_set_level))
+	return int(pow(3, game_state.knight_set_level))
 
 func on_upgrade_mouse_entered(type: UpgradeType):
 	if upgrading:
@@ -465,37 +430,37 @@ func on_upgrade_mouse_entered(type: UpgradeType):
 
 func on_upgrade_mouse_exited():
 	choosing = false
-	upgrade_streak = 0
-	current_upgrade_delay = BASE_UPGRADE_DELAY
-	upgrade_anim_speed = BASE_UPGRADE_DELAY
+	game_state.upgrade_streak = 0
+	game_state.current_upgrade_delay = game_state.BASE_UPGRADE_DELAY
+	game_state.upgrade_anim_speed = game_state.BASE_UPGRADE_DELAY
 
 func start_upgrade_loop():
 	while choosing:
 		upgrading = true
 		if can_buy(current_upgrade):
 			await do_upgrade_feedback(current_upgrade)
-			await get_tree().create_timer(current_upgrade_delay).timeout
+			await get_tree().create_timer(game_state.current_upgrade_delay).timeout
 		else:
 			await get_tree().process_frame
 	upgrading = false
 
 func can_buy(type: UpgradeType) -> bool:
 	var up = upgrades[type]
-	if wood < up["wood_cost"]:
+	if game_state.wood < up["wood_cost"]:
 		return false
-	if meat < up["meat_cost"]:
+	if game_state.meat < up["meat_cost"]:
 		return false
-	if gold < up["gold_cost"]:
+	if game_state.gold < up["gold_cost"]:
 		return false
-	if type == UpgradeType.KNIGHT and total_knights >= max_knights_per_run:
+	if type == UpgradeType.KNIGHT and game_state.total_knights >= game_state.max_knights_per_run:
 		return false
 	return true
 
 func do_upgrade_feedback(type: UpgradeType):
 	var label_type := get_label_from_upgrade(type)
-	var in_time := 0.5 / upgrade_anim_speed
-	var pop_time := 0.2 / upgrade_anim_speed
-	var out_time := 0.5 / upgrade_anim_speed
+	var in_time := 0.5 / game_state.upgrade_anim_speed
+	var pop_time := 0.2 / game_state.upgrade_anim_speed
+	var out_time := 0.5 / game_state.upgrade_anim_speed
 	var tween = get_tree().create_tween()
 
 	tween.tween_property(
@@ -561,26 +526,26 @@ func get_label_from_upgrade(type: UpgradeType) -> Label:
 func try_buy_upgrade(type: UpgradeType) -> void:
 	var up = upgrades[type]
 
-	if type == UpgradeType.KNIGHT and total_knights >= max_knights_per_run:
+	if type == UpgradeType.KNIGHT and game_state.total_knights >= game_state.max_knights_per_run:
 		knight_label.text = "Maxed out!!"
 		return
 
-	upgrade_streak += 1
+	game_state.upgrade_streak += 1
 
-	if upgrade_streak >= STREAK_THRESHOLD:
-		current_upgrade_delay = max(
-			MIN_UPGRADE_DELAY,
-			current_upgrade_delay * 0.85
+	if game_state.upgrade_streak >= game_state.STREAK_THRESHOLD:
+		game_state.current_upgrade_delay = max(
+			game_state.MIN_UPGRADE_DELAY,
+			game_state.current_upgrade_delay * 0.85
 		)
 
-		upgrade_anim_speed = min(
+		game_state.upgrade_anim_speed = min(
 			3.0,
-			upgrade_anim_speed * 1.15
+			game_state.upgrade_anim_speed * 1.15
 		)
 
-	wood -= up.wood_cost
-	meat -= up.meat_cost
-	gold -= up.gold_cost
+	game_state.wood -= up.wood_cost
+	game_state.meat -= up.meat_cost
+	game_state.gold -= up.gold_cost
 	up.apply.call()
 	up.wood_cost = int(up.wood_cost * up.cost_mult)
 	up.meat_cost = int(up.meat_cost * up.cost_mult)
@@ -658,13 +623,13 @@ func perform_action(action):
 	match action:
 		ActionType.ATTACK:
 			animation.play("attack")
-			gold += max(output_floor, output)
+			game_state.gold += max(game_state.output_floor, game_state.output)
 		ActionType.BLOCK:
 			animation.play("block")
-			wood += max(output_floor, output)
+			game_state.wood += max(game_state.output_floor, game_state.output)
 		ActionType.FORAGE:
 			animation.play("forage")
-			meat += max(output_floor, output)
+			game_state.meat += max(game_state.output_floor, game_state.output)
 		_:
 			animation.play("idle")
 
@@ -714,19 +679,19 @@ func update_floating_totals() -> void:
 
 	set_number_icons(
 		containers[ResourceType.WOOD],
-		wood,
+		game_state.wood,
 		ResourceType.WOOD
 	)
 
 	set_number_icons(
 		containers[ResourceType.MEAT],
-		meat,
+		game_state.meat,
 		ResourceType.MEAT
 	)
 
 	set_number_icons(
 		containers[ResourceType.GOLD],
-		gold,
+		game_state.gold,
 		ResourceType.GOLD
 	)
 
@@ -847,14 +812,15 @@ func close_qte_loop():
 	start_qte_loop()
 
 func successful_qte():
+	var output_tween: Tween
 	if output_tween and output_tween.is_running():
 		output_tween.kill()
-	output += (output_floor * (heat - 1.0)) * 0.8
+	game_state.output += (game_state.output_floor * (game_state.heat - 1.0)) * 0.8
 	output_tween = get_tree().create_tween()
 	output_tween.tween_property(
-		self,
+		game_state,
 		"output",
-		output_floor,
+		game_state.output_floor,
 		10.0
 	).set_delay(1.5)\
 	.set_trans(Tween.TRANS_EXPO)\
