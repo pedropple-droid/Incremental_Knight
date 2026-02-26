@@ -233,7 +233,9 @@ var upgrade_buttons := {
 }
 
 
-@onready var game_state: GameState = GameState.new()
+@onready var game_state: GameState
+@onready var visual_station: VisualStation = $VisualStation
+@onready var upgrade_station: UpgradeStation = $UpgradeStation
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var spd_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton/SpdLabel
 @onready var output_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton/OutputLabel
@@ -309,6 +311,11 @@ var normal_offset := Vector2(-60, -60)
 
 func _ready() -> void:
 	await get_tree().process_frame
+
+	game_state = GameState.new()
+	upgrade_station.setup(game_state, visual_station)
+	visual_station.setup(game_state)
+
 	buttons = [attack, block, forage]
 	perform_action(ActionType.IDLE)
 	knight.visible = true
