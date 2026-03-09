@@ -1,395 +1,71 @@
 # 🔴🟠🟢🔵⚪
-# [QOL]🟠
-# add a data packet for all that extra information that doesn't define as code, mostly as data
+# [QOL]
 # ---------------------------------------------------------------
-# [UPGRADE PANELS]🟢
-# you should really fix the upgrade panel, it needs to be able to change freely from
-# one mouse state to the other without bugging out like it does
-# it should register that the mouse is hovering, and, let's change it to clicking and holding
-# it will feel much better, trust me
+# [UPGRADE PANELS]
 # ---------------------------------------------------------------
-# [ACTION PANELS]🟢
-# MOUSE_02 should appear when hovering over the action panel when another one
-# is being chosen
+# [ACTION PANELS]
 # ---------------------------------------------------------------
-# [VISUAL PANEL]🟢
-# it kinda bugged out after buying some upgrades and let my cursor maintain its
-# special cursor, check on that
+# [VISUAL PANEL]
 # ---------------------------------------------------------------
-# [TOUGHNESS TIMER]🔵
-# for a reason my timing slows down to a halt when i attack or upgrade idk i have to find out
+# [TOUGHNESS TIMER]
 # ---------------------------------------------------------------
 # [QTE]🔵
-# qte still kinda sucks, it's kinda just there in number and in visual
-# still about qte, i could add a differente color meter for when my knight is 
-# waiting to finish an action to perform another one, or, maybe, make different
-# animations for him to change between actions so qte would make more sense in a sense
+# qte not working
 #  ---------------------------------------------------------------
-# [GAME FEEL]⚪
-# fixd some numbers, game might go much smoother now, but i do need to add difficulty increase7
+# [GAME FEEL]
 #  ---------------------------------------------------------------
 
 extends Control
 
 const MAIN_2 = preload("uid://ey2i670agjff")
 
-const CURSOR_01 = preload("uid://bigflnfdn68dm")
-const CURSOR_02 = preload("uid://cxshok2ga3xac")
-const CURSOR_03 = preload("uid://7jg0px7vfs51")
-const CURSOR_04 = preload("uid://m2j7b6we60s3")
-const SMALL_RED_SQUARE_BUTTON_REGULAR = preload("uid://cwxlgqhhovp82")
-const SMALL_RED_SQUARE_BUTTON_PRESSED = preload("uid://bd3ec46nfqfdd")
-const WOODEIGHT = preload("uid://bhkspl4ccxfw1")
-const WOODFIVE = preload("uid://d372enmkxh3uv")
-const WOODFOUR = preload("uid://bs518fa5fw1dq")
-const WOODNINE = preload("uid://detx2fiyifthq")
-const WOODONE = preload("uid://de05num5hud5e")
-const WOODSEVEN = preload("uid://24qi0j0ipoea")
-const WOODSIX = preload("uid://csw5wob8r56pg")
-const WOODTHREE = preload("uid://bixtv427vmrr1")
-const WOODTWO = preload("uid://cmysxjbm5vjun")
-const WOODZERO = preload("uid://c2wfov3tpkcih")
-const WOODB = preload("uid://cr0gpnc6franh")
-const WOODDOT = preload("uid://cuhmaq0a2nrtr")
-const WOODK = preload("uid://c7l2phebs2ogq")
-const WOODM = preload("uid://psqabx6t4f86")
-
-enum UpgradeType { 
-	TOTAL,
-	OUTPUT,
-	SPEED,
-	TOUGHNESS,
-	KNIGHT,
-}
-
-enum ActionType {
-	IDLE,
-	ATTACK,
-	BLOCK,
-	FORAGE,
-}
-
-enum ResourceType {
-	WOOD,
-	MEAT,
-	GOLD,
-}
-
-enum CursorState {
-	NORMAL,
-	HOVER_ACTION,
-	STICKY_ACTION,
-	FREE_HOVER_VISUAL,
-	FREE_HOVER_ACTION,
-}
-
-
-var upgrades := {
-	UpgradeType.OUTPUT: {
-		"wood_cost": 75,
-		"meat_cost": 125,
-		"gold_cost": 200,
-		"cost_mult": 2.0,
-		"apply": func():
-			@warning_ignore("narrowing_conversion")
-			game_state.output_floor *= game_state.output_multiplier
-			game_state.output_multiplier -= game_state.original_output_correction
-			game_state.output_multiplier = max(
-			game_state.output_multiplier,
-			game_state.MIN_OUTPUT_UPGRADE,
-		),
-	},
-	UpgradeType.SPEED: {
-		"wood_cost": 4,
-		"meat_cost": 5,
-		"gold_cost": 10,
-		"cost_mult": 1.5,
-		"apply": func():
-			animation.speed_scale *= 1.1,
-	},
-	UpgradeType.TOUGHNESS: {
-		"wood_cost": 20,
-		"meat_cost": 30,
-		"gold_cost": 40,
-		"cost_mult": 2.0,
-		"apply": func():
-			game_state.toughness_level += 1
-			game_state.timer_speed_multiplier *= 0.9,
-	},
-	UpgradeType.KNIGHT: {
-		"wood_cost": 4000,
-		"meat_cost": 5500,
-		"gold_cost": 8500,
-		"cost_mult": 2.5,
-		"apply": func():
-			var amount = knights_per_purchase()
-			game_state.total_knights += amount
-			update_knight_visuals()
-			update_output_from_knights(),
-	},
-}
-
-var actions := {
-	ActionType.ATTACK: {
-		"animation": "attack",
-		"resource": "gold",
-	},
-	ActionType.FORAGE: {
-		"animation": "forage",
-		"resource": "meat",
-	},
-	ActionType.BLOCK: {
-		"animation": "block",
-		"resource": "wood",
-	},
-}
-
-var numbers := {
-	ResourceType.WOOD: {
-		0: WOODZERO,
-		1 : WOODONE,
-		2 : WOODTWO,
-		3 : WOODTHREE,
-		4 : WOODFOUR,
-		5 : WOODFIVE,
-		6 : WOODSIX,
-		7 : WOODSEVEN,
-		8 : WOODEIGHT,
-		9 : WOODNINE,
-	},
-	ResourceType.MEAT: {
-		0: WOODZERO,
-		1 : WOODONE,
-		2 : WOODTWO,
-		3 : WOODTHREE,
-		4 : WOODFOUR,
-		5 : WOODFIVE,
-		6 : WOODSIX,
-		7 : WOODSEVEN,
-		8 : WOODEIGHT,
-		9 : WOODNINE,
-	},
-	ResourceType.GOLD: {
-		0: WOODZERO,
-		1 : WOODONE,
-		2 : WOODTWO,
-		3 : WOODTHREE,
-		4 : WOODFOUR,
-		5 : WOODFIVE,
-		6 : WOODSIX,
-		7 : WOODSEVEN,
-		8 : WOODEIGHT,
-		9 : WOODNINE,
-	},
-}
-
-var suffixes := {
-	"K": WOODK,
-	"M": WOODM,
-	"B": WOODB,
-	".": WOODDOT,
-}
-
-var upgrade_digit_containers := {
-	UpgradeType.TOTAL: {
-		ResourceType.WOOD: null,
-		ResourceType.MEAT: null,
-		ResourceType.GOLD: null,
-	},
-	UpgradeType.SPEED: {
-		ResourceType.WOOD: null,
-		ResourceType.MEAT: null,
-		ResourceType.GOLD: null,
-	},
-	UpgradeType.OUTPUT: {
-		ResourceType.WOOD: null,
-		ResourceType.MEAT: null,
-		ResourceType.GOLD: null,
-	},
-	UpgradeType.KNIGHT: {
-		ResourceType.WOOD: null,
-		ResourceType.MEAT: null,
-		ResourceType.GOLD: null,
-	},
-	UpgradeType.TOUGHNESS: {
-		ResourceType.WOOD: null,
-		ResourceType.MEAT: null,
-		ResourceType.GOLD: null,
-	},
-}
-
-var upgrade_patches := {
-	UpgradeType.SPEED: speed_9p_rect,
-	UpgradeType.OUTPUT: output_9p_rect,
-	UpgradeType.KNIGHT: e_knight_9p_rect,
-	UpgradeType.TOUGHNESS: toughness_9p_rect,
-}
-
-var upgrade_buttons := {
-	UpgradeType.SPEED: speed_btt,
-	UpgradeType.OUTPUT: output_btt,
-	UpgradeType.KNIGHT: knight_btt,
-	UpgradeType.TOUGHNESS: toughness_btt,
-}
-
-
 @onready var game_state: GameState
 @onready var visual_station: VisualStation = $VisualStation
 @onready var upgrade_station: UpgradeStation = $UpgradeStation
-@onready var animation: AnimationPlayer = $AnimationPlayer
-@onready var spd_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton/SpdLabel
-@onready var output_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton/OutputLabel
-@onready var knight_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel/ExtraKnightUpgrade/KnightLabel
-@onready var toughness_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessPanel/ToughnessButton/ToughnessLabel
-@onready var knight_3: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/KnightCentering/HBoxKnights/Knight3
-@onready var knight_2: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/KnightCentering/HBoxKnights/Knight2
-@onready var knight: TextureRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginKnight/KnightCentering/HBoxKnights/Knight
-@onready var pawn: Sprite2D = $TabContainer/ResourcesTab/PanelContainer/MarginContainer/HBoxContainer/HutSpace/MarginContainer/Pawn
-@onready var gold_digits_speed: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer/GoldDigitsSpeed
-@onready var meat_digits_speed: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer/MeatDigitsSpeed
-@onready var wood_digits_speed: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer/WoodDigitsSpeed
-@onready var gold_digits_output: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer/GoldDigitsOutput
-@onready var meat_digits_output: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer/MeatDigitsOutput
-@onready var wood_digits_output: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer/WoodDigitsOutput
-@onready var gold_digits_knight: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel/ExtraKnightUpgrade/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer/GoldDigitsKnight
-@onready var meat_digits_knight: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel/ExtraKnightUpgrade/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer/MeatDigitsKnight
-@onready var wood_digits_knight: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel/ExtraKnightUpgrade/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer/WoodDigitsKnight
-@onready var gold_digits_toughness: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessPanel/ToughnessButton/CenterContainer/HBoxContainer/GoldContainer/MarginContainer/VBoxContainer/CenterContainer/GoldDigitsToughness
-@onready var meat_digits_toughness: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessPanel/ToughnessButton/CenterContainer/HBoxContainer/MeatContainer/MarginContainer/VBoxContainer/CenterContainer/MeatDigitsToughness
-@onready var wood_digits_toughness: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessPanel/ToughnessButton/CenterContainer/HBoxContainer/WoodContainer/MarginContainer/VBoxContainer/CenterContainer/WoodDigitsToughness
-@onready var wood_digits_total: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginValue/HValueBox/WoodIcon/WoodDigits
-@onready var meat_digits_total: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginValue/HValueBox/MeatIcon/MeatDigits
-@onready var gold_digits_total: HBoxContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginValue/HValueBox/GoldIcon/GoldDigits
-@onready var block: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block
-@onready var forage: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/ForagePanel/forage
-@onready var attack: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/AttackPanel/attack
-@onready var speed_btt: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton
-@onready var output_btt: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton
-@onready var knight_btt: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel/ExtraKnightUpgrade
-@onready var toughness_btt: Button = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessPanel/ToughnessButton
-@onready var attack_9p_rect: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/AttackPanel/attack/Attack9PRect
-@onready var forage_9p_rect: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/ForagePanel/forage/Forage9PRect
-@onready var block_9p_rect: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/ActionSpace/MarginContainer/SliderPanel/MarginContainer/VBoxContainer/BlockPanel/block/Block9PRect
-@onready var speed_9p_rect: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton/Speed9PRect
-@onready var output_9p_rect: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton/Output9PRect
-@onready var e_knight_9p_rect: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel/ExtraKnightUpgrade/EKnight9PRect
-@onready var toughness_9p_rect: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessPanel/ToughnessButton/Toughness9PRect
+@onready var action_station: ActionStation = $ActionStation
 @onready var timer_label: Label = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginTimer/TimerLabel
 @onready var countdown_timer: Timer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/VisualSpace/MarginTimer/Timer
-@onready var upgrade_margin: MarginContainer = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin
-@onready var fake_cursor: TextureRect = $FakeCursor
-@onready var speed_chosen: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/SpdPanel/SpeedUpgradeButton/SpeedChosen
-@onready var toughness_chosen: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/ToughnessPanel/ToughnessButton/ToughnessChosen
-@onready var output_chosen: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/OutPutPanel/OutputUpgradeButton/OutputChosen
-@onready var knight_chosen: NinePatchRect = $TabContainer/MarginContainer/PanelContainer/MarginContainer/HBOrganizer/UpgradeSpace/MarginContainer/UpgradePanel/UpgradeMargin/HBoxupgrade/KnightPanel/ExtraKnightUpgrade/KnightChosen
 
 var buttons: Array
 
-var last_action: ActionType = ActionType.IDLE
-var action_loop_running := false
-var pressing = false
-var performing = false
-var choosing = false
-var upgrading = false
-var hovering = false
-
 var start_button_position: Vector2
 
-var current_upgrade : UpgradeType
-var current_action: ActionType
 var current_button: Button
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
-
 var at_pawn := false
 
-var cursor_state := CursorState.NORMAL
-var sticky_button: Button = null
-var sticky_offset := Vector2(-6, 0)
-var normal_offset := Vector2(-60, -60)
+var current_cursor: VisualStation.CursorState
+
+var output_tween: Tween
 
 func _ready() -> void:
 	await get_tree().process_frame
 
 	game_state = GameState.new()
-	upgrade_station.setup(game_state, visual_station)
-	visual_station.setup(game_state)
+	upgrade_station.setup(game_state, visual_station, action_station)
+	visual_station.setup(game_state, upgrade_station, action_station)
+	action_station.setup(game_state, upgrade_station, visual_station)
 
-	buttons = [attack, block, forage]
-	perform_action(ActionType.IDLE)
-	knight.visible = true
-	knight_2.visible = false
-	knight_3.visible = false
+	buttons = [visual_station.attack, visual_station.block, visual_station.forage]
+	perform_action(action_station.ActionType.IDLE)
+	current_cursor = visual_station.CursorState.NORMAL
+	visual_station.knight.visible = true
+	visual_station.knight_2.visible = false
+	visual_station.knight_3.visible = false
 
-	upgrade_digit_containers[UpgradeType.SPEED][ResourceType.WOOD] = wood_digits_speed
-	upgrade_digit_containers[UpgradeType.SPEED][ResourceType.MEAT] = meat_digits_speed
-	upgrade_digit_containers[UpgradeType.SPEED][ResourceType.GOLD] = gold_digits_speed
-
-	upgrade_digit_containers[UpgradeType.OUTPUT][ResourceType.WOOD] = wood_digits_output
-	upgrade_digit_containers[UpgradeType.OUTPUT][ResourceType.MEAT] = meat_digits_output
-	upgrade_digit_containers[UpgradeType.OUTPUT][ResourceType.GOLD] = gold_digits_output
-
-	upgrade_digit_containers[UpgradeType.KNIGHT][ResourceType.WOOD] = wood_digits_knight
-	upgrade_digit_containers[UpgradeType.KNIGHT][ResourceType.MEAT] = meat_digits_knight
-	upgrade_digit_containers[UpgradeType.KNIGHT][ResourceType.GOLD] = gold_digits_knight
-
-	upgrade_digit_containers[UpgradeType.TOUGHNESS][ResourceType.WOOD] = wood_digits_toughness
-	upgrade_digit_containers[UpgradeType.TOUGHNESS][ResourceType.MEAT] = meat_digits_toughness
-	upgrade_digit_containers[UpgradeType.TOUGHNESS][ResourceType.GOLD] = gold_digits_toughness
-
-	upgrade_digit_containers[UpgradeType.TOTAL][ResourceType.WOOD] = wood_digits_total
-	upgrade_digit_containers[UpgradeType.TOTAL][ResourceType.MEAT] = meat_digits_total
-	upgrade_digit_containers[UpgradeType.TOTAL][ResourceType.GOLD] = gold_digits_total
-
-	upgrade_patches[UpgradeType.SPEED] = speed_9p_rect
-	upgrade_patches[UpgradeType.OUTPUT] = output_9p_rect
-	upgrade_patches[UpgradeType.KNIGHT] = e_knight_9p_rect
-	upgrade_patches[UpgradeType.TOUGHNESS] = toughness_9p_rect
-	upgrade_buttons[UpgradeType.SPEED] = speed_btt
-	upgrade_buttons[UpgradeType.OUTPUT] = output_btt
-	upgrade_buttons[UpgradeType.KNIGHT] = knight_btt
-	upgrade_buttons[UpgradeType.TOUGHNESS] = toughness_btt
-
-	update_all_upgrade_costs()
-	update_floating_totals()
 	start_qte_loop()
-	nullify_all()
+	visual_station.nullify_all()
 
 func _process(delta):
 	if game_state.time_left > 0:
 		game_state.time_left -= delta * game_state.timer_speed_multiplier
 		timer_label.text = format_time(game_state.time_left)
-	match cursor_state:
-		CursorState.NORMAL:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			fake_cursor.visible = false
-		CursorState.HOVER_ACTION:
-			if pressing:
-				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-				return
-			fake_cursor.visible = true
-			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-			fake_cursor.global_position = get_global_mouse_position() + normal_offset
-		CursorState.STICKY_ACTION:
-			if sticky_button:
-				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-				fake_cursor.visible = true
-				fake_cursor.global_position = sticky_button.global_position + sticky_offset
-		CursorState.FREE_HOVER_VISUAL:
-			if pressing:
-				fake_cursor.visible = true
-				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			else:
-				fake_cursor.visible = false
-				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		CursorState.FREE_HOVER_ACTION:
-			fake_cursor.visible = false
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			Input.set_custom_mouse_cursor(CURSOR_02, Input.CURSOR_POINTING_HAND, Vector2(15,25))
-
-	for type in upgrade_patches.keys():
-		update_upgrade_patch(type)
+	# Input.set_custom_mouse_cursor(CURSOR_04, Input.CURSOR_ARROW, Vector2 (0, 0))
+	update_cursor_logic()
+	for type in visual_station.upgrade_patches.keys():
+		visual_station.update_upgrade_patch(type)
 	game_state.time_left = max(game_state.time_left - delta * game_state.timer_speed_multiplier, 0)
 	timer_label.text = format_time(game_state.time_left)
 
@@ -400,354 +76,58 @@ func format_time(seconds: float) -> String:
 	var secs := s % 60
 	return "%02d:%02d" % [mins, secs]
 
-func update_knight_visuals(): 
-	knight.visible = game_state.total_knights >= 1
-	knight_2.visible = game_state.total_knights >= 2
-	knight_3.visible = game_state.total_knights >= 3
+func update_cursor_logic():
+	if visual_station.sticky_button != null:
+		current_cursor = VisualStation.CursorState.STICKY
 
-func update_all_upgrade_patches() -> void:
-	for type in upgrade_patches.keys():
-		update_upgrade_patch(type)
+	elif game_state.hovering:
+		current_cursor = VisualStation.CursorState.HOVER
 
-func update_upgrade_patch(type: UpgradeType) -> void:
-	var patch: NinePatchRect = upgrade_patches[type]
-	var button: Button = upgrade_buttons[type]
-
-	if can_buy(type):
-		patch.texture = SMALL_RED_SQUARE_BUTTON_REGULAR
-		patch.position = Vector2(0, 0)
-		button.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_INHERITED 
 	else:
-		patch.texture = SMALL_RED_SQUARE_BUTTON_PRESSED
-		patch.position = Vector2(0, -10)
-		button.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
+		current_cursor = VisualStation.CursorState.NORMAL
 
-func update_output_from_knights():
-	game_state.output *= game_state.total_knights
-
-func knights_per_purchase():
-	return int(pow(3, game_state.knight_set_level))
-
-func on_upgrade_mouse_entered(type: UpgradeType):
-	if upgrading:
-		return
-	current_upgrade = type
-	choosing = true
-	start_upgrade_loop()
-
-func on_upgrade_mouse_exited():
-	choosing = false
-	game_state.upgrade_streak = 0
-	game_state.current_upgrade_delay = game_state.BASE_UPGRADE_DELAY
-	game_state.upgrade_anim_speed = game_state.BASE_UPGRADE_DELAY
-
-func start_upgrade_loop():
-	while choosing:
-		upgrading = true
-		if can_buy(current_upgrade):
-			await do_upgrade_feedback(current_upgrade)
-			await get_tree().create_timer(game_state.current_upgrade_delay).timeout
-		else:
-			await get_tree().process_frame
-	upgrading = false
-
-func can_buy(type: UpgradeType) -> bool:
-	var up = upgrades[type]
-	if game_state.wood < up["wood_cost"]:
-		return false
-	if game_state.meat < up["meat_cost"]:
-		return false
-	if game_state.gold < up["gold_cost"]:
-		return false
-	if type == UpgradeType.KNIGHT and game_state.total_knights >= game_state.max_knights_per_run:
-		return false
-	return true
-
-func do_upgrade_feedback(type: UpgradeType):
-	var label_type := get_label_from_upgrade(type)
-	var in_time := 0.5 / game_state.upgrade_anim_speed
-	var pop_time := 0.2 / game_state.upgrade_anim_speed
-	var out_time := 0.5 / game_state.upgrade_anim_speed
-	var tween = get_tree().create_tween()
-
-	tween.tween_property(
-		label_type,
-		"theme_override_font_sizes/font_size",
-		14,
-		in_time
-	)
-	await tween.finished
-
-	if not choosing:
-		tween = get_tree().create_tween()
-		tween.tween_property(
-			label_type,
-			"theme_override_font_sizes/font_size",
-			16,
-			0.1
-		)
-		await tween.finished
-		return
-
-	try_buy_upgrade(type)
-
-	tween = get_tree().create_tween()
-	tween.tween_property(
-		label_type,
-		"theme_override_font_sizes/font_size",
-		24,
-		pop_time
-	)
-	tween.parallel().tween_property(
-		label_type,
-		"theme_override_constants/outline_size",
-		4,
-		pop_time
-	)
-	tween.chain().tween_property(
-		label_type,
-		"theme_override_font_sizes/font_size",
-		16,
-		out_time
-	)
-	tween.parallel().tween_property(
-		label_type,
-		"theme_override_constants/outline_size",
-		0,
-		out_time
-	)
-	await tween.finished
-
-func get_label_from_upgrade(type: UpgradeType) -> Label:
-	match type:
-		UpgradeType.SPEED:
-			return spd_label
-		UpgradeType.OUTPUT:
-			return output_label
-		UpgradeType.KNIGHT:
-			return knight_label
-		UpgradeType.TOUGHNESS:
-			return toughness_label
-	return null
-
-func try_buy_upgrade(type: UpgradeType) -> void:
-	var up = upgrades[type]
-
-	if type == UpgradeType.KNIGHT and game_state.total_knights >= game_state.max_knights_per_run:
-		knight_label.text = "Maxed out!!"
-		return
-
-	game_state.upgrade_streak += 1
-
-	if game_state.upgrade_streak >= game_state.STREAK_THRESHOLD:
-		game_state.current_upgrade_delay = max(
-			game_state.MIN_UPGRADE_DELAY,
-			game_state.current_upgrade_delay * 0.85
-		)
-
-		game_state.upgrade_anim_speed = min(
-			3.0,
-			game_state.upgrade_anim_speed * 1.15
-		)
-
-	game_state.wood -= up.wood_cost
-	game_state.meat -= up.meat_cost
-	game_state.gold -= up.gold_cost
-	up.apply.call()
-	up.wood_cost = int(up.wood_cost * up.cost_mult)
-	up.meat_cost = int(up.meat_cost * up.cost_mult)
-	up.gold_cost = int(up.gold_cost * up.cost_mult)
-	Input.set_custom_mouse_cursor(CURSOR_04, Input.CURSOR_ARROW, Vector2 (0, 0))
-
-	update_upgrade_cost(type)
-	update_floating_totals()
-
-func _on_speed_upgrade_button_mouse_entered():
-	hovering = true
-	on_upgrade_mouse_entered(UpgradeType.SPEED)
-	declare_hovered_upgrade(speed_btt, speed_9p_rect, speed_chosen)
-
-func _on_speed_upgrade_button_mouse_exited():
-	hovering = false
-	on_upgrade_mouse_exited()
-	declare_hovered_upgrade(speed_btt, speed_9p_rect, speed_chosen)
-
-func _on_output_upgrade_button_mouse_entered():
-	hovering = true
-	on_upgrade_mouse_entered(UpgradeType.OUTPUT)
-	declare_hovered_upgrade(output_btt, output_9p_rect, output_chosen)
-
-func _on_output_upgrade_button_mouse_exited():
-	hovering = false
-	on_upgrade_mouse_exited()
-	declare_hovered_upgrade(output_btt, output_9p_rect, output_chosen)
-
-func _on_extra_knight_upgrade_mouse_entered() -> void:
-	hovering = true
-	on_upgrade_mouse_entered(UpgradeType.KNIGHT)
-	declare_hovered_upgrade(knight_btt, e_knight_9p_rect, knight_chosen)
-
-func _on_extra_knight_upgrade_mouse_exited() -> void:
-	hovering = false
-	on_upgrade_mouse_exited()
-	declare_hovered_upgrade(knight_btt, e_knight_9p_rect, knight_chosen)
-
-func _on_toughness_button_mouse_entered() -> void:
-	hovering = true
-	on_upgrade_mouse_entered(UpgradeType.TOUGHNESS)
-	declare_hovered_upgrade(toughness_btt, toughness_9p_rect, toughness_chosen)
-
-func _on_toughness_button_mouse_exited() -> void:
-	hovering = false
-	on_upgrade_mouse_exited()
-	declare_hovered_upgrade(toughness_btt, toughness_9p_rect, toughness_chosen)
+	visual_station.apply_cursor(current_cursor)
 
 func start_action_loop():
-	match current_action:
-		ActionType.ATTACK:
-			current_button = attack
-		ActionType.BLOCK:
-			current_button = block
-		ActionType.FORAGE:
-			current_button = forage
-		ActionType.IDLE:
+	match action_station.current_action:
+		action_station.ActionType.ATTACK:
+			current_button = visual_station.attack
+		action_station.ActionType.BLOCK:
+			current_button = visual_station.block
+		action_station.ActionType.FORAGE:
+			current_button = visual_station.forage
+		action_station.ActionType.IDLE:
 			current_button = null
 
-	if action_loop_running:
+	if game_state.action_loop_running:
 		return
 
-	action_loop_running = true
+	game_state.action_loop_running = true
 
-	while pressing:
-		await perform_action(current_action)
+	while game_state.pressing:
+		await perform_action(action_station.current_action)
 
-	action_loop_running = false
-	perform_action(ActionType.IDLE)
+	game_state.action_loop_running = false
+	perform_action(action_station.ActionType.IDLE)
 
 func perform_action(action):
-	performing = true
+	game_state.performing = true
 
 	match action:
-		ActionType.ATTACK:
-			animation.play("attack")
+		action_station.ActionType.ATTACK:
+			visual_station.animation.play("attack")
 			game_state.gold += max(game_state.output_floor, game_state.output)
-		ActionType.BLOCK:
-			animation.play("block")
+		action_station.ActionType.BLOCK:
+			visual_station.animation.play("block")
 			game_state.wood += max(game_state.output_floor, game_state.output)
-		ActionType.FORAGE:
-			animation.play("forage")
+		action_station.ActionType.FORAGE:
+			visual_station.animation.play("forage")
 			game_state.meat += max(game_state.output_floor, game_state.output)
 		_:
-			animation.play("idle")
-
-	await animation.animation_finished
-	performing = false
-	update_floating_totals()
-
-func clear_container(container: Container) -> void:
-	for child in container.get_children():
-		child.queue_free()
-
-func set_number_icons(
-	container: HBoxContainer,
-	value: int,
-	resource_type: ResourceType
-) -> void:
-	clear_container(container)
-	var abbrev = abbreviate_number(value) # variável se o número precisa abreviar
-	var number_str = abbrev.number_str # o valor original, checado
-	var suffix = abbrev.suffix # o sufixo, se necessário
-	var digit_map = numbers[resource_type] # variável do mapa de números criados
-	for c in number_str: # confere de 0 a 9
-		var icon := TextureRect.new() # varíavel do ícone específico para o número específico
-		icon.scale = Vector2(20, 20)
-		if c == ".":
-			icon.texture = suffixes["."] # adiciona o ponto
-		else:
-			var digit = int(c)
-			icon.texture = digit_map[digit] # textura do ícone vira a específica da variável acima
-		container.add_child(icon) # this being, the icons will not be added beforehand, they will be called within my scene
-	if suffix != "":
-		var icon = TextureRect.new()
-		icon.texture = suffixes[suffix]
-		container.add_child(icon)
-
-func update_all_upgrade_costs() -> void:
-	for type in upgrades.keys():
-		update_upgrade_cost(type)
-
-func update_upgrade_cost(type: UpgradeType) -> void:
-	var up = upgrades[type]
-	var containers = upgrade_digit_containers[type]
-	set_crossroad(up, containers)
-
-func update_floating_totals() -> void:
-	var containers = upgrade_digit_containers[UpgradeType.TOTAL]
-
-	set_number_icons(
-		containers[ResourceType.WOOD],
-		game_state.wood,
-		ResourceType.WOOD
-	)
-
-	set_number_icons(
-		containers[ResourceType.MEAT],
-		game_state.meat,
-		ResourceType.MEAT
-	)
-
-	set_number_icons(
-		containers[ResourceType.GOLD],
-		game_state.gold,
-		ResourceType.GOLD
-	)
-
-func set_crossroad(up, containers):
-	set_number_icons(
-		containers[ResourceType.WOOD],
-		up.wood_cost,
-		ResourceType.WOOD
-	)
-
-	set_number_icons(
-		containers[ResourceType.MEAT],
-		up.meat_cost,
-		ResourceType.MEAT
-	)
-
-	set_number_icons(
-		containers[ResourceType.GOLD],
-		up.gold_cost,
-		ResourceType.GOLD
-	)
-
-func abbreviate_number(value: int) -> Dictionary:
-	if value < 1_000:
-		return {
-			"number_str": str(value),
-			"suffix": ""
-		}
-	elif value < 1_000_000:
-		@warning_ignore("integer_division")
-		var rounded = int(value/1_000)
-		return {
-			"number_str": str(rounded),
-			"suffix": "K"
-		}
-	elif value < 1_000_000_000:
-		@warning_ignore("integer_division")
-		var rounded = int(value/1_000_000)
-		return {
-			"number_str": str(rounded),
-			"suffix": "M"
-		}
-	else:
-		@warning_ignore("integer_division")
-		var rounded = int(value/1_000_000_000)
-		return {
-			"number_str": str(rounded),
-			"suffix": "B"
-		}
+			visual_station.animation.play("idle")
+	await visual_station.animation.animation_finished
+	game_state.performing = false
+	visual_station.update_floating_totals()
 
 func start_qte_loop():
 	var random_interval = rng.randf_range(2.0, 4.0)
@@ -760,7 +140,7 @@ func awarn_qte():
 
 func tween_chosen_action(action):
 	var tween = get_tree().create_tween()
-	var qte_check := 1.2
+	var qte_check := 1.5
 	
 	tween.tween_property(
 		action,
@@ -819,10 +199,7 @@ func close_qte_loop():
 	start_qte_loop()
 
 func successful_qte():
-	var output_tween: Tween
-	if output_tween and output_tween.is_running():
-		output_tween.kill()
-	game_state.output += (game_state.output_floor * (game_state.heat - 1.0)) * 0.8
+	game_state.output += game_state.output_floor * 5
 	output_tween = get_tree().create_tween()
 	output_tween.tween_property(
 		game_state,
@@ -832,232 +209,67 @@ func successful_qte():
 	).set_delay(1.5)\
 	.set_trans(Tween.TRANS_EXPO)\
 	.set_ease(Tween.EASE_IN_OUT)
-
-func declare_hovered_upgrade(button, ninepatch, panel):
-	var tween = get_tree().create_tween()
-	var vector_hover_in := Vector2(1.05, 1.05)
-	var vector_hover_out := Vector2(1, 1)
-	var vector_position_adjust := Vector2(-8, -8)
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-
-	chosen_panel(panel)
-
-	if hovering:
-		print("[DECLARE_HOVERED_UPGRADE] hovering at:", button)
-		tween.tween_property(
-			button,
-			"scale",
-			vector_hover_in,
-			0.2
-		).set_trans(Tween.TRANS_SINE)
-		tween.parallel().tween_property(
-			button,
-			"position",
-			vector_position_adjust,
-			0.2
-		).set_trans(Tween.TRANS_SINE)
-		await tween.finished
-	else:
-		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_REGULAR)
-		tween.kill()
-		await get_tree().create_timer(0.1).timeout
-		tween = get_tree().create_tween()
-		tween.tween_property(
-			button,
-			"scale",
-			vector_hover_out,
-			0.1
-		).set_trans(Tween.TRANS_BACK)
-		tween.parallel().tween_property(
-			button,
-			"position",
-			Vector2 (0, 0),
-			0.1
-		).set_trans(Tween.TRANS_BACK)
-
-	chosen_panel(null)
-
-func chosen_panel(panel):
-	match panel:
-		speed_chosen:
-			speed_chosen.visible = true
-		output_chosen:
-			output_chosen.visible = true
-		toughness_chosen:
-			toughness_chosen.visible = true
-		knight_chosen:
-			knight_chosen.visible = true
-	nullify_others(panel)
-
-func nullify_others(panel):
-	match panel:
-		speed_chosen:
-			knight_chosen.visible = false
-			toughness_chosen.visible = false
-			output_chosen.visible = false
-			speed_chosen.visible = true
-		output_chosen:
-			knight_chosen.visible = false
-			toughness_chosen.visible = false
-			output_chosen.visible = true
-			speed_chosen.visible = false
-		toughness_chosen:
-			knight_chosen.visible = false
-			toughness_chosen.visible = true
-			output_chosen.visible = false
-			speed_chosen.visible = false
-		knight_chosen:
-			knight_chosen.visible = true
-			toughness_chosen.visible = false
-			output_chosen.visible = false
-			speed_chosen.visible = false
-
-func nullify_all():
-	knight_chosen.visible = false
-	toughness_chosen.visible = false
-	output_chosen.visible = false
-	speed_chosen.visible = false
-
-
-func declare_hovered_action(button):
-	var tween = get_tree().create_tween()
-	var vector_hover_in := Vector2(1.05, 1.05)
-	var vector_hover_out := Vector2(1, 1)
-	var vector_position_adjust := Vector2(-3, -3)
-	if hovering:
-		cursor_state = CursorState.HOVER_ACTION
-		tween.tween_property(
-			button,
-			"scale",
-			vector_hover_in,
-			0.2
-		).set_trans(Tween.TRANS_SINE)
-		tween.parallel().tween_property(
-			button,
-			"position",
-			vector_position_adjust,
-			0.2
-		).set_trans(Tween.TRANS_SINE)
-		await tween.finished
-	else:
-		tween.kill()
-		await get_tree().create_timer(0.1).timeout
-		tween = get_tree().create_tween()
-		tween.tween_property(
-			button,
-			"scale",
-			vector_hover_out,
-			0.1
-		).set_trans(Tween.TRANS_BOUNCE)
-		tween.parallel().tween_property(
-			button,
-			"position",
-			Vector2(0, 0),
-			0.1
-		)
+	print("DEBUG", game_state.output, game_state.output_floor)
 
 func _on_attack_mouse_entered() -> void:
-	hovering = true
-	declare_hovered_action(attack)
+	game_state.hovering = true
+	visual_station.declare_hovered_action(visual_station.attack)
 
 func _on_attack_mouse_exited() -> void:
-	hovering = false
-	declare_hovered_action(attack)
+	game_state.hovering = false
+	visual_station.declare_hovered_action(visual_station.attack)
 
 func _on_forage_mouse_entered() -> void:
-	hovering = true
-	declare_hovered_action(forage)
+	game_state.hovering = true
+	visual_station.declare_hovered_action(visual_station.forage)
 
 func _on_forage_mouse_exited() -> void:
-	hovering = false
-	declare_hovered_action(forage)
+	game_state.hovering = false
+	visual_station.declare_hovered_action(visual_station.forage)
 
 func _on_block_mouse_entered() -> void:
-	hovering = true
-	declare_hovered_action(block)
+	game_state.hovering = true
+	visual_station.declare_hovered_action(visual_station.block)
 
 func _on_block_mouse_exited() -> void:
-	hovering = false
-	declare_hovered_action(block)
-
-func _on_bigger_storage_pressed() -> void:
-	animation.play("pawn_to_gold")
-	await animation.animation_finished
-	await get_tree().create_timer(1).timeout
-	animation.play("gold_to_mount")
-
-func _on_extra_pawn_pressed() -> void:
-	animation.play("pawn_to_meat")
-	await animation.animation_finished
-	await get_tree().create_timer(1).timeout
-	animation.play("meat_to_mount")
-
-func _on_speed_upgrade_pressed() -> void:
-	animation.play("pawn_to_wood")
-	await animation.animation_finished
-	await get_tree().create_timer(1).timeout
-	animation.play("wood_to_mount")
-
-func _on_carry_capacity_upgrade_pressed() -> void:
-	animation.play("forageing")
-
-func _on_tab_container_tab_changed(_tab: int) -> void:
-	if at_pawn:
-		at_pawn = false
-		return
-	else:
-		at_pawn = true
-		return
+	game_state.hovering = false
+	visual_station.declare_hovered_action(visual_station.block)
 
 func _on_attack_pressed() -> void:
-	sticky_button = attack
-	cursor_state = CursorState.STICKY_ACTION
-	switch_action(ActionType.ATTACK)
+	visual_station.sticky_button = visual_station.attack
+	switch_action(action_station.ActionType.ATTACK)
 
 func _on_forage_pressed() -> void:
-	sticky_button = forage
-	cursor_state = CursorState.STICKY_ACTION
-	switch_action(ActionType.FORAGE)
+	visual_station.sticky_button = visual_station.forage
+	switch_action(action_station.ActionType.FORAGE)
 
 func _on_block_pressed() -> void:
-	sticky_button = block
-	cursor_state = CursorState.STICKY_ACTION
-	switch_action(ActionType.BLOCK)
+	visual_station.sticky_button = visual_station.block
+	switch_action(action_station.ActionType.BLOCK)
 
-func clear_sticky():
-	sticky_button = null
-	cursor_state = CursorState.NORMAL
-
-func switch_action(new_action: ActionType) -> void:
-	if current_action == new_action and pressing:
-		pressing = false
-		current_action = ActionType.IDLE
-		check_nine_patch_for_action(new_action)
+func switch_action(new_action: ActionStation.ActionType) -> void:
+	if action_station.current_action == new_action and game_state.pressing:
+		game_state.pressing = false
+		action_station.current_action = action_station.ActionType.IDLE
+		visual_station.check_nine_patch_for_action(new_action)
 		return
-	if pressing:
-		pressing = false
-		check_nine_patch_for_action(current_action)
-	pressing = true
-	last_action = current_action
-	current_action = new_action
-	check_nine_patch_for_action(current_action)
+	if game_state.pressing:
+		game_state.pressing = false
+		visual_station.check_nine_patch_for_action(action_station.current_action)
+	game_state.pressing = true
+	action_station.last_action = action_station.current_action
+	action_station.current_action = new_action
+	visual_station.check_nine_patch_for_action(action_station.current_action)
 	start_action_loop()
 
-func check_nine_patch_for_action(action: ActionType) -> void:
-	match action:
-		ActionType.ATTACK:
-			check_nine_patch(attack_9p_rect)
-		ActionType.BLOCK:
-			check_nine_patch(block_9p_rect)
-		ActionType.FORAGE:
-			check_nine_patch(forage_9p_rect)
 
-func check_nine_patch(ninepatch):
-	if pressing:
-		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_PRESSED)
-	else:
-		ninepatch.set("texture", SMALL_RED_SQUARE_BUTTON_REGULAR)
+func _on_speed_upgrade_button_pressed() -> void:
+	upgrade_station.try_buy_upgrade(upgrade_station.UpgradeType.SPEED)
 
-func _on_visual_space_mouse_entered() -> void:
-	if cursor_state == CursorState.STICKY_ACTION or CursorState.HOVER_ACTION:
-		cursor_state = CursorState.FREE_HOVER_VISUAL
+
+func _on_toughness_button_pressed() -> void:
+	upgrade_station.try_buy_upgrade(upgrade_station.UpgradeType.TOUGHNESS)
+
+
+func _on_output_upgrade_button_pressed() -> void:
+	upgrade_station.try_buy_upgrade(upgrade_station.UpgradeType.OUTPUT)
